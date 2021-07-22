@@ -1,0 +1,25 @@
+{
+  "name": "apexofficeprint",
+  "version": "21.1",
+  "description": "JavaScript interface for APEX Office Print",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npx tsc && node dist/index.js",
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/United-Codes/apexofficeprint-javascript.git"
+  },
+  "author": "United Codes",
+  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/United-Codes/apexofficeprint-javascript/issues"
+  },
+  "homepage": "https://github.com/United-Codes/apexofficeprint-javascript#readme",
+  "dependencies": {
+    "jest": "^27.0.6",
+    "typescript": "^4.3.5"
+  }
+}
