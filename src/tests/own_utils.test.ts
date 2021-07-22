@@ -3,7 +3,7 @@ import * as aop from '../index';
 
 describe('Test own_utils', () => {
     test('Test file_utils', () => {
-        // Also tests bufferToBase64
+        // Also tests rawToBase64
         expect(typeof aop.ownUtils.readFileAsBase64('README.md') === 'string').toBeTruthy();
     });
     test('Test type_utils', () => {

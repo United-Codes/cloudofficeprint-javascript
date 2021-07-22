@@ -26,6 +26,8 @@
               "tsx": "never"
             }
         ],
-        "indent": ["error", 4]
+        "indent": ["error", 4],
+        "max-classes-per-file": "off",
+        "no-use-before-define": "off"
     }
 }
