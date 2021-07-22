@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx tsc && node dist/index.js",
     "build": "npx tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --silent",
+    "test:loud": "jest --verbose false"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,18 @@
   },
   "homepage": "https://github.com/United-Codes/apexofficeprint-javascript#readme",
   "dependencies": {
+    "@jest/globals": "^27.0.6",
     "jest": "^27.0.6",
+    "mime-types": "^2.1.31",
+    "ts-jest": "^27.0.4",
     "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/mime-types": "^2.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
   }
 }
