@@ -14,6 +14,7 @@ export function pathToExtension(filepath: string): string {
  * Map an extension or file type to a mime type
  * @param ext extension where we want the mimetype for
  * @returns mime type of the given extension
+ * @throws error when the mimetype for the given extension is not found
  */
 export function extensionToMimetype(ext: string): string {
     const result: string | false = mime.lookup(ext);
@@ -28,6 +29,7 @@ export function extensionToMimetype(ext: string): string {
  * Map a mime type to an extension or file type
  * @param mimetype mimetype where we want the extension for
  * @returns filetype or extension corresponding to the given mimetype
+ * @throws error when the extension for the given mimetype is not found
  */
 export function mimetypeToExtension(mimetype: string): string {
     const result: string | false = mime.extension(mimetype);
