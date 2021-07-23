@@ -29,7 +29,7 @@ export abstract class CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): Object {
+    asDict(): object {
         return {
             output_location: this.service,
         };
@@ -113,8 +113,8 @@ export class OAuthToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): Object {
-        let result: Object = super.asDict();
+    asDict(): object {
+        let result: object = super.asDict();
         result = {
             ...result,
             cloud_access_token: this.token,
@@ -145,8 +145,8 @@ export class AWSToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): Object {
-        let result: Object = super.asDict();
+    asDict(): object {
+        let result: object = super.asDict();
         result = {
             ...result,
             cloud_access_token: {
@@ -193,8 +193,8 @@ export class FTPToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): Object {
-        let cloudAccessToken: Object = {
+    asDict(): object {
+        let cloudAccessToken: object = {
             host: this.host,
         };
 
