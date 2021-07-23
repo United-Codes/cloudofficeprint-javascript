@@ -107,12 +107,151 @@ export class Command {
     }
 }
 
+/**
+ * Command hook configuration class.
+ */
 export class Commands {
+    postProcess: Command | undefined;
 
+    postProcessReturn: boolean | undefined;
+
+    postProcessDeleteDelay: number | undefined;
+
+    preConversion: Command | undefined;
+
+    postConversion: Command | undefined;
+
+    postMerge: Command | undefined;
+
+    /**
+     * @param postProcess Command to run after the given request has been processed
+     *  but before returning back the output file. Optional
+     * @param postProcessReturn Whether to return the output or not.
+     *  Note this output is AOP's output and not the post process command output. Optional.
+     * @param postProcessDeleteDelay AOP deletes the file provided to the command directly after
+     *  executing it. This can be delayed with this option. Integer in milliseconds. Optional.
+     * @param preConversion Command to run before conversion. Optional.
+     * @param postConversion Command to run after conversion. Optional.
+     * @param postMerge Command to run after merging has happened. Optional.
+     */
+    constructor(
+        postProcess?: Command,
+        postProcessReturn?: boolean,
+        postProcessDeleteDelay?: number,
+        preConversion?: Command,
+        postConversion?: Command,
+        postMerge?: Command,
+    ) {
+        this.postProcess = postProcess;
+        this.postProcessReturn = postProcessReturn;
+        this.postProcessDeleteDelay = postProcessDeleteDelay;
+        this.preConversion = preConversion;
+        this.postConversion = postConversion;
+        this.postMerge = postMerge;
+    }
+
+    /**
+     * The dict representation of this Commands object.
+     * @returns The dict representation of this Commands object.
+     */
+    asDict(): {[key: string]: {[key: string]: string |
+        {[key: string]: string} | boolean | number}} {
+        let result: {[key: string]: {[key: string]: string |
+            {[key: string]: string} | boolean | number}} = {};
+
+        if (this.postProcess !== undefined) {
+            let toAdd: {[key: string]: string |
+                {[key: string]: string} | boolean | number} = this.postProcess.asDict();
+            if (this.postProcessReturn !== undefined) {
+                toAdd = { ...toAdd, return_output: this.postProcessReturn };
+            }
+            if (this.postProcessDeleteDelay !== undefined) {
+                toAdd = { ...toAdd, delete_delay: this.postProcessDeleteDelay };
+            }
+            result = { ...result, post_process: toAdd };
+        }
+
+        if (this.preConversion !== undefined || this.postConversion !== undefined) {
+            let toAdd = {};
+            if (this.preConversion !== undefined) {
+                toAdd = { ...toAdd, ...this.preConversion.asDictPre() };
+            }
+            if (this.postConversion !== undefined) {
+                toAdd = { ...toAdd, ...this.postConversion.asDictPost() };
+            }
+            result = { ...result, conversion: toAdd };
+        }
+
+        if (this.postMerge !== undefined) {
+            result = { ...result, merge: this.postMerge.asDictPost() };
+        }
+
+        return result;
+    }
 }
 
+/**
+ * Class for configuring the server options.
+ */
 export class ServerConfig {
+    apiKey: string | undefined;
 
+    logging: {[key: string]: object} | undefined;
+
+    printer: Printer | undefined;
+
+    commands: Commands | undefined;
+
+    proxies: {[key: string]: string} | undefined;
+
+    aopRemoteDebug: boolean;
+
+    /**
+     * @param apiKey API key to use for communicating with an AOP server. Optional.
+     * @param logging Additional key/value pairs you would like to have logged into server
+     *  printjob.log on the server. (To be used with the --enable_printlog server flag). Optional.
+     * @param printer IP printer to use with this server.
+     *  See the AOP docs for more info and supported printers. Optional.
+     * @param commands Configuration for the various command hooks offered. Optional.
+     * @param proxies Proxies for contacting the server URL, [as a dictionary](https://requests.readthedocs.io/en/master/user/advanced/#proxies). Optional.
+     * @param aopRemoteDebug If True: The AOP server will log the JSON into the database
+     *  and this can bee seen when logged into apexofficeprint.com. Defaults to False.
+     */
+    constructor(
+        apiKey?: string,
+        logging?: {[key: string]: object},
+        printer?: Printer,
+        commands?: Commands,
+        proxies?: {[key: string]: string},
+        aopRemoteDebug: boolean = false,
+    ) {
+        this.apiKey = apiKey;
+        this.logging = logging;
+        this.printer = printer;
+        this.commands = commands;
+        this.proxies = proxies;
+        this.aopRemoteDebug = aopRemoteDebug;
+    }
+
+    /**
+     * The dict representation of these server configurations.
+     * @returns The dict representation of these server configurations.
+     */
+    asDict(): {[key: string]: string | {[key: string]: object} |
+        { location: string; version: string; requester: string; jobName: string; } |
+        { [key: string]: string | number | boolean | { [key: string]: string; }; }} {
+        let result: {[key: string]: string | {[key: string]: object} |
+            { location: string; version: string; requester: string; jobName: string; } |
+            { [key: string]: string | number | boolean | { [key: string]: string; }; }} = {};
+
+        if (this.apiKey !== undefined) result = { ...result, api_key: this.apiKey };
+        if (this.logging !== undefined) result = { ...result, logging: this.logging };
+        if (this.printer !== undefined) result = { ...result, ipp: this.printer.asDict() };
+        if (this.aopRemoteDebug) result = { ...result, aop_remote_debug: 'Yes' };
+        if (this.commands !== undefined) result = { ...result, ...this.commands.asDict() };
+
+        return result;
+    }
 }
 
 export class Server {
