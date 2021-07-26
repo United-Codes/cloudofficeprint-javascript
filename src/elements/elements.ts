@@ -105,7 +105,7 @@ export class CellStyleXlsx extends CellStyle {
      * @param fontColor hex color e.g: #00ff00. Optional.
      * @param fontItalic Whether or not the text is in italic. Optional.
      * @param fontBold Whether or not the text is in bold. Optional.
-     * @param fontStrike Whether or not the text is striked. Optional.
+     * @param fontStrike Whether or not the text is struck. Optional.
      * @param fontUnderline Whether or not the text is underlined. Optional.
      * @param fontSuperscript Whether or not the text is in superscript. Optional.
      * @param fontSubscript Whether or not the text is in subscript. Optional.
@@ -606,6 +606,18 @@ export class StyledProperty extends Property {
     strikethrough: boolean | undefined;
     highlightColor: string | undefined;
 
+    /**
+     * @param name the name for this property
+     * @param value the value for this property
+     * @param font the font; optional
+     * @param fontSize the font size; optional
+     * @param fontColor the font color; optional
+     * @param bold whether or not the text should be bold; optional
+     * @param italic whether or not the text should be italic; optional
+     * @param underline whether or not the text should be underlined; optional
+     * @param strikethrough whether or not the text should be struckthrough; optional
+     * @param highlightColor the color in which the text should be hightlighted; optional
+     */
     constructor(
         name: string,
         value: string,
@@ -629,6 +641,10 @@ export class StyledProperty extends Property {
         this.highlightColor = highlightColor;
     }
 
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
     asDict(): {[key: string]: string | boolean | number} {
         let result: {[key: string]: string | boolean | number} = {
             [this.name]: this.value,
@@ -662,6 +678,10 @@ export class StyledProperty extends Property {
         return result;
     }
 
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
     availableTags(): Set<string> {
         return new Set([`{style ${this.name}}`]);
     }
@@ -675,6 +695,16 @@ export class Watermark extends Property {
     opacity: number | undefined;
     rotation: number | undefined;
 
+    /**
+     * @param name the name for this property
+     * @param text the text for the watermark
+     * @param color the color for the watermark; optional
+     * @param font the font for the watermark; optional
+     * @param width the width of the watermark; optional
+     * @param height the height of the watermark; optional
+     * @param opacity the opacity of the watermark; optional
+     * @param rotation the rotation of the watermark; optional
+     */
     constructor(
         name: string,
         text: string,
@@ -694,6 +724,10 @@ export class Watermark extends Property {
         this.rotation = rotation;
     }
 
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
     asDict(): {[key: string]: string | number} {
         let result: {[key: string]: string | number} = {
             [this.name]: this.value,
@@ -721,6 +755,10 @@ export class Watermark extends Property {
         return result;
     }
 
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
     availableTags(): Set<string> {
         return new Set([`{watermark ${this.name}}`]);
     }
@@ -730,12 +768,21 @@ export class D3Code extends Element {
     code: string;
     data: string | undefined;
 
+    /**
+     * @param name the name for this element
+     * @param code the JSON-encoded code for generating a D3 image
+     * @param data the JSON-encoded data that the code will have access to; optional
+     */
     constructor(name: string, code: string, data?: string) {
         super(name);
         this.code = code;
         this.data = data;
     }
 
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
     asDict(): {[key: string]: string} {
         let result: {[key: string]: string} = {
             [this.name]: this.code,
@@ -748,22 +795,39 @@ export class D3Code extends Element {
         return result;
     }
 
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
     availableTags(): Set<string> {
         return new Set([`{$d3${this.name}}`]);
     }
 }
 
+/**
+ * Date options for an AOPChart (different from ChartDateOptions in charts.py).
+ */
 export class AOPChartDateOptions {
     format: string | undefined;
     unit: string | undefined;
     step: number | string | undefined;
 
+    /**
+     * @param format The format to display the date on the chart's axis. Optional.
+     * @param unit The unit to be used for spacing the axis values. Optional.
+     * @param step How many of the above unit should be used for spacing the axis values
+     *  (automatic if undefined). This option is not supported in LibreOffice. Optional.
+     */
     constructor(format?: string, unit?: string, step?: number | string) {
         this.format = format;
         this.unit = unit;
         this.step = step;
     }
 
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
     asDict(): {[key: string]: string | number} {
         let result: {[key: string]: string | number} = {};
 
@@ -781,6 +845,9 @@ export class AOPChartDateOptions {
     }
 }
 
+/**
+ * The class for an AOPChart. This is used for chart templating.
+ */
 export class AOPChart extends Element {
     xData: string[];
     yDatas: {[key: string]: (string | number | {[key: string]: string | number})[]};
@@ -791,6 +858,19 @@ export class AOPChart extends Element {
     x2Title: string | undefined;
     y2Title: string | undefined;
 
+    /**
+     * @param name The name for this element.
+     * @param xData The data for the x-axis. Format : ["day 1", "day 2", "day 3", "day 4", "day 5"]
+     *  or [{"value": "day 1"}, {"value": "day 2"}, {"value": "day 3"}, 
+     *  {"value": "day 4"}, {"value": "day 5"}]
+     * @param yDatas The data for the y-axis in the same format as x_data.
+     * @param date The date options for the chart. Defaults to None.
+     * @param title The title of the chart. Defaults to None.
+     * @param xTitle The title for the x-axis. Defaults to None.
+     * @param yTitle The title for the y-axis. Defaults to None.
+     * @param y2Title The title for the second y-axis. Defaults to None.
+     * @param x2Title The title for the second x-axis. Defaults to None.
+     */
     constructor(
         name: string,
         xData: string[],
@@ -827,6 +907,10 @@ export class AOPChart extends Element {
         }
     }
 
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
     asDict(): {
         [key: string]:
             {
@@ -963,5 +1047,12 @@ export class AOPChart extends Element {
 
         return result;
     }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{aopchart ${this.name}}`]);
+    }
 }
-// TODO: write documentation for classes StyledProperty, Watermark, D3Code, AOPChartDateOptions, AOPChart
