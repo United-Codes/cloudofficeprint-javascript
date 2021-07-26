@@ -434,3 +434,164 @@ export class FootNote extends Property {
         return new Set(`{+${this.name}}`);
     }
 }
+
+export class Hyperlink extends Element {
+    url: string;
+    text: string | undefined;
+
+    /**
+     * @param name the name for this element
+     * @param url the URL for the hyperlink
+     * @param text the text for the hyperlink; optional
+     */
+    constructor(name: string, url: string, text?: string) {
+        super(name);
+        this.url = url;
+        this.text = text;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): {[key: string]: string} {
+        let result: {[key: string]: string} = {
+            [this.name]: this.url,
+        };
+
+        if (this.text !== undefined) {
+            result = { ...result, [`${this.name}_text`]: this.text };
+        }
+
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{*${this.name}}`);
+    }
+}
+
+export class TableOfContents extends Element {
+    title: string | undefined;
+    depth: number | undefined;
+    tabLeader: string | undefined;
+
+    /**
+     * @param name The name for this element.
+     * @param title Title of the table of contents. Optional.
+     * @param depth The depth of heading to be shown, 3 by default. Optional.
+     * @param tabLeader How the space between title and page number should be filled.
+     *  Can be "hyphen", "underscore", or "dot" (default). Optional.
+     */
+    constructor(name: string, title: string, depth?: number, tabLeader?: string) {
+        super(name);
+        this.title = title;
+        this.depth = depth;
+        this.tabLeader = tabLeader;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): {[key: string]: string | number} {
+        let result: {[key: string]: string | number} = {};
+
+        if (this.title !== undefined) {
+            result = { ...result, [`${this.name}_title`]: this.title };
+        }
+        if (this.depth !== undefined) {
+            result = { ...result, [`${this.name}_show_level`]: this.depth };
+        }
+        if (this.tabLeader !== undefined) {
+            result = { ...result, [`${this.name}_tab_leader`]: this.tabLeader };
+        }
+
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{~${this.name}}`);
+    }
+}
+
+export class Raw extends Property {
+    /**
+     * @param name the name for this property
+     * @param value the value for this property
+     */
+    constructor(name: string, value: string) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{@${this.name}}`);
+    }
+}
+
+export class Span extends Property {
+    columns: number;
+    rows: number;
+
+    /**
+     * @param name the name for this property
+     * @param value the value for this property
+     * @param columns the amount of columns to span
+     * @param rows the amount of rows to span
+     */
+    constructor(name: string, value: string, columns: number, rows: number) {
+        super(name, value);
+        this.columns = columns;
+        this.rows = rows;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): {[key: string]: string | number} {
+        return {
+            [this.name]: this.value,
+            [`${this.name}_row_span`]: this.rows,
+            [`${this.name}_col_span`]: this.columns,
+        };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{${this.name}#}`);
+    }
+}
+
+export class Formula extends Property {
+    /**
+     * @param name the name for this property
+     * @param formula the formula
+     */
+    constructor(name: string, formula: string) {
+        super(name, formula);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{>${this.name}}`);
+    }
+}
