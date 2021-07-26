@@ -336,8 +336,8 @@ export class Property extends Element {
      * A set containing all available template tags this Element reacts to.
      * @returns set of tags associated with this Element
      */
-    availableTags() {
-        return new Set(`{${this.name}}`);
+    availableTags(): Set<string> {
+        return new Set([`{${this.name}}`]);
     }
 }
 
@@ -377,7 +377,7 @@ export class CellStyleProperty extends Property {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{${this.name}$}`);
+        return new Set([`{${this.name}$}`]);
     }
 }
 
@@ -395,7 +395,7 @@ export class Html extends Property {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{_${this.name}}`);
+        return new Set([`{_${this.name}}`]);
     }
 }
 
@@ -413,7 +413,7 @@ export class RightToLeft extends Property {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{<${this.name}}`);
+        return new Set([`{<${this.name}}`]);
     }
 }
 
@@ -431,7 +431,7 @@ export class FootNote extends Property {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{+${this.name}}`);
+        return new Set([`{+${this.name}}`]);
     }
 }
 
@@ -471,7 +471,7 @@ export class Hyperlink extends Element {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{*${this.name}}`);
+        return new Set([`{*${this.name}}`]);
     }
 }
 
@@ -519,7 +519,7 @@ export class TableOfContents extends Element {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{~${this.name}}`);
+        return new Set([`{~${this.name}}`]);
     }
 }
 
@@ -537,7 +537,7 @@ export class Raw extends Property {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{@${this.name}}`);
+        return new Set([`{@${this.name}}`]);
     }
 }
 
@@ -574,7 +574,7 @@ export class Span extends Property {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{${this.name}#}`);
+        return new Set([`{${this.name}#}`]);
     }
 }
 
@@ -592,6 +592,376 @@ export class Formula extends Property {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set(`{>${this.name}}`);
+        return new Set([`{>${this.name}}`]);
     }
 }
+
+export class StyledProperty extends Property {
+    font: string | undefined;
+    fontSize: string | number | undefined;
+    fontColor: string | undefined;
+    bold: boolean | undefined;
+    italic: boolean | undefined;
+    underline: boolean | undefined;
+    strikethrough: boolean | undefined;
+    highlightColor: string | undefined;
+
+    constructor(
+        name: string,
+        value: string,
+        font?: string,
+        fontSize?: string | number,
+        fontColor?: string,
+        bold?: boolean,
+        italic?: boolean,
+        underline?: boolean,
+        strikethrough?: boolean,
+        highlightColor?: string,
+    ) {
+        super(name, value);
+        this.font = font;
+        this.fontSize = fontSize;
+        this.fontColor = fontColor;
+        this.bold = bold;
+        this.italic = italic;
+        this.underline = underline;
+        this.strikethrough = strikethrough;
+        this.highlightColor = highlightColor;
+    }
+
+    asDict(): {[key: string]: string | boolean | number} {
+        let result: {[key: string]: string | boolean | number} = {
+            [this.name]: this.value,
+        };
+
+        if (this.font !== undefined) {
+            result = { ...result, [`${this.name}_font_family`]: this.font };
+        }
+        if (this.fontSize !== undefined) {
+            result = { ...result, [`${this.name}_font_size`]: this.fontSize };
+        }
+        if (this.fontColor !== undefined) {
+            result = { ...result, [`${this.name}_font_color`]: this.fontColor };
+        }
+        if (this.bold !== undefined) {
+            result = { ...result, [`${this.name}_bold`]: this.bold };
+        }
+        if (this.italic !== undefined) {
+            result = { ...result, [`${this.name}_italic`]: this.italic };
+        }
+        if (this.underline !== undefined) {
+            result = { ...result, [`${this.name}_underline`]: this.underline };
+        }
+        if (this.strikethrough !== undefined) {
+            result = { ...result, [`${this.name}_strikethrough`]: this.strikethrough };
+        }
+        if (this.highlightColor !== undefined) {
+            result = { ...result, [`${this.name}_highlight`]: this.highlightColor };
+        }
+
+        return result;
+    }
+
+    availableTags(): Set<string> {
+        return new Set([`{style ${this.name}}`]);
+    }
+}
+
+export class Watermark extends Property {
+    color: string | undefined;
+    font: string | undefined;
+    width: string | number | undefined;
+    height: string | number | undefined;
+    opacity: number | undefined;
+    rotation: number | undefined;
+
+    constructor(
+        name: string,
+        text: string,
+        color?: string,
+        font?: string,
+        width?: number | string,
+        height?: number | string,
+        opacity?: number,
+        rotation?: number,
+    ) {
+        super(name, text);
+        this.color = color;
+        this.font = font;
+        this.width = width;
+        this.height = height;
+        this.opacity = opacity;
+        this.rotation = rotation;
+    }
+
+    asDict(): {[key: string]: string | number} {
+        let result: {[key: string]: string | number} = {
+            [this.name]: this.value,
+        };
+
+        if (this.color !== undefined) {
+            result = { ...result, [`${this.name}_color`]: this.color };
+        }
+        if (this.font !== undefined) {
+            result = { ...result, [`${this.name}_font`]: this.font };
+        }
+        if (this.width !== undefined) {
+            result = { ...result, [`${this.name}_width`]: this.width };
+        }
+        if (this.height !== undefined) {
+            result = { ...result, [`${this.name}_height`]: this.height };
+        }
+        if (this.opacity !== undefined) {
+            result = { ...result, [`${this.name}_opacity`]: this.opacity };
+        }
+        if (this.rotation !== undefined) {
+            result = { ...result, [`${this.name}_rotation`]: this.rotation };
+        }
+
+        return result;
+    }
+
+    availableTags(): Set<string> {
+        return new Set([`{watermark ${this.name}}`]);
+    }
+}
+
+export class D3Code extends Element {
+    code: string;
+    data: string | undefined;
+
+    constructor(name: string, code: string, data?: string) {
+        super(name);
+        this.code = code;
+        this.data = data;
+    }
+
+    asDict(): {[key: string]: string} {
+        let result: {[key: string]: string} = {
+            [this.name]: this.code,
+        };
+
+        if (this.data !== undefined) {
+            result = { ...result, [`${this.name}_data`]: this.data };
+        }
+
+        return result;
+    }
+
+    availableTags(): Set<string> {
+        return new Set([`{$d3${this.name}}`]);
+    }
+}
+
+export class AOPChartDateOptions {
+    format: string | undefined;
+    unit: string | undefined;
+    step: number | string | undefined;
+
+    constructor(format?: string, unit?: string, step?: number | string) {
+        this.format = format;
+        this.unit = unit;
+        this.step = step;
+    }
+
+    asDict(): {[key: string]: string | number} {
+        let result: {[key: string]: string | number} = {};
+
+        if (this.format !== undefined) {
+            result = { ...result, format: this.format };
+        }
+        if (this.unit !== undefined) {
+            result = { ...result, unit: this.unit };
+        }
+        if (this.step !== undefined) {
+            result = { ...result, step: this.step };
+        }
+
+        return result;
+    }
+}
+
+export class AOPChart extends Element {
+    xData: string[];
+    yDatas: {[key: string]: (string | number | {[key: string]: string | number})[]};
+    date: AOPChartDateOptions | undefined;
+    title: string | undefined;
+    xTitle: string | undefined;
+    yTitle: string | undefined;
+    x2Title: string | undefined;
+    y2Title: string | undefined;
+
+    constructor(
+        name: string,
+        xData: string[],
+        yDatas: (string | number | {[key: string]: string | number})[][] |
+            {[key: string]: (string | number | {[key: string]: string | number})[]},
+        date?: AOPChartDateOptions,
+        title?: string,
+        xTitle?: string,
+        yTitle?: string,
+        y2Title?: string,
+        x2Title?: string,
+    ) {
+        super(name);
+        this.xData = xData;
+        this.date = date;
+        this.title = title;
+        this.xTitle = xTitle;
+        this.yTitle = yTitle;
+        this.y2Title = y2Title;
+        this.x2Title = x2Title;
+        this.yDatas = {};
+
+        if (yDatas instanceof Array) {
+            yDatas.forEach(
+                (el, index) => {
+                    this.yDatas = { ...this.yDatas, [`series ${index + 1}`]: el };
+                },
+            );
+        } else if (yDatas.constructor !== Object) {
+            // If yDatas is not an array and not a dictionary: throw error
+            throw new Error(`Expected a dictionary or array, but received ${typeof yDatas}`);
+        } else {
+            this.yDatas = yDatas;
+        }
+    }
+
+    asDict(): {
+        [key: string]:
+            {
+                [key: string]:
+                    string[] |
+                    string |
+                    {
+                        [key: string]:
+                            string |
+                            number
+                    }
+            } |
+            {
+                [key: string]:
+                    {
+                        [key: string]:
+                            string |
+                            (string | number | {[key: string]: string | number})[]
+                    }[] |
+                    string
+            } |
+            string |
+            {
+                [key: string]:
+                    string
+            }
+            } {
+        const ySeries: {name: string, data: (string | number |
+            {[key: string]: string | number})[]}[] = [];
+        Object.entries(this.yDatas).forEach(
+            (e) => {
+                ySeries.push({ name: e[0], data: e[1] });
+            },
+        );
+
+        let result: {
+            [key: string]:
+                {
+                    [key: string]:
+                        string[] |
+                        string |
+                        {
+                            [key: string]:
+                                string |
+                                number
+                        }
+                } |
+                {
+                    [key: string]:
+                        {
+                            [key: string]:
+                                string |
+                                (string | number | {[key: string]: string | number})[]
+                        }[] |
+                        string
+                } |
+                string |
+                {
+                    [key: string]:
+                        string
+                }
+        } = {
+            xAxis: {
+                data: this.xData,
+            },
+            yAxis: {
+                series: ySeries,
+            },
+        };
+
+        if (this.title !== undefined) {
+            result = { ...result, title: this.title };
+        }
+        if (this.date !== undefined) {
+            result.xAxis = {
+                ...result.xAxis as {
+                    [key: string]:
+                        string[] |
+                        string |
+                        {
+                            [key: string]:
+                                string |
+                                number
+                        }
+                },
+                date: this.date.asDict(),
+            };
+        }
+        if (this.xTitle !== undefined) {
+            result.xAxis = {
+                ...result.xAxis as {
+                    [key: string]:
+                        string[] |
+                        string |
+                        {
+                            [key: string]:
+                                string |
+                                number
+                        }
+                },
+                title: this.xTitle,
+            };
+        }
+        if (this.yTitle !== undefined) {
+            result.yAxis = {
+                ...result.yAxis as {
+                    [key: string]:
+                        {
+                            [key: string]:
+                                string |
+                                (string | number | {[key: string]: string | number})[]
+                        }[] |
+                        string
+                },
+                title: this.yTitle,
+            };
+        }
+        if (this.x2Title !== undefined) {
+            result = {
+                ...result,
+                x2Axis: {
+                    title: this.x2Title,
+                },
+            };
+        }
+        if (this.y2Title !== undefined) {
+            result = {
+                ...result,
+                y2Axis: {
+                    title: this.y2Title,
+                },
+            };
+        }
+
+        return result;
+    }
+}
+// TODO: write documentation for classes StyledProperty, Watermark, D3Code, AOPChartDateOptions, AOPChart
