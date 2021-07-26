@@ -1,3 +1,7 @@
+import fetch from 'node-fetch';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+import urljoin from 'url-join';
+
 /**
  * This class defines an IP-enabled printer to use with the AOP server.
  */
@@ -254,6 +258,142 @@ export class ServerConfig {
     }
 }
 
+/**
+ * This config class is used to specify the AOP server to interact with.
+ */
 export class Server {
+    url: string;
 
+    config: ServerConfig | undefined;
+
+    /**
+     * @param url server url
+     * @param config server configuration
+     */
+    constructor(url: string, config?: ServerConfig) {
+        this.url = url;
+        this.config = config;
+    }
+
+    /**
+     * Contact the server to see if it is reachable.
+     * @returns whether the server at `Server.url` is reachable
+     */
+    async isReachable(): Promise<boolean> {
+        try {
+            return await fetch(urljoin(this.url, 'marco'))
+                .then((res) => res.text()) === 'polo';
+        } catch (error) {
+            return false;
+        }
+    }
+
+    /**
+     * raise error if server is unreachable
+     */
+    async raiseIfUnreachable() {
+        const isReachable: boolean = await this.isReachable();
+        if (!isReachable) throw new Error(`Could not reach server at ${this.url}`);
+    }
+
+    /**
+     * Sends a GET request to server-url/soffice.
+     * @returns current version of Libreoffice installed on the server.
+     */
+    async getVersionSoffice(): Promise<string> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(urljoin(this.url, 'soffice'), { agent: proxy });
+        return response.text();
+    }
+
+    /**
+     * Sends a GET request to server-url/officetopdf.
+     * @returns current version of OfficeToPdf installed on the server.
+     *  (Only available if the server runs in Windows environment).
+     */
+    async getVersionOfficetopdf(): Promise<string> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(urljoin(this.url, 'officetopdf'), { agent: proxy });
+        return response.text();
+    }
+
+    /**
+     * Sends a GET request to server-url/supported_template_mimetypes.
+     * @returns JSON of the mime types of templates that AOP supports.
+     */
+    async getSupportedTemplateMimetypes(): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(urljoin(this.url, 'supported_template_mimetypes'), { agent: proxy });
+        return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/supported_output_mimetypes?template=input_type.
+     * Note: You will get empty JSON if the template extension isn't supported.
+     * @param inputType extension of file
+     * @returns JSON of the supported output types for the given template extension.
+     */
+    async getSupportedOutputMimetypes(inputType: string): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(urljoin(this.url, 'supported_output_mimetypes', `?template=${inputType}`), { agent: proxy });
+        return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/supported_prepend_mimetypes.
+     * @returns JSON of the supported prepend file mime types.
+     */
+    async getSupportedPrependMimetypes(): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(urljoin(this.url, 'supported_prepend_mimetypes'), { agent: proxy });
+        return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/supported_append_mimetypes.
+     * @returns JSON of the supported append file mime types.
+     */
+    async getSupportedAppendMimetypes(): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(urljoin(this.url, 'supported_append_mimetypes'), { agent: proxy });
+        return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/version.
+     * @returns the version of AOP that the server runs.
+     */
+    async getVersionAop(): Promise<string> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(urljoin(this.url, 'version'), { agent: proxy });
+        return response.text();
+    }
 }
