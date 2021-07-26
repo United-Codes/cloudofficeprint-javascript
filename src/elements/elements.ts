@@ -23,7 +23,7 @@ export abstract class CellStyle {
      */
     // Disable eslint warning, because this is an abstract base class
     // eslint-disable-next-line class-methods-use-this
-    asDictSuffixes() {
+    asDictSuffixes(): {[key: string]: string | number | boolean} {
         return {};
     }
 }
@@ -51,8 +51,8 @@ export class CellStyleDocx extends CellStyle {
      * @returns the dict representation of the suffixes that need to be appended to the name of
      *  this property in this CellStyle object's dict representation
      */
-    asDictSuffixes(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = super.asDictSuffixes();
+    asDictSuffixes(): {[key: string]: string | number | boolean} {
+        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
             result = { ...result, _cellBackgroundColor: this.cellBackgroundColor };
@@ -275,5 +275,162 @@ export class CellStyleXlsx extends CellStyle {
         }
 
         return result;
+    }
+}
+
+export abstract class Element {
+    name: string;
+
+    /**
+     * @param name the name of this element
+     */
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    // Disable eslint warning, because this is an abstract base class
+    // eslint-disable-next-line class-methods-use-this
+    asDict() {
+        return {};
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    // Disable eslint warning, because this is an abstract base class
+    // eslint-disable-next-line class-methods-use-this
+    availableTags(): Set<string> {
+        return new Set();
+    }
+}
+
+export class Property extends Element {
+    value: number | string;
+
+    /**
+     * @param name the name for this property
+     * @param value The value for this property. Note: the general purpose for
+     *  this value-field is the value as a string, but this can be of any type, for example a dict.
+     */
+    constructor(name: string, value: string) {
+        super(name);
+        this.value = value;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): {[key: string]: string | number | boolean} {
+        return {
+            [this.name]: this.value,
+        };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags() {
+        return new Set(`{${this.name}}`);
+    }
+}
+
+export class CellStyleProperty extends Property {
+    cellStyle: CellStyle;
+
+    /**
+     * @param name the name for this property
+     * @param value the value for this property
+     * @param cellStyle the cell style
+     */
+    constructor(name: string, value: string, cellStyle: CellStyle) {
+        super(name, value);
+        this.cellStyle = cellStyle;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): {[key: string]: string | number | boolean} {
+        let result: {[key: string]: string | number | boolean} = {
+            [this.name]: this.value,
+        };
+
+        Object.entries(this.cellStyle.asDictSuffixes()).forEach(
+            (e) => {
+                result = { ...result, [`${this.name}${e[0]}`]: e[1] };
+            },
+        );
+
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{${this.name}$}`);
+    }
+}
+
+export class Html extends Property {
+    /**
+     * @param name the name for this property
+     * @param value the value for this property
+     */
+    constructor(name: string, value: string) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{_${this.name}}`);
+    }
+}
+
+export class RightToLeft extends Property {
+    /**
+     * @param name the name for this property
+     * @param value the value for this property
+     */
+    constructor(name: string, value: string) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{<${this.name}}`);
+    }
+}
+
+export class FootNote extends Property {
+    /**
+     * @param name the name for this property
+     * @param value the value for this property
+     */
+    constructor(name: string, value: string) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set(`{+${this.name}}`);
     }
 }
