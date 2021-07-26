@@ -7,7 +7,7 @@
  * It contains a user message and an encoded message to be handed to AOP support
  *  if they are contacted.
  */
-export default class AOPError extends Error {
+export class AOPError extends Error {
     userMessage: string;
 
     contactSupportMessage: string;

@@ -1,11 +1,11 @@
 import { CloudAccessToken } from './cloud';
-import PDFOptions from './pdf';
+import { PDFOptions } from './pdf';
 
 /**
  * Class to specify output configuration for a request.
  * This configuration is general and for the entire list of output files.
  */
-export default class OutputConfig {
+export class OutputConfig {
     filetype: string | undefined;
 
     encoding: string;

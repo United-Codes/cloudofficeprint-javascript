@@ -29,6 +29,7 @@
         "indent": ["error", 4],
         "max-classes-per-file": "off",
         "no-use-before-define": "off",
-        "no-useless-constructor": "off"
+        "no-useless-constructor": "off",
+        "import/prefer-default-export": "off"
     }
 }

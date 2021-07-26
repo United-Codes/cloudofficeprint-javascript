@@ -4,7 +4,7 @@
  * All of them are optional, which is why passing an instance of this class
  *  in an OutputConfig is also optional.
  */
-export default class PDFOptions {
+export class PDFOptions {
     readPassword: string | undefined;
 
     watermark: string | undefined;
@@ -238,12 +238,12 @@ export default class PDFOptions {
                 // page margin is already a dict, add/change this position
                 this.pageMargin = {
                     ...this.pageMargin,
-                    position: value,
+                    [position]: value,
                 };
             } else if (this.pageMargin === undefined) {
                 // page margin not yet defined, set it to a dict with this position defined
                 this.pageMargin = {
-                    position: value,
+                    [position]: value,
                 };
             } else {
                 // page margin defined but no dict, convert to dict first
@@ -256,7 +256,7 @@ export default class PDFOptions {
                 };
                 this.pageMargin = {
                     ...this.pageMargin,
-                    position: value,
+                    [position]: value,
                 };
             }
         } else {
