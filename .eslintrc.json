@@ -30,6 +30,7 @@
         "max-classes-per-file": "off",
         "no-use-before-define": "off",
         "no-useless-constructor": "off",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "lines-between-class-members": "off"
     }
 }

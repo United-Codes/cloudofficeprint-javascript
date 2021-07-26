@@ -6,37 +6,21 @@
  */
 export class PDFOptions {
     readPassword: string | undefined;
-
     watermark: string | undefined;
-
     pageWidth: string | number | undefined;
-
     pageHeight: string | number | undefined;
-
     evenPage: boolean | undefined;
-
     mergeMakingEven: boolean | undefined;
-
     modifyPassword: string | undefined;
-
     passwordProtectionFlag: number | undefined;
-
     lockForm: boolean | undefined;
-
     copies: number | undefined;
-
     pageMargin: number | {[key: string]: number} | undefined
-
     landscape: boolean | undefined;
-
     pageFormat: string | undefined;
-
     merge: boolean | undefined;
-
     signCertificate: string | undefined;
-
     identifyFormFields: boolean | undefined;
-
     split: boolean | undefined;
 
     /**

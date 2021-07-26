@@ -18,7 +18,6 @@ import * as ownUtils from './own_utils/index';
  */
 export abstract class Resource {
     data: string | Buffer;
-
     filetype: string;
 
     /**

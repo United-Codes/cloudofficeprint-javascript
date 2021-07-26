@@ -9,9 +9,7 @@
  */
 export class AOPError extends Error {
     userMessage: string;
-
     contactSupportMessage: string;
-
     encodedMessage: string;
 
     /**

@@ -128,7 +128,6 @@ export class OAuthToken extends CloudAccessToken {
  */
 export class AWSToken extends CloudAccessToken {
     keyId: string;
-
     secretKey: string;
 
     /**
@@ -163,11 +162,8 @@ export class AWSToken extends CloudAccessToken {
  */
 export class FTPToken extends CloudAccessToken {
     host: string;
-
     port: number | undefined;
-
     user: string | undefined;
-
     password: string | undefined;
 
     /**

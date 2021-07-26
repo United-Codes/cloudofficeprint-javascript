@@ -7,15 +7,10 @@ import { PDFOptions } from './pdf';
  */
 export class OutputConfig {
     filetype: string | undefined;
-
     encoding: string;
-
     converter: string;
-
     cloudAccessToken: CloudAccessToken | undefined;
-
     serverDirectory: string | undefined;
-
     pdfOptions: PDFOptions | undefined;
 
     /**

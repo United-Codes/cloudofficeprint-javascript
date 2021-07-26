@@ -7,11 +7,8 @@ import urljoin from 'url-join';
  */
 export class Printer {
     location: string;
-
     version: string;
-
     requester: string;
-
     jobName: string;
 
     /**
@@ -46,7 +43,6 @@ export class Printer {
  */
 export class Command {
     command: string;
-
     parameters: {[key: string]: string} | undefined;
 
     /**
@@ -116,15 +112,10 @@ export class Command {
  */
 export class Commands {
     postProcess: Command | undefined;
-
     postProcessReturn: boolean | undefined;
-
     postProcessDeleteDelay: number | undefined;
-
     preConversion: Command | undefined;
-
     postConversion: Command | undefined;
-
     postMerge: Command | undefined;
 
     /**
@@ -199,15 +190,10 @@ export class Commands {
  */
 export class ServerConfig {
     apiKey: string | undefined;
-
     logging: {[key: string]: object} | undefined;
-
     printer: Printer | undefined;
-
     commands: Commands | undefined;
-
     proxies: {[key: string]: string} | undefined;
-
     aopRemoteDebug: boolean;
 
     /**
@@ -263,7 +249,6 @@ export class ServerConfig {
  */
 export class Server {
     url: string;
-
     config: ServerConfig | undefined;
 
     /**
