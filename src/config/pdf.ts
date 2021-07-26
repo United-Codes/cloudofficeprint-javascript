@@ -25,7 +25,7 @@ export default class PDFOptions {
 
     copies: number | undefined;
 
-    pageMargin: number | object | undefined
+    pageMargin: number | {[key: string]: number} | undefined
 
     landscape: boolean | undefined;
 
@@ -85,7 +85,7 @@ export default class PDFOptions {
         passwordProtectionFlag?: number,
         lockForm?: boolean,
         copies?: number,
-        pageMargin?: number | object,
+        pageMargin?: number | {[key: string]: number},
         landscape?: boolean,
         pageFormat?: string,
         merge?: boolean,
@@ -116,7 +116,7 @@ export default class PDFOptions {
      * The dict representation of these PDF options.
      * @returns the dict representation of these PDF options
      */
-    asDict(): object {
+    asDict(): {[key: string]: string | number | boolean | {[key: string]: number}} {
         let result = {};
 
         if (this.readPassword !== undefined) {

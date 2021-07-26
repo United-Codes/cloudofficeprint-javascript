@@ -29,7 +29,7 @@ export abstract class CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): object {
+    asDict(): {[key: string]: string | {[key: string]: string | number}} {
         return {
             output_location: this.service,
         };
@@ -113,8 +113,8 @@ export class OAuthToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): object {
-        let result: object = super.asDict();
+    asDict(): {[key: string]: string | {[key: string]: string | number}} {
+        let result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
         result = {
             ...result,
             cloud_access_token: this.token,
@@ -145,8 +145,8 @@ export class AWSToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): object {
-        let result: object = super.asDict();
+    asDict(): {[key: string]: string | {[key: string]: string | number}} {
+        let result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
         result = {
             ...result,
             cloud_access_token: {
@@ -193,8 +193,8 @@ export class FTPToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): object {
-        let cloudAccessToken: object = {
+    asDict(): {[key: string]: string | {[key: string]: string | number}} {
+        let cloudAccessToken: {[key: string]: string | number } = {
             host: this.host,
         };
 
@@ -217,7 +217,7 @@ export class FTPToken extends CloudAccessToken {
             };
         }
 
-        let result = super.asDict();
+        let result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
         result = {
             ...result,
             cloud_access_token: cloudAccessToken,
