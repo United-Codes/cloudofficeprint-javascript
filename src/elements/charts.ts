@@ -1,3 +1,5 @@
+import { Element } from './elements';
+
 /**
  * Class for defining the styling of the text for a chart.
  */
@@ -493,7 +495,8 @@ export abstract class Series {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | {[key: string]: string | number}[]} {
+    asDict(): {[key: string]: string | number | boolean |
+        {[key: string]: string | number}[]} {
         let result: {[key: string]: string | {[key: string]: number | string}[]} = {
             data: this.data(),
         };
@@ -551,8 +554,9 @@ export class XYSeries extends Series {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | {[key: string]: string | number}[]} {
-        let result: {[key: string]: string | number |
+    asDict(): {[key: string]: string | number | boolean |
+        {[key: string]: string | number}[]} {
+        let result: {[key: string]: string | number | boolean |
             {[key: string]: string | number}[]} = super.asDict();
 
         if (this.color !== undefined) {
@@ -595,8 +599,9 @@ export class PieSeries extends XYSeries {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | {[key: string]: string | number}[]} {
-        const result: {[key: string]: string | number |
+    asDict(): {[key: string]: string | number | boolean |
+        {[key: string]: string | number}[]} {
+        const result: {[key: string]: string | number | boolean |
             {[key: string]: string | number}[]} = super.asDict();
 
         if (this.colors !== undefined) {
@@ -644,8 +649,9 @@ export class AreaSeries extends XYSeries {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | {[key: string]: string | number}[]} {
-        let result: {[key: string]: string | number |
+    asDict(): {[key: string]: string | number | boolean |
+        {[key: string]: string | number}[]} {
+        let result: {[key: string]: string | number | boolean |
             {[key: string]: string | number}[]} = super.asDict();
 
         if (this.opacity !== undefined) {
@@ -653,5 +659,241 @@ export class AreaSeries extends XYSeries {
         }
 
         return result;
+    }
+}
+
+/**
+ * A series for a line chart.
+ */
+export class LineSeries extends XYSeries {
+    smooth: boolean | undefined;
+    symbol: string | undefined;
+    symbolSize: string | number | undefined;
+    lineWidth: string | undefined;
+    lineStyle: string | undefined;
+
+    /**
+     * @param x The data for the x-axis.
+     * @param y The data for the y-axis.
+     * @param name The name of the series. Optional.
+     * @param color The color in which the series should be shown on a chart.
+     *  Can be html/css colors or hex values. Optional.
+     * @param smooth Whether or not the corners of the angles formed in
+     *  the data-points are smoothened. Optional.
+     * @param symbol Symbol representing the datapoints.
+     *  Can be square (default), diamond or triangle. Optional.
+     * @param symbolSize Size of the symbol representing the data-points in
+     *  (in em, pt, px, cm or in), by default: automatic. Optional.
+     * @param lineWidth Thickness of the connecting line in em, pt, px, cm or in. Optional.
+     * @param lineStyle Style of the line. Supported options can be found online on the
+     *  [AOP documentation](http://www.apexofficeprint.com/docs/#line). Optional.
+     */
+    constructor(
+        x: (number | string)[],
+        y: number[],
+        name?: string,
+        color?: string,
+        smooth?: boolean,
+        symbol?: string,
+        symbolSize?: string | number,
+        lineWidth?: string,
+        lineStyle?: string,
+    ) {
+        super(x, y, name, color);
+        this.smooth = smooth;
+        this.symbol = symbol;
+        this.symbolSize = symbolSize;
+        this.lineWidth = lineWidth;
+        this.lineStyle = lineStyle;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string | number | boolean |
+        {[key: string]: string | number}[]} {
+        let result: {[key: string]: string | number | boolean |
+            {[key: string]: string | number}[]} = super.asDict();
+
+        if (this.smooth !== undefined) {
+            result = { ...result, smooth: this.smooth };
+        }
+        if (this.symbol !== undefined) {
+            result = { ...result, symbol: this.symbol };
+        }
+        if (this.symbolSize !== undefined) {
+            result = { ...result, symbolSize: this.symbolSize };
+        }
+        if (this.lineWidth !== undefined) {
+            result = { ...result, lineWidth: this.lineWidth };
+        }
+        if (this.lineStyle !== undefined) {
+            result = { ...result, lineStyle: this.lineStyle };
+        }
+
+        return result;
+    }
+}
+
+/**
+ * A series for a bubble chart.
+ */
+export class BubbleSeries extends XYSeries {
+    sizes: number[];
+
+    /**
+     * @param x The data for the x-axis.
+     * @param y The data for the y-axis.
+     * @param sizes An iterable containing the sizes for each bubble of the series.
+     * @param name The name of the series. Optional.
+     * @param color The color in which the series should be shown on a chart.
+     *  Can be html/css colors or hex values. Optional.
+     */
+    constructor(
+        x: (number | string)[],
+        y: number[],
+        sizes: number[],
+        name?: string,
+        color?: string,
+    ) {
+        super(x, y, name, color);
+        this.sizes = sizes;
+    }
+
+    /**
+     * Get the data used in the series. E.g. x-values, y-values, ...
+     * @returns the data used in the series
+     */
+    data(): {[key: string]: number | string}[] {
+        const result: {[key: string]: number | string}[] = [];
+
+        for (let i = 0; i < this.x.length; i += 1) {
+            result.push({ x: this.x[i], y: this.y[i], size: this.sizes[i] });
+        }
+
+        return result;
+    }
+}
+
+/**
+ * A series for candlestick charts.
+ */
+export class StockSeries extends Series {
+    x: (number | string)[];
+    high: number[];
+    low: number[];
+    close: number[];
+    open: number[] | undefined;
+    volume: number[] | undefined;
+
+    /**
+     * @param x The data for the x-axis.
+     * @param high The data for the hight prices.
+     * @param low The data for the low prices.
+     * @param close The data for the closing prices.
+     * @param open The data for the opening prices. Optional.
+     * @param volume The data for the volumes. Optional.
+     * @param name The name of the series. Optional.
+     */
+    constructor(
+        x: (number | string)[],
+        high: number[],
+        low: number[],
+        close: number[],
+        open?: number[],
+        volume?: number[],
+        name?: string,
+    ) {
+        super(name);
+        this.x = x;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.open = open;
+        this.volume = volume;
+    }
+
+    /**
+     * Get the data used in the series. E.g. x-values, y-values, ...
+     * @returns the data used in the series
+     */
+    data(): {[key: string]: number | string}[] {
+        const result: {[key: string]: number | string}[] = [];
+
+        for (let i = 0; i < this.x.length; i += 1) {
+            result.push({
+                x: this.x[i],
+                high: this.high[i],
+                low: this.low[i],
+                close: this.close[i],
+            });
+        }
+
+        for (let i = 0; i < result.length; i += 1) {
+            if (this.open !== undefined) {
+                result[i] = { ...result[i], open: this.open[i] };
+            }
+            if (this.volume !== undefined) {
+                result[i] = { ...result[i], volume: this.volume[i] };
+            }
+        }
+
+        return result;
+    }
+}
+
+// The next few classes are exactly the same as XYSeries or LineSeries
+export class BarSeries extends XYSeries {}
+export class BarStackedSeries extends XYSeries {}
+export class BarStackedPercentSeries extends XYSeries {}
+export class ColumnSeries extends XYSeries {}
+export class ColumnStackedSeries extends XYSeries {}
+export class ColumnStackedPercentSeries extends XYSeries {}
+export class ScatterSeries extends XYSeries {}
+export class RadarSeries extends LineSeries {}
+
+/**
+ * The abstract base class for a chart.
+ */
+export abstract class Chart extends Element {
+    options: ChartOptions | {[key: string]: unknown} | undefined;
+
+    /**
+     * @param name The name of the chart.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, options?: ChartOptions | {[key: string]: unknown}) {
+        super(name);
+        this.options = options;
+    }
+
+    /**
+     * Update the given dict with the chart options and return the result.
+     * @param updates the dict that needs to be updated with the chart options
+     * @returns the input dict, updated with the chart options
+     */
+    getDict(updates: {[key: string]: unknown}) {
+        let result = {};
+
+        if (this.options !== undefined) {
+            result = {
+                ...result,
+                options: this.options instanceof ChartOptions
+                    ? this.options.asDict() : this.options,
+            };
+        }
+
+        result = { ...result, ...updates };
+
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{$${this.name}}`]);
     }
 }
