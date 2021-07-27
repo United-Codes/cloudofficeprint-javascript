@@ -907,7 +907,7 @@ export class LineChart extends Chart {
     /**
      * @param name The name of the chart.
      * @param lines Iterable of line series.
-     * @param options The options for the chart. Defaults to None.
+     * @param options The options for the chart. Optional.
      */
     constructor(name: string, lines: (LineSeries | XYSeries)[], options?: ChartOptions) {
         super(name, options);
@@ -936,7 +936,7 @@ export class BarChart extends Chart {
     /**
      * @param name The name of the chart.
      * @param bars Iterable of bar series.
-     * @param options The options for the chart. Defaults to None.
+     * @param options The options for the chart. Optional.
      */
     constructor(name: string, bars: (BarSeries | XYSeries)[], options?: ChartOptions) {
         super(name, options);
@@ -965,7 +965,7 @@ export class BarStackedChart extends Chart {
     /**
      * @param name The name of the chart.
      * @param bars Iterable of bar series.
-     * @param options The options for the chart. Defaults to None.
+     * @param options The options for the chart. Optional.
      */
     constructor(name: string, bars: (BarStackedSeries | XYSeries)[], options?: ChartOptions) {
         super(name, options);
@@ -994,7 +994,7 @@ export class BarStackedPercentChart extends Chart {
     /**
      * @param name The name of the chart.
      * @param bars Iterable of bar series.
-     * @param options The options for the chart. Defaults to None.
+     * @param options The options for the chart. Optional.
      */
     constructor(name: string, bars: (BarStackedPercentSeries | XYSeries)[],
         options?: ChartOptions) {
@@ -1024,7 +1024,7 @@ export class ColumnChart extends Chart {
     /**
      * @param name The name of the chart.
      * @param columns Iterable of column series.
-     * @param options The options for the chart. Defaults to None.
+     * @param options The options for the chart. Optional.
      */
     constructor(name: string, columns: (ColumnSeries | XYSeries)[], options?: ChartOptions) {
         super(name, options);
@@ -1053,7 +1053,7 @@ export class ColumnStackedChart extends Chart {
     /**
      * @param name The name of the chart.
      * @param columns Iterable of column series.
-     * @param options The options for the chart. Defaults to None.
+     * @param options The options for the chart. Optional.
      */
     constructor(name: string, columns: (ColumnStackedSeries | XYSeries)[], options?: ChartOptions) {
         super(name, options);
@@ -1082,7 +1082,7 @@ export class ColumnStackedPercentChart extends Chart {
     /**
      * @param name The name of the chart.
      * @param columns Iterable of column series.
-     * @param options The options for the chart. Defaults to None.
+     * @param options The options for the chart. Optional.
      */
     constructor(name: string, columns: (ColumnStackedPercentSeries | XYSeries)[],
         options?: ChartOptions) {
@@ -1099,6 +1099,238 @@ export class ColumnStackedPercentChart extends Chart {
         return this.getDict({
             columns: Array.from(this.columns.map((col) => col.asDict())),
             type: 'columnStackedPercent',
+        });
+    }
+}
+
+/**
+ * Class for a pie chart
+ */
+export class PieChart extends Chart {
+    pies: (PieSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of pie series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, pies: (PieSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.pies = pies;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            pies: Array.from(this.pies.map((pie) => pie.asDict())),
+            type: 'pie',
+        });
+    }
+}
+
+/**
+ * Class for a 3D pie chart
+ */
+export class Pie3DChart extends Chart {
+    pies: (PieSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of pie series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, pies: (PieSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.pies = pies;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            pies: Array.from(this.pies.map((pie) => pie.asDict())),
+            type: 'pie3d',
+        });
+    }
+}
+
+/**
+ * Class for a doughnut chart
+ */
+export class DoughnutChart extends Chart {
+    pies: (PieSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of pie series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, pies: (PieSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.pies = pies;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            doughnuts: Array.from(this.pies.map((pie) => pie.asDict())),
+            type: 'doughnut',
+        });
+    }
+}
+
+/**
+ * Class for a radar chart
+ */
+export class RadarChart extends Chart {
+    radars: (RadarSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of radar series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, radars: (RadarSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.radars = radars;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            radars: Array.from(this.radars.map((rad) => rad.asDict())),
+            type: 'radar',
+        });
+    }
+}
+
+/**
+ * Class for a area chart
+ */
+export class AreaChart extends Chart {
+    areas: (AreaSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of area series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, areas: (AreaSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.areas = areas;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            areas: Array.from(this.areas.map((ar) => ar.asDict())),
+            type: 'area',
+        });
+    }
+}
+
+/**
+ * Class for a scatter chart
+ */
+export class ScatterChart extends Chart {
+    scatters: (ScatterSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of scatter series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, scatters: (ScatterSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.scatters = scatters;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            scatters: Array.from(this.scatters.map((scat) => scat.asDict())),
+            type: 'scatter',
+        });
+    }
+}
+
+/**
+ * Class for a bubble chart
+ */
+export class BubbleChart extends Chart {
+    bubbles: (BubbleSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of bubble series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, bubbles: (BubbleSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.bubbles = bubbles;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            bubbles: Array.from(this.bubbles.map((bub) => bub.asDict())),
+            type: 'bubble',
+        });
+    }
+}
+
+/**
+ * Class for a stock chart
+ */
+export class StockChart extends Chart {
+    stocks: (StockSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of stock series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, stocks: (StockSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.stocks = stocks;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            stocks: Array.from(this.stocks.map((bub) => bub.asDict())),
+            type: 'stock',
         });
     }
 }
