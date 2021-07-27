@@ -464,3 +464,194 @@ export class ChartOptions {
         return result;
     }
 }
+
+/**
+ * Abstract base class for a series.
+ */
+export abstract class Series {
+    name: string | undefined;
+
+    /**
+     * @param name The name of the series. Optional.
+     */
+    constructor(name?: string) {
+        this.name = name;
+    }
+
+    /**
+     * Get the data used in the series. E.g. x-values, y-values, ...
+     * @returns the data used in the series
+     */
+    // Disable eslint warning, because this is an abstract base class
+    // eslint-disable-next-line class-methods-use-this
+    data(): {[key: string]: string | number}[] {
+        // Doesn't get used
+        return [{ dummy: 'dummy' }];
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string | number | {[key: string]: string | number}[]} {
+        let result: {[key: string]: string | {[key: string]: number | string}[]} = {
+            data: this.data(),
+        };
+
+        if (this.name !== undefined) {
+            result = { ...result, name: this.name };
+        }
+
+        return result;
+    }
+}
+
+/**
+ * A series for the case where the data consists of x-values and y-values.
+ */
+export class XYSeries extends Series {
+    x: (number | string)[];
+    y: number[];
+    color: string | undefined;
+
+    /**
+     * @param x The data for the x-axis.
+     * @param y The data for the y-axis.
+     * @param name The name of the series. Optional.
+     * @param color The color in which the series should be shown on a chart.
+     *  Can be html/css colors or hex values. Optional.
+     */
+    constructor(
+        x: (number | string)[],
+        y: number[],
+        name?: string,
+        color?: string,
+    ) {
+        super(name);
+        this.x = x;
+        this.y = y;
+        this.color = color;
+    }
+
+    /**
+     * Get the data used in the series. E.g. x-values, y-values, ...
+     * @returns the data used in the series
+     */
+    data(): {[key: string]: number | string}[] {
+        const result: {[key: string]: number | string}[] = [];
+
+        for (let i = 0; i < this.x.length; i += 1) {
+            result.push({ x: this.x[i], y: this.y[i] });
+        }
+
+        return result;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string | number | {[key: string]: string | number}[]} {
+        let result: {[key: string]: string | number |
+            {[key: string]: string | number}[]} = super.asDict();
+
+        if (this.color !== undefined) {
+            result = { ...result, color: this.color };
+        }
+
+        return result;
+    }
+}
+
+/**
+ * A series for pie charts.
+ */
+export class PieSeries extends XYSeries {
+    colors: string[] | undefined;
+
+    /**
+     * @param x The data for the x-axis.
+     * @param y The data for the y-axis.
+     * @param name The name of the series. Optional.
+     * @param colors Should be an iterable that contains the color for each specific pie slice.
+     *  If no colors are specified, the document's theme color is used.
+     *  If some colors are specified, but not for all data points, random colors will fill the gaps.
+     *  The value for non-specified colors must be None.
+     *  Warning: this is not the same as self.color of XYSeries,
+     *  which is the color for the entire series, but this is not applicable to PieSeries.
+     *  Optional.
+     */
+    constructor(
+        x: (number | string)[],
+        y: number[],
+        name?: string,
+        colors?: string[],
+    ) {
+        super(x, y, name);
+        this.colors = colors;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string | number | {[key: string]: string | number}[]} {
+        const result: {[key: string]: string | number |
+            {[key: string]: string | number}[]} = super.asDict();
+
+        if (this.colors !== undefined) {
+            // Add the color for each slice to 'data'
+            for (let i = 0; i < this.colors.length; i += 1) {
+                if (this.colors[i] !== undefined) {
+                    (result.data as { [key: string]: string | number; }[])[i] = {
+                        ...(result.data as { [key: string]: string | number; }[])[i],
+                        color: this.colors[i],
+                    };
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+/**
+ * A series for an area chart.
+ */
+export class AreaSeries extends XYSeries {
+    opacity: number | undefined;
+
+    /**
+     * @param x The data for the x-axis.
+     * @param y The data for the y-axis.
+     * @param name The name of the series. Optional.
+     * @param color The color in which the series should be shown on a chart.
+     *  Can be html/css colors or hex values. Optional.
+     * @param opacity The opacity for the color of the series. Optional.
+     */
+    constructor(
+        x: (number | string)[],
+        y: number[],
+        name?: string,
+        color?: string,
+        opacity?: number,
+    ) {
+        super(x, y, name, color);
+        this.opacity = opacity;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string | number | {[key: string]: string | number}[]} {
+        let result: {[key: string]: string | number |
+            {[key: string]: string | number}[]} = super.asDict();
+
+        if (this.opacity !== undefined) {
+            result = { ...result, opacity: this.opacity };
+        }
+
+        return result;
+    }
+}
