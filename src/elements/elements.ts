@@ -310,14 +310,14 @@ export abstract class Element {
 }
 
 export class Property extends Element {
-    value: number | string;
+    value: string | number | boolean;
 
     /**
      * @param name the name for this property
      * @param value The value for this property. Note: the general purpose for
      *  this value-field is the value as a string, but this can be of any type, for example a dict.
      */
-    constructor(name: string, value: string) {
+    constructor(name: string, value: string | number | boolean) {
         super(name);
         this.value = value;
     }
@@ -561,7 +561,7 @@ export class Span extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number} {
+    asDict(): {[key: string]: string | number | boolean} {
         return {
             [this.name]: this.value,
             [`${this.name}_row_span`]: this.rows,
@@ -728,8 +728,8 @@ export class Watermark extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = {
+    asDict(): {[key: string]: string | number | boolean} {
+        let result: {[key: string]: string | number | boolean} = {
             [this.name]: this.value,
         };
 
@@ -861,7 +861,7 @@ export class AOPChart extends Element {
     /**
      * @param name The name for this element.
      * @param xData The data for the x-axis. Format : ["day 1", "day 2", "day 3", "day 4", "day 5"]
-     *  or [{"value": "day 1"}, {"value": "day 2"}, {"value": "day 3"}, 
+     *  or [{"value": "day 1"}, {"value": "day 2"}, {"value": "day 3"},
      *  {"value": "day 4"}, {"value": "day 5"}]
      * @param yDatas The data for the y-axis in the same format as x_data.
      * @param date The date options for the chart. Defaults to None.
@@ -1054,5 +1054,260 @@ export class AOPChart extends Element {
      */
     availableTags(): Set<string> {
         return new Set([`{aopchart ${this.name}}`]);
+    }
+}
+
+/**
+ * The class for a page break property.
+ */
+export class PageBreak extends Property {
+    /**
+     * @param name the name for this property
+     * @param value Value should be set to 'page' or 'pagebreak' for PageBreak,
+     *  'column' or 'columnbreak' for column breaks.
+     *  If set to True (default) it will create a pagebreak.
+     */
+    constructor(name: string, value: string | boolean) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{?${this.name}}`]);
+    }
+}
+
+/**
+ * The class for markdown content.
+ */
+export class MarkdownContent extends Property {
+    /**
+     * @param name the name for this property
+     * @param value holds the markdown content
+     */
+    constructor(name: string, value: string) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{_${this.name}}`]);
+    }
+}
+
+/**
+ * This tag will allow you to insert a text box starting in the cell containing the tag in Excel.
+ */
+export class TextBox extends Element {
+    value: string;
+    font: string | undefined;
+    fontColor: string | undefined;
+    fontSize: number | string | undefined;
+    transparency: number | string | undefined;
+    width: number | string | undefined;
+    height: number | string | undefined;
+
+    /**
+     * @param name the name for this element
+     * @param value the value for this element
+     * @param font the font; optional
+     * @param fontColor the font color; optional
+     * @param fontSize the font size; optional
+     * @param transparency the transparency; optional
+     * @param width the width of the text box; optional
+     * @param height the height of the text box; optional
+     */
+    constructor(
+        name: string,
+        value: string,
+        font?: string,
+        fontColor?: string,
+        fontSize?: number | string,
+        transparency?: number | string,
+        width?: number | string,
+        height?: number | string,
+    ) {
+        super(name);
+        this.value = value;
+        this.font = font;
+        this.fontColor = fontColor;
+        this.fontSize = fontSize;
+        this.transparency = transparency;
+        this.width = width;
+        this.height = height;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): {[key: string]: string | number} {
+        let result: {[key: string]: string | number} = {
+            [this.name]: this.value,
+        };
+
+        if (this.font !== undefined) {
+            result = { ...result, [`${this.name}_font`]: this.font };
+        }
+        if (this.fontColor !== undefined) {
+            result = { ...result, [`${this.name}_font_color`]: this.fontColor };
+        }
+        if (this.fontSize !== undefined) {
+            result = { ...result, [`${this.name}_font_size`]: this.fontSize };
+        }
+        if (this.transparency !== undefined) {
+            result = { ...result, [`${this.name}_transparency`]: this.transparency };
+        }
+        if (this.width !== undefined) {
+            result = { ...result, [`${this.name}_width`]: this.width };
+        }
+        if (this.height !== undefined) {
+            result = { ...result, [`${this.name}_height`]: this.height };
+        }
+
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{tbox ${this.name}}`]);
+    }
+}
+
+/**
+ * A collection used to group multiple elements together.
+ * It can contain nested `ElementCollection`s and should be used to pass multiple `Element`s
+ * as PrintJob data, as well as to allow for nested elements.
+ * Its name is used as a key name when nested, but ignored for all purposes when it's the
+ * outer ElementCollection.
+ */
+export class ElementCollection extends Element {
+    elements: Element[];
+
+    /**
+     * @param name The name for this element collection. Not used for the outer ElementCollection,
+     *  but needed for nested ElementCollections. Defaults to "".
+     * @param elements An iterable containing the elements that need to be added to this collection.
+     *  Defaults to [].
+     */
+    constructor(name: string = '', elements: Element[] = []) {
+        super(name);
+        this.elements = elements;
+    }
+
+    /**
+     * Add an element to this element collection object.
+     * @param element the element to add to this collection
+     */
+    add(element: Element) {
+        this.elements.push(element);
+    }
+
+    /**
+     * Add all the elements in the given collection to this collection.
+     * @param col the collection of which the elements need to be added to
+     *  this element collection object
+     */
+    addAll(col: ElementCollection) {
+        col.elements.forEach(
+            (el) => {
+                this.add(el);
+            },
+        );
+    }
+
+    /**
+     * Remove an element from this element collection object by its name.
+     * @param elementName the name of the element that needs to be removed
+     */
+    removeElementByName(elementName: string) {
+        this.elements = this.elements.filter((el) => el.name !== elementName);
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict() {
+        let result = {};
+
+        this.elements.forEach(
+            (el) => {
+                if (el instanceof ElementCollection) {
+                    result = { ...result, [el.name]: el.asDict() };
+                } else {
+                    result = { ...result, ...el.asDict() };
+                }
+            },
+        );
+
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        const result = new Set<string>();
+
+        this.elements.forEach(
+            (el) => {
+                el.availableTags().forEach(
+                    (tag) => {
+                        result.add(tag);
+                    },
+                );
+            },
+        );
+
+        return result;
+    }
+
+    /**
+     * Generate an element collection from an element and a name.
+     * @param element the element that needs to be transformed to an element collection
+     * @param name the name of the element collection
+     * @returns the generated element collection from an element and a name
+     */
+    static elementToElementCollection(element: Element, name: string = ''): ElementCollection {
+        return ElementCollection.fromMapping(element.asDict(), name);
+    }
+
+    /**
+     * Generate an element collection from a mapping and a name.
+     * @param mapping the mapping that needs to be converted to an element collection
+     * @param name the name of the element collection; defaults to ''
+     * @returns an element collection generated from the given mapping and name
+     */
+    static fromMapping(mapping: {[key: string]: string | number | boolean}, name: string = ''): ElementCollection {
+        const resultSet = new Set<Element>();
+
+        Object.entries(mapping).forEach(
+            (e) => {
+                resultSet.add(new Property(e[0], e[1]));
+            },
+        );
+
+        return new ElementCollection(name, Array.from(resultSet));
+    }
+
+    /**
+     * Generate an element collection from a JSON string.
+     * @param jsonStr the json string that needs to be transformed to an element collection
+     * @param name The name of the element collection. Defaults to ''.
+     * @returns an element collection generated from the given JSON string and name
+     */
+    static fromJson(jsonStr: string, name: string = ''): ElementCollection {
+        return ElementCollection.fromMapping(JSON.parse(jsonStr), name);
     }
 }
