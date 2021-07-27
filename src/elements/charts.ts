@@ -897,3 +897,208 @@ export abstract class Chart extends Element {
         return new Set([`{$${this.name}}`]);
     }
 }
+
+/**
+ * Class for a line chart
+ */
+export class LineChart extends Chart {
+    lines: (LineSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param lines Iterable of line series.
+     * @param options The options for the chart. Defaults to None.
+     */
+    constructor(name: string, lines: (LineSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.lines = lines;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            lines: Array.from(this.lines.map((line) => line.asDict())),
+            type: 'line',
+        });
+    }
+}
+
+/**
+ * Class for a bar chart
+ */
+export class BarChart extends Chart {
+    bars: (BarSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param bars Iterable of bar series.
+     * @param options The options for the chart. Defaults to None.
+     */
+    constructor(name: string, bars: (BarSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.bars = bars;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            bars: Array.from(this.bars.map((bar) => bar.asDict())),
+            type: 'bar',
+        });
+    }
+}
+
+/**
+ * Class for a stacked bar chart
+ */
+export class BarStackedChart extends Chart {
+    bars: (BarStackedSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param bars Iterable of bar series.
+     * @param options The options for the chart. Defaults to None.
+     */
+    constructor(name: string, bars: (BarStackedSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.bars = bars;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            bars: Array.from(this.bars.map((bar) => bar.asDict())),
+            type: 'barStacked',
+        });
+    }
+}
+
+/**
+ * Class for a stacked bar chart with the x-axis expressed in percentage
+ */
+export class BarStackedPercentChart extends Chart {
+    bars: (BarStackedPercentSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param bars Iterable of bar series.
+     * @param options The options for the chart. Defaults to None.
+     */
+    constructor(name: string, bars: (BarStackedPercentSeries | XYSeries)[],
+        options?: ChartOptions) {
+        super(name, options);
+        this.bars = bars;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            bars: Array.from(this.bars.map((bar) => bar.asDict())),
+            type: 'barStackedPercent',
+        });
+    }
+}
+
+/**
+ * Class for a column chart
+ */
+export class ColumnChart extends Chart {
+    columns: (ColumnSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param columns Iterable of column series.
+     * @param options The options for the chart. Defaults to None.
+     */
+    constructor(name: string, columns: (ColumnSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.columns = columns;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            columns: Array.from(this.columns.map((col) => col.asDict())),
+            type: 'column',
+        });
+    }
+}
+
+/**
+ * Class for a stacked column chart
+ */
+export class ColumnStackedChart extends Chart {
+    columns: (ColumnStackedSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param columns Iterable of column series.
+     * @param options The options for the chart. Defaults to None.
+     */
+    constructor(name: string, columns: (ColumnStackedSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.columns = columns;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            columns: Array.from(this.columns.map((col) => col.asDict())),
+            type: 'columnStacked',
+        });
+    }
+}
+
+/**
+ * Class for a stacked column chart with the x-axis expressed in percentage
+ */
+export class ColumnStackedPercentChart extends Chart {
+    columns: (ColumnStackedPercentSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param columns Iterable of column series.
+     * @param options The options for the chart. Defaults to None.
+     */
+    constructor(name: string, columns: (ColumnStackedPercentSeries | XYSeries)[],
+        options?: ChartOptions) {
+        super(name, options);
+        this.columns = columns;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: string |
+        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+        return this.getDict({
+            columns: Array.from(this.columns.map((col) => col.asDict())),
+            type: 'columnStackedPercent',
+        });
+    }
+}
