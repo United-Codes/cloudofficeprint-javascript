@@ -1334,3 +1334,110 @@ export class StockChart extends Chart {
         });
     }
 }
+
+/**
+ * Recursively replace the keys in a (possibly) nested dictionary with a new name.
+ * @param obj input dictionary
+ * @param oldKey old name of the key
+ * @param newKey new name of the key
+ * @returns input dictionary with the old key name replaced by the new key name
+ */
+export function replaceKeyRecursive(obj: object, oldKey: string, newKey: string): object {
+    let result: object = { ...obj };
+    Object.entries(result).forEach(
+        ([key, value]) => {
+            if (value.constructor === Object) {
+                result = { ...result, [key]: replaceKeyRecursive(value, oldKey, newKey) };
+            } else if (value.constructor === Array) {
+                const newValue: object[] = [];
+                value.forEach(
+                    (_val, idx) => {
+                        newValue.push(replaceKeyRecursive(value[idx], oldKey, newKey));
+                    },
+                );
+                result = { ...result, [key]: newValue };
+            }
+        },
+    );
+
+    if (Object.prototype.hasOwnProperty.call(result, oldKey)) {
+        const val = (result as {[key: string]: unknown})[oldKey];
+        delete (result as {[key: string]: unknown})[oldKey];
+        result = { ...result, [newKey]: val };
+    }
+
+    return result;
+}
+
+/**
+ * Class for a combined chart.
+ * It is possible to combine more than 2 types of chart but there can only be two value axes."""
+ */
+export class CombinedChart extends Chart {
+    charts: Chart[];
+    secondaryCharts: Chart[] | undefined;
+
+    /**
+     * @param name The name of the chart.
+     * @param charts Charts for the first y-axis.
+     * @param secondaryCharts Charts for the secondary y-axis. Optional.
+     * @param options The options for the chart.
+     *  If not defined, the chartoptions of the first chart that has options will be used.
+     *  Optional.
+     */
+    constructor(
+        name: string,
+        charts: Chart[],
+        secondaryCharts?: Chart[],
+        options?: ChartOptions,
+    ) {
+        super(name, options);
+        this.charts = charts;
+        this.secondaryCharts = secondaryCharts;
+    }
+
+    /**
+     * Remove the chart options from all charts in this combined chart object.
+     * Replace the y-axis with the y2-axis for the secondary charts.
+     * Add the dict representation for each chart to a list and return that list.
+     * @returns list containing the dict representation for each chart, after processing
+     */
+    getModifiedChartDicts() {
+        const primaryArray = [...this.charts];
+        const dictArray: object[] = [];
+
+        primaryArray.forEach(
+            (val) => {
+                const chartDictFull = val.asDict();
+                const chartDict = (chartDictFull as {[key: string]: object})[val.name];
+                delete (chartDict as {[key: string]: object}).options;
+                dictArray.push(chartDict);
+            },
+        );
+
+        if (this.secondaryCharts !== undefined) {
+            const secondaryArray = [...this.secondaryCharts];
+            secondaryArray.forEach(
+                (val) => {
+                    const chartDictFull = val.asDict();
+                    const chartDict = (chartDictFull as {[key: string]: object})[val.name];
+                    delete (chartDict as {[key: string]: object}).options;
+                    dictArray.push(replaceKeyRecursive(chartDict, 'y', 'y2'));
+                },
+            );
+        }
+
+        return dictArray;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict() {
+        return this.getDict({
+            type: 'multiple',
+            multiples: this.getModifiedChartDicts(),
+        });
+    }
+}
