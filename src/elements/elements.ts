@@ -487,7 +487,7 @@ export class TableOfContents extends Element {
      * @param tabLeader How the space between title and page number should be filled.
      *  Can be "hyphen", "underscore", or "dot" (default). Optional.
      */
-    constructor(name: string, title: string, depth?: number, tabLeader?: string) {
+    constructor(name: string, title?: string, depth?: number, tabLeader?: string) {
         super(name);
         this.title = title;
         this.depth = depth;
