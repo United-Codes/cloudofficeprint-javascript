@@ -1,3 +1,5 @@
+import { Element } from './elements';
+
 /**
  * Abstract base class for PDF's insertable objects.
  */
@@ -173,5 +175,142 @@ export class PDFImage extends PDFInsertObject {
         }
 
         return result;
+    }
+}
+
+/**
+ * Group of PDF texts as an `Element`.
+ * There can only be one of this `Element`.
+ * Element name is fixed and important to the server, so multiple will just overwrite.
+ */
+export class PDFTexts extends Element {
+    texts: PDFText[];
+
+    /**
+     * @param texts An iterable consisting of `PDFText`-objects.
+     */
+    constructor(texts: PDFText[]) {
+        super(PDFText.identifier());
+        this.texts = texts;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: {[key: string]: {[key: string]: string | number | boolean}[]}[]} {
+        let result: {[key: string]: {[key: string]: string | number | boolean}[]} = {};
+
+        this.texts.forEach(
+            (txt) => {
+                // If there already is text for this page -> update entry in dictionary
+                //  else -> create new entry in dictionary
+                const pageString: string = txt.page.toString();
+                if (pageString in result) {
+                    if (result.pageString instanceof Array) {
+                        result.pageString.push(txt.asInnerDict());
+                    } else {
+                        // If there already is text for this page, but not yet in a list
+                        //  -> make a list
+                        result = {
+                            ...result,
+                            [pageString]: [result.pageString, txt.asInnerDict()],
+                        };
+                    }
+                } else {
+                    result = { ...result, [pageString]: [txt.asInnerDict()] };
+                }
+            },
+        );
+
+        return {
+            [this.name]: [result],
+        };
+    }
+}
+
+/**
+ * Group of PDF images as an `Element`.
+ * There can only be one of this `Element`.
+ * Element name is fixed and important to the server, so multiple will just overwrite.
+ */
+export class PDFImages extends Element {
+    images: PDFImage[];
+
+    /**
+     * @param images An iterable consisting of `PDFImage`-objects.
+     */
+    constructor(images: PDFImage[]) {
+        super(PDFImage.identifier());
+        this.images = images;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {[key: string]: {[key: string]: {[key: string]: string | number | boolean}[]}[]} {
+        let result: {[key: string]: {[key: string]: string | number | boolean}[]} = {};
+
+        this.images.forEach(
+            (img) => {
+                // If there already is image for this page -> update entry in dictionary
+                //  else -> create new entry in dictionary
+                const pageString: string = img.page.toString();
+                if (pageString in result) {
+                    if (result.pageString instanceof Array) {
+                        result.pageString.push(img.asInnerDict());
+                    } else {
+                        // If there already is image for this page, but not yet in a list
+                        //  -> make a list
+                        result = {
+                            ...result,
+                            [pageString]: [result.pageString, img.asInnerDict()],
+                        };
+                    }
+                } else {
+                    result = { ...result, [pageString]: [img.asInnerDict()] };
+                }
+            },
+        );
+
+        return {
+            [this.name]: [result],
+        };
+    }
+}
+
+/**
+ * Class used for filling in PDF forms.
+ * There can only be one of this `Element`.
+ * Element name is fixed and important to the server, so multiple will just overwrite.
+ */
+export class PDFFormData extends Element {
+    formData: {[key: string]: string | boolean};
+
+    /**
+     * @param formData a dict containing the keys and values of the fields
+     *  that need to be entered in the PDF form
+     */
+    constructor(formData: {[key: string]: string | boolean}) {
+        super(PDFFormData.identifier());
+        this.formData = formData;
+    }
+
+    /**
+     * @returns identifier for this PDFInsertObject
+     */
+    static identifier(): string {
+        return 'aop_pdf_form_data';
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict() {
+        return {
+            [this.name]: this.formData,
+        };
     }
 }
