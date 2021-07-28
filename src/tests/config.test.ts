@@ -3,7 +3,10 @@ import * as aop from '../index';
 
 describe('Test config', () => {
     test('Test route paths', async () => {
-        const serv: aop.config.Server = new aop.config.Server('http://apexofficeprint.com/dev/');
+        const serv: aop.config.Server = new aop.config.Server(
+            'https://api.apexofficeprint.com/',
+            new aop.config.ServerConfig('YOUR_API_KEY'),
+        );
         expect(await serv.isReachable()).toBeTruthy();
         expect(typeof await serv.getVersionSoffice()).toBe('string');
         expect(typeof await serv.getVersionOfficetopdf()).toBe('string');

@@ -686,7 +686,7 @@ export class LineSeries extends XYSeries {
      *  (in em, pt, px, cm or in), by default: automatic. Optional.
      * @param lineWidth Thickness of the connecting line in em, pt, px, cm or in. Optional.
      * @param lineStyle Style of the line. Supported options can be found online on the
-     *  [AOP documentation](http://www.apexofficeprint.com/docs/#line). Optional.
+     *  [AOP documentation](https://www.apexofficeprint.com/docs/#line). Optional.
      */
     constructor(
         x: (number | string)[],
@@ -1342,8 +1342,8 @@ export class StockChart extends Chart {
  * @param newKey new name of the key
  * @returns input dictionary with the old key name replaced by the new key name
  */
-export function replaceKeyRecursive(obj: object, oldKey: string, newKey: string): object {
-    let result: object = { ...obj };
+export function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: string): T {
+    let result: T = { ...obj };
     Object.entries(result).forEach(
         ([key, value]) => {
             if (value.constructor === Object) {
@@ -1402,7 +1402,7 @@ export class CombinedChart extends Chart {
      * Add the dict representation for each chart to a list and return that list.
      * @returns list containing the dict representation for each chart, after processing
      */
-    getModifiedChartDicts() {
+    getModifiedChartDicts(): object[] {
         const primaryArray = [...this.charts];
         const dictArray: object[] = [];
 
@@ -1434,7 +1434,7 @@ export class CombinedChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict() {
+    asDict(): {[key: string]: unknown} {
         return this.getDict({
             type: 'multiple',
             multiples: this.getModifiedChartDicts(),
