@@ -206,7 +206,7 @@ export class PDFTexts extends Element {
                 // If there already is text for this page -> update entry in dictionary
                 //  else -> create new entry in dictionary
                 const pageString: string = txt.page.toString();
-                if (pageString in result) {
+                if (Object.prototype.hasOwnProperty.call(result, pageString)) {
                     if (result.pageString instanceof Array) {
                         result.pageString.push(txt.asInnerDict());
                     } else {
@@ -257,7 +257,7 @@ export class PDFImages extends Element {
                 // If there already is image for this page -> update entry in dictionary
                 //  else -> create new entry in dictionary
                 const pageString: string = img.page.toString();
-                if (pageString in result) {
+                if (Object.prototype.hasOwnProperty.call(result, pageString)) {
                     if (result.pageString instanceof Array) {
                         result.pageString.push(img.asInnerDict());
                     } else {

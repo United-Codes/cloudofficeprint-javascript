@@ -38,6 +38,29 @@ export abstract class Resource {
     }
 
     /**
+     * This Resource object as a dict object for use as a template
+     * @returns dict representation of this resource as a template
+     */
+    templateDict(): {[key: string]: string} {
+        return {
+            template_type: this.filetype,
+        };
+    }
+
+    /**
+     * This Resource object as a dict object for use as a secondary file
+     *  (prepend, append, insert,as subtemplate)
+     * @returns this Resource object as a dict object for use as a secondary file
+     *  (prepend, append, insert, as subtemplate)
+     */
+    secondaryFileDict(): {[key: string]: string} {
+        return {
+            mime_type: this.mimetype(),
+            filename: this.data as string,
+        };
+    }
+
+    /**
      * Create a RawResource from raw file data and a file type (extension)
      * @param rawData raw data as a Buffer object
      * @param filetype file type (extension)
