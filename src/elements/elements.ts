@@ -864,12 +864,12 @@ export class AOPChart extends Element {
      *  or [{"value": "day 1"}, {"value": "day 2"}, {"value": "day 3"},
      *  {"value": "day 4"}, {"value": "day 5"}]
      * @param yDatas The data for the y-axis in the same format as x_data.
-     * @param date The date options for the chart. Defaults to None.
-     * @param title The title of the chart. Defaults to None.
-     * @param xTitle The title for the x-axis. Defaults to None.
-     * @param yTitle The title for the y-axis. Defaults to None.
-     * @param y2Title The title for the second y-axis. Defaults to None.
-     * @param x2Title The title for the second x-axis. Defaults to None.
+     * @param date The date options for the chart. Optional.
+     * @param title The title of the chart. Optional.
+     * @param xTitle The title for the x-axis. Optional.
+     * @param yTitle The title for the y-axis. Optional.
+     * @param y2Title The title for the second y-axis. Optional.
+     * @param x2Title The title for the second x-axis. Optional.
      */
     constructor(
         name: string,
@@ -915,27 +915,30 @@ export class AOPChart extends Element {
         [key: string]:
             {
                 [key: string]:
-                    string[] |
+                    {
+                        [key: string]:
+                            string[] |
+                            string |
+                            {
+                                [key: string]:
+                                    string |
+                                    number
+                            }
+                    } |
+                    {
+                        [key: string]:
+                            {
+                                [key: string]:
+                                    string |
+                                    (string | number | {[key: string]: string | number})[]
+                            }[] |
+                            string
+                    } |
                     string |
                     {
                         [key: string]:
-                            string |
-                            number
+                            string
                     }
-            } |
-            {
-                [key: string]:
-                    {
-                        [key: string]:
-                            string |
-                            (string | number | {[key: string]: string | number})[]
-                    }[] |
-                    string
-            } |
-            string |
-            {
-                [key: string]:
-                    string
             }
             } {
         const ySeries: {name: string, data: (string | number |
@@ -1045,7 +1048,7 @@ export class AOPChart extends Element {
             };
         }
 
-        return result;
+        return { [this.name]: result };
     }
 
     /**

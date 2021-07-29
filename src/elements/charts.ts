@@ -181,13 +181,13 @@ export class ChartAxisOptions {
             result = { ...result, max: this.max };
         }
         if (this.date !== undefined) {
-            result = { ...result, date: this.date };
+            result = { ...result, type: 'date', date: this.date };
         }
         if (this.title !== undefined) {
             result = { ...result, title: this.title };
         }
         if (this.values !== undefined) {
-            result = { ...result, values: this.values };
+            result = { ...result, showValues: this.values };
         }
         if (this.valuesStyle !== undefined) {
             result = { ...result, valuesStyle: this.valuesStyle };
@@ -199,13 +199,13 @@ export class ChartAxisOptions {
             result = { ...result, titleRotation: this.titleRotation };
         }
         if (this.majorGridLines !== undefined) {
-            result = { ...result, majorGridLines: this.majorGridLines };
+            result = { ...result, majorGridlines: this.majorGridLines };
         }
         if (this.majorUnit !== undefined) {
             result = { ...result, majorUnit: this.majorUnit };
         }
         if (this.minorGridLines !== undefined) {
-            result = { ...result, minorGridLines: this.minorGridLines };
+            result = { ...result, minorGridlines: this.minorGridLines };
         }
         if (this.minorUnit !== undefined) {
             result = { ...result, minorUnit: this.minorUnit };
@@ -571,7 +571,7 @@ export class XYSeries extends Series {
  * A series for pie charts.
  */
 export class PieSeries extends XYSeries {
-    colors: string[] | undefined;
+    colors: (string | undefined)[] | undefined;
 
     /**
      * @param x The data for the x-axis.
@@ -589,7 +589,7 @@ export class PieSeries extends XYSeries {
         x: (number | string)[],
         y: number[],
         name?: string,
-        colors?: string[],
+        colors?: (string | undefined)[],
     ) {
         super(x, y, name);
         this.colors = colors;
@@ -610,7 +610,7 @@ export class PieSeries extends XYSeries {
                 if (this.colors[i] !== undefined) {
                     (result.data as { [key: string]: string | number; }[])[i] = {
                         ...(result.data as { [key: string]: string | number; }[])[i],
-                        color: this.colors[i],
+                        color: this.colors[i] as string,
                     };
                 }
             }
@@ -886,7 +886,7 @@ export abstract class Chart extends Element {
 
         result = { ...result, ...updates };
 
-        return result;
+        return { [this.name]: result };
     }
 
     /**
@@ -1342,7 +1342,7 @@ export class StockChart extends Chart {
  * @param newKey new name of the key
  * @returns input dictionary with the old key name replaced by the new key name
  */
-export function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: string): T {
+function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: string): T {
     let result: T = { ...obj };
     Object.entries(result).forEach(
         ([key, value]) => {
@@ -1391,7 +1391,25 @@ export class CombinedChart extends Chart {
         secondaryCharts?: Chart[],
         options?: ChartOptions,
     ) {
-        super(name, options);
+        let optionsCopy: ChartOptions | {[key: string]: unknown} | undefined = options;
+        if (options === undefined) {
+            const allOptions: {[key: string]: unknown}[] = [];
+            charts.concat(secondaryCharts !== undefined ? secondaryCharts : []).forEach(
+                (chart) => {
+                    if (chart.options !== undefined) {
+                        allOptions.push(chart.options instanceof ChartOptions
+                            ? chart.options.asDict()
+                            : chart.options);
+                    }
+                },
+            );
+            allOptions.reverse().forEach(
+                (opt) => {
+                    optionsCopy = opt;
+                },
+            );
+        }
+        super(name, optionsCopy);
         this.charts = charts;
         this.secondaryCharts = secondaryCharts;
     }

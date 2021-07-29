@@ -11,11 +11,11 @@ export abstract class RESTSource {
     /**
      * @param datasource Type of request: graphql or rest.
      * @param endpoint URL of the data source from where the JSON needs to be read.
-     * @param filename Name of the output file. Defaults to None.
+     * @param filename Name of the output file. Optional.
      * @param headers HTTP headers, e.g. [{"Content-Type":"application/json"},
-     *  {"Custom-Auth-Token":"xysazxklj4568asdf46a5sd4f"}]. Defaults to None.
+     *  {"Custom-Auth-Token":"xysazxklj4568asdf46a5sd4f"}]. Optional.
      * @param auth Basic authentication i.e. 'user:password' to compute an Authorization header.
-     *  Defaults to None.
+     *  Optional.
      */
     constructor(
         datasource: string,
@@ -66,11 +66,11 @@ export class RESTSourceREST extends RESTSource {
      * @param endpoint URL of the data source from where the JSON needs to be read.
      * @param method HTTP method. Defaults to 'GET'.
      * @param body Body of HTTP request (can be left empty for GET requests). Defaults to ''.
-     * @param filename Name of the output file. Defaults to None.
+     * @param filename Name of the output file. Optional.
      * @param headers HTTP headers, e.g. [{"Content-Type":"application/json"},
-     *  {"Custom-Auth-Token":"xysazxklj4568asdf46a5sd4f"}]. Defaults to None.
+     *  {"Custom-Auth-Token":"xysazxklj4568asdf46a5sd4f"}]. Optional.
      * @param auth Basic authentication i.e. 'user:password' to compute an Authorization header.
-     *  Defaults to None.
+     *  Optional.
      */
     constructor(
         endpoint: string,
@@ -107,11 +107,11 @@ export class RESTSourceGraphQL extends RESTSource {
     /**
      * @param endpoint URL of the data source from where the JSON needs to be read.
      * @param query Graphql query.
-     * @param filename Name of the output file. Defaults to None.
+     * @param filename Name of the output file. Optional.
      * @param headers HTTP headers, e.g. [{"Content-Type":"application/json"},
-     *  {"Custom-Auth-Token":"xysazxklj4568asdf46a5sd4f"}]. Defaults to None.
+     *  {"Custom-Auth-Token":"xysazxklj4568asdf46a5sd4f"}]. Optional.
      * @param auth Basic authentication i.e. 'user:password' to compute an Authorization header.
-     *  Defaults to None.
+     *  Optional.
      */
     constructor(
         endpoint: string,

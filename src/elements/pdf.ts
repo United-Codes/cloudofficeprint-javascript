@@ -37,12 +37,12 @@ export class PDFText extends PDFInsertObject {
      * @param x  X component of this object's position.
      * @param y Y component of this object's position.
      * @param page Page to include this object on. Either "all" or an integer. Defaults to "all".
-     * @param rotation Text rotation in degrees. Defaults to None.
-     * @param bold Whether or not the text should be in bold. Defaults to None.
-     * @param italic Whether or not the text should be in italic. Defaults to None.
-     * @param font The text font name. Defaults to None.
-     * @param fontColor The text font color, CSS notation. Defaults to None.
-     * @param fontSize The text font size. Defaults to None.
+     * @param rotation Text rotation in degrees. Optional.
+     * @param bold Whether or not the text should be in bold. Optional.
+     * @param italic Whether or not the text should be in italic. Optional.
+     * @param font The text font name. Optional.
+     * @param fontColor The text font color, CSS notation. Optional.
+     * @param fontSize The text font size. Optional.
      */
     constructor(
         text: string,
@@ -121,10 +121,10 @@ export class PDFImage extends PDFInsertObject {
      * @param x X component of this object's position.
      * @param y Y component of this object's position.
      * @param page Page to include this object on. Either "all" or an integer. Defaults to "all".
-     * @param rotation Rotation in degrees. Defaults to None.
-     * @param width Image width in px. Defaults to None.
-     * @param height Image height in px. Defaults to None.
-     * @param maxWidth Max image height in px (for scaling purposes). Defaults to None.
+     * @param rotation Rotation in degrees. Optional.
+     * @param width Image width in px. Optional.
+     * @param height Image height in px. Optional.
+     * @param maxWidth Max image height in px (for scaling purposes). Optional.
      */
     constructor(
         image: string,
