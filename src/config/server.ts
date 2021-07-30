@@ -28,12 +28,12 @@ export class Printer {
      * The dict representation of this Printer object.
      * @returns The dict representation of this Printer object.
      */
-    asDict(): { location: string, version: string, requester: string, jobName: string } {
+    asDict(): { 'location': string, 'version': string, 'requester': string, 'job_name': string } {
         return {
             location: this.location,
             version: this.version,
             requester: this.requester,
-            jobName: this.jobName,
+            job_name: this.jobName,
         };
     }
 }
