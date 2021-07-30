@@ -310,14 +310,14 @@ export abstract class Element {
 }
 
 export class Property extends Element {
-    value: string | number | boolean;
+    value: any;
 
     /**
      * @param name the name for this property
      * @param value The value for this property. Note: the general purpose for
      *  this value-field is the value as a string, but this can be of any type, for example a dict.
      */
-    constructor(name: string, value: string | number | boolean) {
+    constructor(name: string, value: any) {
         super(name);
         this.value = value;
     }
@@ -326,7 +326,7 @@ export class Property extends Element {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number | boolean} {
+    asDict(): {[key: string]: any} {
         return {
             [this.name]: this.value,
         };
@@ -358,8 +358,8 @@ export class CellStyleProperty extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = {
+    asDict(): {[key: string]: any} {
+        let result: {[key: string]: any} = {
             [this.name]: this.value,
         };
 
@@ -561,7 +561,7 @@ export class Span extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number | boolean} {
+    asDict(): {[key: string]: any} {
         return {
             [this.name]: this.value,
             [`${this.name}_row_span`]: this.rows,
@@ -645,8 +645,8 @@ export class StyledProperty extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | boolean | number} {
-        let result: {[key: string]: string | boolean | number} = {
+    asDict(): {[key: string]: any} {
+        let result: {[key: string]: any} = {
             [this.name]: this.value,
         };
 
@@ -728,8 +728,8 @@ export class Watermark extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = {
+    asDict(): {[key: string]: any} {
+        let result: {[key: string]: any} = {
             [this.name]: this.value,
         };
 
@@ -1292,7 +1292,7 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection; defaults to ''
      * @returns an element collection generated from the given mapping and name
      */
-    static fromMapping(mapping: {[key: string]: string | number | boolean}, name: string = ''): ElementCollection {
+    static fromMapping(mapping: {[key: string]: string | number | boolean | {[key: string]: any}}, name: string = ''): ElementCollection {
         const resultSet = new Set<Element>();
 
         Object.entries(mapping).forEach(

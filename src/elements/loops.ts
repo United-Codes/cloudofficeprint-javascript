@@ -100,8 +100,7 @@ export class ForEachSheet extends ForEach {
      * @param content An iterable or mapping containing the elements for this loop element.
      */
     constructor(name: string, content: Element[] | {[key: string]: Element}) {
-        let contentCopy = content.constructor instanceof Array
-            ? [...(content as Element[])] : { ...content };
+        let contentCopy = content;
 
         // when content is a mapping, it means "sheet name": content for that sheet
         // when it's just an iterable, don't add sheet names (or users can add a Property manually)
@@ -110,16 +109,16 @@ export class ForEachSheet extends ForEach {
 
             Object.entries(contentCopy).forEach(
                 ([sheetname, sheetcontent]) => {
+                    let sheetcontentCopy = sheetcontent;
                     // we need to add the additional sheet_name property,
                     //  so we should convert the Element to an ElementCollection if needed
-                    if (!(sheetcontent instanceof ElementCollection)) {
-                        (contentCopy as {[key: string]: unknown})
-                            .sheetname = ElementCollection
-                                .elementToElementCollection(sheetcontent);
+                    if (!(sheetcontentCopy instanceof ElementCollection)) {
+                        sheetcontentCopy = ElementCollection
+                            .elementToElementCollection(sheetcontentCopy);
                     }
                     // adding the new property containing sheet_name
-                    (sheetcontent as ElementCollection).add(new Property('sheet_name', sheetname));
-                    newContent.push(sheetcontent);
+                    (sheetcontentCopy as ElementCollection).add(new Property('sheet_name', sheetname));
+                    newContent.push(sheetcontentCopy);
                 },
             );
 
