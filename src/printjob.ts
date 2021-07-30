@@ -6,7 +6,7 @@ import { AOPError } from './exceptions';
 import { Resource } from './resource';
 import { Response } from './response';
 
-const STATIC_OPTS = {
+export const STATIC_OPTS = {
     tool: 'javascript',
     // 'version': "18.2", # optional: version of AOP JSON format
     javascript_sdk_version: '21.1',
@@ -80,6 +80,7 @@ export class PrintJob {
                     method: 'post',
                     body: JSON.stringify(this.asDict()),
                     agent: proxy,
+                    headers: { 'Content-type': 'application/json' },
                 },
             ),
         );
@@ -147,7 +148,7 @@ export class PrintJob {
         };
 
         // If output_type is not specified, set this to the template filetype
-        if (!(Object.prototype.hasOwnProperty.call(result, 'output_type'))) {
+        if (!(Object.prototype.hasOwnProperty.call(result.output, 'output_type'))) {
             result.output = { ...result.output, output_type: result.template.template_type };
         }
 
@@ -208,5 +209,7 @@ export class PrintJob {
             console.log('The JSON data that is sent to the AOP server:\n');
             console.log(JSON.stringify(result, null, 2));
         }
+
+        return result;
     }
 }

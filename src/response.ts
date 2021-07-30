@@ -50,7 +50,7 @@ export class Response {
             pathCopy = `${path}.${this.filetype()}`;
         }
         fs.writeFile(pathCopy, await this.buffer, (err) => {
-            throw new Error(`Could not write to file. Error: ${err}`);
+            if (err) throw err;
         });
     }
 }

@@ -1,7 +1,94 @@
-import { describe, test } from '@jest/globals';
+import { describe, test, expect } from '@jest/globals';
 import * as aop from '../index';
 
 describe('Tests for class PrintJob', () => {
+    test('Test all options for printjob', async () => {
+        const serv: aop.config.Server = new aop.config.Server(
+            'http://apexofficeprint.com/dev/',
+            new aop.config.ServerConfig('YOUR_API_KEY'),
+        );
+        const prependFile = aop.Resource.fromLocalFile('./data/tests/template.docx');
+
+        const template = aop.Resource.fromLocalFile('./data/tests/template.docx');
+        const templateMain = aop.Resource.fromLocalFile('./data/tests/template_prepend_append_subtemplate.docx');
+        const templateBase64 = template.data;
+        const templateMainBase64 = templateMain.data;
+
+        const data = new aop.elements.ElementCollection('data');
+        const textTag = new aop.elements.Property('textTag1', 'test_text_tag1');
+        data.add(textTag);
+
+        const appendFile = aop.Resource.fromLocalFile('./data/tests/template.docx');
+
+        const subtemplates = {
+            sub1: template,
+            sub2: template,
+        };
+
+        const outputConf = new aop.config.OutputConfig('pdf');
+
+        const printjob = new aop.PrintJob(
+            templateMain,
+            data,
+            serv,
+            outputConf,
+            subtemplates,
+            [prependFile],
+            [appendFile],
+        );
+        const printjobExpected = {
+            api_key: serv.config!.apiKey,
+            append_files: [
+                {
+                    file_content: templateBase64,
+                    file_source: 'base64',
+                    mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                },
+            ],
+            files: [
+                {
+                    data: {
+                        textTag1: 'test_text_tag1',
+                    },
+                },
+            ],
+            output: {
+                output_converter: 'libreoffice',
+                output_encoding: 'raw',
+                output_type: 'pdf',
+            },
+            prepend_files: [
+                {
+                    file_content: templateBase64,
+                    file_source: 'base64',
+                    mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                },
+            ],
+            template: {
+                file: templateMainBase64,
+                template_type: 'docx',
+            },
+            tool: 'javascript',
+            templates: [
+                {
+                    file_content: templateBase64,
+                    file_source: 'base64',
+                    mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    name: 'sub1',
+                },
+                {
+                    file_content: templateBase64,
+                    file_source: 'base64',
+                    mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                    name: 'sub2',
+                },
+            ],
+            javascript_sdk_version: aop.printjob.STATIC_OPTS.javascript_sdk_version,
+        };
+        expect(printjob.asDict()).toEqual(printjobExpected);
+        // Commented out because you need an API key, but the saving to a file works as expected
+        // (await printjob.execute()).toFile('./data/tests/prepend_append_subtemplate_test');
+    });
     // Works as expected, this test is skipped because an API key is needed
     // Remove '.skip' and enter a valid API key if you want to test this yourself
     test.skip('Test executeFullJson()', async () => {
