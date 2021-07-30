@@ -120,7 +120,7 @@ export class RESTSourceGraphQL extends RESTSource {
         headers?: {[key: string]: string}[],
         auth?: string,
     ) {
-        super('graphl', endpoint, filename, headers, auth);
+        super('graphql', endpoint, filename, headers, auth);
         this.query = query;
     }
 
