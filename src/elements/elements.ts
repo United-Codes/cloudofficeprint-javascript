@@ -55,7 +55,7 @@ export class CellStyleDocx extends CellStyle {
         let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
-            result = { ...result, _cellBackgroundColor: this.cellBackgroundColor };
+            result = { ...result, _cell_background_color: this.cellBackgroundColor };
         }
         if (this.width !== undefined) {
             result = { ...result, _width: this.width };
@@ -766,14 +766,14 @@ export class Watermark extends Property {
 
 export class D3Code extends Element {
     code: string;
-    data: string | undefined;
+    data: unknown | undefined;
 
     /**
      * @param name the name for this element
      * @param code the JSON-encoded code for generating a D3 image
-     * @param data the JSON-encoded data that the code will have access to; optional
+     * @param data the data that the code will have access to; optional
      */
-    constructor(name: string, code: string, data?: string) {
+    constructor(name: string, code: string, data?: unknown) {
         super(name);
         this.code = code;
         this.data = data;
@@ -783,8 +783,8 @@ export class D3Code extends Element {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string} {
-        let result: {[key: string]: string} = {
+    asDict(): {[key: string]: string | unknown} {
+        let result: {[key: string]: string | unknown} = {
             [this.name]: this.code,
         };
 

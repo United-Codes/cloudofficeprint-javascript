@@ -1,7 +1,7 @@
 import { describe, test, expect } from '@jest/globals';
 import * as aop from '../index';
 
-describe('Test config', () => {
+describe('Tests for config', () => {
     test('Test PDFOptions', () => {
         const pdfOpts = new aop.config.PDFOptions(
             'test_pw',

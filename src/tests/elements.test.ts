@@ -1,0 +1,268 @@
+import { describe, test, expect } from '@jest/globals';
+import * as aop from '../index';
+
+describe('Tests for elements', () => {
+    test(`Test for Property. Also serves as a test for Html, RightToLeft, FootNote,
+    Raw, Formula, PageBreak and MarkdownContent.`, () => {
+        const prop = new aop.elements.Property(
+            'name',
+            'value',
+        );
+        const propExpected = {
+            name: 'value',
+        };
+        expect(prop.asDict()).toEqual(propExpected);
+    });
+    test('Test cell style property docx', () => {
+        const style = new aop.elements.CellStyleDocx(
+            '#eb4034',
+            10,
+        );
+        const styleProperty = new aop.elements.CellStyleProperty(
+            'name',
+            'value',
+            style,
+        );
+        const stylePropertyExpected = {
+            name: 'value',
+            name_cell_background_color: '#eb4034',
+            name_width: 10,
+        };
+        expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
+    });
+    test('Test cell style property xlsx', () => {
+        const style = new aop.elements.CellStyleXlsx(
+            true,
+            false,
+            '#ff0000',
+            'Arial',
+            12,
+            '#ff0000',
+            true,
+            false,
+            false,
+            true,
+            false,
+            true,
+            'medium',
+            '#ff0000',
+            'mediumDashed',
+            '#ff0000',
+            'mediumDashDot',
+            '#ff0000',
+            'mediumDashDotDot',
+            '#ff0000',
+            'thick',
+            'up-wards',
+            '#ff0000',
+            'center',
+            'justify',
+            45,
+        );
+        const styleProperty = new aop.elements.CellStyleProperty(
+            'name',
+            'value',
+            style,
+        );
+        const stylePropertyExpected = {
+            name: 'value',
+            name_cell_locked: true,
+            name_cell_hidden: false,
+            name_cell_background: '#ff0000',
+            name_font_name: 'Arial',
+            name_font_size: 12,
+            name_font_color: '#ff0000',
+            name_font_italic: true,
+            name_font_bold: false,
+            name_font_strike: false,
+            name_font_underline: true,
+            name_font_superscript: false,
+            name_font_subscript: true,
+            name_border_top: 'medium',
+            name_border_top_color: '#ff0000',
+            name_border_bottom: 'mediumDashed',
+            name_border_bottom_color: '#ff0000',
+            name_border_left: 'mediumDashDot',
+            name_border_left_color: '#ff0000',
+            name_border_right: 'mediumDashDotDot',
+            name_border_right_color: '#ff0000',
+            name_border_diagonal: 'thick',
+            name_border_diagonal_direction: 'up-wards',
+            name_border_diagonal_color: '#ff0000',
+            name_text_h_alignment: 'center',
+            name_text_v_alignment: 'justify',
+            name_text_rotation: 45,
+        };
+        expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
+    });
+    test('Test hyperlink', () => {
+        const hyperlink = new aop.elements.Hyperlink(
+            'hyperlink',
+            'url',
+            'hyperlink_text',
+        );
+        const hyperlinkExpected = {
+            hyperlink: 'url',
+            hyperlink_text: 'hyperlink_text',
+        };
+        expect(hyperlink.asDict()).toEqual(hyperlinkExpected);
+    });
+    test('Test table of content', () => {
+        const toc = new aop.elements.TableOfContents(
+            'table',
+            'contents',
+            4,
+            'underscore',
+        );
+        const tocExpected = {
+            table_title: 'contents',
+            table_show_level: 4,
+            table_tab_leader: 'underscore',
+        };
+        expect(toc.asDict()).toEqual(tocExpected);
+    });
+    test('Test span', () => {
+        const span = new aop.elements.Span(
+            'span_name',
+            'This cell will span 2 rows and 3 columns',
+            3,
+            2,
+        );
+        const spanExpected = {
+            span_name: 'This cell will span 2 rows and 3 columns',
+            span_name_col_span: 3,
+            span_name_row_span: 2,
+        };
+        expect(span.asDict()).toEqual(spanExpected);
+    });
+    test('Test styled property', () => {
+        const styledProp = new aop.elements.StyledProperty(
+            'cust_first_name',
+            'DemoCustomerName',
+            'NanumMyeongjo',
+            '25pt',
+            '#ff00ff',
+            true,
+            true,
+            false,
+            false,
+            'darkMagenta',
+        );
+        const styledPropExpected = {
+            cust_first_name: 'DemoCustomerName',
+            cust_first_name_font_family: 'NanumMyeongjo',
+            cust_first_name_font_size: '25pt',
+            cust_first_name_font_color: '#ff00ff',
+            cust_first_name_bold: true,
+            cust_first_name_italic: true,
+            cust_first_name_underline: false,
+            cust_first_name_strikethrough: false,
+            cust_first_name_highlight: 'darkMagenta',
+        };
+        expect(styledProp.asDict()).toEqual(styledPropExpected);
+    });
+    test('Test watermark', () => {
+        const watermark = new aop.elements.Watermark(
+            'wm_name',
+            'wm_text',
+            'red',
+            'Arial',
+            50,
+            30,
+            50,
+            -45,
+        );
+        const watermarkExpected = {
+            wm_name: 'wm_text',
+            wm_name_color: 'red',
+            wm_name_font: 'Arial',
+            wm_name_width: 50,
+            wm_name_height: 30,
+            wm_name_opacity: 50,
+            wm_name_rotation: -45,
+        };
+        expect(watermark.asDict()).toEqual(watermarkExpected);
+    });
+    test('Test d3 code', () => {
+        const d3 = new aop.elements.D3Code(
+            'd3_code',
+            'test_code',
+            ['a', 1, 2, 3, 'b'],
+        );
+        const d3Expected = {
+            d3_code: 'test_code',
+            d3_code_data: ['a', 1, 2, 3, 'b'],
+        };
+        expect(d3.asDict()).toEqual(d3Expected);
+    });
+    test('Test text box', () => {
+        const tbox = new aop.elements.TextBox(
+            'tbox_name',
+            'tbox_value',
+            'Arial',
+            'blue',
+            12,
+            50,
+            30,
+            25,
+        );
+        const tboxExpected = {
+            tbox_name: 'tbox_value',
+            tbox_name_font: 'Arial',
+            tbox_name_font_color: 'blue',
+            tbox_name_font_size: 12,
+            tbox_name_transparency: 50,
+            tbox_name_width: 30,
+            tbox_name_height: 25,
+        };
+        expect(tbox.asDict()).toEqual(tboxExpected);
+    });
+    test('Test element collection', () => {
+        const data = new aop.elements.ElementCollection('data'); // Name doesn't get used
+        const element1 = aop.elements.Image.fromUrl('image1', 'url_source');
+        element1.altText = 'alt_text';
+        data.add(element1);
+        const element2 = new aop.elements.ForEach(
+            'loop',
+            [new aop.elements.Property('prop', 'value1'), new aop.elements.Property('prop', 'value2')],
+        );
+        data.add(element2);
+        let dataExpected: unknown = {
+            image1: 'url_source',
+            image1_alt_text: 'alt_text',
+            loop: [
+                {
+                    prop: 'value1',
+                },
+                {
+                    prop: 'value2',
+                },
+            ],
+        };
+        expect(data.asDict()).toEqual(dataExpected);
+
+        data.removeElementByName('image1');
+        dataExpected = {
+            loop: [
+                {
+                    prop: 'value1',
+                },
+                {
+                    prop: 'value2',
+                },
+            ],
+        };
+        expect(data.asDict()).toEqual(dataExpected);
+
+        const collection = aop.elements.ElementCollection.elementToElementCollection(
+            element1,
+            'test_name', // Doesn't get used
+        );
+        const collectionExpected = {
+            image1: 'url_source',
+            image1_alt_text: 'alt_text',
+        };
+        expect(collection.asDict()).toEqual(collectionExpected);
+    });
+    // AOP charts get tested in charts.test.ts
+});
