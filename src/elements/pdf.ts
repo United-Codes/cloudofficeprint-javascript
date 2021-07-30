@@ -165,13 +165,13 @@ export class PDFImage extends PDFInsertObject {
             result = { ...result, rotation: this.rotation };
         }
         if (this.width) {
-            result = { ...result, width: this.width };
+            result = { ...result, image_width: this.width };
         }
         if (this.height) {
-            result = { ...result, height: this.height };
+            result = { ...result, image_height: this.height };
         }
         if (this.maxWidth) {
-            result = { ...result, max_width: this.maxWidth };
+            result = { ...result, image_max_width: this.maxWidth };
         }
 
         return result;
@@ -207,16 +207,7 @@ export class PDFTexts extends Element {
                 //  else -> create new entry in dictionary
                 const pageString: string = txt.page.toString();
                 if (Object.prototype.hasOwnProperty.call(result, pageString)) {
-                    if (result.pageString instanceof Array) {
-                        result.pageString.push(txt.asInnerDict());
-                    } else {
-                        // If there already is text for this page, but not yet in a list
-                        //  -> make a list
-                        result = {
-                            ...result,
-                            [pageString]: [result.pageString, txt.asInnerDict()],
-                        };
-                    }
+                    result[pageString].push(txt.asInnerDict());
                 } else {
                     result = { ...result, [pageString]: [txt.asInnerDict()] };
                 }
@@ -258,16 +249,7 @@ export class PDFImages extends Element {
                 //  else -> create new entry in dictionary
                 const pageString: string = img.page.toString();
                 if (Object.prototype.hasOwnProperty.call(result, pageString)) {
-                    if (result.pageString instanceof Array) {
-                        result.pageString.push(img.asInnerDict());
-                    } else {
-                        // If there already is image for this page, but not yet in a list
-                        //  -> make a list
-                        result = {
-                            ...result,
-                            [pageString]: [result.pageString, img.asInnerDict()],
-                        };
-                    }
+                    result[pageString].push(img.asInnerDict());
                 } else {
                     result = { ...result, [pageString]: [img.asInnerDict()] };
                 }
@@ -286,13 +268,13 @@ export class PDFImages extends Element {
  * Element name is fixed and important to the server, so multiple will just overwrite.
  */
 export class PDFFormData extends Element {
-    formData: {[key: string]: string | boolean};
+    formData: {[key: string]: string | boolean | number};
 
     /**
      * @param formData a dict containing the keys and values of the fields
      *  that need to be entered in the PDF form
      */
-    constructor(formData: {[key: string]: string | boolean}) {
+    constructor(formData: {[key: string]: string | boolean | number}) {
         super(PDFFormData.identifier());
         this.formData = formData;
     }
@@ -308,7 +290,7 @@ export class PDFFormData extends Element {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict() {
+    asDict(): {[key: string]: {[key: string]: string | boolean | number}} {
         return {
             [this.name]: this.formData,
         };
