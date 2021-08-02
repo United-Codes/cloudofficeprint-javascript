@@ -51,7 +51,7 @@ export class PDFOptions {
      *  merge it. Optional.
      * @param signCertificate Signing certificate for the output PDF (pkcs #12 .p12/.pfx)
      *  as a base64 string, URL, FTP location or a server path.
-     *  The function read_file_as_base64() from file_utils.py can be used to read local
+     *  The function readFileAsBase64() from file_utils.ts can be used to read local
      *  .p12 or .pfx file as base64. Optional.
      * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
      *  of each field into the respective field. Optional.

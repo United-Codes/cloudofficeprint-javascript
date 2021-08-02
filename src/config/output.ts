@@ -15,7 +15,7 @@ export class OutputConfig {
 
     /**
      * @param filetype The file type (as extension) to use for the output.
-     *  Optional (set to template-type in printjob.py).
+     *  Optional (set to template-type in printjob.ts).
      * @param encoding Encoding of output file. Either "raw" or "base64". Defaults to "raw".
      * @param converter The pdf converter to use. Can be "libreoffice", "officetopdf"
      *  or any custom defined converter.Custom converters are configurated in the AOP server's

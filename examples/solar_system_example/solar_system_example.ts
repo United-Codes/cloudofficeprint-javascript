@@ -1,6 +1,6 @@
 /**
  * This is a standard example of how to use an API to get data to fill in a template.
- * The SpaceX example `spacex_example.py` is a more advanced example using this approach.
+ * The SpaceX example `spacex_example.ts` is a more advanced example using this approach.
  */
 
 import fetch from 'node-fetch';

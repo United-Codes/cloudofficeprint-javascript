@@ -805,7 +805,7 @@ export class D3Code extends Element {
 }
 
 /**
- * Date options for an AOPChart (different from ChartDateOptions in charts.py).
+ * Date options for an AOPChart (different from ChartDateOptions in charts.ts).
  */
 export class AOPChartDateOptions {
     format: string | undefined;
