@@ -1,4 +1,4 @@
-/** This example shows how you can create a PDF signature with the Java/TypeScript SDK. */
+/** This example shows how you can create a PDF signature with the Java-/TypeScript SDK. */
 
 import * as aop from '../../src/index';
 

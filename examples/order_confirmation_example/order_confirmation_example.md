@@ -1,5 +1,5 @@
 # About
-In this example we are going to show you how to use the Java/TypeScript SDK for APEX Office Print. The example we will be using is: generating an order confirmation for buying products from a company. The resulting output file will look like this:
+In this example we are going to show you how to use the Java-/TypeScript SDK for APEX Office Print. The example we will be using is: generating an order confirmation for buying products from a company. The resulting output file will look like this:
 
 ![](./imgs/output_imgs/output-1.jpg)
 <!-- TODO: change this link to Github link -->
@@ -20,7 +20,7 @@ The template we are using is the following:
 - string/number comparison: {#key=='value'}...{/key=='value'} (e.g. {#in_stock<quantity}...{/in_stock<quantity})
 - numerical expression: {num1+num2} (e.g. {unit_price*quantity})
 
-# Data: Java/TypeScript code
+# Data: Java-/TypeScript code
 ```javascript
 import * as aop from '../../src/index';
 
