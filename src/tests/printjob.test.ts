@@ -4,7 +4,7 @@ import * as aop from '../index';
 describe('Tests for class PrintJob', () => {
     test('Test all options for printjob', async () => {
         const serv: aop.config.Server = new aop.config.Server(
-            'http://apexofficeprint.com/dev/',
+            'https://api.apexofficeprint.com/',
             new aop.config.ServerConfig('YOUR_API_KEY'),
         );
         const prependFile = aop.Resource.fromLocalFile('./data/tests/template.docx');
