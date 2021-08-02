@@ -5,7 +5,6 @@
   "main": "dist/src/index.js",
   "types": "dist/src",
   "scripts": {
-    "start": "npx tsc && node dist/index.js",
     "build": "npx tsc",
     "test": "jest --silent",
     "test:loud": "jest --verbose false"
