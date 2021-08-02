@@ -2,7 +2,8 @@
   "name": "apexofficeprint",
   "version": "21.1",
   "description": "JavaScript interface for APEX Office Print",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src",
   "scripts": {
     "start": "npx tsc && node dist/index.js",
     "build": "npx tsc",
