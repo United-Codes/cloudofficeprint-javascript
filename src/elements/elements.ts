@@ -949,7 +949,7 @@ export class AOPChart extends Element {
             },
         );
 
-        let result: {
+        const result: {
             [key: string]:
                 {
                     [key: string]:
