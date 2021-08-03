@@ -124,6 +124,25 @@ describe('Tests for codes', () => {
         };
         expect(telephoneNumber.asDict()).toEqual(telephoneNumberExpected);
     });
+    test('Test qr code email', () => {
+        const email = new aop.elements.EmailQRCode(
+            'name',
+            'receiver',
+            'cc',
+            'bcc',
+            'subject',
+            'body',
+        );
+        const emailExpected = {
+            name: 'receiver',
+            name_type: 'qr_email',
+            name_email_cc: 'cc',
+            name_email_bcc: 'bcc',
+            name_email_subject: 'subject',
+            name_email_body: 'body',
+        };
+        expect(email.asDict()).toEqual(emailExpected);
+    });
     test('Test qr code sms', () => {
         const sms = new aop.elements.SMSQRCode(
             'name',
