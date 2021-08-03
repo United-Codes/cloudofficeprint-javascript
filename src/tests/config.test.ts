@@ -53,6 +53,19 @@ describe('Tests for config', () => {
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
+    test('Test CsvOptions', () => {
+        const csvOptions = new aop.config.CsvOptions(
+            'textDelim',
+            'fieldSep',
+            'charSet',
+        );
+        const csvOptionsExpected = {
+            output_text_delimiter: 'textDelim',
+            output_field_separator: 'fieldSep',
+            output_character_set: 'charSet',
+        };
+        expect(csvOptions.asDict()).toEqual(csvOptionsExpected);
+    });
     test('Test printer', () => {
         const printer = new aop.config.Printer(
             'location',

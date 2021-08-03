@@ -1,5 +1,6 @@
 import { CloudAccessToken } from './cloud';
 import { PDFOptions } from './pdf';
+import { CsvOptions } from './csv';
 
 /**
  * Class to specify output configuration for a request.
@@ -12,6 +13,7 @@ export class OutputConfig {
     cloudAccessToken: CloudAccessToken | undefined;
     serverDirectory: string | undefined;
     pdfOptions: PDFOptions | undefined;
+    csvOptions: CsvOptions | undefined;
 
     /**
      * @param filetype The file type (as extension) to use for the output.
@@ -34,6 +36,7 @@ export class OutputConfig {
         cloudAccessToken?: CloudAccessToken,
         serverDirectory?: string,
         pdfOptions?: PDFOptions,
+        csvOptions?: CsvOptions,
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -41,6 +44,7 @@ export class OutputConfig {
         this.cloudAccessToken = cloudAccessToken;
         this.serverDirectory = serverDirectory;
         this.pdfOptions = pdfOptions;
+        this.csvOptions = csvOptions;
     }
 
     /**
@@ -66,6 +70,9 @@ export class OutputConfig {
         }
         if (this.pdfOptions !== undefined) {
             result = { ...result, ...this.pdfOptions.asDict() };
+        }
+        if (this.csvOptions !== undefined) {
+            result = { ...result, ...this.csvOptions.asDict() };
         }
 
         return result;
