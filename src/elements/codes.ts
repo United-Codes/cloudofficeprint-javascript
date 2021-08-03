@@ -379,79 +379,79 @@ export class QRCode extends Code {
         const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.dotscale !== undefined) {
-            result._dotscale = this.dotscale;
+            result._qr_dotscale = this.dotscale;
         }
         if (this.logo !== undefined) {
-            result._logo = this.logo;
+            result._qr_logo = this.logo;
         }
         if (this.backgroundImage !== undefined) {
-            result._background_image = this.backgroundImage;
+            result._qr_background_image = this.backgroundImage;
         }
         if (this.colorDark !== undefined) {
-            result._color_dark = this.colorDark;
+            result._qr_color_dark = this.colorDark;
         }
         if (this.colorLight !== undefined) {
-            result._color_light = this.colorLight;
+            result._qr_color_light = this.colorLight;
         }
         if (this.logoWidth !== undefined) {
-            result._logo_width = this.logoWidth;
+            result._qr_logo_width = this.logoWidth;
         }
         if (this.logoHeight !== undefined) {
-            result._logo_height = this.logoHeight;
+            result._qr_logo_height = this.logoHeight;
         }
         if (this.logoBackgroundColor !== undefined) {
-            result._logo_background_color = this.logoBackgroundColor;
+            result._qr_logo_background_color = this.logoBackgroundColor;
         }
         if (this.quietZone !== undefined) {
-            result._quiet_zone = this.quietZone;
+            result._qr_quiet_zone = this.quietZone;
         }
         if (this.quietZoneColor !== undefined) {
-            result._quiet_zone_color = this.quietZoneColor;
+            result._qr_quiet_zone_color = this.quietZoneColor;
         }
         if (this.backgroundImageAlpha !== undefined) {
-            result._background_image_alpha = this.backgroundImageAlpha;
+            result._qr_background_image_alpha = this.backgroundImageAlpha;
         }
         if (this.poColor !== undefined) {
-            result._po_color = this.poColor;
+            result._qr_po_color = this.poColor;
         }
         if (this.piColor !== undefined) {
-            result._pi_color = this.piColor;
+            result._qr_pi_color = this.piColor;
         }
         if (this.poTlColor !== undefined) {
-            result._po_tl_color = this.poTlColor;
+            result._qr_po_tl_color = this.poTlColor;
         }
         if (this.piTlColor !== undefined) {
-            result._pi_tl_color = this.piTlColor;
+            result._qr_pi_tl_color = this.piTlColor;
         }
         if (this.poTrColor !== undefined) {
-            result._po_tr_color = this.poTrColor;
+            result._qr_po_tr_color = this.poTrColor;
         }
         if (this.piTrColor !== undefined) {
-            result._pi_tr_color = this.piTrColor;
+            result._qr_pi_tr_color = this.piTrColor;
         }
         if (this.poBlColor !== undefined) {
-            result._po_bl_color = this.poBlColor;
+            result._qr_po_bl_color = this.poBlColor;
         }
         if (this.piBlColor !== undefined) {
-            result._pi_bl_color = this.piBlColor;
+            result._qr_pi_bl_color = this.piBlColor;
         }
         if (this.timingVColor !== undefined) {
-            result._timing_v_color = this.timingVColor;
+            result._qr_timing_v_color = this.timingVColor;
         }
         if (this.timingHColor !== undefined) {
-            result._timing_h_color = this.timingHColor;
+            result._qr_timing_h_color = this.timingHColor;
         }
         if (this.timingColor !== undefined) {
-            result._timing_color = this.timingColor;
+            result._qr_timing_color = this.timingColor;
         }
         if (this.autoColor !== undefined) {
-            result._auto_color = this.autoColor;
+            result._qr_auto_color = this.autoColor;
         }
         if (this.autoColorDark !== undefined) {
-            result._auto_color_dark = this.autoColorDark;
+            result._qr_auto_color_dark = this.autoColorDark;
         }
         if (this.autoColorLight !== undefined) {
-            result._auto_color_light = this.autoColorLight;
+            result._qr_auto_color_light = this.autoColorLight;
         }
 
         return result;
