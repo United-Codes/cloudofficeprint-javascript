@@ -7,7 +7,8 @@
   "scripts": {
     "build": "npx tsc",
     "test": "jest --silent",
-    "test:loud": "jest --verbose false"
+    "test:loud": "jest --verbose false",
+    "bundle": "browserify dist/src/index.js --standalone aop > dist/src/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/United-Codes/apexofficeprint-javascript#readme",
   "dependencies": {
     "@jest/globals": "^27.0.6",
+    "browserify": "^17.0.0",
     "https-proxy-agent": "^5.0.0",
     "jest": "^27.0.6",
     "mime-types": "^2.1.31",

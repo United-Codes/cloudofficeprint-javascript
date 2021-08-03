@@ -800,7 +800,7 @@ export class D3Code extends Element {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set([`{$d3${this.name}}`]);
+        return new Set([`{$d3 ${this.name}}`]);
     }
 }
 
@@ -1085,7 +1085,7 @@ export class MarkdownContent extends Property {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set([`{_${this.name}}`]);
+        return new Set([`{_${this.name}_}`]);
     }
 }
 
