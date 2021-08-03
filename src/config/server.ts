@@ -1,5 +1,6 @@
-import fetch from 'node-fetch';
 import { HttpsProxyAgent } from 'https-proxy-agent';
+
+const fetch = require('node-fetch').default;
 
 /**
  * This class defines an IP-enabled printer to use with the AOP server.
@@ -263,7 +264,7 @@ export class Server {
     async isReachable(): Promise<boolean> {
         try {
             return await fetch(new URL('marco', this.url).href)
-                .then((res) => res.text()) === 'polo';
+                .then((res: { text: () => any; }) => res.text()) === 'polo';
         } catch (error) {
             return false;
         }

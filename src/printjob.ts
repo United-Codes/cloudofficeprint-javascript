@@ -1,10 +1,12 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
-import fetch, { Response as HTTPReponse } from 'node-fetch';
+import { Response as HTTPReponse } from 'node-fetch';
 import { OutputConfig, Server } from './config';
 import { Element, RESTSource } from './elements';
 import { AOPError } from './exceptions';
 import { Resource } from './resource';
 import { Response } from './response';
+
+const fetch = require('node-fetch').default;
 
 export const STATIC_OPTS = {
     tool: 'javascript',

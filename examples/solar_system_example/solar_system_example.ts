@@ -3,8 +3,9 @@
  * The SpaceX example `spacex_example.ts` is a more advanced example using this approach.
  */
 
-import fetch from 'node-fetch';
 import * as aop from '../../src/index';
+
+const fetch = require('node-fetch').default;
 
 // Setup AOP server
 const SERVER_URL = 'https://api.apexofficeprint.com/';
@@ -33,8 +34,9 @@ const planetList: aop.elements.Element[] = [];
 (async () => {
     // Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
     await new Promise<void>((resolve) => fetch('https://api.le-systeme-solaire.net/rest/bodies/')
-        .then((r) => r.json())
-        .then((json) => {
+        .then((r: { json: () => any; }) => r.json())
+        .then((json: { bodies: { [key: string]: string | number | boolean |
+            { [key: string]: unknown; }; }[]; }) => {
             json.bodies.forEach(
                 (body: {[key: string]: string | number | boolean | {[key: string]: unknown}}) => {
                     if (body.isPlanet) {

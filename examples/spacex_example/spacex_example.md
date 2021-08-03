@@ -525,8 +525,8 @@ The beauty of AOP is that the data created by the Java-/TypeScript SDK can be us
 First we create a new Java-/TypeScript file and import the APEX Office Print library and the `requests`-library:
 
 ```javascript
-import fetch from 'node-fetch';
 import * as aop from 'apexofficeprint';
+const fetch = require('node-fetch').default;
 ```
 
 Then we need to set up the AOP server where we will send our template and data to:

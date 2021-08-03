@@ -1,5 +1,6 @@
-import fetch from 'node-fetch';
 import * as aop from '../../src/index';
+
+const fetch = require('node-fetch').default;
 
 // Setup AOP server
 const SERVER_URL = 'https://api.apexofficeprint.com/';
@@ -43,38 +44,43 @@ let landingPads: {[key: string]: string | number | boolean |
 let ships: {[key: string]: string | number | boolean |
     {[key: string]: unknown} | string[]}[] = [];
 const infoProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v3/info')
-    .then((r) => r.json())
-    .then((json) => {
+    .then((r: { json: () => any; }) => r.json())
+    .then((json: { [key: string]: string | number | boolean | { [key: string]: unknown; }; }) => {
         info = json;
         resolve();
     })); // v4 not supported
 const rocketsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/rockets')
-    .then((r) => r.json())
-    .then((json) => {
+    .then((r: { json: () => any; }) => r.json())
+    .then((json: { [key: string]: string | number | boolean | { [key: string]: unknown; } |
+        string[]; }[]) => {
         rockets = json;
         resolve();
     }));
 const dragonsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/dragons')
-    .then((r) => r.json())
-    .then((json) => {
+    .then((r: { json: () => any; }) => r.json())
+    .then((json: { [key: string]: string | number | boolean | string[] |
+        { [key: string]: unknown; }; }[]) => {
         dragons = json;
         resolve();
     }));
 const launchPadsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/launchpads')
-    .then((r) => r.json())
-    .then((json) => {
+    .then((r: { json: () => any; }) => r.json())
+    .then((json: { [key: string]: string | number | boolean | string[] |
+        { [key: string]: unknown; }; }[]) => {
         launchPads = json;
         resolve();
     }));
 const landingPadsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/landpads')
-    .then((r) => r.json())
-    .then((json) => {
+    .then((r: { json: () => any; }) => r.json())
+    .then((json: { [key: string]: string | number | boolean | string[] |
+        { [key: string]: unknown; }; }[]) => {
         landingPads = json;
         resolve();
     }));
 const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/ships')
-    .then((r) => r.json())
-    .then((json) => {
+    .then((r: { json: () => any; }) => r.json())
+    .then((json: { [key: string]: string | number | boolean | string[] |
+        { [key: string]: unknown; }; }[]) => {
         ships = json;
         resolve();
     }));
