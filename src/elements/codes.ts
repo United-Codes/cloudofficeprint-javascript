@@ -34,10 +34,10 @@ export abstract class Code extends Element {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = {};
+        const result: {[key: string]: string | number | boolean} = {};
 
         if (this.type !== undefined) {
-            result = { ...result, _type: this.type };
+            result._type = this.type;
         }
 
         return result;
@@ -48,13 +48,13 @@ export abstract class Code extends Element {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = {
+        const result: {[key: string]: string | number | boolean} = {
             [this.name]: this.data,
         };
 
         Object.entries(this.asDictSuffixes()).forEach(
             ([key, value]) => {
-                result = { ...result, [`${this.name}${key}`]: value };
+                result[`${this.name}${key}`] = value;
             },
         );
 
@@ -139,34 +139,34 @@ export class BarCode extends Code {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.height !== undefined) {
-            result = { ...result, _height: this.height };
+            result._height = this.height;
         }
         if (this.width !== undefined) {
-            result = { ...result, _width: this.width };
+            result._width = this.width;
         }
         if (this.errorcorrectlevel !== undefined) {
-            result = { ...result, _errorcorrectlevel: this.errorcorrectlevel };
+            result._errorcorrectlevel = this.errorcorrectlevel;
         }
         if (this.url !== undefined) {
-            result = { ...result, _url: this.url };
+            result._url = this.url;
         }
         if (this.rotation !== undefined) {
-            result = { ...result, _rotation: this.rotation };
+            result._rotation = this.rotation;
         }
         if (this.backgroundColor !== undefined) {
-            result = { ...result, _background_color: this.backgroundColor };
+            result._background_color = this.backgroundColor;
         }
         if (this.paddingWidth !== undefined) {
-            result = { ...result, _padding_width: this.paddingWidth };
+            result._padding_width = this.paddingWidth;
         }
         if (this.paddingHeight !== undefined) {
-            result = { ...result, _padding_height: this.paddingHeight };
+            result._padding_height = this.paddingHeight;
         }
         if (this.extraOptions !== undefined) {
-            result = { ...result, _extra_options: this.extraOptions };
+            result._extra_options = this.extraOptions;
         }
 
         return result;
@@ -376,82 +376,82 @@ export class QRCode extends Code {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.dotscale !== undefined) {
-            result = { ...result, _dotscale: this.dotscale };
+            result._dotscale = this.dotscale;
         }
         if (this.logo !== undefined) {
-            result = { ...result, _logo: this.logo };
+            result._logo = this.logo;
         }
         if (this.backgroundImage !== undefined) {
-            result = { ...result, _background_image: this.backgroundImage };
+            result._background_image = this.backgroundImage;
         }
         if (this.colorDark !== undefined) {
-            result = { ...result, _color_dark: this.colorDark };
+            result._color_dark = this.colorDark;
         }
         if (this.colorLight !== undefined) {
-            result = { ...result, _color_light: this.colorLight };
+            result._color_light = this.colorLight;
         }
         if (this.logoWidth !== undefined) {
-            result = { ...result, _logo_width: this.logoWidth };
+            result._logo_width = this.logoWidth;
         }
         if (this.logoHeight !== undefined) {
-            result = { ...result, _logo_height: this.logoHeight };
+            result._logo_height = this.logoHeight;
         }
         if (this.logoBackgroundColor !== undefined) {
-            result = { ...result, _logo_background_color: this.logoBackgroundColor };
+            result._logo_background_color = this.logoBackgroundColor;
         }
         if (this.quietZone !== undefined) {
-            result = { ...result, _quiet_zone: this.quietZone };
+            result._quiet_zone = this.quietZone;
         }
         if (this.quietZoneColor !== undefined) {
-            result = { ...result, _quiet_zone_color: this.quietZoneColor };
+            result._quiet_zone_color = this.quietZoneColor;
         }
         if (this.backgroundImageAlpha !== undefined) {
-            result = { ...result, _background_image_alpha: this.backgroundImageAlpha };
+            result._background_image_alpha = this.backgroundImageAlpha;
         }
         if (this.poColor !== undefined) {
-            result = { ...result, _po_color: this.poColor };
+            result._po_color = this.poColor;
         }
         if (this.piColor !== undefined) {
-            result = { ...result, _pi_color: this.piColor };
+            result._pi_color = this.piColor;
         }
         if (this.poTlColor !== undefined) {
-            result = { ...result, _po_tl_color: this.poTlColor };
+            result._po_tl_color = this.poTlColor;
         }
         if (this.piTlColor !== undefined) {
-            result = { ...result, _pi_tl_color: this.piTlColor };
+            result._pi_tl_color = this.piTlColor;
         }
         if (this.poTrColor !== undefined) {
-            result = { ...result, _po_tr_color: this.poTrColor };
+            result._po_tr_color = this.poTrColor;
         }
         if (this.piTrColor !== undefined) {
-            result = { ...result, _pi_tr_color: this.piTrColor };
+            result._pi_tr_color = this.piTrColor;
         }
         if (this.poBlColor !== undefined) {
-            result = { ...result, _po_bl_color: this.poBlColor };
+            result._po_bl_color = this.poBlColor;
         }
         if (this.piBlColor !== undefined) {
-            result = { ...result, _pi_bl_color: this.piBlColor };
+            result._pi_bl_color = this.piBlColor;
         }
         if (this.timingVColor !== undefined) {
-            result = { ...result, _timing_v_color: this.timingVColor };
+            result._timing_v_color = this.timingVColor;
         }
         if (this.timingHColor !== undefined) {
-            result = { ...result, _timing_h_color: this.timingHColor };
+            result._timing_h_color = this.timingHColor;
         }
         if (this.timingColor !== undefined) {
-            result = { ...result, _timing_color: this.timingColor };
+            result._timing_color = this.timingColor;
         }
         if (this.autoColor !== undefined) {
-            result = { ...result, _auto_color: this.autoColor };
+            result._auto_color = this.autoColor;
         }
         if (this.autoColorDark !== undefined) {
-            result = { ...result, _auto_color_dark: this.autoColorDark };
+            result._auto_color_dark = this.autoColorDark;
         }
         if (this.autoColorLight !== undefined) {
-            result = { ...result, _auto_color_light: this.autoColorLight };
+            result._auto_color_light = this.autoColorLight;
         }
 
         return result;
@@ -493,16 +493,16 @@ export class WiFiQRCode extends QRCode {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.wifiPassword !== undefined) {
-            result = { ...result, _wifi_password: this.wifiPassword };
+            result._wifi_password = this.wifiPassword;
         }
         if (this.wifiEncryption !== undefined) {
-            result = { ...result, _wifi_encryption: this.wifiEncryption };
+            result._wifi_encryption = this.wifiEncryption;
         }
         if (this.wifiHidden !== undefined) {
-            result = { ...result, _wifi_hidden: this.wifiHidden };
+            result._wifi_hidden = this.wifiHidden;
         }
 
         return result;
@@ -561,19 +561,19 @@ export class EmailQRCode extends QRCode {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.cc !== undefined) {
-            result = { ...result, _email_cc: this.cc };
+            result._email_cc = this.cc;
         }
         if (this.bcc !== undefined) {
-            result = { ...result, _email_bcc: this.bcc };
+            result._email_bcc = this.bcc;
         }
         if (this.subject !== undefined) {
-            result = { ...result, _email_subject: this.subject };
+            result._email_subject = this.subject;
         }
         if (this.body !== undefined) {
-            result = { ...result, _email_body: this.body };
+            result._email_body = this.body;
         }
 
         return result;
@@ -607,10 +607,10 @@ export class SMSQRCode extends QRCode {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.smsBody !== undefined) {
-            result = { ...result, _sms_body: this.smsBody };
+            result._sms_body = this.smsBody;
         }
 
         return result;
@@ -665,16 +665,16 @@ export class VCardQRCode extends QRCode {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.lastName !== undefined) {
-            result = { ...result, _vcard_last_name: this.lastName };
+            result._vcard_last_name = this.lastName;
         }
         if (this.email !== undefined) {
-            result = { ...result, _vcard_email: this.email };
+            result._vcard_email = this.email;
         }
         if (this.website !== undefined) {
-            result = { ...result, _vcard_website: this.website };
+            result._vcard_website = this.website;
         }
 
         return result;
@@ -740,34 +740,34 @@ export class MeCardQRCode extends QRCode {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.lastName !== undefined) {
-            result = { ...result, _me_card_last_name: this.lastName };
+            result._me_card_last_name = this.lastName;
         }
         if (this.nickname !== undefined) {
-            result = { ...result, _me_card_nickname: this.nickname };
+            result._me_card_nickname = this.nickname;
         }
         if (this.email !== undefined) {
-            result = { ...result, _me_card_email: this.email };
+            result._me_card_email = this.email;
         }
         if (this.contactPrimary !== undefined) {
-            result = { ...result, _me_card_contact_primary: this.contactPrimary };
+            result._me_card_contact_primary = this.contactPrimary;
         }
         if (this.contactSecondary !== undefined) {
-            result = { ...result, _me_card_contact_secondary: this.contactSecondary };
+            result._me_card_contact_secondary = this.contactSecondary;
         }
         if (this.contactTertiary !== undefined) {
-            result = { ...result, _me_card_contact_tertiary: this.contactTertiary };
+            result._me_card_contact_tertiary = this.contactTertiary;
         }
         if (this.website !== undefined) {
-            result = { ...result, _me_card_website: this.website };
+            result._me_card_website = this.website;
         }
         if (this.birthday !== undefined) {
-            result = { ...result, _me_card_birthday: this.birthday };
+            result._me_card_birthday = this.birthday;
         }
         if (this.notes !== undefined) {
-            result = { ...result, _me_card_notes: this.notes };
+            result._me_card_notes = this.notes;
         }
 
         return result;
@@ -805,13 +805,13 @@ export class GeolocationQRCode extends QRCode {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.longitude !== undefined) {
-            result = { ...result, _geolocation_longitude: this.longitude };
+            result._geolocation_longitude = this.longitude;
         }
         if (this.altitude !== undefined) {
-            result = { ...result, _geolocation_altitude: this.altitude };
+            result._geolocation_altitude = this.altitude;
         }
 
         return result;
@@ -849,13 +849,13 @@ export class EventQRCode extends QRCode {
      *  dict representation of this Code object
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.startdate !== undefined) {
-            result = { ...result, _event_startdate: this.startdate };
+            result._event_startdate = this.startdate;
         }
         if (this.enddate !== undefined) {
-            result = { ...result, _event_enddate: this.enddate };
+            result._event_enddate = this.enddate;
         }
 
         return result;

@@ -36,19 +36,19 @@ export abstract class RESTSource {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: string | {[key: string]: string}[]} {
-        let result: {[key: string]: string | {[key: string]: string}[]} = {
+        const result: {[key: string]: string | {[key: string]: string}[]} = {
             datasource: this.datasource,
             endpoint: this.endpoint,
         };
 
         if (this.filename !== undefined) {
-            result = { ...result, filename: this.filename };
+            result.filename = this.filename;
         }
         if (this.headers !== undefined) {
-            result = { ...result, headers: this.headers };
+            result.headers = this.headers;
         }
         if (this.auth !== undefined) {
-            result = { ...result, auth: this.auth };
+            result.auth = this.auth;
         }
 
         return result;
@@ -90,9 +90,10 @@ export class RESTSourceREST extends RESTSource {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: string | {[key: string]: string}[]} {
-        let result: {[key: string]: string | {[key: string]: string}[]} = super.asDict();
+        const result: {[key: string]: string | {[key: string]: string}[]} = super.asDict();
 
-        result = { ...result, method: this.method, body: this.body };
+        result.method = this.method;
+        result.body = this.body;
 
         return result;
     }
@@ -129,9 +130,9 @@ export class RESTSourceGraphQL extends RESTSource {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: string | {[key: string]: string}[]} {
-        let result: {[key: string]: string | {[key: string]: string}[]} = super.asDict();
+        const result: {[key: string]: string | {[key: string]: string}[]} = super.asDict();
 
-        result = { ...result, query: this.query };
+        result.query = this.query;
 
         return result;
     }

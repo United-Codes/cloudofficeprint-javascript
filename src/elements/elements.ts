@@ -8,9 +8,9 @@ export abstract class CellStyle {
      * @returns the dict representation of this cell style
      */
     asDict(propertyName: string) {
-        let result = {};
+        const result: {[key: string]: string | number | boolean} = {};
         Object.entries(this.asDictSuffixes()).forEach(
-            (e) => { result = { ...result, [`${propertyName}${e[0]}`]: e[1] }; },
+            ([key, val]) => { result[`${propertyName}${key}`] = val; },
         );
         return result;
     }
@@ -52,13 +52,13 @@ export class CellStyleDocx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
-            result = { ...result, _cell_background_color: this.cellBackgroundColor };
+            result._cell_background_color = this.cellBackgroundColor;
         }
         if (this.width !== undefined) {
-            result = { ...result, _width: this.width };
+            result._width = this.width;
         }
 
         return result;
@@ -193,85 +193,85 @@ export class CellStyleXlsx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
 
         if (this.cellLocked !== undefined) {
-            result = { ...result, _cell_locked: this.cellLocked };
+            result._cell_locked = this.cellLocked;
         }
         if (this.cellHidden !== undefined) {
-            result = { ...result, _cell_hidden: this.cellHidden };
+            result._cell_hidden = this.cellHidden;
         }
         if (this.cellBackground !== undefined) {
-            result = { ...result, _cell_background: this.cellBackground };
+            result._cell_background = this.cellBackground;
         }
         if (this.fontName !== undefined) {
-            result = { ...result, _font_name: this.fontName };
+            result._font_name = this.fontName;
         }
         if (this.fontSize !== undefined) {
-            result = { ...result, _font_size: this.fontSize };
+            result._font_size = this.fontSize;
         }
         if (this.fontColor !== undefined) {
-            result = { ...result, _font_color: this.fontColor };
+            result._font_color = this.fontColor;
         }
         if (this.fontItalic !== undefined) {
-            result = { ...result, _font_italic: this.fontItalic };
+            result._font_italic = this.fontItalic;
         }
         if (this.fontBold !== undefined) {
-            result = { ...result, _font_bold: this.fontBold };
+            result._font_bold = this.fontBold;
         }
         if (this.fontStrike !== undefined) {
-            result = { ...result, _font_strike: this.fontStrike };
+            result._font_strike = this.fontStrike;
         }
         if (this.fontUnderline !== undefined) {
-            result = { ...result, _font_underline: this.fontUnderline };
+            result._font_underline = this.fontUnderline;
         }
         if (this.fontSuperscript !== undefined) {
-            result = { ...result, _font_superscript: this.fontSuperscript };
+            result._font_superscript = this.fontSuperscript;
         }
         if (this.fontSubscript !== undefined) {
-            result = { ...result, _font_subscript: this.fontSubscript };
+            result._font_subscript = this.fontSubscript;
         }
         if (this.borderTop !== undefined) {
-            result = { ...result, _border_top: this.borderTop };
+            result._border_top = this.borderTop;
         }
         if (this.borderTopColor !== undefined) {
-            result = { ...result, _border_top_color: this.borderTopColor };
+            result._border_top_color = this.borderTopColor;
         }
         if (this.borderBottom !== undefined) {
-            result = { ...result, _border_bottom: this.borderBottom };
+            result._border_bottom = this.borderBottom;
         }
         if (this.borderBottomColor !== undefined) {
-            result = { ...result, _border_bottom_color: this.borderBottomColor };
+            result._border_bottom_color = this.borderBottomColor;
         }
         if (this.borderLeft !== undefined) {
-            result = { ...result, _border_left: this.borderLeft };
+            result._border_left = this.borderLeft;
         }
         if (this.borderLeftColor !== undefined) {
-            result = { ...result, _border_left_color: this.borderLeftColor };
+            result._border_left_color = this.borderLeftColor;
         }
         if (this.borderRight !== undefined) {
-            result = { ...result, _border_right: this.borderRight };
+            result._border_right = this.borderRight;
         }
         if (this.borderRightColor !== undefined) {
-            result = { ...result, _border_right_color: this.borderRightColor };
+            result._border_right_color = this.borderRightColor;
         }
         if (this.borderDiagonal !== undefined) {
-            result = { ...result, _border_diagonal: this.borderDiagonal };
+            result._border_diagonal = this.borderDiagonal;
         }
         if (this.borderDiagonalDirection !== undefined) {
-            result = { ...result, _border_diagonal_direction: this.borderDiagonalDirection };
+            result._border_diagonal_direction = this.borderDiagonalDirection;
         }
         if (this.borderDiagonalColor !== undefined) {
-            result = { ...result, _border_diagonal_color: this.borderDiagonalColor };
+            result._border_diagonal_color = this.borderDiagonalColor;
         }
         if (this.textHAlignment !== undefined) {
-            result = { ...result, _text_h_alignment: this.textHAlignment };
+            result._text_h_alignment = this.textHAlignment;
         }
         if (this.textVAlignment !== undefined) {
-            result = { ...result, _text_v_alignment: this.textVAlignment };
+            result._text_v_alignment = this.textVAlignment;
         }
         if (this.textRotation !== undefined) {
-            result = { ...result, _text_rotation: this.textRotation };
+            result._text_rotation = this.textRotation;
         }
 
         return result;
@@ -359,13 +359,13 @@ export class CellStyleProperty extends Property {
      * @returns dictionary representation of this Element
      */
     asDict(): {[key: string]: any} {
-        let result: {[key: string]: any} = {
+        const result: {[key: string]: any} = {
             [this.name]: this.value,
         };
 
         Object.entries(this.cellStyle.asDictSuffixes()).forEach(
-            (e) => {
-                result = { ...result, [`${this.name}${e[0]}`]: e[1] };
+            ([key, val]) => {
+                result[`${this.name}${key}`] = val;
             },
         );
 
@@ -455,12 +455,12 @@ export class Hyperlink extends Element {
      * @returns dictionary representation of this Element
      */
     asDict(): {[key: string]: string} {
-        let result: {[key: string]: string} = {
+        const result: {[key: string]: string} = {
             [this.name]: this.url,
         };
 
         if (this.text !== undefined) {
-            result = { ...result, [`${this.name}_text`]: this.text };
+            result[`${this.name}_text`] = this.text;
         }
 
         return result;
@@ -499,16 +499,16 @@ export class TableOfContents extends Element {
      * @returns dictionary representation of this Element
      */
     asDict(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = {};
+        const result: {[key: string]: string | number} = {};
 
         if (this.title !== undefined) {
-            result = { ...result, [`${this.name}_title`]: this.title };
+            result[`${this.name}_title`] = this.title;
         }
         if (this.depth !== undefined) {
-            result = { ...result, [`${this.name}_show_level`]: this.depth };
+            result[`${this.name}_show_level`] = this.depth;
         }
         if (this.tabLeader !== undefined) {
-            result = { ...result, [`${this.name}_tab_leader`]: this.tabLeader };
+            result[`${this.name}_tab_leader`] = this.tabLeader;
         }
 
         return result;
@@ -646,33 +646,33 @@ export class StyledProperty extends Property {
      * @returns dictionary representation of this Element
      */
     asDict(): {[key: string]: any} {
-        let result: {[key: string]: any} = {
+        const result: {[key: string]: any} = {
             [this.name]: this.value,
         };
 
         if (this.font !== undefined) {
-            result = { ...result, [`${this.name}_font_family`]: this.font };
+            result[`${this.name}_font_family`] = this.font;
         }
         if (this.fontSize !== undefined) {
-            result = { ...result, [`${this.name}_font_size`]: this.fontSize };
+            result[`${this.name}_font_size`] = this.fontSize;
         }
         if (this.fontColor !== undefined) {
-            result = { ...result, [`${this.name}_font_color`]: this.fontColor };
+            result[`${this.name}_font_color`] = this.fontColor;
         }
         if (this.bold !== undefined) {
-            result = { ...result, [`${this.name}_bold`]: this.bold };
+            result[`${this.name}_bold`] = this.bold;
         }
         if (this.italic !== undefined) {
-            result = { ...result, [`${this.name}_italic`]: this.italic };
+            result[`${this.name}_italic`] = this.italic;
         }
         if (this.underline !== undefined) {
-            result = { ...result, [`${this.name}_underline`]: this.underline };
+            result[`${this.name}_underline`] = this.underline;
         }
         if (this.strikethrough !== undefined) {
-            result = { ...result, [`${this.name}_strikethrough`]: this.strikethrough };
+            result[`${this.name}_strikethrough`] = this.strikethrough;
         }
         if (this.highlightColor !== undefined) {
-            result = { ...result, [`${this.name}_highlight`]: this.highlightColor };
+            result[`${this.name}_highlight`] = this.highlightColor;
         }
 
         return result;
@@ -729,27 +729,27 @@ export class Watermark extends Property {
      * @returns dictionary representation of this Element
      */
     asDict(): {[key: string]: any} {
-        let result: {[key: string]: any} = {
+        const result: {[key: string]: any} = {
             [this.name]: this.value,
         };
 
         if (this.color !== undefined) {
-            result = { ...result, [`${this.name}_color`]: this.color };
+            result[`${this.name}_color`] = this.color;
         }
         if (this.font !== undefined) {
-            result = { ...result, [`${this.name}_font`]: this.font };
+            result[`${this.name}_font`] = this.font;
         }
         if (this.width !== undefined) {
-            result = { ...result, [`${this.name}_width`]: this.width };
+            result[`${this.name}_width`] = this.width;
         }
         if (this.height !== undefined) {
-            result = { ...result, [`${this.name}_height`]: this.height };
+            result[`${this.name}_height`] = this.height;
         }
         if (this.opacity !== undefined) {
-            result = { ...result, [`${this.name}_opacity`]: this.opacity };
+            result[`${this.name}_opacity`] = this.opacity;
         }
         if (this.rotation !== undefined) {
-            result = { ...result, [`${this.name}_rotation`]: this.rotation };
+            result[`${this.name}_rotation`] = this.rotation;
         }
 
         return result;
@@ -784,12 +784,12 @@ export class D3Code extends Element {
      * @returns dictionary representation of this Element
      */
     asDict(): {[key: string]: string | unknown} {
-        let result: {[key: string]: string | unknown} = {
+        const result: {[key: string]: string | unknown} = {
             [this.name]: this.code,
         };
 
         if (this.data !== undefined) {
-            result = { ...result, [`${this.name}_data`]: this.data };
+            result[`${this.name}_data`] = this.data;
         }
 
         return result;
@@ -829,16 +829,16 @@ export class AOPChartDateOptions {
      * @returns dictionary representation of this Element
      */
     asDict(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = {};
+        const result: {[key: string]: string | number} = {};
 
         if (this.format !== undefined) {
-            result = { ...result, format: this.format };
+            result.format = this.format;
         }
         if (this.unit !== undefined) {
-            result = { ...result, unit: this.unit };
+            result.unit = this.unit;
         }
         if (this.step !== undefined) {
-            result = { ...result, step: this.step };
+            result.step = this.step;
         }
 
         return result;
@@ -896,7 +896,7 @@ export class AOPChart extends Element {
         if (yDatas instanceof Array) {
             yDatas.forEach(
                 (el, index) => {
-                    this.yDatas = { ...this.yDatas, [`series ${index + 1}`]: el };
+                    this.yDatas[`series ${index + 1}`] = el;
                 },
             );
         } else if (yDatas.constructor !== Object) {
@@ -985,11 +985,10 @@ export class AOPChart extends Element {
         };
 
         if (this.title !== undefined) {
-            result = { ...result, title: this.title };
+            result.title = this.title;
         }
         if (this.date !== undefined) {
-            result.xAxis = {
-                ...result.xAxis as {
+            (result.xAxis as {
                     [key: string]:
                         string[] |
                         string |
@@ -998,13 +997,10 @@ export class AOPChart extends Element {
                                 string |
                                 number
                         }
-                },
-                date: this.date.asDict(),
-            };
+                }).date = this.date.asDict();
         }
         if (this.xTitle !== undefined) {
-            result.xAxis = {
-                ...result.xAxis as {
+            (result.xAxis as {
                     [key: string]:
                         string[] |
                         string |
@@ -1013,13 +1009,10 @@ export class AOPChart extends Element {
                                 string |
                                 number
                         }
-                },
-                title: this.xTitle,
-            };
+                }).title = this.xTitle;
         }
         if (this.yTitle !== undefined) {
-            result.yAxis = {
-                ...result.yAxis as {
+            (result.yAxis as {
                     [key: string]:
                         {
                             [key: string]:
@@ -1027,24 +1020,16 @@ export class AOPChart extends Element {
                                 (string | number | {[key: string]: string | number})[]
                         }[] |
                         string
-                },
-                title: this.yTitle,
-            };
+                }).title = this.yTitle;
         }
         if (this.x2Title !== undefined) {
-            result = {
-                ...result,
-                x2Axis: {
-                    title: this.x2Title,
-                },
+            result.x2Axis = {
+                title: this.x2Title,
             };
         }
         if (this.y2Title !== undefined) {
-            result = {
-                ...result,
-                y2Axis: {
-                    title: this.y2Title,
-                },
+            result.y2Axis = {
+                title: this.y2Title,
             };
         }
 
@@ -1151,27 +1136,27 @@ export class TextBox extends Element {
      * @returns dictionary representation of this Element
      */
     asDict(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = {
+        const result: {[key: string]: string | number} = {
             [this.name]: this.value,
         };
 
         if (this.font !== undefined) {
-            result = { ...result, [`${this.name}_font`]: this.font };
+            result[`${this.name}_font`] = this.font;
         }
         if (this.fontColor !== undefined) {
-            result = { ...result, [`${this.name}_font_color`]: this.fontColor };
+            result[`${this.name}_font_color`] = this.fontColor;
         }
         if (this.fontSize !== undefined) {
-            result = { ...result, [`${this.name}_font_size`]: this.fontSize };
+            result[`${this.name}_font_size`] = this.fontSize;
         }
         if (this.transparency !== undefined) {
-            result = { ...result, [`${this.name}_transparency`]: this.transparency };
+            result[`${this.name}_transparency`] = this.transparency;
         }
         if (this.width !== undefined) {
-            result = { ...result, [`${this.name}_width`]: this.width };
+            result[`${this.name}_width`] = this.width;
         }
         if (this.height !== undefined) {
-            result = { ...result, [`${this.name}_height`]: this.height };
+            result[`${this.name}_height`] = this.height;
         }
 
         return result;
@@ -1241,12 +1226,12 @@ export class ElementCollection extends Element {
      * @returns dictionary representation of this Element
      */
     asDict() {
-        let result = {};
+        let result: {[key: string]: unknown} = {};
 
         this.elements.forEach(
             (el) => {
                 if (el instanceof ElementCollection) {
-                    result = { ...result, [el.name]: el.asDict() };
+                    result[el.name] = el.asDict();
                 } else {
                     result = { ...result, ...el.asDict() };
                 }

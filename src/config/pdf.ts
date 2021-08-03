@@ -101,111 +101,60 @@ export class PDFOptions {
      * @returns the dict representation of these PDF options
      */
     asDict(): {[key: string]: string | number | boolean | {[key: string]: number}} {
-        let result = {};
+        const result: {[key: string]: string | number | boolean | {[key: string]: number}} = {};
 
         if (this.readPassword !== undefined) {
-            result = {
-                ...result,
-                output_read_password: this.readPassword,
-            };
+            result.output_read_password = this.readPassword;
         }
         if (this.watermark !== undefined) {
-            result = {
-                ...result,
-                output_watermark: this.watermark,
-            };
+            result.output_watermark = this.watermark;
         }
         if (this.pageWidth !== undefined) {
-            result = {
-                ...result,
-                output_page_width: this.pageWidth,
-            };
+            result.output_page_width = this.pageWidth;
         }
         if (this.pageHeight !== undefined) {
-            result = {
-                ...result,
-                output_page_height: this.pageHeight,
-            };
+            result.output_page_height = this.pageHeight;
         }
         if (this.evenPage !== undefined) {
-            result = {
-                ...result,
-                output_even_page: this.evenPage,
-            };
+            result.output_even_page = this.evenPage;
         }
         if (this.mergeMakingEven !== undefined) {
-            result = {
-                ...result,
-                output_merge_making_even: this.mergeMakingEven,
-            };
+            result.output_merge_making_even = this.mergeMakingEven;
         }
         if (this.modifyPassword !== undefined) {
-            result = {
-                ...result,
-                output_modify_password: this.modifyPassword,
-            };
+            result.output_modify_password = this.modifyPassword;
         }
         if (this.passwordProtectionFlag !== undefined) {
-            result = {
-                ...result,
-                output_password_protection_flag: this.passwordProtectionFlag,
-            };
+            result.output_password_protection_flag = this.passwordProtectionFlag;
         }
         if (this.lockForm !== undefined) {
-            result = {
-                ...result,
-                lock_form: this.lockForm,
-            };
+            result.lock_form = this.lockForm;
         }
         if (this.copies !== undefined) {
-            result = {
-                ...result,
-                output_copies: this.copies,
-            };
+            result.output_copies = this.copies;
         }
         if (this.pageMargin !== undefined) {
             // For AOP versions later than 21.1.1, output_page_margin will also be supported
-            result = {
-                ...result,
-                page_margin: this.pageMargin,
-            };
+            result.page_margin = this.pageMargin;
         }
         if (this.landscape !== undefined) {
             // For AOP versions later than 21.1.1, output_page_orientation will also be supported
-            result = {
-                ...result,
-                page_orientation: this.pageOrientation(),
-            };
+            result.page_orientation = this.pageOrientation();
         }
         if (this.pageFormat !== undefined) {
-            result = {
-                ...result,
-                output_page_format: this.pageFormat,
-            };
+            result.output_page_format = this.pageFormat;
         }
         if (this.merge !== undefined) {
-            result = {
-                ...result,
-                output_merge: this.merge,
-            };
+            result.output_merge = this.merge;
         }
         if (this.signCertificate !== undefined) {
-            result = {
-                ...result,
-                output_sign_certificate: this.signCertificate,
-            };
+            result.output_sign_certificate = this.signCertificate;
         }
         if (this.identifyFormFields !== undefined) {
-            result = {
-                ...result,
-                identify_form_fields: this.identifyFormFields,
-            };
+            result.identify_form_fields = this.identifyFormFields;
         }
         if (this.split !== undefined) {
-            result = {
-                ...result,
-                output_split: this.split,
-            };
+            result.output_split = this.split;
         }
         return result;
     }
@@ -220,10 +169,7 @@ export class PDFOptions {
         if (position !== undefined) {
             if (typeof this.pageMargin === 'object') {
                 // page margin is already a dict, add/change this position
-                this.pageMargin = {
-                    ...this.pageMargin,
-                    [position]: value,
-                };
+                this.pageMargin[position] = value;
             } else if (this.pageMargin === undefined) {
                 // page margin not yet defined, set it to a dict with this position defined
                 this.pageMargin = {
@@ -238,10 +184,7 @@ export class PDFOptions {
                     left: current,
                     right: current,
                 };
-                this.pageMargin = {
-                    ...this.pageMargin,
-                    [position]: value,
-                };
+                this.pageMargin[position] = value;
             }
         } else {
             // one value for all margin positions

@@ -60,15 +60,12 @@ export class Command {
      * @returns The dict representation of this command.
      */
     asDict(): {[key: string]: string | {[key: string]: string}} {
-        let result: {[key: string]: string | {[key: string]: string}} = {
+        const result: {[key: string]: string | {[key: string]: string}} = {
             command: this.command,
         };
 
         if (this.parameters !== undefined) {
-            result = {
-                ...result,
-                command_parameters: this.parameters,
-            };
+            result.command_parameters = this.parameters;
         }
 
         return result;
@@ -80,11 +77,11 @@ export class Command {
      * @returns dict representation of this command, with 'pre' prepended to the keys
      */
     asDictPre(): {[key: string]: string | {[key: string]: string}} {
-        let result: {[key: string]: string | {[key: string]: string}} = {};
+        const result: {[key: string]: string | {[key: string]: string}} = {};
 
         // prepend 'pre_' to the keys
         Object.entries(this.asDict()).forEach(
-            (e) => { result = { ...result, [`pre_${e[0]}`]: e[1] }; },
+            ([key, val]) => { result[`pre_${key}`] = val; },
         );
 
         return result;
@@ -96,11 +93,11 @@ export class Command {
      * @returns dict representation of this command, with 'post' prepended to the keys
      */
     asDictPost(): {[key: string]: string | {[key: string]: string}} {
-        let result: {[key: string]: string | {[key: string]: string}} = {};
+        const result: {[key: string]: string | {[key: string]: string}} = {};
 
         // prepend 'post_' to the keys
         Object.entries(this.asDict()).forEach(
-            (e) => { result = { ...result, [`post_${e[0]}`]: e[1] }; },
+            ([key, val]) => { result[`post_${key}`] = val; },
         );
 
         return result;
@@ -151,19 +148,19 @@ export class Commands {
      */
     asDict(): {[key: string]: {[key: string]: string |
         {[key: string]: string} | boolean | number}} {
-        let result: {[key: string]: {[key: string]: string |
+        const result: {[key: string]: {[key: string]: string |
             {[key: string]: string} | boolean | number}} = {};
 
         if (this.postProcess !== undefined) {
-            let toAdd: {[key: string]: string |
+            const toAdd: {[key: string]: string |
                 {[key: string]: string} | boolean | number} = this.postProcess.asDict();
             if (this.postProcessReturn !== undefined) {
-                toAdd = { ...toAdd, return_output: this.postProcessReturn };
+                toAdd.return_output = this.postProcessReturn;
             }
             if (this.postProcessDeleteDelay !== undefined) {
-                toAdd = { ...toAdd, delete_delay: this.postProcessDeleteDelay };
+                toAdd.delete_delay = this.postProcessDeleteDelay;
             }
-            result = { ...result, post_process: toAdd };
+            result.post_process = toAdd;
         }
 
         if (this.preConversion !== undefined || this.postConversion !== undefined) {
@@ -174,11 +171,11 @@ export class Commands {
             if (this.postConversion !== undefined) {
                 toAdd = { ...toAdd, ...this.postConversion.asDictPost() };
             }
-            result = { ...result, conversion: toAdd };
+            result.conversion = toAdd;
         }
 
         if (this.postMerge !== undefined) {
-            result = { ...result, merge: this.postMerge.asDictPost() };
+            result.merge = this.postMerge.asDictPost();
         }
 
         return result;
@@ -234,10 +231,10 @@ export class ServerConfig {
             { location: string; version: string; requester: string; jobName: string; } |
             { [key: string]: string | number | boolean | { [key: string]: string; }; }} = {};
 
-        if (this.apiKey !== undefined) result = { ...result, api_key: this.apiKey };
-        if (this.logging !== undefined) result = { ...result, logging: this.logging };
-        if (this.printer !== undefined) result = { ...result, ipp: this.printer.asDict() };
-        if (this.aopRemoteDebug) result = { ...result, aop_remote_debug: 'Yes' };
+        if (this.apiKey !== undefined) result.api_key = this.apiKey;
+        if (this.logging !== undefined) result.logging = this.logging;
+        if (this.printer !== undefined) result.ipp = this.printer.asDict();
+        if (this.aopRemoteDebug) result.aop_remote_debug = 'Yes';
         if (this.commands !== undefined) result = { ...result, ...this.commands.asDict() };
 
         return result;

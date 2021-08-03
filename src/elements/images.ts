@@ -76,34 +76,34 @@ export class Image extends Element {
      *  this property in this object's dict representation
      */
     asDictSuffixes(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = {};
+        const result: {[key: string]: string | number} = {};
 
         if (this.maxWidth !== undefined) {
-            result = { ...result, _max_width: this.maxWidth };
+            result._max_width = this.maxWidth;
         }
         if (this.maxHeight !== undefined) {
-            result = { ...result, _max_height: this.maxHeight };
+            result._max_height = this.maxHeight;
         }
         if (this.altText !== undefined) {
-            result = { ...result, _alt_text: this.altText };
+            result._alt_text = this.altText;
         }
         if (this.wrapText !== undefined) {
-            result = { ...result, _wrap_text: this.wrapText };
+            result._wrap_text = this.wrapText;
         }
         if (this.rotation !== undefined) {
-            result = { ...result, _rotation: this.rotation };
+            result._rotation = this.rotation;
         }
         if (this.transparency !== undefined) {
-            result = { ...result, _transparency: this.transparency };
+            result._transparency = this.transparency;
         }
         if (this.url !== undefined) {
-            result = { ...result, _url: this.url };
+            result._url = this.url;
         }
         if (this.width !== undefined) {
-            result = { ...result, _width: this.width };
+            result._width = this.width;
         }
         if (this.height !== undefined) {
-            result = { ...result, _height: this.height };
+            result._height = this.height;
         }
 
         return result;
@@ -114,13 +114,13 @@ export class Image extends Element {
      * @returns dict representation for this cloud access token
      */
     asDict(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = {
+        const result: {[key: string]: string | number} = {
             [this.name]: this.source,
         };
 
         Object.entries(this.asDictSuffixes()).forEach(
             ([key, value]) => {
-                result = { ...result, [`${this.name}${key}`]: value };
+                result[`${this.name}${key}`] = value;
             },
         );
 

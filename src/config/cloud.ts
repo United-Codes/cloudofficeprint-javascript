@@ -114,11 +114,8 @@ export class OAuthToken extends CloudAccessToken {
      * @returns dict representation for this cloud access token
      */
     asDict(): {[key: string]: string | {[key: string]: string | number}} {
-        let result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
-        result = {
-            ...result,
-            cloud_access_token: this.token,
-        };
+        const result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
+        result.cloud_access_token = this.token;
         return result;
     }
 }
@@ -145,13 +142,10 @@ export class AWSToken extends CloudAccessToken {
      * @returns dict representation for this cloud access token
      */
     asDict(): {[key: string]: string | {[key: string]: string | number}} {
-        let result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
-        result = {
-            ...result,
-            cloud_access_token: {
-                access_key: this.keyId,
-                secret_access_key: this.secretKey,
-            },
+        const result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
+        result.cloud_access_token = {
+            access_key: this.keyId,
+            secret_access_key: this.secretKey,
         };
         return result;
     }
@@ -190,34 +184,22 @@ export class FTPToken extends CloudAccessToken {
      * @returns dict representation for this cloud access token
      */
     asDict(): {[key: string]: string | {[key: string]: string | number}} {
-        let cloudAccessToken: {[key: string]: string | number } = {
+        const cloudAccessToken: {[key: string]: string | number } = {
             host: this.host,
         };
 
         if (this.port !== undefined) {
-            cloudAccessToken = {
-                ...cloudAccessToken,
-                port: this.port,
-            };
+            cloudAccessToken.port = this.port;
         }
         if (this.user !== undefined) {
-            cloudAccessToken = {
-                ...cloudAccessToken,
-                user: this.user,
-            };
+            cloudAccessToken.user = this.user;
         }
         if (this.password !== undefined) {
-            cloudAccessToken = {
-                ...cloudAccessToken,
-                password: this.password,
-            };
+            cloudAccessToken.password = this.password;
         }
 
-        let result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
-        result = {
-            ...result,
-            cloud_access_token: cloudAccessToken,
-        };
+        const result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
+        result.cloud_access_token = cloudAccessToken;
         return result;
     }
 }

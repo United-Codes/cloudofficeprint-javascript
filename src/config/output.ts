@@ -56,13 +56,13 @@ export class OutputConfig {
         };
 
         if (this.filetype !== undefined) {
-            result = { ...result, output_type: this.filetype };
+            result.output_type = this.filetype;
         }
         if (this.cloudAccessToken !== undefined) {
             result = { ...result, ...this.cloudAccessToken.asDict() };
         }
         if (this.serverDirectory !== undefined) {
-            result = { ...result, output_directory: this.serverDirectory };
+            result.output_directory = this.serverDirectory;
         }
         if (this.pdfOptions !== undefined) {
             result = { ...result, ...this.pdfOptions.asDict() };

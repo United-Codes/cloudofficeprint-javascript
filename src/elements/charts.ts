@@ -27,19 +27,19 @@ export class ChartTextStyle {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: string | boolean} {
-        let result: {[key: string]: string | boolean} = {};
+        const result: {[key: string]: string | boolean} = {};
 
         if (this.italic !== undefined) {
-            result = { ...result, italic: this.italic };
+            result.italic = this.italic;
         }
         if (this.bold !== undefined) {
-            result = { ...result, bold: this.bold };
+            result.bold = this.bold;
         }
         if (this.color !== undefined) {
-            result = { ...result, color: this.color };
+            result.color = this.color;
         }
         if (this.font !== undefined) {
-            result = { ...result, font: this.font };
+            result.font = this.font;
         }
 
         return result;
@@ -74,19 +74,19 @@ export class ChartDateOptions {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = {};
+        const result: {[key: string]: string | number} = {};
 
         if (this.format !== undefined) {
-            result = { ...result, format: this.format };
+            result.format = this.format;
         }
         if (this.code !== undefined) {
-            result = { ...result, code: this.code };
+            result.code = this.code;
         }
         if (this.unit !== undefined) {
-            result = { ...result, unit: this.unit };
+            result.unit = this.unit;
         }
         if (this.step !== undefined) {
-            result = { ...result, step: this.step };
+            result.step = this.step;
         }
 
         return result;
@@ -167,51 +167,52 @@ export class ChartAxisOptions {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: string | number | boolean | ChartDateOptions | ChartTextStyle} {
-        let result: {
+        const result: {
             [key: string]: string | number | boolean | ChartDateOptions | ChartTextStyle
         } = {};
 
         if (this.orientation !== undefined) {
-            result = { ...result, orientation: this.orientation };
+            result.orientation = this.orientation;
         }
         if (this.min !== undefined) {
-            result = { ...result, min: this.min };
+            result.min = this.min;
         }
         if (this.max !== undefined) {
-            result = { ...result, max: this.max };
+            result.max = this.max;
         }
         if (this.date !== undefined) {
-            result = { ...result, type: 'date', date: this.date };
+            result.type = 'date';
+            result.date = this.date;
         }
         if (this.title !== undefined) {
-            result = { ...result, title: this.title };
+            result.title = this.title;
         }
         if (this.values !== undefined) {
-            result = { ...result, showValues: this.values };
+            result.showValues = this.values;
         }
         if (this.valuesStyle !== undefined) {
-            result = { ...result, valuesStyle: this.valuesStyle };
+            result.valuesStyle = this.valuesStyle;
         }
         if (this.titleStyle !== undefined) {
-            result = { ...result, titleStyle: this.titleStyle };
+            result.titleStyle = this.titleStyle;
         }
         if (this.titleRotation !== undefined) {
-            result = { ...result, titleRotation: this.titleRotation };
+            result.titleRotation = this.titleRotation;
         }
         if (this.majorGridLines !== undefined) {
-            result = { ...result, majorGridlines: this.majorGridLines };
+            result.majorGridlines = this.majorGridLines;
         }
         if (this.majorUnit !== undefined) {
-            result = { ...result, majorUnit: this.majorUnit };
+            result.majorUnit = this.majorUnit;
         }
         if (this.minorGridLines !== undefined) {
-            result = { ...result, minorGridlines: this.minorGridLines };
+            result.minorGridlines = this.minorGridLines;
         }
         if (this.minorUnit !== undefined) {
-            result = { ...result, minorUnit: this.minorUnit };
+            result.minorUnit = this.minorUnit;
         }
         if (this.formatCode !== undefined) {
-            result = { ...result, formatCode: this.formatCode };
+            result.formatCode = this.formatCode;
         }
 
         return result;
@@ -299,7 +300,7 @@ export class ChartOptions {
         };
 
         if (style !== undefined) {
-            this.legendOptions = { ...this.legendOptions, style: style.asDict() };
+            this.legendOptions.style = style.asDict();
         }
     }
 
@@ -339,25 +340,25 @@ export class ChartOptions {
         };
 
         if (separator !== undefined) {
-            this.dataLabelsOptions = { ...this.dataLabelsOptions, separator };
+            this.dataLabelsOptions.separator = separator;
         }
         if (seriesName !== undefined) {
-            this.dataLabelsOptions = { ...this.dataLabelsOptions, showSeriesName: seriesName };
+            this.dataLabelsOptions.showSeriesName = seriesName;
         }
         if (categoryName !== undefined) {
-            this.dataLabelsOptions = { ...this.dataLabelsOptions, showCategoryName: categoryName };
+            this.dataLabelsOptions.showCategoryName = categoryName;
         }
         if (legendKey !== undefined) {
-            this.dataLabelsOptions = { ...this.dataLabelsOptions, showLegendKey: legendKey };
+            this.dataLabelsOptions.showLegendKey = legendKey;
         }
         if (value !== undefined) {
-            this.dataLabelsOptions = { ...this.dataLabelsOptions, showValue: value };
+            this.dataLabelsOptions.showValue = value;
         }
         if (percentage !== undefined) {
-            this.dataLabelsOptions = { ...this.dataLabelsOptions, showPercentage: percentage };
+            this.dataLabelsOptions.showPercentage = percentage;
         }
         if (position !== undefined) {
-            this.dataLabelsOptions = { ...this.dataLabelsOptions, position };
+            this.dataLabelsOptions.position = position;
         }
     }
 
@@ -384,7 +385,7 @@ export class ChartOptions {
             boolean |
             string
             } {
-        let result: {
+        const result: {
             [key: string]:
                 {[key: string]: boolean | string | {[key: string]: string | boolean}} |
                 {[key: string]: {
@@ -400,67 +401,55 @@ export class ChartOptions {
         };
 
         if (this.legendOptions !== undefined) {
-            result = { ...result, legend: this.legendOptions };
+            result.legend = this.legendOptions;
         }
         if (this.dataLabelsOptions !== undefined) {
-            result = { ...result, dataLabels: this.dataLabelsOptions };
+            result.dataLabels = this.dataLabelsOptions;
         }
         if (this.xAxis !== undefined) {
-            result.axis = {
-                ...result.axis as {[key: string]: {
-                    [key: string]:
-                        string | number | boolean | ChartDateOptions | ChartTextStyle
-                    }
-                },
-                x: this.xAxis.asDict(),
-            };
+            (result.axis as {[key: string]: {
+                [key: string]:
+                    string | number | boolean | ChartDateOptions | ChartTextStyle
+                }}).x = this.xAxis.asDict();
         }
         if (this.yAxis !== undefined) {
-            result.axis = {
-                ...result.axis as {[key: string]: {
+            (result.axis as {[key: string]: {
                     [key: string]:
                         string | number | boolean | ChartDateOptions | ChartTextStyle
-                    }
-                },
-                y: this.yAxis.asDict(),
-            };
+                }}).y = this.yAxis?.asDict();
         }
         if (this.y2Axis !== undefined) {
-            result.axis = {
-                ...result.axis as {[key: string]: {
+            (result.axis as {[key: string]: {
                     [key: string]:
                         string | number | boolean | ChartDateOptions | ChartTextStyle
-                    }
-                },
-                y2: this.y2Axis.asDict(),
-            };
+                }}).y2 = this.y2Axis.asDict();
         }
         if (this.width !== undefined) {
-            result = { ...result, width: this.width };
+            result.width = this.width;
         }
         if (this.height !== undefined) {
-            result = { ...result, height: this.height };
+            result.height = this.height;
         }
         if (this.border !== undefined) {
-            result = { ...result, border: this.border };
+            result.border = this.border;
         }
         if (this.roundedCorners !== undefined) {
-            result = { ...result, roundedCorners: this.roundedCorners };
+            result.roundedCorners = this.roundedCorners;
         }
         if (this.backgroundColor !== undefined) {
-            result = { ...result, backgroundColor: this.backgroundColor };
+            result.backgroundColor = this.backgroundColor;
         }
         if (this.backgroundOpacity !== undefined) {
-            result = { ...result, backgroundOpacity: this.backgroundOpacity };
+            result.backgroundOpacity = this.backgroundOpacity;
         }
         if (this.title !== undefined) {
-            result = { ...result, title: this.title };
+            result.title = this.title;
         }
         if (this.titleStyle !== undefined) {
-            result = { ...result, titleStyle: this.titleStyle.asDict() };
+            result.titleStyle = this.titleStyle.asDict();
         }
         if (this.grid !== undefined) {
-            result = { ...result, grid: this.grid };
+            result.grid = this.grid;
         }
 
         return result;
@@ -497,12 +486,12 @@ export abstract class Series {
      */
     asDict(): {[key: string]: string | number | boolean |
         {[key: string]: string | number}[]} {
-        let result: {[key: string]: string | {[key: string]: number | string}[]} = {
+        const result: {[key: string]: string | {[key: string]: number | string}[]} = {
             data: this.data(),
         };
 
         if (this.name !== undefined) {
-            result = { ...result, name: this.name };
+            result.name = this.name;
         }
 
         return result;
@@ -556,11 +545,11 @@ export class XYSeries extends Series {
      */
     asDict(): {[key: string]: string | number | boolean |
         {[key: string]: string | number}[]} {
-        let result: {[key: string]: string | number | boolean |
+        const result: {[key: string]: string | number | boolean |
             {[key: string]: string | number}[]} = super.asDict();
 
         if (this.color !== undefined) {
-            result = { ...result, color: this.color };
+            result.color = this.color;
         }
 
         return result;
@@ -608,10 +597,8 @@ export class PieSeries extends XYSeries {
             // Add the color for each slice to 'data'
             for (let i = 0; i < this.colors.length; i += 1) {
                 if (this.colors[i] !== undefined) {
-                    (result.data as { [key: string]: string | number; }[])[i] = {
-                        ...(result.data as { [key: string]: string | number; }[])[i],
-                        color: this.colors[i] as string,
-                    };
+                    (result.data as { [key: string]: string | number; }[])[i]
+                        .color = this.colors[i] as string;
                 }
             }
         }
@@ -651,11 +638,11 @@ export class AreaSeries extends XYSeries {
      */
     asDict(): {[key: string]: string | number | boolean |
         {[key: string]: string | number}[]} {
-        let result: {[key: string]: string | number | boolean |
+        const result: {[key: string]: string | number | boolean |
             {[key: string]: string | number}[]} = super.asDict();
 
         if (this.opacity !== undefined) {
-            result = { ...result, opacity: this.opacity };
+            result.opacity = this.opacity;
         }
 
         return result;
@@ -713,23 +700,23 @@ export class LineSeries extends XYSeries {
      */
     asDict(): {[key: string]: string | number | boolean |
         {[key: string]: string | number}[]} {
-        let result: {[key: string]: string | number | boolean |
+        const result: {[key: string]: string | number | boolean |
             {[key: string]: string | number}[]} = super.asDict();
 
         if (this.smooth !== undefined) {
-            result = { ...result, smooth: this.smooth };
+            result.smooth = this.smooth;
         }
         if (this.symbol !== undefined) {
-            result = { ...result, symbol: this.symbol };
+            result.symbol = this.symbol;
         }
         if (this.symbolSize !== undefined) {
-            result = { ...result, symbolSize: this.symbolSize };
+            result.symbolSize = this.symbolSize;
         }
         if (this.lineWidth !== undefined) {
-            result = { ...result, lineWidth: this.lineWidth };
+            result.lineWidth = this.lineWidth;
         }
         if (this.lineStyle !== undefined) {
-            result = { ...result, lineStyle: this.lineStyle };
+            result.lineStyle = this.lineStyle;
         }
 
         return result;
@@ -832,10 +819,10 @@ export class StockSeries extends Series {
 
         for (let i = 0; i < result.length; i += 1) {
             if (this.open !== undefined) {
-                result[i] = { ...result[i], open: this.open[i] };
+                result[i].open = this.open[i];
             }
             if (this.volume !== undefined) {
-                result[i] = { ...result[i], volume: this.volume[i] };
+                result[i].volume = this.volume[i];
             }
         }
 
@@ -877,11 +864,9 @@ export abstract class Chart extends Element {
         let result = {};
 
         if (this.options !== undefined) {
-            result = {
-                ...result,
-                options: this.options instanceof ChartOptions
-                    ? this.options.asDict() : this.options,
-            };
+            (result as {[key: string]: ChartOptions | {[key: string]: unknown}})
+                .options = this.options instanceof ChartOptions
+                    ? this.options.asDict() : this.options;
         }
 
         result = { ...result, ...updates };
@@ -1343,11 +1328,15 @@ export class StockChart extends Chart {
  * @returns input dictionary with the old key name replaced by the new key name
  */
 function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: string): T {
-    let result: T = { ...obj };
+    const result: T = { ...obj };
     Object.entries(result).forEach(
         ([key, value]) => {
             if (value.constructor === Object) {
-                result = { ...result, [key]: replaceKeyRecursive(value, oldKey, newKey) };
+                (result as {[key: string]: unknown})[key] = replaceKeyRecursive(
+                    value,
+                    oldKey,
+                    newKey,
+                );
             } else if (value.constructor === Array) {
                 const newValue: object[] = [];
                 value.forEach(
@@ -1355,7 +1344,7 @@ function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: s
                         newValue.push(replaceKeyRecursive(value[idx], oldKey, newKey));
                     },
                 );
-                result = { ...result, [key]: newValue };
+                (result as {[key: string]: unknown})[key] = newValue;
             }
         },
     );
@@ -1363,7 +1352,7 @@ function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: s
     if (Object.prototype.hasOwnProperty.call(result, oldKey)) {
         const val = (result as {[key: string]: unknown})[oldKey];
         delete (result as {[key: string]: unknown})[oldKey];
-        result = { ...result, [newKey]: val };
+        (result as {[key: string]: unknown})[newKey] = val;
     }
 
     return result;

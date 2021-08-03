@@ -77,29 +77,29 @@ export class PDFText extends PDFInsertObject {
      * @returns dict representation of this PDFInsertObject
      */
     asInnerDict(): {[key: string]: string | number | boolean} {
-        let result: {[key: string]: string | number | boolean} = {
+        const result: {[key: string]: string | number | boolean} = {
             text: this.text,
             x: this.x,
             y: this.y,
         };
 
         if (this.rotation !== undefined) {
-            result = { ...result, rotation: this.rotation };
+            result.rotation = this.rotation;
         }
         if (this.bold !== undefined) {
-            result = { ...result, bold: this.bold };
+            result.bold = this.bold;
         }
         if (this.italic !== undefined) {
-            result = { ...result, italic: this.italic };
+            result.italic = this.italic;
         }
         if (this.font !== undefined) {
-            result = { ...result, font: this.font };
+            result.font = this.font;
         }
         if (this.fontColor !== undefined) {
-            result = { ...result, font_color: this.fontColor };
+            result.font_color = this.fontColor;
         }
         if (this.fontSize !== undefined) {
-            result = { ...result, font_size: this.fontSize };
+            result.font_size = this.fontSize;
         }
 
         return result;
@@ -155,23 +155,23 @@ export class PDFImage extends PDFInsertObject {
      * @returns dict representation of this PDFInsertObject
      */
     asInnerDict(): {[key: string]: string | number} {
-        let result: {[key: string]: string | number} = {
+        const result: {[key: string]: string | number} = {
             image: this.image,
             x: this.x,
             y: this.y,
         };
 
         if (this.rotation) {
-            result = { ...result, rotation: this.rotation };
+            result.rotation = this.rotation;
         }
         if (this.width) {
-            result = { ...result, image_width: this.width };
+            result.image_width = this.width;
         }
         if (this.height) {
-            result = { ...result, image_height: this.height };
+            result.image_height = this.height;
         }
         if (this.maxWidth) {
-            result = { ...result, image_max_width: this.maxWidth };
+            result.image_max_width = this.maxWidth;
         }
 
         return result;
@@ -199,7 +199,7 @@ export class PDFTexts extends Element {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: {[key: string]: {[key: string]: string | number | boolean}[]}[]} {
-        let result: {[key: string]: {[key: string]: string | number | boolean}[]} = {};
+        const result: {[key: string]: {[key: string]: string | number | boolean}[]} = {};
 
         this.texts.forEach(
             (txt) => {
@@ -209,7 +209,7 @@ export class PDFTexts extends Element {
                 if (Object.prototype.hasOwnProperty.call(result, pageString)) {
                     result[pageString].push(txt.asInnerDict());
                 } else {
-                    result = { ...result, [pageString]: [txt.asInnerDict()] };
+                    result[pageString] = [txt.asInnerDict()];
                 }
             },
         );
@@ -241,7 +241,7 @@ export class PDFImages extends Element {
      * @returns dict representation of this object
      */
     asDict(): {[key: string]: {[key: string]: {[key: string]: string | number | boolean}[]}[]} {
-        let result: {[key: string]: {[key: string]: string | number | boolean}[]} = {};
+        const result: {[key: string]: {[key: string]: string | number | boolean}[]} = {};
 
         this.images.forEach(
             (img) => {
@@ -251,7 +251,7 @@ export class PDFImages extends Element {
                 if (Object.prototype.hasOwnProperty.call(result, pageString)) {
                     result[pageString].push(img.asInnerDict());
                 } else {
-                    result = { ...result, [pageString]: [img.asInnerDict()] };
+                    result[pageString] = [img.asInnerDict()];
                 }
             },
         );

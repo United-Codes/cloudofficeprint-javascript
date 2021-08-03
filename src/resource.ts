@@ -313,17 +313,14 @@ export class HTMLResource extends Resource {
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): { 'template_type': string, 'html_template_content': string } | { 'template_type': string, 'html_template_content': string, 'orientation': string } {
-        let result: { 'template_type': string, 'html_template_content': string } |{ 'template_type': string, 'html_template_content': string, 'orientation': string } = {
+    templateDict(): {[key: string]: string} {
+        const result: {[key: string]: string} = {
             template_type: this.filetype,
             html_template_content: this.data as string,
         };
         if (this.orientation()) {
             // Update result
-            result = {
-                ...result,
-                orientation: this.orientation()!,
-            };
+            result.orientation = this.orientation()!;
         }
         return result;
     }

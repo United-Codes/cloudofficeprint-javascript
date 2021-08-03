@@ -139,55 +139,37 @@ export class PrintJob {
             result = { ...result, ...this.server.config.asDict() };
         }
 
-        result = {
-            ...result,
-            // output config goes in "output" and decides where its sub-configs go through its
-            //  as_dict property (e.g. PDFConfigs are just appended at this "output" level)
-            output: this.outputConfig.asDict(),
-            template: this.template.templateDict(),
-        };
+        // output config goes in "output" and decides where its sub-configs go through its
+        //  as_dict property (e.g. PDFConfigs are just appended at this "output" level)
+        result.output = this.outputConfig.asDict();
+        result.template = this.template.templateDict();
 
         // If output_type is not specified, set this to the template filetype
         if (!(Object.prototype.hasOwnProperty.call(result.output, 'output_type'))) {
-            result.output = { ...result.output, output_type: result.template.template_type };
+            result.output.output_type = result.template.template_type;
         }
 
         if (this.data.constructor === Object) {
-            result = {
-                ...result,
-                files: Array.from(Object.entries(this.data).map(([name, data]) => ({
-                    filename: name,
-                    data: data.asDict(),
-                }))),
-            };
+            result.files = Array.from(Object.entries(this.data).map(([name, data]) => ({
+                filename: name,
+                data: data.asDict(),
+            })));
         } else if (this.data instanceof RESTSource) {
-            result = {
-                ...result,
-                files: [this.data.asDict()],
-            };
+            result.files = [this.data.asDict()];
         } else {
-            result = {
-                ...result,
-                files: [{ data: (this.data as Element).asDict() }],
-            };
+            result.files = [{ data: (this.data as Element).asDict() }];
         }
 
         if (this.prependFiles.length > 0) {
-            result = {
-                ...result,
-                prepend_files: Array.from(this.prependFiles.map(
-                    (value) => value.secondaryFileDict(),
-                )),
-            };
+            result.prepend_files = Array.from(this.prependFiles.map(
+                (value) => value.secondaryFileDict(),
+            ));
         }
 
         if (this.appendFiles.length > 0) {
-            result = {
-                ...result,
-                append_files: Array.from(this.appendFiles.map(
-                    (value) => value.secondaryFileDict(),
-                )),
-            };
+            result.append_files = Array.from(this.appendFiles.map(
+                (value) => value.secondaryFileDict(),
+            ));
         }
 
         if (Object.keys(this.subtemplates).length > 0) {
@@ -195,13 +177,13 @@ export class PrintJob {
 
             Object.entries(this.subtemplates).forEach(
                 ([name, res]) => {
-                    let toAdd = res.secondaryFileDict();
-                    toAdd = { ...toAdd, name };
+                    const toAdd = res.secondaryFileDict();
+                    toAdd.name = name;
                     templatesArray.push(toAdd);
                 },
             );
 
-            result = { ...result, templates: templatesArray };
+            result.templates = templatesArray;
         }
 
         // If verbose mode is activated, print the result to the terminal
