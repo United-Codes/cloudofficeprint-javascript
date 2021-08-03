@@ -7,8 +7,7 @@
   "scripts": {
     "build": "npx tsc",
     "test": "jest --silent",
-    "test:loud": "jest --verbose false",
-    "bundle": "browserify dist/src/index.js --standalone aop > dist/src/bundle.js"
+    "test:loud": "jest --verbose false"
   },
   "repository": {
     "type": "git",
@@ -22,20 +21,17 @@
   "homepage": "https://github.com/United-Codes/apexofficeprint-javascript#readme",
   "dependencies": {
     "@jest/globals": "^27.0.6",
-    "browserify": "^17.0.0",
     "https-proxy-agent": "^5.0.0",
     "jest": "^27.0.6",
     "mime-types": "^2.1.31",
     "node-fetch": "^2.6.1",
     "ts-jest": "^27.0.4",
     "typedoc": "^0.21.4",
-    "typescript": "^4.3.5",
-    "url-join": "^4.0.1"
+    "typescript": "^4.3.5"
   },
   "devDependencies": {
     "@types/mime-types": "^2.1.0",
     "@types/node-fetch": "^2.5.12",
-    "@types/url-join": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
     "eslint": "^7.31.0",

@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
 import { HttpsProxyAgent } from 'https-proxy-agent';
-import urljoin from 'url-join';
 
 /**
  * This class defines an IP-enabled printer to use with the AOP server.
@@ -263,7 +262,7 @@ export class Server {
      */
     async isReachable(): Promise<boolean> {
         try {
-            return await fetch(urljoin(this.url, 'marco'))
+            return await fetch(new URL('marco', this.url).href)
                 .then((res) => res.text()) === 'polo';
         } catch (error) {
             return false;
@@ -288,7 +287,7 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(urljoin(this.url, 'soffice'), { agent: proxy });
+        const response = await fetch(new URL('soffice', this.url).href, { agent: proxy });
         return response.text();
     }
 
@@ -303,7 +302,7 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(urljoin(this.url, 'officetopdf'), { agent: proxy });
+        const response = await fetch(new URL('officetopdf', this.url).href, { agent: proxy });
         return response.text();
     }
 
@@ -317,7 +316,7 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(urljoin(this.url, 'supported_template_mimetypes'), { agent: proxy });
+        const response = await fetch(new URL('supported_template_mimetypes', this.url).href, { agent: proxy });
         return response.json();
     }
 
@@ -333,7 +332,7 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(urljoin(this.url, 'supported_output_mimetypes', `?template=${inputType}`), { agent: proxy });
+        const response = await fetch(new URL(`supported_output_mimetypes?template=${inputType}`, this.url).href, { agent: proxy });
         return response.json();
     }
 
@@ -347,7 +346,7 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(urljoin(this.url, 'supported_prepend_mimetypes'), { agent: proxy });
+        const response = await fetch(new URL('supported_prepend_mimetypes', this.url).href, { agent: proxy });
         return response.json();
     }
 
@@ -361,7 +360,7 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(urljoin(this.url, 'supported_append_mimetypes'), { agent: proxy });
+        const response = await fetch(new URL('supported_append_mimetypes', this.url).href, { agent: proxy });
         return response.json();
     }
 
@@ -375,7 +374,7 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(urljoin(this.url, 'version'), { agent: proxy });
+        const response = await fetch(new URL('version', this.url).href, { agent: proxy });
         return response.text();
     }
 }
