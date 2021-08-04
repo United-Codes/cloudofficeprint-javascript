@@ -79,7 +79,7 @@ const outputFilesProm: Promise<aop.Response>[] = [];
     const outputFiles = await Promise.all(outputFilesProm);
 
     // Wait for the buffers of the server responses
-    const buffersProm: Promise<Buffer>[] = [];
+    const buffersProm: Promise<ArrayBuffer>[] = [];
     outputFiles.forEach(
         (res) => {
             buffersProm.push(res.buffer);
@@ -93,7 +93,7 @@ const outputFilesProm: Promise<aop.Response>[] = [];
     buffers.forEach(
         (buff) => {
             resources.push(aop.Resource.fromRaw(
-                buff,
+                Buffer.from(buff),
                 'pdf',
             ));
         },

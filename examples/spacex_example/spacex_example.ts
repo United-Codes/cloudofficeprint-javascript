@@ -29,7 +29,7 @@ const IMAGE_MAX_WIDTH = 400; // pptx, xlsx
 const CHART_WIDTH = 800; // pptx, xlsx
 // const IMAGE_MAX_HEIGHT = 500; // docx
 // const IMAGE_MAX_WIDTH = 640; // docx
-// const CHART_WIDTH = 650; // pptx, xlsx
+// const CHART_WIDTH = 650; // docx
 
 // Get SpaceX data from https://docs.spacexdata.com
 let info: {[key: string]: string | number | boolean | {[key: string]: unknown}} = {};

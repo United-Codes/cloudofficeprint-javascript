@@ -10,7 +10,7 @@ import * as ownUtils from './own_utils';
  */
 export class Response {
     mimetype: string;
-    buffer: Promise<Buffer>;
+    buffer: Promise<ArrayBuffer>;
 
     /**
      * You should never need to construct a Response manually
@@ -18,7 +18,7 @@ export class Response {
      */
     constructor(response: HTTPReponse) {
         const mimetype = response.headers.get('Content-Type');
-        const buffer = response.buffer();
+        const buffer = response.arrayBuffer();
         if (mimetype === null) {
             throw new Error('Could not get the mimetype from the response.');
         }
@@ -49,7 +49,7 @@ export class Response {
         if (!(fileName.includes('.'))) {
             pathCopy = `${path}.${this.filetype()}`;
         }
-        fs.writeFile(pathCopy, await this.buffer, (err) => {
+        fs.writeFile(pathCopy, Buffer.from(await this.buffer), (err) => {
             if (err) throw err;
         });
     }
