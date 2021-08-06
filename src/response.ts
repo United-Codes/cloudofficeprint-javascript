@@ -34,6 +34,15 @@ export class Response {
     }
 
     /**
+     * Return the string representation of this buffer.
+     * Useful if the server returns a JSON (e.g. for output_type 'count_tags').
+     * @returns string representation of this buffer
+     */
+    async toString(): Promise<string> {
+        return Buffer.from(await this.buffer).toString();
+    }
+
+    /**
      * Write the response to a file at the given path without extension.
      * If the given file path does not contain an extension,
      *  the correct path is automatically added from the response data.
