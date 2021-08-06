@@ -6,7 +6,7 @@ To install the APEX Office Print Java-/TypeScript package, you can type in your 
 `npm install apexofficeprint`
 
 # Usage
-1. Create a template (docx, xlsx, pptx, HTML, md, txt, csv)
+1. Create a template (docx, xlsx, pptx, HTML, md, txt, csv), for the possible tags, click [here](http://www.apexofficeprint.com/docs/#templates).
 2. Create the input data with this Java-/TypeScript SDK
 3. Send template and data to an AOP server and save the response to a file with this Java-/TypeScript SDK
 
@@ -42,7 +42,7 @@ collection.add(text);
 ```
 
 ## AOP server
-The template and the data need to be sent to an AOP server that merges both. This can be done by setting up the configuration for AOP server and passing it to the print job instance:
+The template and the data need to be sent to an AOP server that merges both. This can be done by setting up the configuration for AOP server and passing it to the print job instance. You can get your API key by signing up at https://www.apexofficeprint.com.
 ```javascript
 ...
 const SERVER_URL = 'https://api.apexofficeprint.com/';
