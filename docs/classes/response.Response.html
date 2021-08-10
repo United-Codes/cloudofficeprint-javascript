@@ -108,6 +108,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="response.Response.html#filetype" class="tsd-kind-icon">filetype</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="response.Response.html#toFile" class="tsd-kind-icon">to<wbr>File</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="response.Response.html#toString" class="tsd-kind-icon">to<wbr>String</a></li>
 							</ul>
 						</section>
 					</div>
@@ -125,7 +126,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/response.ts#L19">src/response.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/response.ts#L19">src/response.ts:19</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -154,10 +155,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="buffer" class="tsd-anchor"></a>
 					<h3>buffer</h3>
-					<div class="tsd-signature tsd-kind-icon">buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/response.ts#L13">src/response.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/response.ts#L13">src/response.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">mimetype<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/response.ts#L12">src/response.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/response.ts#L12">src/response.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -184,7 +185,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/response.ts#L32">src/response.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/response.ts#L32">src/response.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -202,7 +203,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/response.ts#L45">src/response.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/response.ts#L54">src/response.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -225,6 +226,30 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="toString" class="tsd-anchor"></a>
+					<h3>to<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/response.ts#L41">src/response.ts:41</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return the string representation of this buffer.
+									Useful if the server returns a JSON (e.g. for output_type &#39;count_tags&#39;).</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>string representation of this buffer</p>
 						</li>
 					</ul>
 				</section>
@@ -280,6 +305,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="response.Response.html#toFile" class="tsd-kind-icon">to<wbr>File</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="response.Response.html#toString" class="tsd-kind-icon">to<wbr>String</a>
 							</li>
 						</ul>
 					</li>

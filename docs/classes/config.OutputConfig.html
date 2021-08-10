@@ -99,6 +99,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.OutputConfig.html#cloudAccessToken" class="tsd-kind-icon">cloud<wbr>Access<wbr>Token</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.OutputConfig.html#converter" class="tsd-kind-icon">converter</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.OutputConfig.html#csvOptions" class="tsd-kind-icon">csv<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.OutputConfig.html#encoding" class="tsd-kind-icon">encoding</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.OutputConfig.html#filetype" class="tsd-kind-icon">filetype</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.OutputConfig.html#pdfOptions" class="tsd-kind-icon">pdf<wbr>Options</a></li>
@@ -120,13 +121,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Output<wbr>Config<span class="tsd-signature-symbol">(</span>filetype<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, encoding<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, converter<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, cloudAccessToken<span class="tsd-signature-symbol">?: </span><a href="config.CloudAccessToken.html" class="tsd-signature-type" data-tsd-kind="Class">CloudAccessToken</a>, serverDirectory<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, pdfOptions<span class="tsd-signature-symbol">?: </span><a href="config.PDFOptions.html" class="tsd-signature-type" data-tsd-kind="Class">PDFOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Output<wbr>Config<span class="tsd-signature-symbol">(</span>filetype<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, encoding<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, converter<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, cloudAccessToken<span class="tsd-signature-symbol">?: </span><a href="config.CloudAccessToken.html" class="tsd-signature-type" data-tsd-kind="Class">CloudAccessToken</a>, serverDirectory<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, pdfOptions<span class="tsd-signature-symbol">?: </span><a href="config.PDFOptions.html" class="tsd-signature-type" data-tsd-kind="Class">PDFOptions</a>, csvOptions<span class="tsd-signature-symbol">?: </span><a href="config.CsvOptions.html" class="tsd-signature-type" data-tsd-kind="Class">CsvOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/config/output.ts#L30">src/config/output.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L32">src/config/output.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -185,6 +186,9 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> csvOptions: <a href="config.CsvOptions.html" class="tsd-signature-type" data-tsd-kind="Class">CsvOptions</a></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a></h4>
 						</li>
@@ -199,7 +203,7 @@
 					<div class="tsd-signature tsd-kind-icon">cloud<wbr>Access<wbr>Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="config.CloudAccessToken.html" class="tsd-signature-type" data-tsd-kind="Class">CloudAccessToken</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/config/output.ts#L12">src/config/output.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L13">src/config/output.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -209,7 +213,17 @@
 					<div class="tsd-signature tsd-kind-icon">converter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/config/output.ts#L11">src/config/output.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L12">src/config/output.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="csvOptions" class="tsd-anchor"></a>
+					<h3>csv<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">csv<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="config.CsvOptions.html" class="tsd-signature-type" data-tsd-kind="Class">CsvOptions</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L16">src/config/output.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -219,7 +233,7 @@
 					<div class="tsd-signature tsd-kind-icon">encoding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/config/output.ts#L10">src/config/output.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L11">src/config/output.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -229,7 +243,7 @@
 					<div class="tsd-signature tsd-kind-icon">filetype<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/config/output.ts#L9">src/config/output.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L10">src/config/output.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -239,7 +253,7 @@
 					<div class="tsd-signature tsd-kind-icon">pdf<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="config.PDFOptions.html" class="tsd-signature-type" data-tsd-kind="Class">PDFOptions</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/config/output.ts#L14">src/config/output.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L15">src/config/output.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -249,7 +263,7 @@
 					<div class="tsd-signature tsd-kind-icon">server<wbr>Directory<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/config/output.ts#L13">src/config/output.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L14">src/config/output.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -266,7 +280,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/3fc2496/src/config/output.ts#L50">src/config/output.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/output.ts#L54">src/config/output.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -330,6 +344,9 @@
 						<a href="config.Commands.html" class="tsd-kind-icon">Commands</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.CsvOptions.html" class="tsd-kind-icon">Csv<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
 						<a href="config.FTPToken.html" class="tsd-kind-icon">FTPToken</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
@@ -348,6 +365,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="config.OutputConfig.html#converter" class="tsd-kind-icon">converter</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="config.OutputConfig.html#csvOptions" class="tsd-kind-icon">csv<wbr>Options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="config.OutputConfig.html#encoding" class="tsd-kind-icon">encoding</a>

@@ -277,7 +277,7 @@ export class Image extends Element {
     /**
      * Generate an Image object from a URL.
      * @param name The name of the image element.
-     * @param source The source for the image: base64 or URL.
+     * @param urlSource The source for the image: base64 or URL.
      * @param maxWidth The maximum width of the image (for proportional scaling).
      * @param maxHeight The maximum height of the image (for proportional scaling).
      * @param altText The alternative text for the image, used when the image can't be loaded.

@@ -8,7 +8,7 @@
 export class CsvOptions {
     textDelimiter: string | undefined;
     fieldSeparator: string | undefined;
-    characterSet: string | undefined;
+    characterSet: number | undefined;
 
     /**
      * @param textDelimiter this option will specify the text delimiter. Can be " or ' (default ").
@@ -21,7 +21,7 @@ export class CsvOptions {
     constructor(
         textDelimiter?: string,
         fieldSeparator?: string,
-        characterSet?: string,
+        characterSet?: number,
     ) {
         this.textDelimiter = textDelimiter;
         this.fieldSeparator = fieldSeparator;
@@ -32,8 +32,8 @@ export class CsvOptions {
      * The dict representation of these csv options.
      * @returns the dict representation of these csv options
      */
-    asDict(): {[key: string]: string} {
-        const result: {[key: string]: string} = {};
+    asDict(): {[key: string]: string | number} {
+        const result: {[key: string]: string | number} = {};
 
         if (this.textDelimiter !== undefined) {
             result.output_text_delimiter = this.textDelimiter;

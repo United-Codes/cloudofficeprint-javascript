@@ -70,7 +70,7 @@
 					<h1>Usage</h1>
 				</a>
 				<ol>
-					<li>Create a template (docx, xlsx, pptx, HTML, md, txt, csv)</li>
+					<li>Create a template (docx, xlsx, pptx, HTML, md, txt, csv), for the possible tags, click <a href="http://www.apexofficeprint.com/docs/#templates">here</a>.</li>
 					<li>Create the input data with this Java-/TypeScript SDK</li>
 					<li>Send template and data to an AOP server and save the response to a file with this Java-/TypeScript SDK</li>
 				</ol>
@@ -110,7 +110,7 @@
 				<a href="#aop-server" id="aop-server" style="color: inherit; text-decoration: none;">
 					<h2>AOP server</h2>
 				</a>
-				<p>The template and the data need to be sent to an AOP server that merges both. This can be done by setting up the configuration for AOP server and passing it to the print job instance:</p>
+				<p>The template and the data need to be sent to an AOP server that merges both. This can be done by setting up the configuration for AOP server and passing it to the print job instance. You can get your API key by signing up at <a href="https://www.apexofficeprint.com">https://www.apexofficeprint.com</a>.</p>
 				<pre><code class="language-javascript"><span style="color: #000000">...</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">SERVER_URL</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;https://api.apexofficeprint.com/&#039;</span><span style="color: #000000">;</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">API_KEY</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;YOUR_API_KEY&#039;</span><span style="color: #000000">; </span><span style="color: #008000">// Replace by your own API key</span>
@@ -123,7 +123,7 @@
 
 <span style="color: #008000">// Create print job</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">printjob</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">aop</span><span style="color: #000000">.</span><span style="color: #795E26">PrintJob</span><span style="color: #000000">(</span>
-<span style="color: #000000">    </span><span style="color: #001080">aop</span><span style="color: #000000">.</span><span style="color: #001080">Resource</span><span style="color: #000000">.</span><span style="color: #795E26">fromLocalFile</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;./data/template.docx&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    </span><span style="color: #001080">aop</span><span style="color: #000000">.</span><span style="color: #001080">Resource</span><span style="color: #000000">.</span><span style="color: #795E26">fromLocalFile</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;PATH_TO_TEMPLATE_FILE&#039;</span><span style="color: #000000">),</span>
 <span style="color: #000000">    </span><span style="color: #001080">collection</span><span style="color: #000000">,</span>
 <span style="color: #000000">    </span><span style="color: #001080">server</span><span style="color: #000000">,</span>
 <span style="color: #000000">);</span>
@@ -131,7 +131,7 @@
 <span style="color: #008000">// Asynchronously execute print job and save response to file</span>
 <span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
 <span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">response</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">printjob</span><span style="color: #000000">.</span><span style="color: #795E26">execute</span><span style="color: #000000">();</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">response</span><span style="color: #000000">.</span><span style="color: #795E26">toFile</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;./data/output&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">response</span><span style="color: #000000">.</span><span style="color: #795E26">toFile</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;PATH_OF_OUTPUT_FILE&#039;</span><span style="color: #000000">);</span>
 <span style="color: #000000">})();</span>
 </code></pre>
 				<a href="#result" id="result" style="color: inherit; text-decoration: none;">

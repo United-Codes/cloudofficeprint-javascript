@@ -57,12 +57,12 @@ describe('Tests for config', () => {
         const csvOptions = new aop.config.CsvOptions(
             'textDelim',
             'fieldSep',
-            'charSet',
+            5,
         );
         const csvOptionsExpected = {
             output_text_delimiter: 'textDelim',
             output_field_separator: 'fieldSep',
-            output_character_set: 'charSet',
+            output_character_set: 5,
         };
         expect(csvOptions.asDict()).toEqual(csvOptionsExpected);
     });

@@ -56,7 +56,7 @@ const server = new aop.config.Server(
 
 // Create print job
 const printjob = new aop.PrintJob(
-    aop.Resource.fromLocalFile('./data/template.docx'),
+    aop.Resource.fromLocalFile('PATH_TO_TEMPLATE_FILE'),
     collection,
     server,
 );
@@ -64,7 +64,7 @@ const printjob = new aop.PrintJob(
 // Asynchronously execute print job and save response to file
 (async () => {
     const response = await printjob.execute();
-    await response.toFile('./data/output');
+    await response.toFile('PATH_OF_OUTPUT_FILE');
 })();
 ```
 

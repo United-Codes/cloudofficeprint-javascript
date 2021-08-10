@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Printer | apexofficeprint</title>
+	<title>CsvOptions | apexofficeprint</title>
 	<meta name="description" content="Documentation for apexofficeprint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/config.html">config</a>
 				</li>
 				<li>
-					<a href="config.Printer.html">Printer</a>
+					<a href="config.CsvOptions.html">CsvOptions</a>
 				</li>
 			</ul>
-			<h1>Class Printer</h1>
+			<h1>Class CsvOptions</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,11 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>This class defines an IP-enabled printer to use with the AOP server.</p>
+						<p>Class of optional csv options.
+							The properties of this class define all possible csv output options.
+							All of them are optional, which is why passing an instance of this class
+							in an OutputConfig is also optional.
+						These options can be used when the template is xlsx and the output is csv.</p>
 					</div>
 				</div>
 			</section>
@@ -79,7 +83,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Printer</span>
+						<span class="target">CsvOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -90,22 +94,21 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="config.Printer.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="config.CsvOptions.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#jobName" class="tsd-kind-icon">job<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#location" class="tsd-kind-icon">location</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#requester" class="tsd-kind-icon">requester</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#version" class="tsd-kind-icon">version</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.CsvOptions.html#characterSet" class="tsd-kind-icon">character<wbr>Set</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.CsvOptions.html#fieldSeparator" class="tsd-kind-icon">field<wbr>Separator</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.CsvOptions.html#textDelimiter" class="tsd-kind-icon">text<wbr>Delimiter</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="config.Printer.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="config.CsvOptions.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
 							</ul>
 						</section>
 					</div>
@@ -117,51 +120,46 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Printer<span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, requester<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, jobName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.Printer.html" class="tsd-signature-type" data-tsd-kind="Class">Printer</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Csv<wbr>Options<span class="tsd-signature-symbol">(</span>textDelimiter<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, fieldSeparator<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, characterSet<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.CsvOptions.html" class="tsd-signature-type" data-tsd-kind="Class">CsvOptions</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/server.ts#L20">src/config/server.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/csv.ts#L21">src/config/csv.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>location: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> textDelimiter: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>IP address of the printer</p>
+											<p>this option will specify the text delimiter. Can be &quot; or &#39; (default &quot;).</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5>version: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> fieldSeparator: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>IPP version</p>
+											<p>this option will specify the field separator. Default ,.
+											Can be any ascii character or &#39;tab&#39; for tab and &#39;space&#39; for space.</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5>requester: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;AOP&#x27;</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> characterSet: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the name of the requester; defaults to &#39;AOP&#39;</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5>jobName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;AOP&#x27;</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>the name of the print job; defaults to &#39;AOP&#39;</p>
+											<p>this option will determine the character set. Should be an integer.
+												See: <a href="https://wiki.openoffice.org/wiki/Documentation/DevGuide/Spreadsheets/Filter_Options#Filter_Options_for_Lotus.2C_dBase_and_DIF_Filters">https://wiki.openoffice.org/wiki/Documentation/DevGuide/Spreadsheets/Filter_Options#Filter_Options_for_Lotus.2C_dBase_and_DIF_Filters</a>
+											for possible values. Default 0 or system encoding.</p>
 										</div>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="config.Printer.html" class="tsd-signature-type" data-tsd-kind="Class">Printer</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="config.CsvOptions.html" class="tsd-signature-type" data-tsd-kind="Class">CsvOptions</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -169,42 +167,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="jobName" class="tsd-anchor"></a>
-					<h3>job<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">job<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="characterSet" class="tsd-anchor"></a>
+					<h3>character<wbr>Set</h3>
+					<div class="tsd-signature tsd-kind-icon">character<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/server.ts#L12">src/config/server.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/csv.ts#L11">src/config/csv.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="location" class="tsd-anchor"></a>
-					<h3>location</h3>
-					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="fieldSeparator" class="tsd-anchor"></a>
+					<h3>field<wbr>Separator</h3>
+					<div class="tsd-signature tsd-kind-icon">field<wbr>Separator<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/server.ts#L9">src/config/server.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/csv.ts#L10">src/config/csv.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="requester" class="tsd-anchor"></a>
-					<h3>requester</h3>
-					<div class="tsd-signature tsd-kind-icon">requester<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="textDelimiter" class="tsd-anchor"></a>
+					<h3>text<wbr>Delimiter</h3>
+					<div class="tsd-signature tsd-kind-icon">text<wbr>Delimiter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/server.ts#L11">src/config/server.ts:11</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="version" class="tsd-anchor"></a>
-					<h3>version</h3>
-					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/server.ts#L10">src/config/server.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/csv.ts#L9">src/config/csv.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -215,34 +203,25 @@
 					<a name="asDict" class="tsd-anchor"></a>
 					<h3>as<wbr>Dict</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">as<wbr>Dict<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>job_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>requester<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></li>
+						<li class="tsd-signature tsd-kind-icon">as<wbr>Dict<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/server.ts#L31">src/config/server.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/2812c4f/src/config/csv.ts#L35">src/config/csv.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The dict representation of this Printer object.</p>
+									<p>The dict representation of these csv options.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>job_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>requester<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h4>
-							<p>The dict representation of this Printer object.</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
+							<p>the dict representation of these csv options</p>
 							<ul class="tsd-parameters">
-								<li class="tsd-parameter">
-									<h5>job_<wbr>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li class="tsd-parameter">
-									<h5>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li class="tsd-parameter">
-									<h5>requester<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-								</li>
-								<li class="tsd-parameter">
-									<h5>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+								<li class="tsd-parameter-index-signature">
+									<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 						</li>
@@ -293,9 +272,30 @@
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
 						<a href="config.Commands.html" class="tsd-kind-icon">Commands</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-namespace">
 						<a href="config.CsvOptions.html" class="tsd-kind-icon">Csv<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="config.CsvOptions.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="config.CsvOptions.html#characterSet" class="tsd-kind-icon">character<wbr>Set</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="config.CsvOptions.html#fieldSeparator" class="tsd-kind-icon">field<wbr>Separator</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="config.CsvOptions.html#textDelimiter" class="tsd-kind-icon">text<wbr>Delimiter</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="config.CsvOptions.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
 						<a href="config.FTPToken.html" class="tsd-kind-icon">FTPToken</a>
 					</li>
@@ -308,33 +308,9 @@
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
 						<a href="config.PDFOptions.html" class="tsd-kind-icon">PDFOptions</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-namespace">
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
 						<a href="config.Printer.html" class="tsd-kind-icon">Printer</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="config.Printer.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="config.Printer.html#jobName" class="tsd-kind-icon">job<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="config.Printer.html#location" class="tsd-kind-icon">location</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="config.Printer.html#requester" class="tsd-kind-icon">requester</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="config.Printer.html#version" class="tsd-kind-icon">version</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="config.Printer.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-namespace">
 						<a href="config.Server.html" class="tsd-kind-icon">Server</a>
 					</li>
