@@ -43,9 +43,9 @@ const conf = new aop.config.OutputConfig(
 
 // Create print job
 const printjob = new aop.PrintJob(
-    aop.Resource.fromLocalFile('./examples/pdfsignature_example/pdfsignature_template.pdf'),
     collection,
     server,
+    aop.Resource.fromLocalFile('./examples/pdfsignature_example/pdfsignature_template.pdf'),
     conf,
 );
 

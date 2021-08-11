@@ -28,9 +28,9 @@ describe('Tests for class PrintJob', () => {
         const outputConf = new aop.config.OutputConfig('pdf');
 
         const printjob = new aop.PrintJob(
-            templateMain,
             data,
             serv,
+            templateMain,
             outputConf,
             subtemplates,
             [prependFile],
@@ -121,5 +121,26 @@ describe('Tests for class PrintJob', () => {
                 ),
             ),
         )).toFile('./output');
+    });
+    // Works as expected, this test is skipped because an API key is needed
+    // Remove '.skip' and enter a valid API key if you want to test this yourself
+    test.skip('Test without template', async () => {
+        const collection = new aop.elements.ElementCollection();
+        collection.add(new aop.elements.Property('test_property', 'value'));
+        collection.add(
+            aop.elements.Image.fromUrl(
+                'test_image',
+                'https://apexofficeprint.com/assets/dist/images/office-print/logo-office-print.svg',
+            ),
+        );
+        const server = new aop.config.Server(
+            'http://apexofficeprint.com/dev/',
+            new aop.config.ServerConfig('YOUR_API_KEY'), // Replace by your own API key
+        );
+        const printjob = new aop.PrintJob(
+            collection,
+            server,
+        );
+        (await printjob.execute()).toFile('./output');
     });
 });

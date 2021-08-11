@@ -93,14 +93,14 @@ const planetList: aop.elements.Element[] = [];
 
     // Create printjob
     const printjob = new aop.PrintJob(
+        data,
+        server,
         aop.Resource.fromLocalFile(
             './examples/solar_system_example/pptx/solar_system_template.pptx',
         ), // pptx
         // aop.Resource.fromLocalFile(
         //     './examples/solar_system_example/docx/solar_system_template.docx',
         // ), // docx
-        data,
-        server,
     );
 
     (await printjob.execute()).toFile('./examples/solar_system_example/pptx/output');

@@ -23,20 +23,20 @@ export class PrintJob {
     data: Element | RESTSource | {[key: string]: Element};
     server: Server;
     outputConfig: OutputConfig;
-    template: Resource;
+    template: Resource | undefined;
     subtemplates: {[key: string]: Resource};
     prependFiles: Resource[];
     appendFiles: Resource[];
     aopVerbose: boolean;
 
     /**
-     * @param template Template to use for this print job.
      * @param data This is either: An `Element` (e.g. an `ElementCollection`);
      *  A mapping, containing file names as keys and an `Element` as data.
      *  Multiple files will be produced from the different datas, the result is a zip file
      *  containing them. In the first case, no output file name is specified and
      *  the server will name it "file0".
      * @param server Server to be used for this print job.
+     * @param template Template to use for this print job.
      * @param outputConfig Output configuration to be used for this print job.
      *  Defaults to `OutputConfig`().
      * @param subtemplates Subtemplates for this print job, accessible (in docx) through
@@ -46,9 +46,9 @@ export class PrintJob {
      * @param aopVerbose Whether or not verbose mode should be activated. Defaults to False.
      */
     constructor(
-        template: Resource,
         data: Element | RESTSource | {[key: string]: Element},
         server: Server,
+        template?: Resource,
         outputConfig: OutputConfig = new OutputConfig(),
         subtemplates: {[key: string]: Resource} = {},
         prependFiles: Resource[] = [],
@@ -144,11 +144,19 @@ export class PrintJob {
         // output config goes in "output" and decides where its sub-configs go through its
         //  as_dict property (e.g. PDFConfigs are just appended at this "output" level)
         result.output = this.outputConfig.asDict();
-        result.template = this.template.templateDict();
+
+        if (this.template !== undefined) {
+            result.template = this.template.templateDict();
+        }
 
         // If output_type is not specified, set this to the template filetype
+        // If no template found: default docx
         if (!(Object.prototype.hasOwnProperty.call(result.output, 'output_type'))) {
-            result.output.output_type = result.template.template_type;
+            if (this.template) {
+                result.output.output_type = result.template.template_type;
+            } else {
+                result.output.output_type = 'docx';
+            }
         }
 
         if (this.data.constructor === Object) {

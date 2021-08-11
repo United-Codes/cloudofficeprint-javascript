@@ -154,7 +154,7 @@ data.add(orders);
 
 // Merge template and data to generate the output file
 const conf = new aop.config.OutputConfig('pdf'); // Optional
-const printjob = new aop.PrintJob(template, data, server, conf);
+const printjob = new aop.PrintJob(data, server, template, conf);
 
 (async () => {
     try {

@@ -956,6 +956,8 @@ Now that we have the template and the data ready, it is time to let AOP merge th
 const printjob = new aop.PrintJob(
     // NOTE: change IMAGE_MAX_HEIGHT, IMAGE_MAX_WIDTH and CHART_WIDTH at the beginning
     //  of this script according to filetype
+    data,
+    server,
     // aop.Resource.fromLocalFile(
     //     './examples/spacex_example/spacex_template.pptx',
     // ), // For pptx
@@ -965,8 +967,6 @@ const printjob = new aop.PrintJob(
     // aop.Resource.fromLocalFile(
     //     './examples/spacex_example/spacex_template.docx',
     // ), // For docx
-    data,
-    server,
 );
 ```
 We loaded the template from a local file, passed in our data element collection and our server object.

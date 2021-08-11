@@ -352,6 +352,8 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
     const printjob = new aop.PrintJob(
         // NOTE: change IMAGE_MAX_HEIGHT, IMAGE_MAX_WIDTH and CHART_WIDTH at the beginning
         //  of this script according to filetype
+        data,
+        server,
         aop.Resource.fromLocalFile(
             './examples/spacex_example/spacex_template.pptx',
         ), // For pptx
@@ -361,8 +363,6 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
         // aop.Resource.fromLocalFile(
         //     './examples/spacex_example/spacex_template.docx',
         // ), // For docx
-        data,
-        server,
     );
 
     (await printjob.execute()).toFile('./examples/spacex_example/output');

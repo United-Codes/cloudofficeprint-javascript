@@ -54,9 +54,9 @@ describe('Tests for class RESTSource', () => {
             'username:password',
         );
         const pj = new aop.PrintJob(
-            aop.Resource.fromBase64('test_base64', 'docx'),
             data,
             serv,
+            aop.Resource.fromBase64('test_base64', 'docx'),
         );
         const pjExpected = {
             tool: 'javascript',

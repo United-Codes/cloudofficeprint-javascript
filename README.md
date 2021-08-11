@@ -56,9 +56,9 @@ const server = new aop.config.Server(
 
 // Create print job
 const printjob = new aop.PrintJob(
-    aop.Resource.fromLocalFile('PATH_TO_TEMPLATE_FILE'),
     collection,
     server,
+    aop.Resource.fromLocalFile('PATH_TO_TEMPLATE_FILE'),
 );
 
 // Asynchronously execute print job and save response to file
@@ -95,7 +95,7 @@ To check if everything works, you can run the tests.
 1. Open a terminal in the parent directory of this project, which can be found on [Github](https://github.com/United-Codes/apexofficeprint-javascript).
 2. Type in the terminal: `npm run test`
 
-In the file `printjob.test.ts`, the test for the `executeFullJson()`-function is skipped because this test needs an API to succeed. You can enable this test by remove the `.skip` on the first line (as explained in the test file). The tests make use of the [jest](https://jestjs.io/)-package.
+In the file `printjob.test.ts`, the tests for the `executeFullJson()`-function and for no input template are skipped because these tests needs an API key to succeed. You can enable these tests by removing the `.skip` on the first line (as explained in the test file itself). The tests make use of the [jest](https://jestjs.io/)-package.
 
 # ESLint
 Airbnb style guide is used in this project with some tweaks (see .eslintrc.json).

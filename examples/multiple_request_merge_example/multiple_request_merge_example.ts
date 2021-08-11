@@ -66,9 +66,9 @@ const outputFilesProm: Promise<aop.Response>[] = [];
             },
         );
         const printjob = new aop.PrintJob(
-            aop.Resource.fromLocalFile('./examples/multiple_request_merge_example/template.docx'),
             d,
             server,
+            aop.Resource.fromLocalFile('./examples/multiple_request_merge_example/template.docx'),
             conf,
         );
 
@@ -103,9 +103,9 @@ const outputFilesProm: Promise<aop.Response>[] = [];
     // As the template we pick the first PDF in the resources-list
     // The other 9 PDFs from the resources-list can be added to append_files (or prepend_files)
     const printjob = new aop.PrintJob(
-        resources[0],
         new aop.elements.Property('not_used', 'not_used'),
         server,
+        resources[0],
         undefined,
         undefined,
         undefined,
