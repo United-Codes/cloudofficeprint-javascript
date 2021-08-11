@@ -844,13 +844,13 @@ export class RadarSeries extends LineSeries {}
  * The abstract base class for a chart.
  */
 export abstract class Chart extends Element {
-    options: ChartOptions | {[key: string]: unknown} | undefined;
+    options: ChartOptions | undefined;
 
     /**
      * @param name The name of the chart.
      * @param options The options for the chart. Optional.
      */
-    constructor(name: string, options?: ChartOptions | {[key: string]: unknown}) {
+    constructor(name: string, options?: ChartOptions) {
         super(name);
         this.options = options;
     }
@@ -1322,6 +1322,7 @@ export class StockChart extends Chart {
 
 /**
  * Recursively replace the keys in a (possibly) nested dictionary with a new name.
+ * Objects with key "options" will not be modified (y-axis stays y-axis).
  * @param obj input dictionary
  * @param oldKey old name of the key
  * @param newKey new name of the key
@@ -1332,11 +1333,13 @@ function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: s
     Object.entries(result).forEach(
         ([key, value]) => {
             if (value.constructor === Object) {
-                (result as {[key: string]: unknown})[key] = replaceKeyRecursive(
-                    value,
-                    oldKey,
-                    newKey,
-                );
+                if (key !== 'options') {
+                    (result as {[key: string]: unknown})[key] = replaceKeyRecursive(
+                        value,
+                        oldKey,
+                        newKey,
+                    );
+                }
             } else if (value.constructor === Array) {
                 const newValue: object[] = [];
                 value.forEach(
@@ -1370,9 +1373,7 @@ export class CombinedChart extends Chart {
      * @param name The name of the chart.
      * @param charts Charts for the first y-axis.
      * @param secondaryCharts Charts for the secondary y-axis. Optional.
-     * @param options The options for the chart.
-     *  If not defined, the chartoptions of the first chart that has options will be used.
-     *  Optional.
+     * @param options The options for the chart. Optional.
      */
     constructor(
         name: string,
@@ -1380,31 +1381,12 @@ export class CombinedChart extends Chart {
         secondaryCharts?: Chart[],
         options?: ChartOptions,
     ) {
-        let optionsCopy: ChartOptions | {[key: string]: unknown} | undefined = options;
-        if (options === undefined) {
-            const allOptions: {[key: string]: unknown}[] = [];
-            charts.concat(secondaryCharts !== undefined ? secondaryCharts : []).forEach(
-                (chart) => {
-                    if (chart.options !== undefined) {
-                        allOptions.push(chart.options instanceof ChartOptions
-                            ? chart.options.asDict()
-                            : chart.options);
-                    }
-                },
-            );
-            allOptions.reverse().forEach(
-                (opt) => {
-                    optionsCopy = opt;
-                },
-            );
-        }
-        super(name, optionsCopy);
+        super(name, options);
         this.charts = charts;
         this.secondaryCharts = secondaryCharts;
     }
 
     /**
-     * Remove the chart options from all charts in this combined chart object.
      * Replace the y-axis with the y2-axis for the secondary charts.
      * Add the dict representation for each chart to a list and return that list.
      * @returns list containing the dict representation for each chart, after processing
@@ -1417,7 +1399,6 @@ export class CombinedChart extends Chart {
             (val) => {
                 const chartDictFull = val.asDict();
                 const chartDict = (chartDictFull as {[key: string]: object})[val.name];
-                delete (chartDict as {[key: string]: object}).options;
                 dictArray.push(chartDict);
             },
         );
@@ -1428,7 +1409,6 @@ export class CombinedChart extends Chart {
                 (val) => {
                     const chartDictFull = val.asDict();
                     const chartDict = (chartDictFull as {[key: string]: object})[val.name];
-                    delete (chartDict as {[key: string]: object}).options;
                     dictArray.push(replaceKeyRecursive(chartDict, 'y', 'y2'));
                 },
             );

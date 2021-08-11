@@ -815,6 +815,17 @@ describe('Tests for charts', () => {
                                 symbol: 'square',
                             },
                         ],
+                        options: {
+                            axis: {
+                                x: {
+                                },
+                                y: {
+                                },
+                            },
+                            backgroundColor: 'gray',
+                            backgroundOpacity: 50,
+                            width: 50,
+                        },
                         type: 'line',
                     },
                     {
@@ -854,18 +865,20 @@ describe('Tests for charts', () => {
                                 name: 'bar2',
                             },
                         ],
+                        options: {
+                            axis: {
+                                x: {
+                                },
+                                y: {
+                                },
+                            },
+                            height: 100,
+                            roundedCorners: false,
+                            width: 100,
+                        },
                         type: 'bar',
                     },
                 ],
-                options: {
-                    axis: {
-                        x: {},
-                        y: {},
-                    },
-                    width: 50,
-                    backgroundColor: 'gray',
-                    backgroundOpacity: 50,
-                },
                 type: 'multiple',
             },
         };
