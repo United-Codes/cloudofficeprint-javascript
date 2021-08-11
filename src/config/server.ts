@@ -264,7 +264,7 @@ export class Server {
     async isReachable(): Promise<boolean> {
         try {
             return await fetch(new URL('marco', this.url).href)
-                .then((res: { text: () => any; }) => res.text()) === 'polo';
+                .then((res: Response) => res.text()) === 'polo';
         } catch (error) {
             return false;
         }

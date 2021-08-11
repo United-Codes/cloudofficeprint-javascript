@@ -227,7 +227,7 @@ describe('Tests for elements', () => {
             [new aop.elements.Property('prop', 'value1'), new aop.elements.Property('prop', 'value2')],
         );
         data.add(element2);
-        let dataExpected: unknown = {
+        let dataExpected: {[key: string]: string | {[key: string]: string}[]} = {
             image1: 'url_source',
             image1_alt_text: 'alt_text',
             loop: [

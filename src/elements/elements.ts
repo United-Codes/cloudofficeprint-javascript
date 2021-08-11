@@ -310,14 +310,14 @@ export abstract class Element {
 }
 
 export class Property extends Element {
-    value: any;
+    value: unknown;
 
     /**
      * @param name the name for this property
      * @param value The value for this property. Note: the general purpose for
      *  this value-field is the value as a string, but this can be of any type, for example a dict.
      */
-    constructor(name: string, value: any) {
+    constructor(name: string, value: unknown) {
         super(name);
         this.value = value;
     }
@@ -326,7 +326,7 @@ export class Property extends Element {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: any} {
+    asDict(): {[key: string]: unknown} {
         return {
             [this.name]: this.value,
         };
@@ -358,8 +358,8 @@ export class CellStyleProperty extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: any} {
-        const result: {[key: string]: any} = {
+    asDict(): {[key: string]: unknown} {
+        const result: {[key: string]: unknown} = {
             [this.name]: this.value,
         };
 
@@ -561,7 +561,7 @@ export class Span extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: any} {
+    asDict(): {[key: string]: unknown} {
         return {
             [this.name]: this.value,
             [`${this.name}_row_span`]: this.rows,
@@ -645,8 +645,8 @@ export class StyledProperty extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: any} {
-        const result: {[key: string]: any} = {
+    asDict(): {[key: string]: unknown} {
+        const result: {[key: string]: unknown} = {
             [this.name]: this.value,
         };
 
@@ -728,8 +728,8 @@ export class Watermark extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: any} {
-        const result: {[key: string]: any} = {
+    asDict(): {[key: string]: unknown} {
+        const result: {[key: string]: unknown} = {
             [this.name]: this.value,
         };
 
@@ -1277,7 +1277,7 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection; defaults to ''
      * @returns an element collection generated from the given mapping and name
      */
-    static fromMapping(mapping: {[key: string]: string | number | boolean | {[key: string]: any}}, name: string = ''): ElementCollection {
+    static fromMapping(mapping: {[key: string]: unknown}, name: string = ''): ElementCollection {
         const resultSet = new Set<Element>();
 
         Object.entries(mapping).forEach(

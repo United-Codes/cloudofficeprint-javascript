@@ -134,7 +134,7 @@ export class PrintJob {
      * @returns dict representation of this object
      */
     asDict() {
-        let result: {[key: string]: any} = { ...STATIC_OPTS };
+        let result: {[key: string]: unknown} = { ...STATIC_OPTS };
 
         // server config goes in the upper level
         if (this.server.config) {
@@ -153,9 +153,22 @@ export class PrintJob {
         // If no template found: default docx
         if (!(Object.prototype.hasOwnProperty.call(result.output, 'output_type'))) {
             if (this.template) {
-                result.output.output_type = result.template.template_type;
+                (result.output as {
+                    [key: string]: string | number | boolean | {
+                        [key: string]: number;
+                    } | {
+                        [key: string]: string | number;
+                    };
+                })
+                    .output_type = (result.template as {[key: string]: string}).template_type;
             } else {
-                result.output.output_type = 'docx';
+                (result.output as {
+                    [key: string]: string | number | boolean | {
+                        [key: string]: number;
+                    } | {
+                        [key: string]: string | number;
+                    };
+                }).output_type = 'docx';
             }
         }
 

@@ -34,7 +34,7 @@ const planetList: aop.elements.Element[] = [];
 (async () => {
     // Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
     await new Promise<void>((resolve) => fetch('https://api.le-systeme-solaire.net/rest/bodies/')
-        .then((r: { json: () => any; }) => r.json())
+        .then((r: Response) => r.json())
         .then((json: { bodies: { [key: string]: string | number | boolean |
             { [key: string]: unknown; }; }[]; }) => {
             json.bodies.forEach(
