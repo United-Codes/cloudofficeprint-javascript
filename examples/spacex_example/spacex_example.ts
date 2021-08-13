@@ -3,7 +3,7 @@ import * as aop from '../../src/index';
 const fetch = require('node-fetch').default;
 
 // Setup AOP server
-const SERVER_URL = 'http://apexofficeprint.com/dev/';
+const SERVER_URL = 'https://api.apexofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
 const server = new aop.config.Server(
@@ -32,17 +32,27 @@ const CHART_WIDTH = 800; // pptx, xlsx
 // const CHART_WIDTH = 650; // docx
 
 // Get SpaceX data from https://docs.spacexdata.com
-let info: {[key: string]: string | number | boolean | {[key: string]: unknown}} = {};
-let rockets: {[key: string]: string | number | boolean |
-    {[key: string]: unknown} | string[]}[] = [];
-let dragons: {[key: string]: string | number | boolean |
-    {[key: string]: unknown} | string[]}[] = [];
-let launchPads: {[key: string]: string | number | boolean |
-    {[key: string]: unknown} | string[]}[] = [];
-let landingPads: {[key: string]: string | number | boolean |
-    {[key: string]: unknown} | string[]}[] = [];
-let ships: {[key: string]: string | number | boolean |
-    {[key: string]: unknown} | string[]}[] = [];
+let info: { [key: string]: string | number | boolean | { [key: string]: unknown } } = {};
+let rockets: {
+    [key: string]: string | number | boolean |
+    { [key: string]: unknown } | string[]
+}[] = [];
+let dragons: {
+    [key: string]: string | number | boolean |
+    { [key: string]: unknown } | string[]
+}[] = [];
+let launchPads: {
+    [key: string]: string | number | boolean |
+    { [key: string]: unknown } | string[]
+}[] = [];
+let landingPads: {
+    [key: string]: string | number | boolean |
+    { [key: string]: unknown } | string[]
+}[] = [];
+let ships: {
+    [key: string]: string | number | boolean |
+    { [key: string]: unknown } | string[]
+}[] = [];
 const infoProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v3/info')
     .then((r: Response) => r.json())
     .then((json: { [key: string]: string | number | boolean | { [key: string]: unknown; }; }) => {
@@ -51,36 +61,46 @@ const infoProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.co
     })); // v4 not supported
 const rocketsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/rockets')
     .then((r: Response) => r.json())
-    .then((json: { [key: string]: string | number | boolean | { [key: string]: unknown; } |
-        string[]; }[]) => {
+    .then((json: {
+        [key: string]: string | number | boolean | { [key: string]: unknown; } |
+        string[];
+    }[]) => {
         rockets = json;
         resolve();
     }));
 const dragonsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/dragons')
     .then((r: Response) => r.json())
-    .then((json: { [key: string]: string | number | boolean | string[] |
-        { [key: string]: unknown; }; }[]) => {
+    .then((json: {
+        [key: string]: string | number | boolean | string[] |
+        { [key: string]: unknown; };
+    }[]) => {
         dragons = json;
         resolve();
     }));
 const launchPadsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/launchpads')
     .then((r: Response) => r.json())
-    .then((json: { [key: string]: string | number | boolean | string[] |
-        { [key: string]: unknown; }; }[]) => {
+    .then((json: {
+        [key: string]: string | number | boolean | string[] |
+        { [key: string]: unknown; };
+    }[]) => {
         launchPads = json;
         resolve();
     }));
 const landingPadsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/landpads')
     .then((r: Response) => r.json())
-    .then((json: { [key: string]: string | number | boolean | string[] |
-        { [key: string]: unknown; }; }[]) => {
+    .then((json: {
+        [key: string]: string | number | boolean | string[] |
+        { [key: string]: unknown; };
+    }[]) => {
         landingPads = json;
         resolve();
     }));
 const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.com/v4/ships')
     .then((r: Response) => r.json())
-    .then((json: { [key: string]: string | number | boolean | string[] |
-        { [key: string]: unknown; }; }[]) => {
+    .then((json: {
+        [key: string]: string | number | boolean | string[] |
+        { [key: string]: unknown; };
+    }[]) => {
         ships = json;
         resolve();
     }));
@@ -101,7 +121,7 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
     // / Add SpaceX website as hyperlink
     const website = new aop.elements.Hyperlink(
         'spacex_website',
-        (info.links as {[key: string]: string}).website,
+        (info.links as { [key: string]: string }).website,
         'Website',
     );
     data.add(website);
@@ -265,7 +285,7 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
         (launchPad) => {
             const collec = aop.elements.ElementCollection.fromMapping(launchPad);
 
-            const img = aop.elements.Image.fromUrl('image', (launchPad.images as {[key: string]: string[]}).large[0]);
+            const img = aop.elements.Image.fromUrl('image', (launchPad.images as { [key: string]: string[] }).large[0]);
             img.maxHeight = IMAGE_MAX_HEIGHT;
             img.maxWidth = IMAGE_MAX_WIDTH;
             collec.add(img);
@@ -293,7 +313,7 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
         (landingPad) => {
             const collec = aop.elements.ElementCollection.fromMapping(landingPad);
 
-            const img = aop.elements.Image.fromUrl('image', (landingPad.images as {[key: string]: string[]}).large[0]);
+            const img = aop.elements.Image.fromUrl('image', (landingPad.images as { [key: string]: string[] }).large[0]);
             img.maxHeight = IMAGE_MAX_HEIGHT;
             img.maxWidth = IMAGE_MAX_WIDTH;
             collec.add(img);

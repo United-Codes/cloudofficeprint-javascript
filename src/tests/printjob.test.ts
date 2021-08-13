@@ -134,7 +134,7 @@ describe('Tests for class PrintJob', () => {
             ),
         );
         const server = new aop.config.Server(
-            'http://apexofficeprint.com/dev/',
+            'https://api.apexofficeprint.com/',
             new aop.config.ServerConfig('YOUR_API_KEY'), // Replace by your own API key
         );
         const printjob = new aop.PrintJob(
