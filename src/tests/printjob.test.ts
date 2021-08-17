@@ -1,33 +1,33 @@
 import { describe, test, expect } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for class PrintJob', () => {
     test('Test all options for printjob', async () => {
-        const serv: aop.config.Server = new aop.config.Server(
-            'https://api.apexofficeprint.com/',
-            new aop.config.ServerConfig('YOUR_API_KEY'),
+        const serv: cop.config.Server = new cop.config.Server(
+            'https://api.cloudofficeprint.com/',
+            new cop.config.ServerConfig('YOUR_API_KEY'),
         );
-        const prependFile = aop.Resource.fromLocalFile('./data/tests/template.docx');
+        const prependFile = cop.Resource.fromLocalFile('./data/tests/template.docx');
 
-        const template = aop.Resource.fromLocalFile('./data/tests/template.docx');
-        const templateMain = aop.Resource.fromLocalFile('./data/tests/template_prepend_append_subtemplate.docx');
+        const template = cop.Resource.fromLocalFile('./data/tests/template.docx');
+        const templateMain = cop.Resource.fromLocalFile('./data/tests/template_prepend_append_subtemplate.docx');
         const templateBase64 = template.data;
         const templateMainBase64 = templateMain.data;
 
-        const data = new aop.elements.ElementCollection('data');
-        const textTag = new aop.elements.Property('textTag1', 'test_text_tag1');
+        const data = new cop.elements.ElementCollection('data');
+        const textTag = new cop.elements.Property('textTag1', 'test_text_tag1');
         data.add(textTag);
 
-        const appendFile = aop.Resource.fromLocalFile('./data/tests/template.docx');
+        const appendFile = cop.Resource.fromLocalFile('./data/tests/template.docx');
 
         const subtemplates = {
             sub1: template,
             sub2: template,
         };
 
-        const outputConf = new aop.config.OutputConfig('pdf');
+        const outputConf = new cop.config.OutputConfig('pdf');
 
-        const printjob = new aop.PrintJob(
+        const printjob = new cop.PrintJob(
             data,
             serv,
             templateMain,
@@ -83,7 +83,7 @@ describe('Tests for class PrintJob', () => {
                     name: 'sub2',
                 },
             ],
-            javascript_sdk_version: aop.printjob.STATIC_OPTS.javascript_sdk_version,
+            javascript_sdk_version: cop.printjob.STATIC_OPTS.javascript_sdk_version,
         };
         expect(printjob.asDict()).toEqual(printjobExpected);
         // Commented out because you need an API key, but the saving to a file works as expected
@@ -112,11 +112,11 @@ describe('Tests for class PrintJob', () => {
             ],
             templates: [],
         };
-        (await aop.PrintJob.executeFullJson(
+        (await cop.PrintJob.executeFullJson(
             jsonData,
-            new aop.config.Server(
-                'https://api.apexofficeprint.com/',
-                new aop.config.ServerConfig(
+            new cop.config.Server(
+                'https://api.cloudofficeprint.com/',
+                new cop.config.ServerConfig(
                     'YOUR_API_KEY', // Replace by your own API key
                 ),
             ),
@@ -125,19 +125,19 @@ describe('Tests for class PrintJob', () => {
     // Works as expected, this test is skipped because an API key is needed
     // Remove '.skip' and enter a valid API key if you want to test this yourself
     test.skip('Test without template', async () => {
-        const collection = new aop.elements.ElementCollection();
-        collection.add(new aop.elements.Property('test_property', 'value'));
+        const collection = new cop.elements.ElementCollection();
+        collection.add(new cop.elements.Property('test_property', 'value'));
         collection.add(
-            aop.elements.Image.fromUrl(
+            cop.elements.Image.fromUrl(
                 'test_image',
-                'https://apexofficeprint.com/assets/dist/images/office-print/logo-office-print.svg',
+                'https://www.unitedcodes.com/assets/dist/images/logo-united-codes.svg',
             ),
         );
-        const server = new aop.config.Server(
-            'https://api.apexofficeprint.com/',
-            new aop.config.ServerConfig('YOUR_API_KEY'), // Replace by your own API key
+        const server = new cop.config.Server(
+            'https://api.cloudofficeprint.com/',
+            new cop.config.ServerConfig('YOUR_API_KEY'), // Replace by your own API key
         );
-        const printjob = new aop.PrintJob(
+        const printjob = new cop.PrintJob(
             collection,
             server,
         );

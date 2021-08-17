@@ -1,32 +1,32 @@
 /**
- * Custom exceptions for apexofficeprint.
+ * Custom exceptions for cloudofficeprint.
  */
 
 /**
- * The error that is thrown when the AOP server itself returns an error instead of a result.
- * It contains a user message and an encoded message to be handed to AOP support
+ * The error that is thrown when the COP server itself returns an error instead of a result.
+ * It contains a user message and an encoded message to be handed to Cloud Office Print support
  *  if they are contacted.
  */
-export class AOPError extends Error {
+export class COPError extends Error {
     userMessage: string;
     contactSupportMessage: string;
     encodedMessage: string;
 
     /**
-     * @param fullMessage the full error message received from the AOP server
+     * @param fullMessage the full error message received from the COP server
      */
     constructor(fullMessage: string) {
-        const split = AOPError.splitMessage(fullMessage);
+        const split = COPError.splitMessage(fullMessage);
         super(split[0]);
         [this.userMessage,
-            this.contactSupportMessage,
-            this.encodedMessage] = AOPError.splitMessage(fullMessage);
+        this.contactSupportMessage,
+        this.encodedMessage] = COPError.splitMessage(fullMessage);
     }
 
     /**
-     * Split the AOP server error message into different parts:
+     * Split the COP server error message into different parts:
      *  user message, contact support message and encoded message.
-     * @param message AOP server error message
+     * @param message COP server error message
      * @returns an array with the split messages
      */
     static splitMessage(message: string): string[] {

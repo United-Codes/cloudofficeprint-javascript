@@ -3,7 +3,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 const fetch = require('node-fetch').default;
 
 /**
- * This class defines an IP-enabled printer to use with the AOP server.
+ * This class defines an IP-enabled printer to use with the COP server.
  */
 export class Printer {
     location: string;
@@ -14,10 +14,10 @@ export class Printer {
     /**
      * @param location IP address of the printer
      * @param version IPP version
-     * @param requester the name of the requester; defaults to 'AOP'
-     * @param jobName the name of the print job; defaults to 'AOP'
+     * @param requester the name of the requester; defaults to 'Cloud Office Print'
+     * @param jobName the name of the print job; defaults to 'Cloud Office Print'
      */
-    constructor(location: string, version: string, requester: string = 'AOP', jobName: string = 'AOP') {
+    constructor(location: string, version: string, requester: string = 'Cloud Office Print', jobName: string = 'Cloud Office Print') {
         this.location = location;
         this.version = version;
         this.requester = requester;
@@ -39,18 +39,18 @@ export class Printer {
 }
 
 /**
- * Command object with a single command for the AOP server.
+ * Command object with a single command for the COP server.
  */
 export class Command {
     command: string;
-    parameters: {[key: string]: string} | undefined;
+    parameters: { [key: string]: string } | undefined;
 
     /**
      * @param command The name of the command to execute.
      *  This command should be present in the aop_config.json file.
      * @param parameters The parameters for the command. Optional.
      */
-    constructor(command: string, parameters?: {[key: string]: string}) {
+    constructor(command: string, parameters?: { [key: string]: string }) {
         this.command = command;
         this.parameters = parameters;
     }
@@ -59,8 +59,8 @@ export class Command {
      * The dict representation of this command.
      * @returns The dict representation of this command.
      */
-    asDict(): {[key: string]: string | {[key: string]: string}} {
-        const result: {[key: string]: string | {[key: string]: string}} = {
+    asDict(): { [key: string]: string | { [key: string]: string } } {
+        const result: { [key: string]: string | { [key: string]: string } } = {
             command: this.command,
         };
 
@@ -76,8 +76,8 @@ export class Command {
      *  This is used for pre-conversion commands.
      * @returns dict representation of this command, with 'pre' prepended to the keys
      */
-    asDictPre(): {[key: string]: string | {[key: string]: string}} {
-        const result: {[key: string]: string | {[key: string]: string}} = {};
+    asDictPre(): { [key: string]: string | { [key: string]: string } } {
+        const result: { [key: string]: string | { [key: string]: string } } = {};
 
         // prepend 'pre_' to the keys
         Object.entries(this.asDict()).forEach(
@@ -92,8 +92,8 @@ export class Command {
      *  This is used for post-process, post-conversion and post-merge commands.
      * @returns dict representation of this command, with 'post' prepended to the keys
      */
-    asDictPost(): {[key: string]: string | {[key: string]: string}} {
-        const result: {[key: string]: string | {[key: string]: string}} = {};
+    asDictPost(): { [key: string]: string | { [key: string]: string } } {
+        const result: { [key: string]: string | { [key: string]: string } } = {};
 
         // prepend 'post_' to the keys
         Object.entries(this.asDict()).forEach(
@@ -119,8 +119,10 @@ export class Commands {
      * @param postProcess Command to run after the given request has been processed
      *  but before returning back the output file. Optional
      * @param postProcessReturn Whether to return the output or not.
-     *  Note this output is AOP's output and not the post process command output. Optional.
-     * @param postProcessDeleteDelay AOP deletes the file provided to the command directly after
+     *  Note this output is Cloud Office Print's output and not the post process command output.
+     *  Optional.
+     * @param postProcessDeleteDelay Cloud Office Print deletes the file provided to
+     *  the command directly after
      *  executing it. This can be delayed with this option. Integer in milliseconds. Optional.
      * @param preConversion Command to run before conversion. Optional.
      * @param postConversion Command to run after conversion. Optional.
@@ -146,14 +148,24 @@ export class Commands {
      * The dict representation of this Commands object.
      * @returns The dict representation of this Commands object.
      */
-    asDict(): {[key: string]: {[key: string]: string |
-        {[key: string]: string} | boolean | number}} {
-        const result: {[key: string]: {[key: string]: string |
-            {[key: string]: string} | boolean | number}} = {};
+    asDict(): {
+        [key: string]: {
+            [key: string]: string |
+            { [key: string]: string } | boolean | number
+        }
+    } {
+        const result: {
+            [key: string]: {
+                [key: string]: string |
+                { [key: string]: string } | boolean | number
+            }
+        } = {};
 
         if (this.postProcess !== undefined) {
-            const toAdd: {[key: string]: string |
-                {[key: string]: string} | boolean | number} = this.postProcess.asDict();
+            const toAdd: {
+                [key: string]: string |
+                { [key: string]: string } | boolean | number
+            } = this.postProcess.asDict();
             if (this.postProcessReturn !== undefined) {
                 toAdd.return_output = this.postProcessReturn;
             }
@@ -187,54 +199,58 @@ export class Commands {
  */
 export class ServerConfig {
     apiKey: string | undefined;
-    logging: {[key: string]: object} | undefined;
+    logging: { [key: string]: object } | undefined;
     printer: Printer | undefined;
     commands: Commands | undefined;
-    proxies: {[key: string]: string} | undefined;
-    aopRemoteDebug: boolean;
+    proxies: { [key: string]: string } | undefined;
+    copRemoteDebug: boolean;
 
     /**
-     * @param apiKey API key to use for communicating with an AOP server. Optional.
+     * @param apiKey API key to use for communicating with an COP server. Optional.
      * @param logging Additional key/value pairs you would like to have logged into server
      *  printjob.log on the server. (To be used with the --enable_printlog server flag). Optional.
      * @param printer IP printer to use with this server.
-     *  See the AOP docs for more info and supported printers. Optional.
+     *  See the Cloud Office Print docs for more info and supported printers. Optional.
      * @param commands Configuration for the various command hooks offered. Optional.
      * @param proxies Proxies for contacting the server URL, [as a dictionary](https://requests.readthedocs.io/en/master/user/advanced/#proxies). Optional.
-     * @param aopRemoteDebug If True: The AOP server will log the JSON into the database
-     *  and this can bee seen when logged into apexofficeprint.com. Defaults to False.
+     * @param copRemoteDebug If True: The COP server will log the JSON into the database
+     *  and this can bee seen when logged into cloudofficeprint.com. Defaults to False.
      */
     constructor(
         apiKey?: string,
-        logging?: {[key: string]: object},
+        logging?: { [key: string]: object },
         printer?: Printer,
         commands?: Commands,
-        proxies?: {[key: string]: string},
-        aopRemoteDebug: boolean = false,
+        proxies?: { [key: string]: string },
+        copRemoteDebug: boolean = false,
     ) {
         this.apiKey = apiKey;
         this.logging = logging;
         this.printer = printer;
         this.commands = commands;
         this.proxies = proxies;
-        this.aopRemoteDebug = aopRemoteDebug;
+        this.copRemoteDebug = copRemoteDebug;
     }
 
     /**
      * The dict representation of these server configurations.
      * @returns The dict representation of these server configurations.
      */
-    asDict(): {[key: string]: string | {[key: string]: object} |
+    asDict(): {
+        [key: string]: string | { [key: string]: object } |
         { location: string; version: string; requester: string; jobName: string; } |
-        { [key: string]: string | number | boolean | { [key: string]: string; }; }} {
-        let result: {[key: string]: string | {[key: string]: object} |
+        { [key: string]: string | number | boolean | { [key: string]: string; }; }
+    } {
+        let result: {
+            [key: string]: string | { [key: string]: object } |
             { location: string; version: string; requester: string; jobName: string; } |
-            { [key: string]: string | number | boolean | { [key: string]: string; }; }} = {};
+            { [key: string]: string | number | boolean | { [key: string]: string; }; }
+        } = {};
 
         if (this.apiKey !== undefined) result.api_key = this.apiKey;
         if (this.logging !== undefined) result.logging = this.logging;
         if (this.printer !== undefined) result.ipp = this.printer.asDict();
-        if (this.aopRemoteDebug) result.aop_remote_debug = 'Yes';
+        if (this.copRemoteDebug) result.aop_remote_debug = 'Yes';
         if (this.commands !== undefined) result = { ...result, ...this.commands.asDict() };
 
         return result;
@@ -242,7 +258,7 @@ export class ServerConfig {
 }
 
 /**
- * This config class is used to specify the AOP server to interact with.
+ * This config class is used to specify the COP server to interact with.
  */
 export class Server {
     url: string;
@@ -309,7 +325,7 @@ export class Server {
 
     /**
      * Sends a GET request to server-url/supported_template_mimetypes.
-     * @returns JSON of the mime types of templates that AOP supports.
+     * @returns JSON of the mime types of templates that Cloud Office Print supports.
      */
     async getSupportedTemplateMimetypes(): Promise<JSON> {
         await this.raiseIfUnreachable();
@@ -367,9 +383,9 @@ export class Server {
 
     /**
      * Sends a GET request to server-url/version.
-     * @returns the version of AOP that the server runs.
+     * @returns the version of Cloud Office Print that the server runs.
      */
-    async getVersionAop(): Promise<string> {
+    async getVersionCop(): Promise<string> {
         await this.raiseIfUnreachable();
         let proxy;
         if (this.config && this.config.proxies) {

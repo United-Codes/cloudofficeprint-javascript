@@ -1,24 +1,24 @@
 import { describe, test, expect } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Test for loops', () => {
     test(`Test ForEach, also serves as the tests for Labels, ForEachSlide,
     ForEachInline, ForEachHorizontal and ForEachTableRow.`, () => {
-        const element1 = aop.elements.ElementCollection.fromMapping(
+        const element1 = cop.elements.ElementCollection.fromMapping(
             {
                 a: 1,
                 b: 2,
                 c: 3,
             },
         );
-        const element2 = aop.elements.ElementCollection.fromMapping(
+        const element2 = cop.elements.ElementCollection.fromMapping(
             {
                 a: 4,
                 b: 5,
                 c: 6,
             },
         );
-        const loop = new aop.elements.ForEach(
+        const loop = new cop.elements.ForEach(
             'loop_name',
             [element1, element2],
         );
@@ -39,7 +39,7 @@ describe('Test for loops', () => {
         expect(loop.asDict()).toEqual(loopExpected);
     });
     test('Test ForEachSheet', () => {
-        let element1 = aop.elements.ElementCollection.fromMapping(
+        let element1 = cop.elements.ElementCollection.fromMapping(
             {
                 sheet_name: 'John Dulles',
                 sheet_dynamic_print_area: true,
@@ -71,7 +71,7 @@ describe('Test for loops', () => {
                 ],
             },
         );
-        let element2 = aop.elements.ElementCollection.fromMapping(
+        let element2 = cop.elements.ElementCollection.fromMapping(
             {
                 sheet_name: 'William Hartsfield',
                 cust_first_name: 'William',
@@ -108,12 +108,12 @@ describe('Test for loops', () => {
                 ],
             },
         );
-        const loop1 = new aop.elements.ForEachSheet(
+        const loop1 = new cop.elements.ForEachSheet(
             'customers',
             [element1, element2],
         );
 
-        element1 = aop.elements.ElementCollection.fromMapping(
+        element1 = cop.elements.ElementCollection.fromMapping(
             {
                 sheet_dynamic_print_area: true,
                 cust_first_name: 'John',
@@ -144,7 +144,7 @@ describe('Test for loops', () => {
                 ],
             },
         );
-        element2 = aop.elements.ElementCollection.fromMapping(
+        element2 = cop.elements.ElementCollection.fromMapping(
             {
                 cust_first_name: 'William',
                 cust_last_name: 'Hartsfield',
@@ -180,7 +180,7 @@ describe('Test for loops', () => {
                 ],
             },
         );
-        const loop2 = new aop.elements.ForEachSheet(
+        const loop2 = new cop.elements.ForEachSheet(
             'customers',
 
             {

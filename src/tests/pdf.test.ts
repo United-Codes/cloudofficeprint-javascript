@@ -1,9 +1,9 @@
 import { describe, test, expect } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for pdf elements', () => {
-    test('Test aop_pdf_texts element', () => {
-        const pdfText11 = new aop.elements.PDFText(
+    test('Test cop_pdf_texts element', () => {
+        const pdfText11 = new cop.elements.PDFText(
             'test1_1',
             50,
             60,
@@ -15,7 +15,7 @@ describe('Tests for pdf elements', () => {
             'blue',
             12,
         );
-        const pdfText12 = new aop.elements.PDFText(
+        const pdfText12 = new cop.elements.PDFText(
             'test1_2',
             20,
             30,
@@ -27,7 +27,7 @@ describe('Tests for pdf elements', () => {
             'red',
             10,
         );
-        const pdfText2 = new aop.elements.PDFText(
+        const pdfText2 = new cop.elements.PDFText(
             'test2',
             60,
             70,
@@ -39,7 +39,7 @@ describe('Tests for pdf elements', () => {
             '#FF00FF',
             15,
         );
-        const pdfTextAll = new aop.elements.PDFText(
+        const pdfTextAll = new cop.elements.PDFText(
             'test_all',
             20,
             30,
@@ -51,7 +51,7 @@ describe('Tests for pdf elements', () => {
             'red',
             20,
         );
-        const pdfTexts = new aop.elements.PDFTexts(
+        const pdfTexts = new cop.elements.PDFTexts(
             [pdfText11, pdfText12, pdfText2, pdfTextAll],
         );
         const pdfTextsExpected = {
@@ -112,8 +112,8 @@ describe('Tests for pdf elements', () => {
         };
         expect(pdfTexts.asDict()).toEqual(pdfTextsExpected);
     });
-    test('Test aop_pdf_images element', () => {
-        const pdfImage11 = new aop.elements.PDFImage(
+    test('Test cop_pdf_images element', () => {
+        const pdfImage11 = new cop.elements.PDFImage(
             'test1_1',
             50,
             60,
@@ -123,7 +123,7 @@ describe('Tests for pdf elements', () => {
             50,
             100,
         );
-        const pdfImage12 = new aop.elements.PDFImage(
+        const pdfImage12 = new cop.elements.PDFImage(
             'test1_2',
             60,
             70,
@@ -133,7 +133,7 @@ describe('Tests for pdf elements', () => {
             75,
             75,
         );
-        const pdfImage2 = new aop.elements.PDFImage(
+        const pdfImage2 = new cop.elements.PDFImage(
             'test2',
             20,
             30,
@@ -143,7 +143,7 @@ describe('Tests for pdf elements', () => {
             100,
             100,
         );
-        const pdfImageAll = new aop.elements.PDFImage(
+        const pdfImageAll = new cop.elements.PDFImage(
             'test_all',
             25,
             26,
@@ -153,7 +153,7 @@ describe('Tests for pdf elements', () => {
             20,
             50,
         );
-        const pdfImages = new aop.elements.PDFImages(
+        const pdfImages = new cop.elements.PDFImages(
             [pdfImage11, pdfImage12, pdfImage2, pdfImageAll],
         );
         const pdfImagesExpected = {
@@ -206,8 +206,8 @@ describe('Tests for pdf elements', () => {
         };
         expect(pdfImages.asDict()).toEqual(pdfImagesExpected);
     });
-    test('Test aop_pdf_forms element', () => {
-        const form = new aop.elements.PDFFormData(
+    test('Test cop_pdf_forms element', () => {
+        const form = new cop.elements.PDFFormData(
             {
                 f_1: 5,
                 f_2: 'test',

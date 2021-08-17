@@ -1,9 +1,9 @@
 import { describe, expect, test } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for codes', () => {
     test('Test class BarCode, a subclass of class Code', () => {
-        const barcode = new aop.elements.BarCode(
+        const barcode = new cop.elements.BarCode(
             'name',
             'data',
             'ean13',
@@ -33,7 +33,7 @@ describe('Tests for codes', () => {
         expect(barcode.asDict()).toEqual(barcodeExpected);
     });
     test('Test styling options for qr-code class', () => {
-        const qr = new aop.elements.QRCode(
+        const qr = new cop.elements.QRCode(
             'name',
             'data',
             'qrcode',
@@ -97,7 +97,7 @@ describe('Tests for codes', () => {
         expect(qr.asDict()).toEqual(qrExpected);
     });
     test('Test qr code wifi', () => {
-        const wifi = new aop.elements.WiFiQRCode(
+        const wifi = new cop.elements.WiFiQRCode(
             'name',
             'ssid',
             'WPA',
@@ -114,7 +114,7 @@ describe('Tests for codes', () => {
         expect(wifi.asDict()).toEqual(wifiExpected);
     });
     test('Test qr code telephone', () => {
-        const telephoneNumber = new aop.elements.TelephoneNumberQRCode(
+        const telephoneNumber = new cop.elements.TelephoneNumberQRCode(
             'name',
             '+32_test_number',
         );
@@ -125,7 +125,7 @@ describe('Tests for codes', () => {
         expect(telephoneNumber.asDict()).toEqual(telephoneNumberExpected);
     });
     test('Test qr code email', () => {
-        const email = new aop.elements.EmailQRCode(
+        const email = new cop.elements.EmailQRCode(
             'name',
             'receiver',
             'cc',
@@ -144,7 +144,7 @@ describe('Tests for codes', () => {
         expect(email.asDict()).toEqual(emailExpected);
     });
     test('Test qr code sms', () => {
-        const sms = new aop.elements.SMSQRCode(
+        const sms = new cop.elements.SMSQRCode(
             'name',
             'receiver',
             'sms_body',
@@ -157,7 +157,7 @@ describe('Tests for codes', () => {
         expect(sms.asDict()).toEqual(smsExpected);
     });
     test('Test qr code url', () => {
-        const url = new aop.elements.URLQRCode(
+        const url = new cop.elements.URLQRCode(
             'name',
             'url',
         );
@@ -168,7 +168,7 @@ describe('Tests for codes', () => {
         expect(url.asDict()).toEqual(urlExpected);
     });
     test('Test qr code v card', () => {
-        const vCard = new aop.elements.VCardQRCode(
+        const vCard = new cop.elements.VCardQRCode(
             'name',
             'first_name',
             'last_name',
@@ -185,7 +185,7 @@ describe('Tests for codes', () => {
         expect(vCard.asDict()).toEqual(vCardExpected);
     });
     test('Test qr code me card', () => {
-        const meCard = new aop.elements.MeCardQRCode(
+        const meCard = new cop.elements.MeCardQRCode(
             'name',
             'first_name',
             'last_name',
@@ -214,7 +214,7 @@ describe('Tests for codes', () => {
         expect(meCard.asDict()).toEqual(meCardExpected);
     });
     test('Test qr code geolocation', () => {
-        const geolocation = new aop.elements.GeolocationQRCode(
+        const geolocation = new cop.elements.GeolocationQRCode(
             'name',
             'latitude',
             'longitude',
@@ -229,7 +229,7 @@ describe('Tests for codes', () => {
         expect(geolocation.asDict()).toEqual(geolocationExpected);
     });
     test('Test qr code event', () => {
-        const event = new aop.elements.EventQRCode(
+        const event = new cop.elements.EventQRCode(
             'name',
             'summary',
             'startdate',

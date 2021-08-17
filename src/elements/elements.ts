@@ -8,7 +8,7 @@ export abstract class CellStyle {
      * @returns the dict representation of this cell style
      */
     asDict(propertyName: string) {
-        const result: {[key: string]: string | number | boolean} = {};
+        const result: { [key: string]: string | number | boolean } = {};
         Object.entries(this.asDictSuffixes()).forEach(
             ([key, val]) => { result[`${propertyName}${key}`] = val; },
         );
@@ -23,7 +23,7 @@ export abstract class CellStyle {
      */
     // Disable eslint warning, because this is an abstract base class
     // eslint-disable-next-line class-methods-use-this
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
         return {};
     }
 }
@@ -51,8 +51,8 @@ export class CellStyleDocx extends CellStyle {
      * @returns the dict representation of the suffixes that need to be appended to the name of
      *  this property in this CellStyle object's dict representation
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
             result._cell_background_color = this.cellBackgroundColor;
@@ -192,8 +192,8 @@ export class CellStyleXlsx extends CellStyle {
      * @returns the dict representation of the suffixes that need to be appended to the name of
      *  this property in this CellStyle object's dict representation
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.cellLocked !== undefined) {
             result._cell_locked = this.cellLocked;
@@ -326,7 +326,7 @@ export class Property extends Element {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: unknown} {
+    asDict(): { [key: string]: unknown } {
         return {
             [this.name]: this.value,
         };
@@ -358,8 +358,8 @@ export class CellStyleProperty extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: unknown} {
-        const result: {[key: string]: unknown} = {
+    asDict(): { [key: string]: unknown } {
+        const result: { [key: string]: unknown } = {
             [this.name]: this.value,
         };
 
@@ -454,8 +454,8 @@ export class Hyperlink extends Element {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string} {
-        const result: {[key: string]: string} = {
+    asDict(): { [key: string]: string } {
+        const result: { [key: string]: string } = {
             [this.name]: this.url,
         };
 
@@ -498,8 +498,8 @@ export class TableOfContents extends Element {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {};
+    asDict(): { [key: string]: string | number } {
+        const result: { [key: string]: string | number } = {};
 
         if (this.title !== undefined) {
             result[`${this.name}_title`] = this.title;
@@ -561,7 +561,7 @@ export class Span extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: unknown} {
+    asDict(): { [key: string]: unknown } {
         return {
             [this.name]: this.value,
             [`${this.name}_row_span`]: this.rows,
@@ -645,8 +645,8 @@ export class StyledProperty extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: unknown} {
-        const result: {[key: string]: unknown} = {
+    asDict(): { [key: string]: unknown } {
+        const result: { [key: string]: unknown } = {
             [this.name]: this.value,
         };
 
@@ -728,8 +728,8 @@ export class Watermark extends Property {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: unknown} {
-        const result: {[key: string]: unknown} = {
+    asDict(): { [key: string]: unknown } {
+        const result: { [key: string]: unknown } = {
             [this.name]: this.value,
         };
 
@@ -783,8 +783,8 @@ export class D3Code extends Element {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | unknown} {
-        const result: {[key: string]: string | unknown} = {
+    asDict(): { [key: string]: string | unknown } {
+        const result: { [key: string]: string | unknown } = {
             [this.name]: this.code,
         };
 
@@ -805,9 +805,9 @@ export class D3Code extends Element {
 }
 
 /**
- * Date options for an AOPChart (different from ChartDateOptions in charts.ts).
+ * Date options for an COPChart (different from ChartDateOptions in charts.ts).
  */
-export class AOPChartDateOptions {
+export class COPChartDateOptions {
     format: string | undefined;
     unit: string | undefined;
     step: number | string | undefined;
@@ -828,8 +828,8 @@ export class AOPChartDateOptions {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {};
+    asDict(): { [key: string]: string | number } {
+        const result: { [key: string]: string | number } = {};
 
         if (this.format !== undefined) {
             result.format = this.format;
@@ -846,12 +846,12 @@ export class AOPChartDateOptions {
 }
 
 /**
- * The class for an AOPChart. This is used for chart templating.
+ * The class for an COPChart. This is used for chart templating.
  */
-export class AOPChart extends Element {
+export class COPChart extends Element {
     xData: string[];
-    yDatas: {[key: string]: (string | number | {[key: string]: string | number})[]};
-    date: AOPChartDateOptions | undefined;
+    yDatas: { [key: string]: (string | number | { [key: string]: string | number })[] };
+    date: COPChartDateOptions | undefined;
     title: string | undefined;
     xTitle: string | undefined;
     yTitle: string | undefined;
@@ -874,9 +874,9 @@ export class AOPChart extends Element {
     constructor(
         name: string,
         xData: string[],
-        yDatas: (string | number | {[key: string]: string | number})[][] |
-            {[key: string]: (string | number | {[key: string]: string | number})[]},
-        date?: AOPChartDateOptions,
+        yDatas: (string | number | { [key: string]: string | number })[][] |
+        { [key: string]: (string | number | { [key: string]: string | number })[] },
+        date?: COPChartDateOptions,
         title?: string,
         xTitle?: string,
         yTitle?: string,
@@ -913,36 +913,38 @@ export class AOPChart extends Element {
      */
     asDict(): {
         [key: string]:
+        {
+            [key: string]:
             {
                 [key: string]:
-                    {
-                        [key: string]:
-                            string[] |
-                            string |
-                            {
-                                [key: string]:
-                                    string |
-                                    number
-                            }
-                    } |
-                    {
-                        [key: string]:
-                            {
-                                [key: string]:
-                                    string |
-                                    (string | number | {[key: string]: string | number})[]
-                            }[] |
-                            string
-                    } |
+                string[] |
+                string |
+                {
+                    [key: string]:
                     string |
-                    {
-                        [key: string]:
-                            string
-                    }
+                    number
+                }
+            } |
+            {
+                [key: string]:
+                {
+                    [key: string]:
+                    string |
+                    (string | number | { [key: string]: string | number })[]
+                }[] |
+                string
+            } |
+            string |
+            {
+                [key: string]:
+                string
             }
-            } {
-        const ySeries: {name: string, data: (string | number |
-            {[key: string]: string | number})[]}[] = [];
+        }
+    } {
+        const ySeries: {
+            name: string, data: (string | number |
+            { [key: string]: string | number })[]
+        }[] = [];
         Object.entries(this.yDatas).forEach(
             (e) => {
                 ySeries.push({ name: e[0], data: e[1] });
@@ -951,30 +953,30 @@ export class AOPChart extends Element {
 
         const result: {
             [key: string]:
-                {
-                    [key: string]:
-                        string[] |
-                        string |
-                        {
-                            [key: string]:
-                                string |
-                                number
-                        }
-                } |
-                {
-                    [key: string]:
-                        {
-                            [key: string]:
-                                string |
-                                (string | number | {[key: string]: string | number})[]
-                        }[] |
-                        string
-                } |
+            {
+                [key: string]:
+                string[] |
                 string |
                 {
                     [key: string]:
-                        string
+                    string |
+                    number
                 }
+            } |
+            {
+                [key: string]:
+                {
+                    [key: string]:
+                    string |
+                    (string | number | { [key: string]: string | number })[]
+                }[] |
+                string
+            } |
+            string |
+            {
+                [key: string]:
+                string
+            }
         } = {
             xAxis: {
                 data: this.xData,
@@ -989,38 +991,38 @@ export class AOPChart extends Element {
         }
         if (this.date !== undefined) {
             (result.xAxis as {
+                [key: string]:
+                string[] |
+                string |
+                {
                     [key: string]:
-                        string[] |
-                        string |
-                        {
-                            [key: string]:
-                                string |
-                                number
-                        }
-                }).date = this.date.asDict();
+                    string |
+                    number
+                }
+            }).date = this.date.asDict();
         }
         if (this.xTitle !== undefined) {
             (result.xAxis as {
+                [key: string]:
+                string[] |
+                string |
+                {
                     [key: string]:
-                        string[] |
-                        string |
-                        {
-                            [key: string]:
-                                string |
-                                number
-                        }
-                }).title = this.xTitle;
+                    string |
+                    number
+                }
+            }).title = this.xTitle;
         }
         if (this.yTitle !== undefined) {
             (result.yAxis as {
+                [key: string]:
+                {
                     [key: string]:
-                        {
-                            [key: string]:
-                                string |
-                                (string | number | {[key: string]: string | number})[]
-                        }[] |
-                        string
-                }).title = this.yTitle;
+                    string |
+                    (string | number | { [key: string]: string | number })[]
+                }[] |
+                string
+            }).title = this.yTitle;
         }
         if (this.x2Title !== undefined) {
             result.x2Axis = {
@@ -1135,8 +1137,8 @@ export class TextBox extends Element {
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {
+    asDict(): { [key: string]: string | number } {
+        const result: { [key: string]: string | number } = {
             [this.name]: this.value,
         };
 
@@ -1226,7 +1228,7 @@ export class ElementCollection extends Element {
      * @returns dictionary representation of this Element
      */
     asDict() {
-        let result: {[key: string]: unknown} = {};
+        let result: { [key: string]: unknown } = {};
 
         this.elements.forEach(
             (el) => {
@@ -1277,7 +1279,7 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection; defaults to ''
      * @returns an element collection generated from the given mapping and name
      */
-    static fromMapping(mapping: {[key: string]: unknown}, name: string = ''): ElementCollection {
+    static fromMapping(mapping: { [key: string]: unknown }, name: string = ''): ElementCollection {
         const resultSet = new Set<Element>();
 
         Object.entries(mapping).forEach(

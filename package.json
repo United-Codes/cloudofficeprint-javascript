@@ -1,7 +1,7 @@
 {
   "name": "apexofficeprint",
   "version": "21.1",
-  "description": "JavaScript interface for APEX Office Print",
+  "description": "JavaScript interface for Cloud Office Print",
   "main": "dist/src/index.js",
   "types": "dist/src",
   "scripts": {

@@ -8,11 +8,12 @@ export abstract class Code extends Element {
     type: string;
 
     /**
-     * @param name The name for this Code object (AOP tag).
+     * @param name The name for this Code object (Cloud Office Print tag).
      * @param data The data for this Code object.
      * @param type For the different types of QR-codes and barcodes, we refer to the
-     *  [AOP documentation](https://www.apexofficeprint.com/docs/#barcode-qrcode-tags).
+     *  [Cloud Office Print documentation](https://www.cloudofficeprint.com/docs/#barcode-qrcode-tags).
      */
+    // TODO: change website for type argument?
     constructor(name: string, data: string, type: string) {
         super(name);
         this.data = data;
@@ -33,8 +34,8 @@ export abstract class Code extends Element {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = {};
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {};
 
         if (this.type !== undefined) {
             result._type = this.type;
@@ -47,8 +48,8 @@ export abstract class Code extends Element {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = {
+    asDict(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {
             [this.name]: this.data,
         };
 
@@ -77,10 +78,10 @@ export class BarCode extends Code {
     extraOptions: string | undefined;
 
     /**
-     * @param name The name for this Code object (AOP tag).
+     * @param name The name for this Code object (Cloud Office Print tag).
      * @param data The data for this Code object.
      * @param type For the different types of QR-codes and barcodes, we refer to the
-     *  [AOP documentation](https://www.apexofficeprint.com/docs/#barcode-qrcode-tags).
+     *  [Cloud Office Print documentation](https://www.cloudofficeprint.com/docs/#barcode-qrcode-tags).
      * @param height The height for the generated code. The default is 200 for QR,
      *  50 for the rest. Optional.
      * @param width The width for the generated code. The default is 200. Optional.
@@ -106,6 +107,7 @@ export class BarCode extends Code {
      *  Please visit https://github.com/bwipp/postscriptbarcode/wiki/Symbologies-Reference
      *  for all the options. Optional.
      */
+    // TODO: change website for type argument?
     constructor(
         name: string,
         data: string,
@@ -138,8 +140,8 @@ export class BarCode extends Code {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.height !== undefined) {
             result._height = this.height;
@@ -204,11 +206,12 @@ export class QRCode extends Code {
     autoColorLight: string | undefined;
 
     /**
-     * @param name The name for this Code object (AOP tag).
+     * @param name The name for this Code object (Cloud Office Print tag).
      * @param data The data for this Code object.
      * @param type For the different types of QR-codes and barcodes, we refer to the
-     *  [AOP documentation](https://www.apexofficeprint.com/docs/#barcode-qrcode-tags).
+     *  [Cloud Office Print documentation](https://www.cloudofficeprint.com/docs/#barcode-qrcode-tags).
      */
+    // TODO: change website for type argument?
     constructor(name: string, data: string, type: string) {
         super(name, data, type);
     }
@@ -375,8 +378,8 @@ export class QRCode extends Code {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.dotscale !== undefined) {
             result._qr_dotscale = this.dotscale;
@@ -467,7 +470,7 @@ export class WiFiQRCode extends QRCode {
     wifiHidden: boolean | undefined;
 
     /**
-     * @param name The name of this Code object (AOP tag)
+     * @param name The name of this Code object (Cloud Office Print tag)
      * @param ssid The ssid of the WiFi
      * @param wifiEncryption The encryption type
      * @param wifiPassword The WiFi password Optional.
@@ -492,8 +495,8 @@ export class WiFiQRCode extends QRCode {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.wifiPassword !== undefined) {
             result._wifi_password = this.wifiPassword;
@@ -514,7 +517,7 @@ export class WiFiQRCode extends QRCode {
  */
 export class TelephoneNumberQRCode extends QRCode {
     /**
-     * @param name The name of this Code object (AOP tag)
+     * @param name The name of this Code object (Cloud Office Print tag)
      * @param number The telephone number
      */
     constructor(name: string, number: string) {
@@ -532,7 +535,7 @@ export class EmailQRCode extends QRCode {
     body: string | undefined;
 
     /**
-     * @param name The name of this Code object (AOP tag)
+     * @param name The name of this Code object (Cloud Office Print tag)
      * @param receiver The receiver of the email
      * @param cc The cc for the email. Optional.
      * @param bcc The bcc for the email. Optional.
@@ -560,8 +563,8 @@ export class EmailQRCode extends QRCode {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.cc !== undefined) {
             result._email_cc = this.cc;
@@ -587,7 +590,7 @@ export class SMSQRCode extends QRCode {
     smsBody: string | undefined;
 
     /**
-     * @param name The name of this Code object (AOP tag)
+     * @param name The name of this Code object (Cloud Office Print tag)
      * @param receiver The telephone number for the receiver of the sms
      * @param smsBody The body of the sms. Optional.
      */
@@ -606,8 +609,8 @@ export class SMSQRCode extends QRCode {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.smsBody !== undefined) {
             result._sms_body = this.smsBody;
@@ -622,7 +625,7 @@ export class SMSQRCode extends QRCode {
  */
 export class URLQRCode extends QRCode {
     /**
-     * @param name The name of this Code object (AOP tag)
+     * @param name The name of this Code object (Cloud Office Print tag)
      * @param url The URL
      */
     constructor(name: string, url: string) {
@@ -639,7 +642,7 @@ export class VCardQRCode extends QRCode {
     website: string | undefined;
 
     /**
-     * @param name The name for this Code object (AOP tag).
+     * @param name The name for this Code object (Cloud Office Print tag).
      * @param firstName The first name.
      * @param lastName The last name. Optional.
      * @param email The email. Optional.
@@ -664,8 +667,8 @@ export class VCardQRCode extends QRCode {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.lastName !== undefined) {
             result._vcard_last_name = this.lastName;
@@ -696,7 +699,7 @@ export class MeCardQRCode extends QRCode {
     notes: string | undefined;
 
     /**
-     * @param name The name for this Code object (AOP tag).
+     * @param name The name for this Code object (Cloud Office Print tag).
      * @param firstName The first name.
      * @param lastName The last name. Optional.
      * @param nickname The nickname. Optional.
@@ -739,8 +742,8 @@ export class MeCardQRCode extends QRCode {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.lastName !== undefined) {
             result._me_card_last_name = this.lastName;
@@ -782,7 +785,7 @@ export class GeolocationQRCode extends QRCode {
     altitude: string | undefined;
 
     /**
-     * @param name The name for this Code object (AOP tag).
+     * @param name The name for this Code object (Cloud Office Print tag).
      * @param latitude The latitude.
      * @param longitude The longitude. Optional.
      * @param altitude The altitude. Optional.
@@ -804,8 +807,8 @@ export class GeolocationQRCode extends QRCode {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.longitude !== undefined) {
             result._geolocation_longitude = this.longitude;
@@ -826,7 +829,7 @@ export class EventQRCode extends QRCode {
     enddate: string | undefined;
 
     /**
-     * @param name The name for this Code object (AOP tag).
+     * @param name The name for this Code object (Cloud Office Print tag).
      * @param summary The summary.
      * @param startdate The start date. Optional.
      * @param enddate The end date. Optional.
@@ -848,8 +851,8 @@ export class EventQRCode extends QRCode {
      * @returns the suffixes that need to be appended to the keys of the
      *  dict representation of this Code object
      */
-    asDictSuffixes(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = super.asDictSuffixes();
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.startdate !== undefined) {
             result._event_startdate = this.startdate;

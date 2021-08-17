@@ -1,10 +1,10 @@
 import * as fs from 'fs';
 import { describe, test, expect } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for class Resource', () => {
     test('Test resource base64', () => {
-        const resource = aop.Resource.fromBase64('dummy', 'docx');
+        const resource = cop.Resource.fromBase64('dummy', 'docx');
         const resourceExpected = {
             file: 'dummy',
             template_type: 'docx',
@@ -15,9 +15,9 @@ describe('Tests for class Resource', () => {
         const localPath = './data/tests/template.docx';
         await new Promise<void>((resolve) => fs.readFile(localPath, (err, data) => {
             if (err) throw err;
-            const resource = aop.Resource.fromRaw(data, 'docx');
+            const resource = cop.Resource.fromRaw(data, 'docx');
             const resourceExpected = {
-                file: aop.ownUtils.rawToBase64(data),
+                file: cop.ownUtils.rawToBase64(data),
                 template_type: 'docx',
             };
             expect(resource.templateDict()).toEqual(resourceExpected);
@@ -26,11 +26,11 @@ describe('Tests for class Resource', () => {
     });
     test('Test resource local file', async () => {
         const localPath = './data/tests/template.docx';
-        const resource = aop.Resource.fromLocalFile(localPath);
+        const resource = cop.Resource.fromLocalFile(localPath);
         await new Promise<void>((resolve) => fs.readFile(localPath, (err, data) => {
             if (err) throw err;
             const resourceExpected = {
-                file: aop.ownUtils.rawToBase64(data),
+                file: cop.ownUtils.rawToBase64(data),
                 template_type: 'docx',
             };
             expect(resource.templateDict()).toEqual(resourceExpected);
@@ -38,7 +38,7 @@ describe('Tests for class Resource', () => {
         }));
     });
     test('Test resource server path', () => {
-        const resource = aop.Resource.fromServerPath('dummy/path.docx');
+        const resource = cop.Resource.fromServerPath('dummy/path.docx');
         const resourceExpected = {
             filename: 'dummy/path.docx',
             template_type: 'docx',
@@ -46,7 +46,7 @@ describe('Tests for class Resource', () => {
         expect(resource.templateDict()).toEqual(resourceExpected);
     });
     test('Test resource url', () => {
-        const resource = aop.Resource.fromUrl('dummy_url', 'docx');
+        const resource = cop.Resource.fromUrl('dummy_url', 'docx');
         const resourceExpected = {
             template_type: 'docx',
             url: 'dummy_url',
@@ -65,7 +65,7 @@ describe('Tests for class Resource', () => {
             </body>
             </html> 
         `;
-        const resource = aop.Resource.fromHtml(htmlString, true);
+        const resource = cop.Resource.fromHtml(htmlString, true);
         const resourceExpected = {
             template_type: 'html',
             orientation: 'landscape',

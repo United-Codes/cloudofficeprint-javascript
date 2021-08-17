@@ -1,9 +1,9 @@
 import { describe, test, expect } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for class RESTSource', () => {
     test('Test rest source rest', () => {
-        const data = new aop.elements.RESTSourceREST(
+        const data = new cop.elements.RESTSourceREST(
             'endpoint_url',
             'GET',
             '',
@@ -23,7 +23,7 @@ describe('Tests for class RESTSource', () => {
         expect(data.asDict()).toEqual(dataExpected);
     });
     test('Test rest source graphql', () => {
-        const data = new aop.elements.RESTSourceGraphQL(
+        const data = new cop.elements.RESTSourceGraphQL(
             'endpoint_url',
             'test_query',
             'output_file',
@@ -41,11 +41,11 @@ describe('Tests for class RESTSource', () => {
         expect(data.asDict()).toEqual(dataExpected);
     });
     test('Test rest source printjob', () => {
-        const serv: aop.config.Server = new aop.config.Server(
-            'https://api.apexofficeprint.com/',
-            new aop.config.ServerConfig('YOUR_API_KEY'),
+        const serv: cop.config.Server = new cop.config.Server(
+            'https://api.cloudofficeprint.com/',
+            new cop.config.ServerConfig('YOUR_API_KEY'),
         );
-        const data = new aop.elements.RESTSourceREST(
+        const data = new cop.elements.RESTSourceREST(
             'endpoint_url',
             'GET',
             '',
@@ -53,14 +53,14 @@ describe('Tests for class RESTSource', () => {
             [{ 'Content-Type': 'application/json' }],
             'username:password',
         );
-        const pj = new aop.PrintJob(
+        const pj = new cop.PrintJob(
             data,
             serv,
-            aop.Resource.fromBase64('test_base64', 'docx'),
+            cop.Resource.fromBase64('test_base64', 'docx'),
         );
         const pjExpected = {
             tool: 'javascript',
-            javascript_sdk_version: aop.printjob.STATIC_OPTS.javascript_sdk_version,
+            javascript_sdk_version: cop.printjob.STATIC_OPTS.javascript_sdk_version,
             api_key: serv.config!.apiKey,
             output: {
                 output_converter: 'libreoffice',

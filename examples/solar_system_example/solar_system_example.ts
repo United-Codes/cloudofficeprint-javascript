@@ -3,34 +3,34 @@
  * The SpaceX example `spacex_example.ts` is a more advanced example using this approach.
  */
 
-import * as aop from '../../src/index';
+import * as cop from '../../src/index';
 
 const fetch = require('node-fetch').default;
 
-// Setup AOP server
-const SERVER_URL = 'https://api.apexofficeprint.com/';
+// Setup COP server
+const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
-const server = new aop.config.Server(
+const server = new cop.config.Server(
     SERVER_URL,
-    new aop.config.ServerConfig(API_KEY),
+    new cop.config.ServerConfig(API_KEY),
 );
 
 // Create the main element collection that contains all data
-const data = new aop.elements.ElementCollection();
+const data = new cop.elements.ElementCollection();
 
 // Add the title to the data
-data.add(new aop.elements.Property('main_title', 'The solar system'));
+data.add(new cop.elements.Property('main_title', 'The solar system'));
 
 // Add the source for the data
-data.add(new aop.elements.Hyperlink(
+data.add(new cop.elements.Hyperlink(
     'data_source',
     'https://api.le-systeme-solaire.net/rest/bodies/',
     'Data source',
 ));
 
 // Process data: we only want planets
-const planetList: aop.elements.Element[] = [];
+const planetList: cop.elements.Element[] = [];
 (async () => {
     // Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
     await new Promise<void>((resolve) => fetch('https://api.le-systeme-solaire.net/rest/bodies/')
@@ -46,7 +46,7 @@ const planetList: aop.elements.Element[] = [];
                     [key: string]: string | number | boolean | { [key: string]: unknown }
                 }) => {
                     if (body.isPlanet) {
-                        const collec = aop.elements.ElementCollection.fromMapping(body);
+                        const collec = cop.elements.ElementCollection.fromMapping(body);
                         planetList.push(collec);
                     }
                 },
@@ -54,14 +54,14 @@ const planetList: aop.elements.Element[] = [];
             resolve();
         }));
 
-    const planets = new aop.elements.ForEach('planets', planetList);
+    const planets = new cop.elements.ForEach('planets', planetList);
     data.add(planets);
 
     // Add planet radius chart to data
     const color = new Array(planetList.length);
     color[0] = '#7298d4'; // Specify the color for the first pie slice
 
-    const radiusSeries = new aop.elements.PieSeries(
+    const radiusSeries = new cop.elements.PieSeries(
         Array.from((planets.asDict().planets as { [key: string]: string | number }[]).map(
             (planet) => planet.name,
         )),
@@ -72,7 +72,7 @@ const planetList: aop.elements.Element[] = [];
         color,
     );
 
-    const radiusChartOptions = new aop.elements.ChartOptions(
+    const radiusChartOptions = new cop.elements.ChartOptions(
         undefined,
         undefined,
         undefined,
@@ -83,14 +83,14 @@ const planetList: aop.elements.Element[] = [];
 
     radiusChartOptions.setLegend(
         undefined,
-        new aop.elements.ChartTextStyle(
+        new cop.elements.ChartTextStyle(
             undefined,
             undefined,
             'black',
         ),
     );
 
-    const radiusChart = new aop.elements.Pie3DChart(
+    const radiusChart = new cop.elements.Pie3DChart(
         'planet_radius_chart',
         [radiusSeries],
         radiusChartOptions,
@@ -98,10 +98,13 @@ const planetList: aop.elements.Element[] = [];
     data.add(radiusChart);
 
     // Create printjob
-    const printjob = new aop.PrintJob(
+    const printjob = new cop.PrintJob(
         data,
         server,
-        // aop.Resource.fromLocalFile(
+        cop.Resource.fromLocalFile(
+            './examples/solar_system_example/pptx/solar_system_template.pptx',
+        ), // pptx
+        // cop.Resource.fromLocalFile(
         //     './examples/solar_system_example/docx/solar_system_template.docx',
         // ), // docx
     );

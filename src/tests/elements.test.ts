@@ -1,10 +1,10 @@
 import { describe, test, expect } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for elements', () => {
     test(`Test for Property. Also serves as a test for Html, RightToLeft, FootNote,
     Raw, Formula, PageBreak and MarkdownContent.`, () => {
-        const prop = new aop.elements.Property(
+        const prop = new cop.elements.Property(
             'name',
             'value',
         );
@@ -14,11 +14,11 @@ describe('Tests for elements', () => {
         expect(prop.asDict()).toEqual(propExpected);
     });
     test('Test cell style property docx', () => {
-        const style = new aop.elements.CellStyleDocx(
+        const style = new cop.elements.CellStyleDocx(
             '#eb4034',
             10,
         );
-        const styleProperty = new aop.elements.CellStyleProperty(
+        const styleProperty = new cop.elements.CellStyleProperty(
             'name',
             'value',
             style,
@@ -31,7 +31,7 @@ describe('Tests for elements', () => {
         expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
     });
     test('Test cell style property xlsx', () => {
-        const style = new aop.elements.CellStyleXlsx(
+        const style = new cop.elements.CellStyleXlsx(
             true,
             false,
             '#ff0000',
@@ -59,7 +59,7 @@ describe('Tests for elements', () => {
             'justify',
             45,
         );
-        const styleProperty = new aop.elements.CellStyleProperty(
+        const styleProperty = new cop.elements.CellStyleProperty(
             'name',
             'value',
             style,
@@ -96,7 +96,7 @@ describe('Tests for elements', () => {
         expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
     });
     test('Test hyperlink', () => {
-        const hyperlink = new aop.elements.Hyperlink(
+        const hyperlink = new cop.elements.Hyperlink(
             'hyperlink',
             'url',
             'hyperlink_text',
@@ -108,7 +108,7 @@ describe('Tests for elements', () => {
         expect(hyperlink.asDict()).toEqual(hyperlinkExpected);
     });
     test('Test table of content', () => {
-        const toc = new aop.elements.TableOfContents(
+        const toc = new cop.elements.TableOfContents(
             'table',
             'contents',
             4,
@@ -122,7 +122,7 @@ describe('Tests for elements', () => {
         expect(toc.asDict()).toEqual(tocExpected);
     });
     test('Test span', () => {
-        const span = new aop.elements.Span(
+        const span = new cop.elements.Span(
             'span_name',
             'This cell will span 2 rows and 3 columns',
             3,
@@ -136,7 +136,7 @@ describe('Tests for elements', () => {
         expect(span.asDict()).toEqual(spanExpected);
     });
     test('Test styled property', () => {
-        const styledProp = new aop.elements.StyledProperty(
+        const styledProp = new cop.elements.StyledProperty(
             'cust_first_name',
             'DemoCustomerName',
             'NanumMyeongjo',
@@ -162,7 +162,7 @@ describe('Tests for elements', () => {
         expect(styledProp.asDict()).toEqual(styledPropExpected);
     });
     test('Test watermark', () => {
-        const watermark = new aop.elements.Watermark(
+        const watermark = new cop.elements.Watermark(
             'wm_name',
             'wm_text',
             'red',
@@ -184,7 +184,7 @@ describe('Tests for elements', () => {
         expect(watermark.asDict()).toEqual(watermarkExpected);
     });
     test('Test d3 code', () => {
-        const d3 = new aop.elements.D3Code(
+        const d3 = new cop.elements.D3Code(
             'd3_code',
             'test_code',
             ['a', 1, 2, 3, 'b'],
@@ -196,7 +196,7 @@ describe('Tests for elements', () => {
         expect(d3.asDict()).toEqual(d3Expected);
     });
     test('Test text box', () => {
-        const tbox = new aop.elements.TextBox(
+        const tbox = new cop.elements.TextBox(
             'tbox_name',
             'tbox_value',
             'Arial',
@@ -218,16 +218,16 @@ describe('Tests for elements', () => {
         expect(tbox.asDict()).toEqual(tboxExpected);
     });
     test('Test element collection', () => {
-        const data = new aop.elements.ElementCollection('data'); // Name doesn't get used
-        const element1 = aop.elements.Image.fromUrl('image1', 'url_source');
+        const data = new cop.elements.ElementCollection('data'); // Name doesn't get used
+        const element1 = cop.elements.Image.fromUrl('image1', 'url_source');
         element1.altText = 'alt_text';
         data.add(element1);
-        const element2 = new aop.elements.ForEach(
+        const element2 = new cop.elements.ForEach(
             'loop',
-            [new aop.elements.Property('prop', 'value1'), new aop.elements.Property('prop', 'value2')],
+            [new cop.elements.Property('prop', 'value1'), new cop.elements.Property('prop', 'value2')],
         );
         data.add(element2);
-        let dataExpected: {[key: string]: string | {[key: string]: string}[]} = {
+        let dataExpected: { [key: string]: string | { [key: string]: string }[] } = {
             image1: 'url_source',
             image1_alt_text: 'alt_text',
             loop: [
@@ -254,7 +254,7 @@ describe('Tests for elements', () => {
         };
         expect(data.asDict()).toEqual(dataExpected);
 
-        const collection = aop.elements.ElementCollection.elementToElementCollection(
+        const collection = cop.elements.ElementCollection.elementToElementCollection(
             element1,
             'test_name', // Doesn't get used
         );
@@ -264,5 +264,5 @@ describe('Tests for elements', () => {
         };
         expect(collection.asDict()).toEqual(collectionExpected);
     });
-    // AOP charts get tested in charts.test.ts
+    // COP charts get tested in charts.test.ts
 });

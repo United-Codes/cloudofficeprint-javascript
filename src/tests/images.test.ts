@@ -1,9 +1,9 @@
 import { describe, test, expect } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for images', () => {
     test('Test image', () => {
-        const image = new aop.elements.Image(
+        const image = new cop.elements.Image(
             'image1',
             'url_source',
             50,

@@ -1,9 +1,9 @@
 import { describe, test, expect } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for config', () => {
     test('Test PDFOptions', () => {
-        const pdfOpts = new aop.config.PDFOptions(
+        const pdfOpts = new cop.config.PDFOptions(
             'test_pw',
             'test_watermark',
             500,
@@ -23,7 +23,7 @@ describe('Tests for config', () => {
             true,
         );
         pdfOpts.setPageMarginAt(6, 'top');
-        const conf = new aop.config.OutputConfig('pdf', undefined, undefined, undefined, undefined, pdfOpts);
+        const conf = new cop.config.OutputConfig('pdf', undefined, undefined, undefined, undefined, pdfOpts);
         const confExpected = {
             output_type: 'pdf',
             output_encoding: 'raw',
@@ -54,7 +54,7 @@ describe('Tests for config', () => {
         expect(conf.asDict()).toEqual(confExpected);
     });
     test('Test CsvOptions', () => {
-        const csvOptions = new aop.config.CsvOptions(
+        const csvOptions = new cop.config.CsvOptions(
             'textDelim',
             'fieldSep',
             5,
@@ -67,7 +67,7 @@ describe('Tests for config', () => {
         expect(csvOptions.asDict()).toEqual(csvOptionsExpected);
     });
     test('Test printer', () => {
-        const printer = new aop.config.Printer(
+        const printer = new cop.config.Printer(
             'location',
             'version',
             'requester',
@@ -83,7 +83,7 @@ describe('Tests for config', () => {
     });
     test('Test cloud access for output file: OAuthToken, AWSToken, FTPToken and SFTPToken', () => {
         // OAuthToken
-        const oAuthToken = aop.config.CloudAccessToken.fromOAuth('dropbox', 'dummy_token');
+        const oAuthToken = cop.config.CloudAccessToken.fromOAuth('dropbox', 'dummy_token');
         const oAuthTokenExpected = {
             output_location: 'dropbox',
             cloud_access_token: 'dummy_token',
@@ -91,7 +91,7 @@ describe('Tests for config', () => {
         expect(oAuthToken.asDict()).toEqual(oAuthTokenExpected);
 
         // AWSToken
-        const awsToken = aop.config.CloudAccessToken.fromAWS('AWS_access_key_id', 'AWS_secter_access_key');
+        const awsToken = cop.config.CloudAccessToken.fromAWS('AWS_access_key_id', 'AWS_secter_access_key');
         const awsTokenExpected = {
             output_location: 'aws_s3',
             cloud_access_token: {
@@ -102,7 +102,7 @@ describe('Tests for config', () => {
         expect(awsToken.asDict()).toEqual(awsTokenExpected);
 
         // FTPToken & SFTPToken
-        const ftpToken = aop.config.CloudAccessToken.fromFTP('host_name', 35, 'dummy_user', 'dummy_pw');
+        const ftpToken = cop.config.CloudAccessToken.fromFTP('host_name', 35, 'dummy_user', 'dummy_pw');
         const ftpCloudAccessToken = {
             host: 'host_name',
             port: 35,
@@ -113,7 +113,7 @@ describe('Tests for config', () => {
             output_location: 'ftp',
             cloud_access_token: ftpCloudAccessToken,
         };
-        const sftpToken = aop.config.CloudAccessToken.fromSFTP('host_name', 35, 'dummy_user', 'dummy_pw');
+        const sftpToken = cop.config.CloudAccessToken.fromSFTP('host_name', 35, 'dummy_user', 'dummy_pw');
         const sftpTokenExpected = {
             output_location: 'sftp',
             cloud_access_token: ftpCloudAccessToken,
@@ -123,11 +123,11 @@ describe('Tests for config', () => {
     });
     test('Test post-process, conversion and merge commands', () => {
         // post-process
-        const postProcessCommand = new aop.config.Command(
+        const postProcessCommand = new cop.config.Command(
             'echo_post',
             { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
         );
-        const postProcessCommands = new aop.config.Commands(
+        const postProcessCommands = new cop.config.Commands(
             postProcessCommand,
             false,
             1500,
@@ -143,15 +143,15 @@ describe('Tests for config', () => {
         expect(postProcessCommands.asDict()).toEqual(postProcessExpected);
 
         // conversion
-        const preConversionCommand = new aop.config.Command(
+        const preConversionCommand = new cop.config.Command(
             'echo_pre',
             { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
         );
-        const postConversionCommand = new aop.config.Command(
+        const postConversionCommand = new cop.config.Command(
             'echo_post',
             { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
         );
-        const conversionCommands = new aop.config.Commands(
+        const conversionCommands = new cop.config.Commands(
             undefined,
             undefined,
             undefined,
@@ -169,11 +169,11 @@ describe('Tests for config', () => {
         expect(conversionCommands.asDict()).toEqual(conversionExpected);
 
         // merge
-        const postMergeCommand = new aop.config.Command(
+        const postMergeCommand = new cop.config.Command(
             'echo_post',
             { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
         );
-        const postMergeCommands = new aop.config.Commands(
+        const postMergeCommands = new cop.config.Commands(
             undefined,
             undefined,
             undefined,
@@ -190,9 +190,9 @@ describe('Tests for config', () => {
         expect(postMergeCommands.asDict()).toEqual(postMergeExpected);
     });
     test('Test route paths', async () => {
-        const serv: aop.config.Server = new aop.config.Server(
-            'https://api.apexofficeprint.com/',
-            new aop.config.ServerConfig('YOUR_API_KEY'),
+        const serv: cop.config.Server = new cop.config.Server(
+            'https://api.cloudofficeprint.com/',
+            new cop.config.ServerConfig('YOUR_API_KEY'),
         );
         expect(await serv.isReachable()).toBeTruthy();
         expect(typeof await serv.getVersionSoffice()).toBe('string');
@@ -201,6 +201,6 @@ describe('Tests for config', () => {
         expect(typeof await serv.getSupportedOutputMimetypes('docx')).toBe('object');
         expect(typeof await serv.getSupportedPrependMimetypes()).toBe('object');
         expect(typeof await serv.getSupportedAppendMimetypes()).toBe('object');
-        expect(typeof await serv.getVersionAop()).toBe('string');
+        expect(typeof await serv.getVersionCop()).toBe('string');
     });
 });

@@ -15,7 +15,7 @@ export class PDFOptions {
     passwordProtectionFlag: number | undefined;
     lockForm: boolean | undefined;
     copies: number | undefined;
-    pageMargin: number | {[key: string]: number} | undefined
+    pageMargin: number | { [key: string]: number } | undefined
     landscape: boolean | undefined;
     pageFormat: string | undefined;
     merge: boolean | undefined;
@@ -69,7 +69,7 @@ export class PDFOptions {
         passwordProtectionFlag?: number,
         lockForm?: boolean,
         copies?: number,
-        pageMargin?: number | {[key: string]: number},
+        pageMargin?: number | { [key: string]: number },
         landscape?: boolean,
         pageFormat?: string,
         merge?: boolean,
@@ -100,8 +100,8 @@ export class PDFOptions {
      * The dict representation of these PDF options.
      * @returns the dict representation of these PDF options
      */
-    asDict(): {[key: string]: string | number | boolean | {[key: string]: number}} {
-        const result: {[key: string]: string | number | boolean | {[key: string]: number}} = {};
+    asDict(): { [key: string]: string | number | boolean | { [key: string]: number } } {
+        const result: { [key: string]: string | number | boolean | { [key: string]: number } } = {};
 
         if (this.readPassword !== undefined) {
             result.output_read_password = this.readPassword;
@@ -134,11 +134,11 @@ export class PDFOptions {
             result.output_copies = this.copies;
         }
         if (this.pageMargin !== undefined) {
-            // For AOP versions later than 21.1.1, output_page_margin will also be supported
+            // For Cloud Office Print versions later than 21.1.1, output_page_margin will also be supported
             result.page_margin = this.pageMargin;
         }
         if (this.landscape !== undefined) {
-            // For AOP versions later than 21.1.1, output_page_orientation will also be supported
+            // For Cloud Office Print versions later than 21.1.1, output_page_orientation will also be supported
             result.page_orientation = this.pageOrientation();
         }
         if (this.pageFormat !== undefined) {

@@ -29,7 +29,7 @@ export abstract class CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): {[key: string]: string | {[key: string]: string | number}} {
+    asDict(): { [key: string]: string | { [key: string]: string | number } } {
         return {
             output_location: this.service,
         };
@@ -65,8 +65,8 @@ export abstract class CloudAccessToken {
 
     /**
      * Create a token from FTP info.
-     * When an argument is / defaults to None, no data about it is sent to the AOP server.
-     * The AOP server will then fill in default values.
+     * When an argument is / defaults to None, no data about it is sent to the COP server.
+     * The COP server will then fill in default values.
      * @param host host name or IP address
      * @param port port to use; optional
      * @param user username; optional
@@ -79,8 +79,8 @@ export abstract class CloudAccessToken {
 
     /**
      * Create a token from SFTP info.
-     * When an argument is / defaults to None, no data about it is sent to the AOP server.
-     * The AOP server will then fill in default values.
+     * When an argument is / defaults to None, no data about it is sent to the COP server.
+     * The COP server will then fill in default values.
      * @param host host name or IP address
      * @param port port to use; optional
      * @param user username; optional
@@ -113,8 +113,8 @@ export class OAuthToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): {[key: string]: string | {[key: string]: string | number}} {
-        const result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
+    asDict(): { [key: string]: string | { [key: string]: string | number } } {
+        const result: { [key: string]: string | { [key: string]: string | number } } = super.asDict();
         result.cloud_access_token = this.token;
         return result;
     }
@@ -141,8 +141,8 @@ export class AWSToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): {[key: string]: string | {[key: string]: string | number}} {
-        const result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
+    asDict(): { [key: string]: string | { [key: string]: string | number } } {
+        const result: { [key: string]: string | { [key: string]: string | number } } = super.asDict();
         result.cloud_access_token = {
             access_key: this.keyId,
             secret_access_key: this.secretKey,
@@ -183,8 +183,8 @@ export class FTPToken extends CloudAccessToken {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): {[key: string]: string | {[key: string]: string | number}} {
-        const cloudAccessToken: {[key: string]: string | number } = {
+    asDict(): { [key: string]: string | { [key: string]: string | number } } {
+        const cloudAccessToken: { [key: string]: string | number } = {
             host: this.host,
         };
 
@@ -198,7 +198,7 @@ export class FTPToken extends CloudAccessToken {
             cloudAccessToken.password = this.password;
         }
 
-        const result: {[key: string]: string | {[key: string]: string | number}} = super.asDict();
+        const result: { [key: string]: string | { [key: string]: string | number } } = super.asDict();
         result.cloud_access_token = cloudAccessToken;
         return result;
     }

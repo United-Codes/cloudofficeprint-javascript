@@ -1,18 +1,18 @@
-import * as aop from '../../src/index';
+import * as cop from '../../src/index';
 
 const fetch = require('node-fetch').default;
 
-// Setup AOP server
-const SERVER_URL = 'https://api.apexofficeprint.com/';
+// Setup COP server
+const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
-const server = new aop.config.Server(
+const server = new cop.config.Server(
     SERVER_URL,
-    new aop.config.ServerConfig(API_KEY),
+    new cop.config.ServerConfig(API_KEY),
 );
 
 // Create data object that contains all the data needed to fill in the template
-const data = new aop.elements.ElementCollection();
+const data = new cop.elements.ElementCollection();
 
 function shortenDescription(input: string): string {
     /**
@@ -107,7 +107,7 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
 
 (async () => {
     // Add data source hyperlink
-    const dataSource = new aop.elements.Hyperlink(
+    const dataSource = new cop.elements.Hyperlink(
         'data_source',
         'https://docs.spacexdata.com',
         'Data source',
@@ -116,10 +116,10 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
 
     // Add information about SpaceX
     await infoProm;
-    data.addAll(aop.elements.ElementCollection.fromMapping(info));
+    data.addAll(cop.elements.ElementCollection.fromMapping(info));
 
     // / Add SpaceX website as hyperlink
-    const website = new aop.elements.Hyperlink(
+    const website = new cop.elements.Hyperlink(
         'spacex_website',
         (info.links as { [key: string]: string }).website,
         'Website',
@@ -128,38 +128,38 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
 
     // Add rocket data
     // / Add rockets description
-    const rocketsDescription = new aop.elements.Property('rockets_description', 'Data about the rockets built by SpaceX');
+    const rocketsDescription = new cop.elements.Property('rockets_description', 'Data about the rockets built by SpaceX');
     data.add(rocketsDescription);
 
     // / Add rocket data to a list
-    const rocketList: aop.elements.Element[] = [];
+    const rocketList: cop.elements.Element[] = [];
 
     // / Add rocket images, wikipedia hyperlink and shortened description for each rocket
     await rocketsProm;
     rockets.forEach(
         (rocket) => {
-            const collec = aop.elements.ElementCollection.fromMapping(rocket);
+            const collec = cop.elements.ElementCollection.fromMapping(rocket);
 
-            const img = aop.elements.Image.fromUrl('image', (rocket.flickr_images as string[])[0]);
+            const img = cop.elements.Image.fromUrl('image', (rocket.flickr_images as string[])[0]);
             img.maxHeight = IMAGE_MAX_HEIGHT;
             img.maxWidth = IMAGE_MAX_WIDTH;
             collec.add(img);
 
-            const hyper = new aop.elements.Hyperlink(
+            const hyper = new cop.elements.Hyperlink(
                 'wikipedia',
                 rocket.wikipedia as string,
                 'Wikipedia',
             );
             collec.add(hyper);
 
-            const shortDescription = new aop.elements.Property('description', shortenDescription(rocket.description as string));
+            const shortDescription = new cop.elements.Property('description', shortenDescription(rocket.description as string));
             collec.add(shortDescription); // Overwrites the current description
 
             rocketList.push(collec);
         },
     );
 
-    const rocketData = new aop.elements.ForEach('rockets', rocketList);
+    const rocketData = new cop.elements.ForEach('rockets', rocketList);
     data.add(rocketData);
 
     // / Add rocket chart
@@ -173,15 +173,15 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
         },
     );
 
-    const costSeries = new aop.elements.ColumnSeries(
+    const costSeries = new cop.elements.ColumnSeries(
         x,
         costY,
         'Cost per launch',
         '#087c6c',
     );
 
-    const rocketsChartOptions = new aop.elements.ChartOptions(
-        new aop.elements.ChartAxisOptions(
+    const rocketsChartOptions = new cop.elements.ChartOptions(
+        new cop.elements.ChartAxisOptions(
             undefined,
             undefined,
             undefined,
@@ -189,13 +189,13 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
             'Rocket',
             undefined,
             undefined,
-            new aop.elements.ChartTextStyle(
+            new cop.elements.ChartTextStyle(
                 undefined,
                 undefined,
                 'black',
             ),
         ),
-        new aop.elements.ChartAxisOptions(
+        new cop.elements.ChartAxisOptions(
             undefined,
             undefined,
             undefined,
@@ -203,7 +203,7 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
             'Cost ($)',
             undefined,
             undefined,
-            new aop.elements.ChartTextStyle(
+            new cop.elements.ChartTextStyle(
                 undefined,
                 undefined,
                 'black',
@@ -222,14 +222,14 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
 
     rocketsChartOptions.setLegend(
         undefined,
-        new aop.elements.ChartTextStyle(
+        new cop.elements.ChartTextStyle(
             undefined,
             undefined,
             'black',
         ),
     );
 
-    const rocketsChart = new aop.elements.ColumnChart(
+    const rocketsChart = new cop.elements.ColumnChart(
         'rockets_chart',
         [costSeries],
         rocketsChartOptions,
@@ -239,122 +239,122 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
 
     // Add dragons data
     // / Add dragons description
-    data.add(new aop.elements.Property('dragons_description', 'Data about the dragon capsules of SpaceX'));
+    data.add(new cop.elements.Property('dragons_description', 'Data about the dragon capsules of SpaceX'));
 
     // / Add dragon data to a list
-    const dragonList: aop.elements.Element[] = [];
+    const dragonList: cop.elements.Element[] = [];
 
     // / Add dragon images, wikipedia hyperlink and shortened description for each dragon
     await dragonsProm;
     dragons.forEach(
         (dragon) => {
-            const collec = aop.elements.ElementCollection.fromMapping(dragon);
+            const collec = cop.elements.ElementCollection.fromMapping(dragon);
 
-            const img = aop.elements.Image.fromUrl('image', (dragon.flickr_images as string[])[0]);
+            const img = cop.elements.Image.fromUrl('image', (dragon.flickr_images as string[])[0]);
             img.maxHeight = IMAGE_MAX_HEIGHT;
             img.maxWidth = IMAGE_MAX_WIDTH;
             collec.add(img);
 
-            const hyper = new aop.elements.Hyperlink(
+            const hyper = new cop.elements.Hyperlink(
                 'wikipedia',
                 dragon.wikipedia as string,
                 'Wikipedia',
             );
             collec.add(hyper);
 
-            const shortDescription = new aop.elements.Property('description', shortenDescription(dragon.description as string));
+            const shortDescription = new cop.elements.Property('description', shortenDescription(dragon.description as string));
             collec.add(shortDescription); // Overwrites the current description
 
             dragonList.push(collec);
         },
     );
 
-    const dragonData = new aop.elements.ForEach('dragons', dragonList);
+    const dragonData = new cop.elements.ForEach('dragons', dragonList);
     data.add(dragonData);
 
     // Add launch pads data
     // / Add launch pads description
-    data.add(new aop.elements.Property('launch_pads_description', "Data about SpaceX's launch pads"));
+    data.add(new cop.elements.Property('launch_pads_description', "Data about SpaceX's launch pads"));
 
     // / Add launch pad data to a list
-    const launchPadList: aop.elements.Element[] = [];
+    const launchPadList: cop.elements.Element[] = [];
 
     // / Add launch pad images, wikipedia hyperlink and shortened description for each launch_pad
     await launchPadsProm;
     launchPads.forEach(
         (launchPad) => {
-            const collec = aop.elements.ElementCollection.fromMapping(launchPad);
+            const collec = cop.elements.ElementCollection.fromMapping(launchPad);
 
-            const img = aop.elements.Image.fromUrl('image', (launchPad.images as { [key: string]: string[] }).large[0]);
+            const img = cop.elements.Image.fromUrl('image', (launchPad.images as { [key: string]: string[] }).large[0]);
             img.maxHeight = IMAGE_MAX_HEIGHT;
             img.maxWidth = IMAGE_MAX_WIDTH;
             collec.add(img);
 
-            const shortDescription = new aop.elements.Property('details', shortenDescription(launchPad.details as string));
+            const shortDescription = new cop.elements.Property('details', shortenDescription(launchPad.details as string));
             collec.add(shortDescription); // Overwrites the current description
 
             launchPadList.push(collec);
         },
     );
 
-    const launchPadData = new aop.elements.ForEach('launch_pads', launchPadList);
+    const launchPadData = new cop.elements.ForEach('launch_pads', launchPadList);
     data.add(launchPadData);
 
     // Add landing pads data
     // / Add landing pads description
-    data.add(new aop.elements.Property('landing_pads_description', "Data about SpaceX's landing pads"));
+    data.add(new cop.elements.Property('landing_pads_description', "Data about SpaceX's landing pads"));
 
     // / Add landing pad data to a list
-    const landingPadList: aop.elements.Element[] = [];
+    const landingPadList: cop.elements.Element[] = [];
 
     // / Add landing pad images, wikipedia hyperlink and shortened description for each landing pad
     await landingPadsProm;
     landingPads.forEach(
         (landingPad) => {
-            const collec = aop.elements.ElementCollection.fromMapping(landingPad);
+            const collec = cop.elements.ElementCollection.fromMapping(landingPad);
 
-            const img = aop.elements.Image.fromUrl('image', (landingPad.images as { [key: string]: string[] }).large[0]);
+            const img = cop.elements.Image.fromUrl('image', (landingPad.images as { [key: string]: string[] }).large[0]);
             img.maxHeight = IMAGE_MAX_HEIGHT;
             img.maxWidth = IMAGE_MAX_WIDTH;
             collec.add(img);
 
-            const hyper = new aop.elements.Hyperlink(
+            const hyper = new cop.elements.Hyperlink(
                 'wikipedia',
                 landingPad.wikipedia as string,
                 'Wikipedia',
             );
             collec.add(hyper);
 
-            const shortDescription = new aop.elements.Property('details', shortenDescription(landingPad.details as string));
+            const shortDescription = new cop.elements.Property('details', shortenDescription(landingPad.details as string));
             collec.add(shortDescription); // Overwrites the current description
 
             landingPadList.push(collec);
         },
     );
 
-    const landingPadData = new aop.elements.ForEach('landing_pads', landingPadList);
+    const landingPadData = new cop.elements.ForEach('landing_pads', landingPadList);
 
     data.add(landingPadData);
 
     // Add ships data
     // / Add ships description
-    data.add(new aop.elements.Property('ships_description', 'Data about the ships that assist SpaceX launches, including ASDS drone ships, tugs, fairing recovery ships, and various support ships'));
+    data.add(new cop.elements.Property('ships_description', 'Data about the ships that assist SpaceX launches, including ASDS drone ships, tugs, fairing recovery ships, and various support ships'));
 
     // / Add ship data to a list
-    const shipList: aop.elements.Element[] = [];
+    const shipList: cop.elements.Element[] = [];
 
     // / Add ship images and website hyperlink for each ship
     await shipsProm;
     ships.forEach(
         (ship) => {
-            const collec = aop.elements.ElementCollection.fromMapping(ship);
+            const collec = cop.elements.ElementCollection.fromMapping(ship);
 
-            const img = aop.elements.Image.fromUrl('image', ship.image as string);
+            const img = cop.elements.Image.fromUrl('image', ship.image as string);
             img.maxHeight = IMAGE_MAX_HEIGHT;
             img.maxWidth = IMAGE_MAX_WIDTH;
             collec.add(img);
 
-            const hyper = new aop.elements.Hyperlink(
+            const hyper = new cop.elements.Hyperlink(
                 'website',
                 ship.link as string,
                 'Website',
@@ -365,22 +365,22 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
         },
     );
 
-    const shipData = new aop.elements.ForEach('ships', shipList);
+    const shipData = new cop.elements.ForEach('ships', shipList);
     data.add(shipData);
 
     // Create printjob
-    const printjob = new aop.PrintJob(
+    const printjob = new cop.PrintJob(
         // NOTE: change IMAGE_MAX_HEIGHT, IMAGE_MAX_WIDTH and CHART_WIDTH at the beginning
         //  of this script according to filetype
         data,
         server,
-        aop.Resource.fromLocalFile(
+        cop.Resource.fromLocalFile(
             './examples/spacex_example/spacex_template.pptx',
         ), // For pptx
-        // aop.Resource.fromLocalFile(
+        // cop.Resource.fromLocalFile(
         //     './examples/spacex_example/spacex_template.xlsx',
         // ), // For xlsx
-        // aop.Resource.fromLocalFile(
+        // cop.Resource.fromLocalFile(
         //     './examples/spacex_example/spacex_template.docx',
         // ), // For docx
     );

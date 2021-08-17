@@ -1,13 +1,13 @@
 import { describe, expect, test } from '@jest/globals';
-import * as aop from '../index';
+import * as cop from '../index';
 
 describe('Tests for charts', () => {
     test('Test chart options', () => {
-        const xAxis = new aop.elements.ChartAxisOptions(
+        const xAxis = new cop.elements.ChartAxisOptions(
             'minMax',
             5,
             10,
-            new aop.elements.ChartDateOptions(
+            new cop.elements.ChartDateOptions(
                 'unix',
                 'mm/yy',
                 'months',
@@ -15,13 +15,13 @@ describe('Tests for charts', () => {
             ),
             'title_x',
             true,
-            new aop.elements.ChartTextStyle(
+            new cop.elements.ChartTextStyle(
                 true,
                 true,
                 'red',
                 'Arial',
             ),
-            new aop.elements.ChartTextStyle(
+            new cop.elements.ChartTextStyle(
                 true,
                 false,
                 'blue',
@@ -34,20 +34,20 @@ describe('Tests for charts', () => {
             1,
             'General',
         );
-        const yAxis = new aop.elements.ChartAxisOptions(
+        const yAxis = new cop.elements.ChartAxisOptions(
             'minMax',
             5,
             10,
             undefined,
             'title_y',
             true,
-            new aop.elements.ChartTextStyle(
+            new cop.elements.ChartTextStyle(
                 true,
                 true,
                 'red',
                 'Arial',
             ),
-            new aop.elements.ChartTextStyle(
+            new cop.elements.ChartTextStyle(
                 true,
                 false,
                 'blue',
@@ -61,7 +61,7 @@ describe('Tests for charts', () => {
             'General',
         );
         const y2Axis = yAxis;
-        const options = new aop.elements.ChartOptions(
+        const options = new cop.elements.ChartOptions(
             xAxis,
             yAxis,
             y2Axis,
@@ -72,7 +72,7 @@ describe('Tests for charts', () => {
             'green',
             50,
             'title_chart',
-            new aop.elements.ChartTextStyle(
+            new cop.elements.ChartTextStyle(
                 false,
                 true,
                 'red',
@@ -82,7 +82,7 @@ describe('Tests for charts', () => {
         );
         options.setLegend(
             'l',
-            new aop.elements.ChartTextStyle(
+            new cop.elements.ChartTextStyle(
                 true,
                 true,
                 'blue',
@@ -221,7 +221,7 @@ describe('Tests for charts', () => {
         expect(options.asDict()).toEqual(optionsExpected);
     });
     test('Test for LineChart. Also serves as a test for RadarChart (RadarSeries is equivalent to LineSeries)', () => {
-        const line1 = new aop.elements.LineSeries(
+        const line1 = new cop.elements.LineSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
             'line1',
@@ -232,7 +232,7 @@ describe('Tests for charts', () => {
             '0.2cm',
             'sysDashDotDot',
         );
-        const line2 = new aop.elements.LineSeries(
+        const line2 = new cop.elements.LineSeries(
             ['a', 'b', 'c'],
             [4, 5, 6],
             'line2',
@@ -243,7 +243,7 @@ describe('Tests for charts', () => {
             '2px',
             'sysDash',
         );
-        const lineChart = new aop.elements.LineChart(
+        const lineChart = new cop.elements.LineChart(
             'test_name',
             [line1, line2],
         );
@@ -305,19 +305,19 @@ describe('Tests for charts', () => {
     test(`Test for BarChart. Also serves as the test for: 
     BarStackedChart, BarStackedPercentChart, ColumnChart, ColumnStackedChart, ColumnStackedPercentChart
     and ScatterChart because their constructors take the same argument types (i.e. XYSeries).`, () => {
-        const bars1 = new aop.elements.BarSeries(
+        const bars1 = new cop.elements.BarSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
             'bars1',
             'red',
         );
-        const bars2 = new aop.elements.BarSeries(
+        const bars2 = new cop.elements.BarSeries(
             ['a', 'b', 'c'],
             [4, 5, 6],
             'bars2',
             'blue',
         );
-        const barChart = new aop.elements.BarChart(
+        const barChart = new cop.elements.BarChart(
             'bar_chart',
             [bars1, bars2],
         );
@@ -368,19 +368,19 @@ describe('Tests for charts', () => {
     });
     test(`Test for PieChart. Also serves as the test for Pie3DChart and DoughnutChart,
     because their constructors take the same argument types (i.e. PieSeries).`, () => {
-        const pies1 = new aop.elements.PieSeries(
+        const pies1 = new cop.elements.PieSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
             'pies1',
             ['red', undefined, 'blue'],
         );
-        const pies2 = new aop.elements.PieSeries(
+        const pies2 = new cop.elements.PieSeries(
             ['a', 'b', 'c'],
             [4, 5, 6],
             'pies2',
             ['green', 'blue', undefined],
         );
-        const piesChart = new aop.elements.PieChart(
+        const piesChart = new cop.elements.PieChart(
             'pie_chart',
             [pies1, pies2],
         );
@@ -432,21 +432,21 @@ describe('Tests for charts', () => {
         expect(piesChart.asDict()).toEqual(piesChartExpected);
     });
     test('Test for AreaChart', () => {
-        const area1 = new aop.elements.AreaSeries(
+        const area1 = new cop.elements.AreaSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
             'area1',
             'red',
             50,
         );
-        const area2 = new aop.elements.AreaSeries(
+        const area2 = new cop.elements.AreaSeries(
             ['a', 'b', 'c'],
             [4, 5, 6],
             'area2',
             'blue',
             80,
         );
-        const areaChart = new aop.elements.AreaChart(
+        const areaChart = new cop.elements.AreaChart(
             'area_chart',
             [area1, area2],
         );
@@ -498,21 +498,21 @@ describe('Tests for charts', () => {
         expect(areaChart.asDict()).toEqual(areaChartExpected);
     });
     test('Test for BubbleChart', () => {
-        const bubble1 = new aop.elements.BubbleSeries(
+        const bubble1 = new cop.elements.BubbleSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
             [5, 6, 2],
             'bubble1',
             'red',
         );
-        const bubble2 = new aop.elements.BubbleSeries(
+        const bubble2 = new cop.elements.BubbleSeries(
             ['a', 'b', 'c'],
             [4, 5, 6],
             [5, 6, 2],
             'bubble2',
             'blue',
         );
-        const bubbleChart = new aop.elements.BubbleChart(
+        const bubbleChart = new cop.elements.BubbleChart(
             'bubble_chart',
             [bubble1, bubble2],
         );
@@ -568,7 +568,7 @@ describe('Tests for charts', () => {
         expect(bubbleChart.asDict()).toEqual(bubbleChartExpected);
     });
     test('Test for StockChart', () => {
-        const stock1 = new aop.elements.StockSeries(
+        const stock1 = new cop.elements.StockSeries(
             [1, 2, 3],
             [4, 5, 6],
             [7, 8, 9],
@@ -577,7 +577,7 @@ describe('Tests for charts', () => {
             [16, 17, 18],
             'stock1',
         );
-        const stock2 = new aop.elements.StockSeries(
+        const stock2 = new cop.elements.StockSeries(
             [1, 2, 3],
             [4, 5, 6],
             [7, 8, 9],
@@ -586,7 +586,7 @@ describe('Tests for charts', () => {
             [16, 17, 18],
             'stock2',
         );
-        const stockChart = new aop.elements.StockChart(
+        const stockChart = new cop.elements.StockChart(
             'stock_chart',
             [stock1, stock2],
         );
@@ -658,22 +658,22 @@ describe('Tests for charts', () => {
         expect(stockChart.asDict()).toEqual(stockChartExpected);
     });
     test('Test chart combined', () => {
-        const axis = new aop.elements.ChartAxisOptions();
-        const column1 = new aop.elements.ColumnSeries(
+        const axis = new cop.elements.ChartAxisOptions();
+        const column1 = new cop.elements.ColumnSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
             'column1',
         );
-        const column2 = new aop.elements.ColumnSeries(
+        const column2 = new cop.elements.ColumnSeries(
             ['a', 'b', 'c'],
             [4, 5, 6],
             'column2',
         );
-        const columnChart = new aop.elements.ColumnChart(
+        const columnChart = new cop.elements.ColumnChart(
             'column_chart',
             [column1, column2],
         );
-        const line1 = new aop.elements.LineSeries(
+        const line1 = new cop.elements.LineSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
             'line1',
@@ -681,7 +681,7 @@ describe('Tests for charts', () => {
             undefined,
             'square',
         );
-        const line2 = new aop.elements.LineSeries(
+        const line2 = new cop.elements.LineSeries(
             ['a', 'b', 'c'],
             [4, 5, 6],
             'line2',
@@ -689,7 +689,7 @@ describe('Tests for charts', () => {
             undefined,
             'square',
         );
-        const lineChartOptions = new aop.elements.ChartOptions(
+        const lineChartOptions = new cop.elements.ChartOptions(
             axis,
             axis,
             undefined,
@@ -700,22 +700,22 @@ describe('Tests for charts', () => {
             'gray',
             50,
         );
-        const lineChart = new aop.elements.LineChart(
+        const lineChart = new cop.elements.LineChart(
             'line_chart',
             [line1, line2],
             lineChartOptions,
         );
-        const bar1 = new aop.elements.BarSeries(
+        const bar1 = new cop.elements.BarSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
             'bar1',
         );
-        const bar2 = new aop.elements.BarSeries(
+        const bar2 = new cop.elements.BarSeries(
             ['a', 'b', 'c'],
             [4, 5, 6],
             'bar2',
         );
-        const barChartOptions = new aop.elements.ChartOptions(
+        const barChartOptions = new cop.elements.ChartOptions(
             axis,
             axis,
             undefined,
@@ -724,12 +724,12 @@ describe('Tests for charts', () => {
             undefined,
             false,
         );
-        const barChart = new aop.elements.BarChart(
+        const barChart = new cop.elements.BarChart(
             'bar_chart',
             [bar1, bar2],
             barChartOptions,
         );
-        const combinedChart = new aop.elements.CombinedChart(
+        const combinedChart = new cop.elements.CombinedChart(
             'combined_chart',
             [columnChart, lineChart],
             [barChart],
@@ -884,24 +884,24 @@ describe('Tests for charts', () => {
         };
         expect(combinedChart.asDict()).toEqual(combinedChartExpected);
     });
-    test('Test chart aop', () => {
-        const aopChart = new aop.elements.AOPChart(
-            'aop_chart',
+    test('Test chart cop', () => {
+        const copChart = new cop.elements.COPChart(
+            'cop_chart',
             ['a', 'b', 'c'],
             [[1, 2, 3], [4, 5, 6]],
-            new aop.elements.AOPChartDateOptions(
+            new cop.elements.COPChartDateOptions(
                 'd/m/yyyy',
                 'days',
                 1,
             ),
-            'aop_chart_title',
+            'cop_chart_title',
             'x-axis',
             'y-axis',
             'y2-axis',
             'x2-axis',
         );
-        const aopChartExpected = {
-            aop_chart: {
+        const copChartExpected = {
+            cop_chart: {
                 xAxis: {
                     data: [
                         'a',
@@ -936,7 +936,7 @@ describe('Tests for charts', () => {
                     ],
                     title: 'y-axis',
                 },
-                title: 'aop_chart_title',
+                title: 'cop_chart_title',
                 x2Axis: {
                     title: 'x2-axis',
                 },
@@ -945,29 +945,29 @@ describe('Tests for charts', () => {
                 },
             },
         };
-        expect(aopChart.asDict()).toEqual(aopChartExpected);
+        expect(copChart.asDict()).toEqual(copChartExpected);
     });
-    test('Test aop chart for y_datas = dictionary', () => {
-        const aopChart = new aop.elements.AOPChart(
-            'aop_chart',
+    test('Test cop chart for y_datas = dictionary', () => {
+        const copChart = new cop.elements.COPChart(
+            'cop_chart',
             ['a', 'b', 'c'],
             {
                 first_series: [1, 2, 3],
                 second_series: [4, 5, 6],
             },
-            new aop.elements.AOPChartDateOptions(
+            new cop.elements.COPChartDateOptions(
                 'd/m/yyyy',
                 'days',
                 1,
             ),
-            'aop_chart_title',
+            'cop_chart_title',
             'x-axis',
             'y-axis',
             'y2-axis',
             'x2-axis',
         );
-        const aopChartExpected = {
-            aop_chart: {
+        const copChartExpected = {
+            cop_chart: {
                 xAxis: {
                     data: [
                         'a',
@@ -1002,7 +1002,7 @@ describe('Tests for charts', () => {
                     ],
                     title: 'y-axis',
                 },
-                title: 'aop_chart_title',
+                title: 'cop_chart_title',
                 x2Axis: {
                     title: 'x2-axis',
                 },
@@ -1011,6 +1011,6 @@ describe('Tests for charts', () => {
                 },
             },
         };
-        expect(aopChart.asDict()).toEqual(aopChartExpected);
+        expect(copChart.asDict()).toEqual(copChartExpected);
     });
 });

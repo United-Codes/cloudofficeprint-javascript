@@ -20,7 +20,7 @@ export class OutputConfig {
      *  Optional (set to template-type in printjob.ts).
      * @param encoding Encoding of output file. Either "raw" or "base64". Defaults to "raw".
      * @param converter The pdf converter to use. Can be "libreoffice", "officetopdf"
-     *  or any custom defined converter.Custom converters are configurated in the AOP server's
+     *  or any custom defined converter.Custom converters are configurated in the COP server's
      *  `aop_config.json` file. Defaults to "libreoffice".
      * @param cloudAccessToken Access token used to access various cloud services
      *  for output storage. Optional.
@@ -51,10 +51,14 @@ export class OutputConfig {
      * The dict representation of this output config.
      * @returns the dict representation of this output config
      */
-    asDict(): {[key: string]: string | number | boolean | {[key: string]: number} |
-    {[key: string]: string | number}} {
-        let result: {[key: string]: string | number | boolean | {[key: string]: number} |
-        {[key: string]: string | number}} = {
+    asDict(): {
+        [key: string]: string | number | boolean | { [key: string]: number } |
+        { [key: string]: string | number }
+    } {
+        let result: {
+            [key: string]: string | number | boolean | { [key: string]: number } |
+            { [key: string]: string | number }
+        } = {
             output_encoding: this.encoding,
             output_converter: this.converter,
         };

@@ -2,7 +2,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 import { Response as HTTPReponse } from 'node-fetch';
 import { OutputConfig, Server } from './config';
 import { Element, RESTSource } from './elements';
-import { AOPError } from './exceptions';
+import { COPError } from './exceptions';
 import { Resource } from './resource';
 import { Response } from './response';
 
@@ -10,24 +10,24 @@ const fetch = require('node-fetch').default;
 
 export const STATIC_OPTS = {
     tool: 'javascript',
-    // 'version': "18.2", # optional: version of AOP JSON format
+    // 'version': "18.2", # optional: version of Cloud Office Print JSON format
     javascript_sdk_version: '21.1',
 };
 
 /**
- * A print job for a AOP server.
+ * A print job for a COP server.
  * This class contains all configuration options, resources, render elements ...
- * and the `PrintJob.execute` method to combine all these and send a request to the AOP server.
+ * and the `PrintJob.execute` method to combine all these and send a request to the COP server.
  */
 export class PrintJob {
-    data: Element | RESTSource | {[key: string]: Element};
+    data: Element | RESTSource | { [key: string]: Element };
     server: Server;
     outputConfig: OutputConfig;
     template: Resource | undefined;
-    subtemplates: {[key: string]: Resource};
+    subtemplates: { [key: string]: Resource };
     prependFiles: Resource[];
     appendFiles: Resource[];
-    aopVerbose: boolean;
+    copVerbose: boolean;
 
     /**
      * @param data This is either: An `Element` (e.g. an `ElementCollection`);
@@ -43,17 +43,17 @@ export class PrintJob {
      *  `{?include subtemplate_dict_key}`. Defaults to {}.
      * @param prependFiles Files to prepend to the output file. Defaults to [].
      * @param appendFiles Files to append to the output file. Defaults to [].
-     * @param aopVerbose Whether or not verbose mode should be activated. Defaults to False.
+     * @param copVerbose Whether or not verbose mode should be activated. Defaults to False.
      */
     constructor(
-        data: Element | RESTSource | {[key: string]: Element},
+        data: Element | RESTSource | { [key: string]: Element },
         server: Server,
         template?: Resource,
         outputConfig: OutputConfig = new OutputConfig(),
-        subtemplates: {[key: string]: Resource} = {},
+        subtemplates: { [key: string]: Resource } = {},
         prependFiles: Resource[] = [],
         appendFiles: Resource[] = [],
-        aopVerbose: boolean = false,
+        copVerbose: boolean = false,
     ) {
         this.data = data;
         this.server = server;
@@ -62,7 +62,7 @@ export class PrintJob {
         this.subtemplates = subtemplates;
         this.prependFiles = prependFiles;
         this.appendFiles = appendFiles;
-        this.aopVerbose = aopVerbose;
+        this.copVerbose = copVerbose;
     }
 
     /**
@@ -92,7 +92,7 @@ export class PrintJob {
      * If you already have the JSON to be sent to the server
      *  (not just the data, but the entire JSON body including your API key and template),
      *  this package will wrap the request to the server.
-     * @param jsonData full JSON data that needs to be sent to an AOP server
+     * @param jsonData full JSON data that needs to be sent to an COP server
      * @param server `Server`-object
      * @returns `Response`-object
      */
@@ -117,13 +117,13 @@ export class PrintJob {
 
     /**
      * Converts the HTML response to a `Response`-object
-     * @param res HTML response from the AOP server
+     * @param res HTML response from the COP server
      * @returns `Response`-object of HTML response
-     * @throws AOPError when response status is not OK
+     * @throws COPError when response status is not OK
      */
     static async handleResponse(res: HTTPReponse): Promise<Response> {
         if (!(res.ok)) {
-            throw new AOPError(await res.text());
+            throw new COPError(await res.text());
         } else {
             return new Response(res);
         }
@@ -134,7 +134,7 @@ export class PrintJob {
      * @returns dict representation of this object
      */
     asDict() {
-        let result: {[key: string]: unknown} = { ...STATIC_OPTS };
+        let result: { [key: string]: unknown } = { ...STATIC_OPTS };
 
         // server config goes in the upper level
         if (this.server.config) {
@@ -160,7 +160,7 @@ export class PrintJob {
                         [key: string]: string | number;
                     };
                 })
-                    .output_type = (result.template as {[key: string]: string}).template_type;
+                    .output_type = (result.template as { [key: string]: string }).template_type;
             } else {
                 (result.output as {
                     [key: string]: string | number | boolean | {
@@ -196,7 +196,7 @@ export class PrintJob {
         }
 
         if (Object.keys(this.subtemplates).length > 0) {
-            const templatesArray: {[key: string]: string}[] = [];
+            const templatesArray: { [key: string]: string }[] = [];
 
             Object.entries(this.subtemplates).forEach(
                 ([name, res]) => {
@@ -210,8 +210,8 @@ export class PrintJob {
         }
 
         // If verbose mode is activated, print the result to the terminal
-        if (this.aopVerbose) {
-            console.log('The JSON data that is sent to the AOP server:\n');
+        if (this.copVerbose) {
+            console.log('The JSON data that is sent to the COP server:\n');
             console.log(JSON.stringify(result, null, 2));
         }
 

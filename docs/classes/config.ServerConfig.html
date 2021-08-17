@@ -96,9 +96,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.ServerConfig.html#aopRemoteDebug" class="tsd-kind-icon">aop<wbr>Remote<wbr>Debug</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.ServerConfig.html#apiKey" class="tsd-kind-icon">api<wbr>Key</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.ServerConfig.html#commands" class="tsd-kind-icon">commands</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.ServerConfig.html#copRemoteDebug" class="tsd-kind-icon">cop<wbr>Remote<wbr>Debug</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.ServerConfig.html#logging" class="tsd-kind-icon">logging</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.ServerConfig.html#printer" class="tsd-kind-icon">printer</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.ServerConfig.html#proxies" class="tsd-kind-icon">proxies</a></li>
@@ -119,13 +119,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Server<wbr>Config<span class="tsd-signature-symbol">(</span>apiKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, logging<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span>, printer<span class="tsd-signature-symbol">?: </span><a href="config.Printer.html" class="tsd-signature-type" data-tsd-kind="Class">Printer</a>, commands<span class="tsd-signature-symbol">?: </span><a href="config.Commands.html" class="tsd-signature-type" data-tsd-kind="Class">Commands</a>, proxies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span>, aopRemoteDebug<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.ServerConfig.html" class="tsd-signature-type" data-tsd-kind="Class">ServerConfig</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Server<wbr>Config<span class="tsd-signature-symbol">(</span>apiKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, logging<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span>, printer<span class="tsd-signature-symbol">?: </span><a href="config.Printer.html" class="tsd-signature-type" data-tsd-kind="Class">Printer</a>, commands<span class="tsd-signature-symbol">?: </span><a href="config.Commands.html" class="tsd-signature-type" data-tsd-kind="Class">Commands</a>, proxies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span>, copRemoteDebug<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.ServerConfig.html" class="tsd-signature-type" data-tsd-kind="Class">ServerConfig</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/0ed050c/src/config/server.ts#L207">src/config/server.ts:207</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/de0fe64/src/config/server.ts#L219">src/config/server.ts:219</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -134,7 +134,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> apiKey: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>API key to use for communicating with an AOP server. Optional.</p>
+											<p>API key to use for communicating with an COP server. Optional.</p>
 										</div>
 									</div>
 								</li>
@@ -157,7 +157,7 @@
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>IP printer to use with this server.
-											See the AOP docs for more info and supported printers. Optional.</p>
+											See the Cloud Office Print docs for more info and supported printers. Optional.</p>
 										</div>
 									</div>
 								</li>
@@ -183,11 +183,11 @@
 									</ul>
 								</li>
 								<li>
-									<h5>aopRemoteDebug: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<h5>copRemoteDebug: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>If True: The AOP server will log the JSON into the database
-											and this can bee seen when logged into apexofficeprint.com. Defaults to False.</p>
+											<p>If True: The COP server will log the JSON into the database
+											and this can bee seen when logged into cloudofficeprint.com. Defaults to False.</p>
 										</div>
 									</div>
 								</li>
@@ -200,22 +200,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="aopRemoteDebug" class="tsd-anchor"></a>
-					<h3>aop<wbr>Remote<wbr>Debug</h3>
-					<div class="tsd-signature tsd-kind-icon">aop<wbr>Remote<wbr>Debug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/0ed050c/src/config/server.ts#L194">src/config/server.ts:194</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="apiKey" class="tsd-anchor"></a>
 					<h3>api<wbr>Key</h3>
 					<div class="tsd-signature tsd-kind-icon">api<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/0ed050c/src/config/server.ts#L189">src/config/server.ts:189</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/de0fe64/src/config/server.ts#L201">src/config/server.ts:201</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -225,7 +215,17 @@
 					<div class="tsd-signature tsd-kind-icon">commands<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="config.Commands.html" class="tsd-signature-type" data-tsd-kind="Class">Commands</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/0ed050c/src/config/server.ts#L192">src/config/server.ts:192</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/de0fe64/src/config/server.ts#L204">src/config/server.ts:204</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="copRemoteDebug" class="tsd-anchor"></a>
+					<h3>cop<wbr>Remote<wbr>Debug</h3>
+					<div class="tsd-signature tsd-kind-icon">cop<wbr>Remote<wbr>Debug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/de0fe64/src/config/server.ts#L206">src/config/server.ts:206</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -235,7 +235,7 @@
 					<div class="tsd-signature tsd-kind-icon">logging<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/0ed050c/src/config/server.ts#L190">src/config/server.ts:190</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/de0fe64/src/config/server.ts#L202">src/config/server.ts:202</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -245,7 +245,7 @@
 					<div class="tsd-signature tsd-kind-icon">printer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="config.Printer.html" class="tsd-signature-type" data-tsd-kind="Class">Printer</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/0ed050c/src/config/server.ts#L191">src/config/server.ts:191</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/de0fe64/src/config/server.ts#L203">src/config/server.ts:203</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -255,7 +255,7 @@
 					<div class="tsd-signature tsd-kind-icon">proxies<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/0ed050c/src/config/server.ts#L193">src/config/server.ts:193</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/de0fe64/src/config/server.ts#L205">src/config/server.ts:205</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -272,7 +272,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/0ed050c/src/config/server.ts#L227">src/config/server.ts:227</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/de0fe64/src/config/server.ts#L239">src/config/server.ts:239</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -365,13 +365,13 @@
 								<a href="config.ServerConfig.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="config.ServerConfig.html#aopRemoteDebug" class="tsd-kind-icon">aop<wbr>Remote<wbr>Debug</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="config.ServerConfig.html#apiKey" class="tsd-kind-icon">api<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="config.ServerConfig.html#commands" class="tsd-kind-icon">commands</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="config.ServerConfig.html#copRemoteDebug" class="tsd-kind-icon">cop<wbr>Remote<wbr>Debug</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="config.ServerConfig.html#logging" class="tsd-kind-icon">logging</a>

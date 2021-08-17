@@ -26,8 +26,8 @@ export class ChartTextStyle {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | boolean} {
-        const result: {[key: string]: string | boolean} = {};
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {};
 
         if (this.italic !== undefined) {
             result.italic = this.italic;
@@ -73,8 +73,8 @@ export class ChartDateOptions {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {};
+    asDict(): { [key: string]: string | number } {
+        const result: { [key: string]: string | number } = {};
 
         if (this.format !== undefined) {
             result.format = this.format;
@@ -166,7 +166,7 @@ export class ChartAxisOptions {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | boolean | ChartDateOptions | ChartTextStyle} {
+    asDict(): { [key: string]: string | number | boolean | ChartDateOptions | ChartTextStyle } {
         const result: {
             [key: string]: string | number | boolean | ChartDateOptions | ChartTextStyle
         } = {};
@@ -223,9 +223,9 @@ export class ChartAxisOptions {
  * Options object for a Chart.
  */
 export class ChartOptions {
-    legendOptions: {[key: string]: boolean | string | {[key: string]: string | boolean}} |
+    legendOptions: { [key: string]: boolean | string | { [key: string]: string | boolean } } |
         undefined;
-    dataLabelsOptions: {[key: string]: boolean | string} | undefined;
+    dataLabelsOptions: { [key: string]: boolean | string } | undefined;
     xAxis: ChartAxisOptions | undefined;
     yAxis: ChartAxisOptions | undefined;
     y2Axis: ChartAxisOptions | undefined;
@@ -242,9 +242,9 @@ export class ChartOptions {
     /**
      * @param xAxis The options for the x-axis. Optional.
      * @param yAxis The options for the y-axis. Note: date options for the y axis are ignored by
-     *  the AOP server. Optional.
+     *  the COP server. Optional.
      * @param y2Axis The options for the y2-axis. Note: date options for the y2 axis are ignored by
-     *  the AOP server. Optional.
+     *  the COP server. Optional.
      * @param width Width of the chart. Optional.
      * @param height Height of the chart. Optional.
      * @param border Whether or not the chart should have a border. Optional.
@@ -375,27 +375,29 @@ export class ChartOptions {
      */
     asDict(): {
         [key: string]:
-            {[key: string]: boolean | string | {[key: string]: string | boolean}} |
-            {[key: string]: {
+        { [key: string]: boolean | string | { [key: string]: string | boolean } } |
+        {
+            [key: string]: {
                 [key: string]:
+                string | number | boolean | ChartDateOptions | ChartTextStyle
+            }
+        } |
+        number |
+        boolean |
+        string
+    } {
+        const result: {
+            [key: string]:
+            { [key: string]: boolean | string | { [key: string]: string | boolean } } |
+            {
+                [key: string]: {
+                    [key: string]:
                     string | number | boolean | ChartDateOptions | ChartTextStyle
                 }
             } |
             number |
             boolean |
             string
-            } {
-        const result: {
-            [key: string]:
-                {[key: string]: boolean | string | {[key: string]: string | boolean}} |
-                {[key: string]: {
-                    [key: string]:
-                        string | number | boolean | ChartDateOptions | ChartTextStyle
-                    }
-                } |
-                number |
-                boolean |
-                string
         } = {
             axis: {},
         };
@@ -407,22 +409,28 @@ export class ChartOptions {
             result.dataLabels = this.dataLabelsOptions;
         }
         if (this.xAxis !== undefined) {
-            (result.axis as {[key: string]: {
-                [key: string]:
+            (result.axis as {
+                [key: string]: {
+                    [key: string]:
                     string | number | boolean | ChartDateOptions | ChartTextStyle
-                }}).x = this.xAxis.asDict();
+                }
+            }).x = this.xAxis.asDict();
         }
         if (this.yAxis !== undefined) {
-            (result.axis as {[key: string]: {
+            (result.axis as {
+                [key: string]: {
                     [key: string]:
-                        string | number | boolean | ChartDateOptions | ChartTextStyle
-                }}).y = this.yAxis?.asDict();
+                    string | number | boolean | ChartDateOptions | ChartTextStyle
+                }
+            }).y = this.yAxis?.asDict();
         }
         if (this.y2Axis !== undefined) {
-            (result.axis as {[key: string]: {
+            (result.axis as {
+                [key: string]: {
                     [key: string]:
-                        string | number | boolean | ChartDateOptions | ChartTextStyle
-                }}).y2 = this.y2Axis.asDict();
+                    string | number | boolean | ChartDateOptions | ChartTextStyle
+                }
+            }).y2 = this.y2Axis.asDict();
         }
         if (this.width !== undefined) {
             result.width = this.width;
@@ -475,7 +483,7 @@ export abstract class Series {
      */
     // Disable eslint warning, because this is an abstract base class
     // eslint-disable-next-line class-methods-use-this
-    data(): {[key: string]: string | number}[] {
+    data(): { [key: string]: string | number }[] {
         // Doesn't get used
         return [{ dummy: 'dummy' }];
     }
@@ -484,9 +492,11 @@ export abstract class Series {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | boolean |
-        {[key: string]: string | number}[]} {
-        const result: {[key: string]: string | {[key: string]: number | string}[]} = {
+    asDict(): {
+        [key: string]: string | number | boolean |
+        { [key: string]: string | number }[]
+    } {
+        const result: { [key: string]: string | { [key: string]: number | string }[] } = {
             data: this.data(),
         };
 
@@ -529,8 +539,8 @@ export class XYSeries extends Series {
      * Get the data used in the series. E.g. x-values, y-values, ...
      * @returns the data used in the series
      */
-    data(): {[key: string]: number | string}[] {
-        const result: {[key: string]: number | string}[] = [];
+    data(): { [key: string]: number | string }[] {
+        const result: { [key: string]: number | string }[] = [];
 
         for (let i = 0; i < this.x.length; i += 1) {
             result.push({ x: this.x[i], y: this.y[i] });
@@ -543,10 +553,14 @@ export class XYSeries extends Series {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | boolean |
-        {[key: string]: string | number}[]} {
-        const result: {[key: string]: string | number | boolean |
-            {[key: string]: string | number}[]} = super.asDict();
+    asDict(): {
+        [key: string]: string | number | boolean |
+        { [key: string]: string | number }[]
+    } {
+        const result: {
+            [key: string]: string | number | boolean |
+            { [key: string]: string | number }[]
+        } = super.asDict();
 
         if (this.color !== undefined) {
             result.color = this.color;
@@ -588,10 +602,14 @@ export class PieSeries extends XYSeries {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | boolean |
-        {[key: string]: string | number}[]} {
-        const result: {[key: string]: string | number | boolean |
-            {[key: string]: string | number}[]} = super.asDict();
+    asDict(): {
+        [key: string]: string | number | boolean |
+        { [key: string]: string | number }[]
+    } {
+        const result: {
+            [key: string]: string | number | boolean |
+            { [key: string]: string | number }[]
+        } = super.asDict();
 
         if (this.colors !== undefined) {
             // Add the color for each slice to 'data'
@@ -636,10 +654,14 @@ export class AreaSeries extends XYSeries {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | boolean |
-        {[key: string]: string | number}[]} {
-        const result: {[key: string]: string | number | boolean |
-            {[key: string]: string | number}[]} = super.asDict();
+    asDict(): {
+        [key: string]: string | number | boolean |
+        { [key: string]: string | number }[]
+    } {
+        const result: {
+            [key: string]: string | number | boolean |
+            { [key: string]: string | number }[]
+        } = super.asDict();
 
         if (this.opacity !== undefined) {
             result.opacity = this.opacity;
@@ -673,8 +695,9 @@ export class LineSeries extends XYSeries {
      *  (in em, pt, px, cm or in), by default: automatic. Optional.
      * @param lineWidth Thickness of the connecting line in em, pt, px, cm or in. Optional.
      * @param lineStyle Style of the line. Supported options can be found online on the
-     *  [AOP documentation](https://www.apexofficeprint.com/docs/#line). Optional.
+     *  [Cloud Office Print documentation](https://www.cloudofficeprint.com/docs/#line). Optional.
      */
+    // TODO: change website for lineStyle argument?
     constructor(
         x: (number | string)[],
         y: number[],
@@ -698,10 +721,14 @@ export class LineSeries extends XYSeries {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | number | boolean |
-        {[key: string]: string | number}[]} {
-        const result: {[key: string]: string | number | boolean |
-            {[key: string]: string | number}[]} = super.asDict();
+    asDict(): {
+        [key: string]: string | number | boolean |
+        { [key: string]: string | number }[]
+    } {
+        const result: {
+            [key: string]: string | number | boolean |
+            { [key: string]: string | number }[]
+        } = super.asDict();
 
         if (this.smooth !== undefined) {
             result.smooth = this.smooth;
@@ -752,8 +779,8 @@ export class BubbleSeries extends XYSeries {
      * Get the data used in the series. E.g. x-values, y-values, ...
      * @returns the data used in the series
      */
-    data(): {[key: string]: number | string}[] {
-        const result: {[key: string]: number | string}[] = [];
+    data(): { [key: string]: number | string }[] {
+        const result: { [key: string]: number | string }[] = [];
 
         for (let i = 0; i < this.x.length; i += 1) {
             result.push({ x: this.x[i], y: this.y[i], size: this.sizes[i] });
@@ -805,8 +832,8 @@ export class StockSeries extends Series {
      * Get the data used in the series. E.g. x-values, y-values, ...
      * @returns the data used in the series
      */
-    data(): {[key: string]: number | string}[] {
-        const result: {[key: string]: number | string}[] = [];
+    data(): { [key: string]: number | string }[] {
+        const result: { [key: string]: number | string }[] = [];
 
         for (let i = 0; i < this.x.length; i += 1) {
             result.push({
@@ -831,14 +858,14 @@ export class StockSeries extends Series {
 }
 
 // The next few classes are exactly the same as XYSeries or LineSeries
-export class BarSeries extends XYSeries {}
-export class BarStackedSeries extends XYSeries {}
-export class BarStackedPercentSeries extends XYSeries {}
-export class ColumnSeries extends XYSeries {}
-export class ColumnStackedSeries extends XYSeries {}
-export class ColumnStackedPercentSeries extends XYSeries {}
-export class ScatterSeries extends XYSeries {}
-export class RadarSeries extends LineSeries {}
+export class BarSeries extends XYSeries { }
+export class BarStackedSeries extends XYSeries { }
+export class BarStackedPercentSeries extends XYSeries { }
+export class ColumnSeries extends XYSeries { }
+export class ColumnStackedSeries extends XYSeries { }
+export class ColumnStackedPercentSeries extends XYSeries { }
+export class ScatterSeries extends XYSeries { }
+export class RadarSeries extends LineSeries { }
 
 /**
  * The abstract base class for a chart.
@@ -860,11 +887,11 @@ export abstract class Chart extends Element {
      * @param updates the dict that needs to be updated with the chart options
      * @returns the input dict, updated with the chart options
      */
-    getDict(updates: {[key: string]: unknown}) {
+    getDict(updates: { [key: string]: unknown }) {
         let result = {};
 
         if (this.options !== undefined) {
-            (result as {[key: string]: ChartOptions | {[key: string]: unknown}})
+            (result as { [key: string]: ChartOptions | { [key: string]: unknown } })
                 .options = this.options instanceof ChartOptions
                     ? this.options.asDict() : this.options;
         }
@@ -903,8 +930,10 @@ export class LineChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             lines: Array.from(this.lines.map((line) => line.asDict())),
             type: 'line',
@@ -932,8 +961,10 @@ export class BarChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             bars: Array.from(this.bars.map((bar) => bar.asDict())),
             type: 'bar',
@@ -961,8 +992,10 @@ export class BarStackedChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             bars: Array.from(this.bars.map((bar) => bar.asDict())),
             type: 'barStacked',
@@ -991,8 +1024,10 @@ export class BarStackedPercentChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             bars: Array.from(this.bars.map((bar) => bar.asDict())),
             type: 'barStackedPercent',
@@ -1020,8 +1055,10 @@ export class ColumnChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             columns: Array.from(this.columns.map((col) => col.asDict())),
             type: 'column',
@@ -1049,8 +1086,10 @@ export class ColumnStackedChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             columns: Array.from(this.columns.map((col) => col.asDict())),
             type: 'columnStacked',
@@ -1079,8 +1118,10 @@ export class ColumnStackedPercentChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             columns: Array.from(this.columns.map((col) => col.asDict())),
             type: 'columnStackedPercent',
@@ -1108,8 +1149,10 @@ export class PieChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             pies: Array.from(this.pies.map((pie) => pie.asDict())),
             type: 'pie',
@@ -1137,8 +1180,10 @@ export class Pie3DChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             pies: Array.from(this.pies.map((pie) => pie.asDict())),
             type: 'pie3d',
@@ -1166,8 +1211,10 @@ export class DoughnutChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             doughnuts: Array.from(this.pies.map((pie) => pie.asDict())),
             type: 'doughnut',
@@ -1195,8 +1242,10 @@ export class RadarChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             radars: Array.from(this.radars.map((rad) => rad.asDict())),
             type: 'radar',
@@ -1224,8 +1273,10 @@ export class AreaChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             areas: Array.from(this.areas.map((ar) => ar.asDict())),
             type: 'area',
@@ -1253,8 +1304,10 @@ export class ScatterChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             scatters: Array.from(this.scatters.map((scat) => scat.asDict())),
             type: 'scatter',
@@ -1282,8 +1335,10 @@ export class BubbleChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             bubbles: Array.from(this.bubbles.map((bub) => bub.asDict())),
             type: 'bubble',
@@ -1311,8 +1366,10 @@ export class StockChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string |
-        {[key: string]: string | number | boolean | {[key: string]: string | number}[]}} {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+    } {
         return this.getDict({
             stocks: Array.from(this.stocks.map((bub) => bub.asDict())),
             type: 'stock',
@@ -1334,7 +1391,7 @@ function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: s
         ([key, value]) => {
             if (value.constructor === Object) {
                 if (key !== 'options') {
-                    (result as {[key: string]: unknown})[key] = replaceKeyRecursive(
+                    (result as { [key: string]: unknown })[key] = replaceKeyRecursive(
                         value,
                         oldKey,
                         newKey,
@@ -1347,15 +1404,15 @@ function replaceKeyRecursive<T extends object>(obj: T, oldKey: string, newKey: s
                         newValue.push(replaceKeyRecursive(value[idx], oldKey, newKey));
                     },
                 );
-                (result as {[key: string]: unknown})[key] = newValue;
+                (result as { [key: string]: unknown })[key] = newValue;
             }
         },
     );
 
     if (Object.prototype.hasOwnProperty.call(result, oldKey)) {
-        const val = (result as {[key: string]: unknown})[oldKey];
-        delete (result as {[key: string]: unknown})[oldKey];
-        (result as {[key: string]: unknown})[newKey] = val;
+        const val = (result as { [key: string]: unknown })[oldKey];
+        delete (result as { [key: string]: unknown })[oldKey];
+        (result as { [key: string]: unknown })[newKey] = val;
     }
 
     return result;
@@ -1398,7 +1455,7 @@ export class CombinedChart extends Chart {
         primaryArray.forEach(
             (val) => {
                 const chartDictFull = val.asDict();
-                const chartDict = (chartDictFull as {[key: string]: object})[val.name];
+                const chartDict = (chartDictFull as { [key: string]: object })[val.name];
                 dictArray.push(chartDict);
             },
         );
@@ -1408,7 +1465,7 @@ export class CombinedChart extends Chart {
             secondaryArray.forEach(
                 (val) => {
                     const chartDictFull = val.asDict();
-                    const chartDict = (chartDictFull as {[key: string]: object})[val.name];
+                    const chartDict = (chartDictFull as { [key: string]: object })[val.name];
                     dictArray.push(replaceKeyRecursive(chartDict, 'y', 'y2'));
                 },
             );
@@ -1421,7 +1478,7 @@ export class CombinedChart extends Chart {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: unknown} {
+    asDict(): { [key: string]: unknown } {
         return this.getDict({
             type: 'multiple',
             multiples: this.getModifiedChartDicts(),

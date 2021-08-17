@@ -1,9 +1,9 @@
 # About
-In this file we are going to show you how you can use the APEX Office Print (AOP) Java-/TypeScript SDK to generate an output file using a template and data to fill the template. The general approach is to create a template file in which you want the data to appear, then process the data with the Java-/TypeScript SDK and finally let APEX Office Print do the work to merge your template with the data. 
+In this file we are going to show you how you can use the Cloud Office Print Java-/TypeScript SDK to generate an output file using a template and data to fill the template. The general approach is to create a template file in which you want the data to appear, then process the data with the Java-/TypeScript SDK and finally let Cloud Office Print do the work to merge your template with the data. 
 
 In this example, we are going to use SpaceX data to fill a template we are going to make. The SpaceX data can be received by sending an HTTP-request to an API. The (non-official) API used in this example is https://docs.spacexdata.com/.
 
-Normally you know the data you will be using to fill in the template, but for this example, we are going to start with a brief overview of the data we will be using. Then we will create a template. Then we will get the data from the spacexdata-API and process this data with this Java-/TypeScript SDK. Finally we send the template together with the data to an AOP server and save the response into our output file.
+Normally you know the data you will be using to fill in the template, but for this example, we are going to start with a brief overview of the data we will be using. Then we will create a template. Then we will get the data from the spacexdata-API and process this data with this Java-/TypeScript SDK. Finally we send the template together with the data to an COP server and save the response into our output file.
 
 # Input data (API)
 The data we use comes from https://docs.spacexdata.com/. More specifically we will use SpaceX data about their company, rockets, dragons, launch pads, landing pads and ships that assist SpaceX launches. Let us have a look at the available data for the different components.
@@ -356,7 +356,7 @@ The response is a JSON array with information about all the ships. One element o
 ```
 
 # Template
-Now we will build the template. We can create templates in different file extensions, namely docx, xlsx, pptx, html, md, txt and csv. In this example we will build a template of filetype pptx, xlsx and docx. The template has to follow a specific structure which can be found at the official AOP documentation: https://www.apexofficeprint.com/docs/.
+Now we will build the template. We can create templates in different file extensions, namely docx, xlsx, pptx, html, md, txt and csv. In this example we will build a template of filetype pptx, xlsx and docx. The template has to follow a specific structure which can be found at the official Cloud Office Print documentation: https://www.cloudofficeprint.com/docs/.
 
 ## pptx
 We will build the template in Google Slides. After choosing a pretty theme, we create the title slide. On this slide, we want the title of our presentation and the source where we got the data from. The title slide looks like this:
@@ -364,7 +364,7 @@ We will build the template in Google Slides. After choosing a pretty theme, we c
 <img src="./imgs/pptx_template/slide1.png" width="600" />
 <!-- TODO: change this link to Github link -->
 
-Here we encounter our first placeholder/tag: `{*data_source}`. Tags are defined by surrounding a variable name with curly brackets. This is the way we let the AOP server know that data needs to replace this placeholder. We will see what that data is in the section [Process input data](#process-input-data). In this specific case, we used a hyperlink-tag `{*hyperlink}`.
+Here we encounter our first placeholder/tag: `{*data_source}`. Tags are defined by surrounding a variable name with curly brackets. This is the way we let the COP server know that data needs to replace this placeholder. We will see what that data is in the section [Process input data](#process-input-data). In this specific case, we used a hyperlink-tag `{*hyperlink}`.
 
 Note: to minimize the modifications to the input data (see [Input Data (API)](#input-data-api)), it is important to use as variable names the keys available in the input data if possible.
 
@@ -373,7 +373,7 @@ Next we want a slide that gives information about the company itself:
 <img src="./imgs/pptx_template/slide2.png" width="600" />
 <!-- TODO: change this link to Github link -->
 
-Again, the placeholders will be replaced with data by the AOP server. Since the data given to the AOP server will be in JSON-format (see [Process input data](#process-input-data)), it is possible to reach a subfield of an entry by using `entry.subfield`. So if `headquarters` is a JSON object like this:
+Again, the placeholders will be replaced with data by the COP server. Since the data given to the COP server will be in JSON-format (see [Process input data](#process-input-data)), it is possible to reach a subfield of an entry by using `entry.subfield`. So if `headquarters` is a JSON object like this:
 ```json
 "headquarters": {
     "address": "",
@@ -456,7 +456,7 @@ The 'rockets'-tab contains the rockets description in the left top. It also cont
 <img src="./imgs/xlsx_template/tab2.png" width="600" />
 <!-- TODO: change this link to Github link -->
 
-We use the loop tags `{#rockets}...{/rockets}` to loop through the 'rockets'-array. The AOP server will repeat everything inside the loop tags on a new row for each object in the array.
+We use the loop tags `{#rockets}...{/rockets}` to loop through the 'rockets'-array. The COP server will repeat everything inside the loop tags on a new row for each object in the array.
 
 ### Dragons
 <img src="./imgs/xlsx_template/tab3.png" width="600" />
@@ -519,31 +519,31 @@ We also want to show a chart of the cost per launch for each rocket:
 # Process input data (Java-/TypeScript SDK)
 Now that our template is finished, we have to process the data used by the template. That is where the Java-/TypeScript SDK comes into play. In this section we will explain in detail all the Java-/TypeScript code needed to generate the data to fill in the template. The full Java-/TypeScript code can also be found in the file `spacex_example.ts`.
 
-The beauty of AOP is that the data created by the Java-/TypeScript SDK can be used in all templates of different file extensions while using the same tags.
+The beauty of Cloud Office Print is that the data created by the Java-/TypeScript SDK can be used in all templates of different file extensions while using the same tags.
 
 ## Setup
-First we create a new Java-/TypeScript file and import the APEX Office Print library and the `requests`-library:
+First we create a new Java-/TypeScript file and import the Cloud Office Print library and the `requests`-library:
 
 ```javascript
-import * as aop from 'apexofficeprint';
+import * as cop from 'cloudofficeprint';
 const fetch = require('node-fetch').default;
 ```
 
-Then we need to set up the AOP server where we will send our template and data to:
+Then we need to set up the COP server where we will send our template and data to:
 ```javascript
-const SERVER_URL = 'https://api.apexofficeprint.com/';
+const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
-const server = new aop.config.Server(
+const server = new cop.config.Server(
     SERVER_URL,
-    new aop.config.ServerConfig(API_KEY),
+    new cop.config.ServerConfig(API_KEY),
 );
 ```
-If you have an AOP server running on localhost (e.g. on-premise version), replace the server url by the localhost url: `http://localhost:8010`
+If you have an COP server running on localhost (e.g. on-premise version), replace the server url by the localhost url: `http://localhost:8010`
 
 We also need to create the main element-collection object that contains all our data:
 ```javascript
-const data = new aop.elements.ElementCollection();
+const data = new cop.elements.ElementCollection();
 ```
 
 Lastly we write a function that return the first sentence of a text input. This is used when we only want to display the first sentence of a discription:
@@ -625,9 +625,9 @@ All the code that follows will be placed inside an anonymous async function. Thi
 ```
 
 ## Title slide
-The template title slide contains the title of our presentation and a hyperlink-tag `{*data_source}`. Now we need to add the data for this tag in our Java-/TypeScript code by creating an AOP element (hyperlink) and adding this to the main data collection. 
+The template title slide contains the title of our presentation and a hyperlink-tag `{*data_source}`. Now we need to add the data for this tag in our Java-/TypeScript code by creating an Cloud Office Print element (hyperlink) and adding this to the main data collection. 
 ```javascript
-const dataSource = new aop.elements.Hyperlink(
+const dataSource = new cop.elements.Hyperlink(
     'data_source',
     'https://docs.spacexdata.com',
     'Data source',
@@ -640,11 +640,11 @@ The tag `{*data_source}` will be replaced by the text 'Data source' and this tex
 We see why we said in [Template](#template) to use as the variable names inside the tags, the name of the keys available in the responses of [Input data (API)](#input-data-api). Now we can just add the data received from the SpaceX-API to our data collection and this data can be accessed by the template, after waiting for the data to be received:
 ```javascript
 await infoProm;
-data.addAll(aop.elements.ElementCollection.fromMapping(info));
+data.addAll(cop.elements.ElementCollection.fromMapping(info));
 ```
 The only thing we need to create ourselves is the SpaceX-website hyperlink:
 ```javascript
-const website = new aop.elements.Hyperlink(
+const website = new cop.elements.Hyperlink(
     'spacex_website',
     (info.links as {[key: string]: string}).website,
     'Website',
@@ -658,14 +658,14 @@ We now add all the information about SpaceX's rockets to our main element collec
 ### Description
 First we add the description for the tag `{rockets_description}`:
 ```javascript
-const rocketsDescription = new aop.elements.Property('rockets_description', 'Data about the rockets built by SpaceX');
+const rocketsDescription = new cop.elements.Property('rockets_description', 'Data about the rockets built by SpaceX');
 data.add(rocketsDescription);
 ```
 
 ### Main loop
 Since we want a separate slide for each rocket, we need to add the rockets information in an array to be able to loop through the rockets. So we create a rocket list: 
 ```javascript
-const rocketList: aop.elements.Element[] = [];
+const rocketList: cop.elements.Element[] = [];
 ```
 
 We cannot just add the rocket data to our element collection, because we need to do some processing on it. We want the images to be accessible with the tag `{%image}` and we want to choose the size of these images. We also want to add a hyperlink for their Wikipedia page and we want to shorten their description to one sentence. The code for this is the following, again waiting for the rockets data to be received from the API:
@@ -673,21 +673,21 @@ We cannot just add the rocket data to our element collection, because we need to
 await rocketsProm;
 rockets.forEach(
     (rocket) => {
-        const collec = aop.elements.ElementCollection.fromMapping(rocket);
+        const collec = cop.elements.ElementCollection.fromMapping(rocket);
 
-        const img = aop.elements.Image.fromUrl('image', (rocket.flickr_images as string[])[0]);
+        const img = cop.elements.Image.fromUrl('image', (rocket.flickr_images as string[])[0]);
         img.maxHeight = IMAGE_MAX_HEIGHT;
         img.maxWidth = IMAGE_MAX_WIDTH;
         collec.add(img);
 
-        const hyper = new aop.elements.Hyperlink(
+        const hyper = new cop.elements.Hyperlink(
             'wikipedia',
             rocket.wikipedia as string,
             'Wikipedia',
         );
         collec.add(hyper);
 
-        const shortDescription = new aop.elements.Property('description', shortenDescription(rocket.description as string));
+        const shortDescription = new cop.elements.Property('description', shortenDescription(rocket.description as string));
         collec.add(shortDescription); // Overwrites the current description
 
         rocketList.push(collec);
@@ -698,7 +698,7 @@ We loop through all the rockets and for each rocket, we first create an element 
 
 Now we need to make an element of the rocket list. Because we use `{!rockets}` in our template to loop over all the rockets, the name of this loop-element needs to be 'rockets'. Finally we add this loop-element to the main data collection:
 ```javascript
-const rocketData = new aop.elements.ForEach('rockets', rocketList);
+const rocketData = new cop.elements.ForEach('rockets', rocketList);
 data.add(rocketData);
 ```
 
@@ -717,7 +717,7 @@ rockets.forEach(
 ```
 Each chart can contain multiple data series. Since we only want to show the cost per launch for the rockets, we only need one series. Let's say we want our chart to show the data in vertical bars, then we can use this code:
 ```javascript
-const costSeries = new aop.elements.ColumnSeries(
+const costSeries = new cop.elements.ColumnSeries(
     x,
     costY,
     'Cost per launch',
@@ -728,8 +728,8 @@ We also specify the name of the series (showed in the legend) and the color of t
 
 Next we want to choose the style of our chart, so we create an element for chart options:
 ```javascript
-const rocketsChartOptions = new aop.elements.ChartOptions(
-    new aop.elements.ChartAxisOptions(
+const rocketsChartOptions = new cop.elements.ChartOptions(
+    new cop.elements.ChartAxisOptions(
         undefined,
         undefined,
         undefined,
@@ -737,13 +737,13 @@ const rocketsChartOptions = new aop.elements.ChartOptions(
         'Rocket',
         undefined,
         undefined,
-        new aop.elements.ChartTextStyle(
+        new cop.elements.ChartTextStyle(
             undefined,
             undefined,
             'black',
         ),
     ),
-    new aop.elements.ChartAxisOptions(
+    new cop.elements.ChartAxisOptions(
         undefined,
         undefined,
         undefined,
@@ -751,7 +751,7 @@ const rocketsChartOptions = new aop.elements.ChartOptions(
         'Cost ($)',
         undefined,
         undefined,
-        new aop.elements.ChartTextStyle(
+        new cop.elements.ChartTextStyle(
             undefined,
             undefined,
             'black',
@@ -774,7 +774,7 @@ Next we would like to have a legend showing on the right side of the chart:
 ```javascript
 rocketsChartOptions.setLegend(
     undefined,
-    new aop.elements.ChartTextStyle(
+    new cop.elements.ChartTextStyle(
         undefined,
         undefined,
         'black',
@@ -785,7 +785,7 @@ The color of the text in the legend is chosen to be black and its position is on
 
 Now we create the actual chart with the series created earlier and the chart options and add this to the main element collection (data). Because the tag used in our template is `{$rockets_chart}`, the name of the chart element should be 'rockets_chart':
 ```javascript
-const rocketsChart = new aop.elements.ColumnChart(
+const rocketsChart = new cop.elements.ColumnChart(
     'rockets_chart',
     [costSeries],
     rocketsChartOptions,
@@ -800,39 +800,39 @@ The dragons data can be added in the same way as the rockets.
 
 ### Description
 ```javascript
-data.add(new aop.elements.Property('dragons_description', 'Data about the dragon capsules of SpaceX'));
+data.add(new cop.elements.Property('dragons_description', 'Data about the dragon capsules of SpaceX'));
 ```
 
 ### Main loop
 ```javascript
-const dragonList: aop.elements.Element[] = [];
+const dragonList: cop.elements.Element[] = [];
 
 // Add dragon images, wikipedia hyperlink and shortened description for each dragon
 await dragonsProm;
 dragons.forEach(
     (dragon) => {
-        const collec = aop.elements.ElementCollection.fromMapping(dragon);
+        const collec = cop.elements.ElementCollection.fromMapping(dragon);
 
-        const img = aop.elements.Image.fromUrl('image', (dragon.flickr_images as string[])[0]);
+        const img = cop.elements.Image.fromUrl('image', (dragon.flickr_images as string[])[0]);
         img.maxHeight = IMAGE_MAX_HEIGHT;
         img.maxWidth = IMAGE_MAX_WIDTH;
         collec.add(img);
 
-        const hyper = new aop.elements.Hyperlink(
+        const hyper = new cop.elements.Hyperlink(
             'wikipedia',
             dragon.wikipedia as string,
             'Wikipedia',
         );
         collec.add(hyper);
 
-        const shortDescription = new aop.elements.Property('description', shortenDescription(dragon.description as string));
+        const shortDescription = new cop.elements.Property('description', shortenDescription(dragon.description as string));
         collec.add(shortDescription); // Overwrites the current description
 
         dragonList.push(collec);
     },
 );
 
-const dragonData = new aop.elements.ForEach('dragons', dragonList);
+const dragonData = new cop.elements.ForEach('dragons', dragonList);
 data.add(dragonData);
 ```
 
@@ -840,32 +840,32 @@ data.add(dragonData);
 
 ### Description
 ```javascript
-data.add(new aop.elements.Property('launch_pads_description', "Data about SpaceX's launch pads"));
+data.add(new cop.elements.Property('launch_pads_description', "Data about SpaceX's launch pads"));
 ```
 
 ### Main loop
 ```javascript
-const launchPadList: aop.elements.Element[] = [];
+const launchPadList: cop.elements.Element[] = [];
 
 // Add launch pad images, wikipedia hyperlink and shortened description for each launch_pad
 await launchPadsProm;
 launchPads.forEach(
     (launchPad) => {
-        const collec = aop.elements.ElementCollection.fromMapping(launchPad);
+        const collec = cop.elements.ElementCollection.fromMapping(launchPad);
 
-        const img = aop.elements.Image.fromUrl('image', (launchPad.images as {[key: string]: string[]}).large[0]);
+        const img = cop.elements.Image.fromUrl('image', (launchPad.images as {[key: string]: string[]}).large[0]);
         img.maxHeight = IMAGE_MAX_HEIGHT;
         img.maxWidth = IMAGE_MAX_WIDTH;
         collec.add(img);
 
-        const shortDescription = new aop.elements.Property('details', shortenDescription(launchPad.details as string));
+        const shortDescription = new cop.elements.Property('details', shortenDescription(launchPad.details as string));
         collec.add(shortDescription); // Overwrites the current description
 
         launchPadList.push(collec);
     },
 );
 
-const launchPadData = new aop.elements.ForEach('launch_pads', launchPadList);
+const launchPadData = new cop.elements.ForEach('launch_pads', launchPadList);
 data.add(launchPadData);
 ```
 Here we didn't add Wikipedia hyperlinks, because they are not available in the API data.
@@ -874,39 +874,39 @@ Here we didn't add Wikipedia hyperlinks, because they are not available in the A
 
 ### Description
 ```javascript
-data.add(new aop.elements.Property('landing_pads_description', "Data about SpaceX's landing pads"));
+data.add(new cop.elements.Property('landing_pads_description', "Data about SpaceX's landing pads"));
 ```
 
 ### Main loop
 ```javascript
-const landingPadList: aop.elements.Element[] = [];
+const landingPadList: cop.elements.Element[] = [];
 
 // Add landing pad images, wikipedia hyperlink and shortened description for each landing pad
 await landingPadsProm;
 landingPads.forEach(
     (landingPad) => {
-        const collec = aop.elements.ElementCollection.fromMapping(landingPad);
+        const collec = cop.elements.ElementCollection.fromMapping(landingPad);
 
-        const img = aop.elements.Image.fromUrl('image', (landingPad.images as {[key: string]: string[]}).large[0]);
+        const img = cop.elements.Image.fromUrl('image', (landingPad.images as {[key: string]: string[]}).large[0]);
         img.maxHeight = IMAGE_MAX_HEIGHT;
         img.maxWidth = IMAGE_MAX_WIDTH;
         collec.add(img);
 
-        const hyper = new aop.elements.Hyperlink(
+        const hyper = new cop.elements.Hyperlink(
             'wikipedia',
             landingPad.wikipedia as string,
             'Wikipedia',
         );
         collec.add(hyper);
 
-        const shortDescription = new aop.elements.Property('details', shortenDescription(landingPad.details as string));
+        const shortDescription = new cop.elements.Property('details', shortenDescription(landingPad.details as string));
         collec.add(shortDescription); // Overwrites the current description
 
         landingPadList.push(collec);
     },
 );
 
-const landingPadData = new aop.elements.ForEach('landing_pads', landingPadList);
+const landingPadData = new cop.elements.ForEach('landing_pads', landingPadList);
 
 data.add(landingPadData);
 ```
@@ -915,25 +915,25 @@ data.add(landingPadData);
 
 ### Description
 ```javascript
-data.add(new aop.elements.Property('ships_description', 'Data about the ships that assist SpaceX launches, including ASDS drone ships, tugs, fairing recovery ships, and various support ships'));
+data.add(new cop.elements.Property('ships_description', 'Data about the ships that assist SpaceX launches, including ASDS drone ships, tugs, fairing recovery ships, and various support ships'));
 ```
 
 ### Main loop
 ```javascript
-const shipList: aop.elements.Element[] = [];
+const shipList: cop.elements.Element[] = [];
 
 // / Add ship images and website hyperlink for each ship
 await shipsProm;
 ships.forEach(
     (ship) => {
-        const collec = aop.elements.ElementCollection.fromMapping(ship);
+        const collec = cop.elements.ElementCollection.fromMapping(ship);
 
-        const img = aop.elements.Image.fromUrl('image', ship.image as string);
+        const img = cop.elements.Image.fromUrl('image', ship.image as string);
         img.maxHeight = IMAGE_MAX_HEIGHT;
         img.maxWidth = IMAGE_MAX_WIDTH;
         collec.add(img);
 
-        const hyper = new aop.elements.Hyperlink(
+        const hyper = new cop.elements.Hyperlink(
             'website',
             ship.link as string,
             'Website',
@@ -944,34 +944,34 @@ ships.forEach(
     },
 );
 
-const shipData = new aop.elements.ForEach('ships', shipList);
+const shipData = new cop.elements.ForEach('ships', shipList);
 data.add(shipData);
 ```
 Here we didn't shorten the description to one sentence, since there is no description available for the ships in the API data.
 
 
-# AOP server and response
-Now that we have the template and the data ready, it is time to let AOP merge them together. In the Java-/TypeScript SDK this is implemented by creating a printjob:
+# COP server and response
+Now that we have the template and the data ready, it is time to let Cloud Office Print merge them together. In the Java-/TypeScript SDK this is implemented by creating a printjob:
 ```javascript
-const printjob = new aop.PrintJob(
+const printjob = new cop.PrintJob(
     // NOTE: change IMAGE_MAX_HEIGHT, IMAGE_MAX_WIDTH and CHART_WIDTH at the beginning
     //  of this script according to filetype
     data,
     server,
-    // aop.Resource.fromLocalFile(
+    // cop.Resource.fromLocalFile(
     //     './examples/spacex_example/spacex_template.pptx',
     // ), // For pptx
-    aop.Resource.fromLocalFile(
+    cop.Resource.fromLocalFile(
         './examples/spacex_example/spacex_template.xlsx',
     ), // For xlsx
-    // aop.Resource.fromLocalFile(
+    // cop.Resource.fromLocalFile(
     //     './examples/spacex_example/spacex_template.docx',
     // ), // For docx
 );
 ```
 We loaded the template from a local file and passed in our data element collection and our server object.
 
-Finally we actually send this printjob to an AOP server and save the response into our output file:
+Finally we actually send this printjob to an COP server and save the response into our output file:
 ```javascript
 (await printjob.execute()).toFile('./examples/spacex_example/output');
 ```
