@@ -35,10 +35,16 @@ const planetList: aop.elements.Element[] = [];
     // Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
     await new Promise<void>((resolve) => fetch('https://api.le-systeme-solaire.net/rest/bodies/')
         .then((r: Response) => r.json())
-        .then((json: { bodies: { [key: string]: string | number | boolean |
-            { [key: string]: unknown; }; }[]; }) => {
+        .then((json: {
+            bodies: {
+                [key: string]: string | number | boolean |
+                { [key: string]: unknown; };
+            }[];
+        }) => {
             json.bodies.forEach(
-                (body: {[key: string]: string | number | boolean | {[key: string]: unknown}}) => {
+                (body: {
+                    [key: string]: string | number | boolean | { [key: string]: unknown }
+                }) => {
                     if (body.isPlanet) {
                         const collec = aop.elements.ElementCollection.fromMapping(body);
                         planetList.push(collec);
@@ -56,11 +62,11 @@ const planetList: aop.elements.Element[] = [];
     color[0] = '#7298d4'; // Specify the color for the first pie slice
 
     const radiusSeries = new aop.elements.PieSeries(
-        Array.from((planets.asDict().planets as {[key: string]: string | number}[]).map(
+        Array.from((planets.asDict().planets as { [key: string]: string | number }[]).map(
             (planet) => planet.name,
         )),
-        Array.from((planets.asDict().planets as {[key: string]: string | number}[]).map(
-            (planet) => planet.meanRadius as number,
+        Array.from((planets.asDict().planets as { [key: string]: string | number }[]).map(
+            (planet) => planet.equaRadius as number,
         )),
         'radius',
         color,
@@ -95,9 +101,6 @@ const planetList: aop.elements.Element[] = [];
     const printjob = new aop.PrintJob(
         data,
         server,
-        aop.Resource.fromLocalFile(
-            './examples/solar_system_example/pptx/solar_system_template.pptx',
-        ), // pptx
         // aop.Resource.fromLocalFile(
         //     './examples/solar_system_example/docx/solar_system_template.docx',
         // ), // docx
