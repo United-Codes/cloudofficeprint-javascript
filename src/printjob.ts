@@ -15,9 +15,9 @@ export const STATIC_OPTS = {
 };
 
 /**
- * A print job for a COP server.
+ * A print job for a Cloud Office Print server.
  * This class contains all configuration options, resources, render elements ...
- * and the `PrintJob.execute` method to combine all these and send a request to the COP server.
+ * and the `PrintJob.execute` method to combine all these and send a request to the Cloud Office Print server.
  */
 export class PrintJob {
     data: Element | RESTSource | { [key: string]: Element };
@@ -92,7 +92,7 @@ export class PrintJob {
      * If you already have the JSON to be sent to the server
      *  (not just the data, but the entire JSON body including your API key and template),
      *  this package will wrap the request to the server.
-     * @param jsonData full JSON data that needs to be sent to an COP server
+     * @param jsonData full JSON data that needs to be sent to an Cloud Office Print server
      * @param server `Server`-object
      * @returns `Response`-object
      */
@@ -117,7 +117,7 @@ export class PrintJob {
 
     /**
      * Converts the HTML response to a `Response`-object
-     * @param res HTML response from the COP server
+     * @param res HTML response from the Cloud Office Print server
      * @returns `Response`-object of HTML response
      * @throws COPError when response status is not OK
      */
@@ -211,7 +211,7 @@ export class PrintJob {
 
         // If verbose mode is activated, print the result to the terminal
         if (this.copVerbose) {
-            console.log('The JSON data that is sent to the COP server:\n');
+            console.log('The JSON data that is sent to the Cloud Office Print server:\n');
             console.log(JSON.stringify(result, null, 2));
         }
 

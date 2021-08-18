@@ -242,9 +242,9 @@ export class ChartOptions {
     /**
      * @param xAxis The options for the x-axis. Optional.
      * @param yAxis The options for the y-axis. Note: date options for the y axis are ignored by
-     *  the COP server. Optional.
+     *  the Cloud Office Print server. Optional.
      * @param y2Axis The options for the y2-axis. Note: date options for the y2 axis are ignored by
-     *  the COP server. Optional.
+     *  the Cloud Office Print server. Optional.
      * @param width Width of the chart. Optional.
      * @param height Height of the chart. Optional.
      * @param border Whether or not the chart should have a border. Optional.

@@ -3,7 +3,7 @@ In this file we are going to show you how you can use the Cloud Office Print Jav
 
 In this example, we are going to use SpaceX data to fill a template we are going to make. The SpaceX data can be received by sending an HTTP-request to an API. The (non-official) API used in this example is https://docs.spacexdata.com/.
 
-Normally you know the data you will be using to fill in the template, but for this example, we are going to start with a brief overview of the data we will be using. Then we will create a template. Then we will get the data from the spacexdata-API and process this data with this Java-/TypeScript SDK. Finally we send the template together with the data to an COP server and save the response into our output file.
+Normally you know the data you will be using to fill in the template, but for this example, we are going to start with a brief overview of the data we will be using. Then we will create a template. Then we will get the data from the spacexdata-API and process this data with this Java-/TypeScript SDK. Finally we send the template together with the data to an Cloud Office Print server and save the response into our output file.
 
 # Input data (API)
 The data we use comes from https://docs.spacexdata.com/. More specifically we will use SpaceX data about their company, rockets, dragons, launch pads, landing pads and ships that assist SpaceX launches. Let us have a look at the available data for the different components.
@@ -364,7 +364,7 @@ We will build the template in Google Slides. After choosing a pretty theme, we c
 <img src="./imgs/pptx_template/slide1.png" width="600" />
 <!-- TODO: change this link to Github link -->
 
-Here we encounter our first placeholder/tag: `{*data_source}`. Tags are defined by surrounding a variable name with curly brackets. This is the way we let the COP server know that data needs to replace this placeholder. We will see what that data is in the section [Process input data](#process-input-data). In this specific case, we used a hyperlink-tag `{*hyperlink}`.
+Here we encounter our first placeholder/tag: `{*data_source}`. Tags are defined by surrounding a variable name with curly brackets. This is the way we let the Cloud Office Print server know that data needs to replace this placeholder. We will see what that data is in the section [Process input data](#process-input-data). In this specific case, we used a hyperlink-tag `{*hyperlink}`.
 
 Note: to minimize the modifications to the input data (see [Input Data (API)](#input-data-api)), it is important to use as variable names the keys available in the input data if possible.
 
@@ -373,7 +373,7 @@ Next we want a slide that gives information about the company itself:
 <img src="./imgs/pptx_template/slide2.png" width="600" />
 <!-- TODO: change this link to Github link -->
 
-Again, the placeholders will be replaced with data by the COP server. Since the data given to the COP server will be in JSON-format (see [Process input data](#process-input-data)), it is possible to reach a subfield of an entry by using `entry.subfield`. So if `headquarters` is a JSON object like this:
+Again, the placeholders will be replaced with data by the Cloud Office Print server. Since the data given to the Cloud Office Print server will be in JSON-format (see [Process input data](#process-input-data)), it is possible to reach a subfield of an entry by using `entry.subfield`. So if `headquarters` is a JSON object like this:
 ```json
 "headquarters": {
     "address": "",
@@ -456,7 +456,7 @@ The 'rockets'-tab contains the rockets description in the left top. It also cont
 <img src="./imgs/xlsx_template/tab2.png" width="600" />
 <!-- TODO: change this link to Github link -->
 
-We use the loop tags `{#rockets}...{/rockets}` to loop through the 'rockets'-array. The COP server will repeat everything inside the loop tags on a new row for each object in the array.
+We use the loop tags `{#rockets}...{/rockets}` to loop through the 'rockets'-array. The Cloud Office Print server will repeat everything inside the loop tags on a new row for each object in the array.
 
 ### Dragons
 <img src="./imgs/xlsx_template/tab3.png" width="600" />
@@ -529,7 +529,7 @@ import * as cop from 'cloudofficeprint';
 const fetch = require('node-fetch').default;
 ```
 
-Then we need to set up the COP server where we will send our template and data to:
+Then we need to set up the Cloud Office Print server where we will send our template and data to:
 ```javascript
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
@@ -539,7 +539,7 @@ const server = new cop.config.Server(
     new cop.config.ServerConfig(API_KEY),
 );
 ```
-If you have an COP server running on localhost (e.g. on-premise version), replace the server url by the localhost url: `http://localhost:8010`
+If you have an Cloud Office Print server running on localhost (e.g. on-premise version), replace the server url by the localhost url: `http://localhost:8010`
 
 We also need to create the main element-collection object that contains all our data:
 ```javascript
@@ -950,7 +950,7 @@ data.add(shipData);
 Here we didn't shorten the description to one sentence, since there is no description available for the ships in the API data.
 
 
-# COP server and response
+# Cloud Office Print server and response
 Now that we have the template and the data ready, it is time to let Cloud Office Print merge them together. In the Java-/TypeScript SDK this is implemented by creating a printjob:
 ```javascript
 const printjob = new cop.PrintJob(
@@ -971,7 +971,7 @@ const printjob = new cop.PrintJob(
 ```
 We loaded the template from a local file and passed in our data element collection and our server object.
 
-Finally we actually send this printjob to an COP server and save the response into our output file:
+Finally we actually send this printjob to an Cloud Office Print server and save the response into our output file:
 ```javascript
 (await printjob.execute()).toFile('./examples/spacex_example/output');
 ```

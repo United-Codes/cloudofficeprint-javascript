@@ -10,7 +10,7 @@ To install the Cloud Office Print Java-/TypeScript package, you can type in your
 2. Create the input data with this Java-/TypeScript SDK
 3. Send template and data to an Cloud Office Print server and save the response to a file with this Java-/TypeScript SDK
 
-To see the JSON-data that is sent to the COP server, you can turn on verbose-mode by setting the argument `copVerbose` to `True` when creating a `PrintJob`.
+To see the JSON-data that is sent to the Cloud Office Print server, you can turn on verbose-mode by setting the argument `copVerbose` to `True` when creating a `PrintJob`.
 
 # Quickstart: Hello World example
 ## Template (docx)
@@ -41,8 +41,8 @@ collection.add(text);
 ...
 ```
 
-## COP server
-The template and the data need to be sent to an COP server that merges both. This can be done by setting up the configuration for COP server and passing it to the print job instance. You can get your API key by signing up at https://www.cloudofficeprint.com.
+## Cloud Office Print server
+The template and the data need to be sent to an Cloud Office Print server that merges both. This can be done by setting up the configuration for Cloud Office Print server and passing it to the print job instance. You can get your API key by signing up at https://www.cloudofficeprint.com.
 ```javascript
 ...
 const SERVER_URL = 'https://api.cloudofficeprint.com/';

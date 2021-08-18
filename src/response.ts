@@ -3,9 +3,9 @@ import { Response as HTTPReponse } from 'node-fetch';
 import * as ownUtils from './own_utils';
 
 /**
- * The Response class serves as a container for and interface with the COP server's
+ * The Response class serves as a container for and interface with the Cloud Office Print server's
  *  response to a printjob request.
- * The COP server can also throw an error, in which case you will be dealing with
+ * The Cloud Office Print server can also throw an error, in which case you will be dealing with
  *  an cloudofficeprint.exceptions.COPError instead of this class.
  */
 export class Response {

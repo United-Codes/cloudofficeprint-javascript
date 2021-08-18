@@ -264,5 +264,5 @@ describe('Tests for elements', () => {
         };
         expect(collection.asDict()).toEqual(collectionExpected);
     });
-    // COP charts get tested in charts.test.ts
+    // Cloud Office Print charts get tested in charts.test.ts
 });

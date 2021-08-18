@@ -3,9 +3,10 @@
  */
 
 /**
- * The error that is thrown when the COP server itself returns an error instead of a result.
+ * The error that is thrown when the Cloud Office Print server itself returns an error
+ * instead of a result.
  * It contains a user message and an encoded message to be handed to Cloud Office Print support
- *  if they are contacted.
+ * if they are contacted.
  */
 export class COPError extends Error {
     userMessage: string;
@@ -13,7 +14,7 @@ export class COPError extends Error {
     encodedMessage: string;
 
     /**
-     * @param fullMessage the full error message received from the COP server
+     * @param fullMessage the full error message received from the Cloud Office Print server
      */
     constructor(fullMessage: string) {
         const split = COPError.splitMessage(fullMessage);
@@ -24,9 +25,9 @@ export class COPError extends Error {
     }
 
     /**
-     * Split the COP server error message into different parts:
+     * Split the Cloud Office Print server error message into different parts:
      *  user message, contact support message and encoded message.
-     * @param message COP server error message
+     * @param message Cloud Office Print server error message
      * @returns an array with the split messages
      */
     static splitMessage(message: string): string[] {

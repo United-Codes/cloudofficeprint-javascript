@@ -3,7 +3,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 const fetch = require('node-fetch').default;
 
 /**
- * This class defines an IP-enabled printer to use with the COP server.
+ * This class defines an IP-enabled printer to use with the Cloud Office Print server.
  */
 export class Printer {
     location: string;
@@ -39,7 +39,7 @@ export class Printer {
 }
 
 /**
- * Command object with a single command for the COP server.
+ * Command object with a single command for the Cloud Office Print server.
  */
 export class Command {
     command: string;
@@ -206,14 +206,14 @@ export class ServerConfig {
     copRemoteDebug: boolean;
 
     /**
-     * @param apiKey API key to use for communicating with an COP server. Optional.
+     * @param apiKey API key to use for communicating with an Cloud Office Print server. Optional.
      * @param logging Additional key/value pairs you would like to have logged into server
      *  printjob.log on the server. (To be used with the --enable_printlog server flag). Optional.
      * @param printer IP printer to use with this server.
      *  See the Cloud Office Print docs for more info and supported printers. Optional.
      * @param commands Configuration for the various command hooks offered. Optional.
      * @param proxies Proxies for contacting the server URL, [as a dictionary](https://requests.readthedocs.io/en/master/user/advanced/#proxies). Optional.
-     * @param copRemoteDebug If True: The COP server will log the JSON into the database
+     * @param copRemoteDebug If True: The Cloud Office Print server will log the JSON into the database
      *  and this can bee seen when logged into cloudofficeprint.com. Defaults to False.
      */
     constructor(
@@ -258,7 +258,7 @@ export class ServerConfig {
 }
 
 /**
- * This config class is used to specify the COP server to interact with.
+ * This config class is used to specify the Cloud Office Print server to interact with.
  */
 export class Server {
     url: string;

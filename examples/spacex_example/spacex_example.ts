@@ -2,7 +2,7 @@ import * as cop from '../../src/index';
 
 const fetch = require('node-fetch').default;
 
-// Setup COP server
+// Setup Cloud Office Print server
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 

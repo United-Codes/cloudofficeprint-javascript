@@ -65,8 +65,8 @@ export abstract class CloudAccessToken {
 
     /**
      * Create a token from FTP info.
-     * When an argument is / defaults to None, no data about it is sent to the COP server.
-     * The COP server will then fill in default values.
+     * When an argument is / defaults to None, no data about it is sent to the Cloud Office Print server.
+     * The Cloud Office Print server will then fill in default values.
      * @param host host name or IP address
      * @param port port to use; optional
      * @param user username; optional
@@ -79,8 +79,8 @@ export abstract class CloudAccessToken {
 
     /**
      * Create a token from SFTP info.
-     * When an argument is / defaults to None, no data about it is sent to the COP server.
-     * The COP server will then fill in default values.
+     * When an argument is / defaults to None, no data about it is sent to the Cloud Office Print server.
+     * The Cloud Office Print server will then fill in default values.
      * @param host host name or IP address
      * @param port port to use; optional
      * @param user username; optional

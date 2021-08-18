@@ -2,14 +2,14 @@
  * This is an example of how you can merge the output files generated
  *  from a single template using multiple requests.
  * This approach is useful if you are dealing with a lot of output files that need to be merged.
- * There is a limit on how much data can be sent to an COP server,
+ * There is a limit on how much data can be sent to an Cloud Office Print server,
  *  so this is useful to split one big request into multiple smaller ones.
  * This example will take a minute to run.
  */
 
 import * as cop from '../../src/index';
 
-// Setup COP server
+// Setup Cloud Office Print server
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
@@ -52,7 +52,7 @@ const conf = new cop.config.OutputConfig(
     ),
 );
 
-// Let's assume that the COP server can't handle all the data at once,
+// Let's assume that the Cloud Office Print server can't handle all the data at once,
 //  so we need to split our data into multiple requests.
 // Let's use 10 requests with each 10 elements in the data (a total of 100 data elements).
 const outputFilesProm: Promise<cop.Response>[] = [];
