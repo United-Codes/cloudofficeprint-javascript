@@ -24,7 +24,7 @@ NOTE: For an overview of all the possibilities of this SDK, we refer to the docu
 ## Setup
 First we create a new file and import the Cloud library:
 ```typescript
-import * as cop from 'cloudofficeprint'
+import * as cop from 'cloudofficeprint';
 ```
 
 Then we load the template explained in the [template section](#template) and set up the Cloud Office Print server:
