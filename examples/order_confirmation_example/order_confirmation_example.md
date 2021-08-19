@@ -1,29 +1,34 @@
 # About
-In this example we are going to show you how to use the Java-/TypeScript SDK for Cloud Office Print. The example we will be using is: generating an order confirmation for buying products from a company. The resulting output file will look like this:
+In this example we are going to show you how to use this SDK to generate an order confirmation for buying products from a company. The resulting output file will look like this:
 
-![](./imgs/output_imgs/output-1.jpg)
-<!-- TODO: change this link to Github link -->
-![](./imgs/output_imgs/output-2.jpg)
-<!-- TODO: change this link to Github link -->
+![](https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/master/examples/order_confirmation_example/imgs/output_imgs/output-1.jpg)
+![](https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/master/examples/order_confirmation_example/imgs/output_imgs/output-2.jpg)
 
 # Template
 The template we are using is the following:
-![](./imgs/template_imgs/template-1.jpg)
-<!-- TODO: change this link to Github link -->
-![](./imgs/template_imgs/template-2.jpg)
-<!-- TODO: change this link to Github link -->
+![](https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/master/examples/order_confirmation_example/imgs/template_imgs/template-1.jpg)
+![](https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/master/examples/order_confirmation_example/imgs/template_imgs/template-2.jpg)
 
-## Tags used in this example
+## Tags
+Tags are used in a template as placeholders to let the Cloud Office Print server know what needs to be replaced by data. The tags used in this example are:
 - normal tag: {data_string} (e.g. {company_name})
 - image tag: {%imageKey} (e.g. {%company_logo})
 - loop tag: {#data_loop}...{/data_loop} (e.g. {#orders}...{/orders})
 - string/number comparison: {#key=='value'}...{/key=='value'} (e.g. {#in_stock<quantity}...{/in_stock<quantity})
 - numerical expression: {num1+num2} (e.g. {unit_price*quantity})
 
-# Data: Java-/TypeScript code
-```javascript
-import * as cop from '../../src/index';
+For an overview of the available tags, we refer to our [website](https://www.cloudofficeprint.com/docs/#tag-overview).
 
+# Code
+NOTE: For an overview of all the possibilities of this SDK, we refer to the documentation on our [website](https://cloudofficeprint.com/docs).
+## Setup
+First we create a new file and import the Cloud library:
+```typescript
+import * as cop from 'cloudofficeprint'
+```
+
+Then we load the template explained in the [template section](#template) and set up the Cloud Office Print server:
+```typescript
 const TEMPLATE_PATH = './examples/order_confirmation_example/data/template.docx';
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
@@ -34,11 +39,17 @@ const server = new cop.config.Server(
     SERVER_URL,
     new cop.config.ServerConfig(API_KEY),
 );
+```
+If you have a cloud Office Print server running on localhost (e.g. on-premise version), replace the server url by the localhost url: http://localhost:8010
 
-// Main ElementCollection that includes all the data
+We also need to create the main element-collection object that contains all our data:
+```typescript
 const data = new cop.elements.ElementCollection('data');
+```
 
-// Company information
+## Data
+The data is used to fill in the tags that we created in our template. First we add information about the company.
+```typescript
 const companyName = new cop.elements.Property('company_name', 'United Codes');
 const companyLogo = cop.elements.Image.fromUrl(
     'company_logo',
@@ -46,21 +57,27 @@ const companyLogo = cop.elements.Image.fromUrl(
 );
 companyLogo.maxHeight = 200;
 companyLogo.maxWidth = 200;
+```
+Here we added a property, which consists of a simple key and value, and an image, which we loaded from a URL. We also specify the maximum height and width of this image.
 
-// / Add company information to data
+Next, we need to add this information to the element collection that we created.
+```typescript
 data.add(companyName);
 data.add(companyLogo);
+```
 
-// Customer information
+In the same way we add information about the customer to our element collection.
+```typescript
 const cust = cop.elements.ElementCollection.fromMapping({
     cust_city: 'St. Louis',
     cust_first_name: 'Albertos',
     cust_last_name: 'Lambert',
 });
-
-// / Add customer information to data
 data.addAll(cust);
+```
 
+Let's say the customer placed two orders on the company's website. The first order consists of three products and the second order consists of two orders. Again, the keys used for all the data elements is in accordance with the tags used in the template.
+```typescript
 // Order information
 
 // / Order 1
@@ -148,14 +165,21 @@ product2.add(image);
 // /// Add products to order2
 products = new cop.elements.ForEach('product', [product1, product2]);
 order2.add(products);
+```
+Instead of loading the images from our computer locally, we added the images with their base64-encoded value. To make it possible to use a loop-tag in our template, we added the products for each order as a loop-element.
 
+In the same way we added the products as a loop-element to each order, we add the orders as a loop-element to the element collection:
+```typescript
 // / Add orders to an object list
 const orders = new cop.elements.ForEach('orders', [order1, order2]);
 
 // / Add orders to data
 data.add(orders);
+```
 
-// Merge template and data to generate the output file
+## Print job
+Finally, we create a print job to send our template and data to a cloud Office Print server and we save the server response file to our computer:
+```typescript
 const conf = new cop.config.OutputConfig('pdf'); // Optional
 const printjob = new cop.PrintJob(data, server, template, conf);
 
@@ -167,5 +191,4 @@ const printjob = new cop.PrintJob(data, server, template, conf);
         throw new cop.exceptions.COPError(err);
     }
 })();
-
 ```
