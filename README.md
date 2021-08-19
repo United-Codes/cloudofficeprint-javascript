@@ -80,7 +80,7 @@ Going through the other examples is also recommended as this gives you a good id
 - spacex_example.ts (the most extensive example)
 - multiple_request_merge_example.ts
 
-The examples can be found in the `examples`-directory of the project on [Github](https://github.com/United-Codes/cloudofficeprint-javascript). Each example has its own folder containing the used templates, the generated output files and a markdown file with explanation when needed.
+The examples can be found in the `examples`-directory of the project on [Github](https://github.com/United-Codes/cloudofficeprint-javascript). Each example has its own folder containing the used templates, the generated output files and a markdown file with explanation.
 
 # Documentation
 The documentation for this SDK can be found inside the `docs/` folder on [Github](https://github.com/United-Codes/cloudofficeprint-javascript). If you want to generate this documentation yourself, you can run the following command in the project directory:  

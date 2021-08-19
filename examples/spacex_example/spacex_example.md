@@ -524,13 +524,13 @@ The beauty of Cloud Office Print is that the data created by the Java-/TypeScrip
 ## Setup
 First we create a new Java-/TypeScript file and import the Cloud Office Print library and the `requests`-library:
 
-```javascript
+```typescript
 import * as cop from 'cloudofficeprint';
 const fetch = require('node-fetch').default;
 ```
 
 Then we need to set up the Cloud Office Print server where we will send our template and data to:
-```javascript
+```typescript
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
@@ -542,12 +542,12 @@ const server = new cop.config.Server(
 If you have an Cloud Office Print server running on localhost (e.g. on-premise version), replace the server url by the localhost url: `http://localhost:8010`
 
 We also need to create the main element-collection object that contains all our data:
-```javascript
+```typescript
 const data = new cop.elements.ElementCollection();
 ```
 
 Lastly we write a function that return the first sentence of a text input. This is used when we only want to display the first sentence of a discription:
-```javascript
+```typescript
 function shortenDescription(input: string): string {
     /**
      * Return only the first sentence of an input.
@@ -561,7 +561,7 @@ function shortenDescription(input: string): string {
 
 ## Import data
 As discussed in [Input data (API)](#input-data-api), we use an API of a cloud server to receive the data about SpaceX. The information we use for this example can be received as follows using the [node-fetch](https://www.npmjs.com/package/node-fetch)-library. To achieve this, we create a promise for each request. This way we can await the promise when we need the data.
-```javascript
+```typescript
 let info: {[key: string]: string | number | boolean | {[key: string]: unknown}} = {};
 let rockets: {[key: string]: string | number | boolean |
     {[key: string]: unknown} | string[]}[] = [];
@@ -618,7 +618,7 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
 
 ## Async
 All the code that follows will be placed inside an anonymous async function. This is necessary to asynchronously wait for the data to get retrieved from the SpaceX API.
-```javascript
+```typescript
 (async () => {
     // the rest of the code
 })()
@@ -626,7 +626,7 @@ All the code that follows will be placed inside an anonymous async function. Thi
 
 ## Title slide
 The template title slide contains the title of our presentation and a hyperlink-tag `{*data_source}`. Now we need to add the data for this tag in our Java-/TypeScript code by creating an Cloud Office Print element (hyperlink) and adding this to the main data collection. 
-```javascript
+```typescript
 const dataSource = new cop.elements.Hyperlink(
     'data_source',
     'https://docs.spacexdata.com',
@@ -638,12 +638,12 @@ The tag `{*data_source}` will be replaced by the text 'Data source' and this tex
 
 ## Company
 We see why we said in [Template](#template) to use as the variable names inside the tags, the name of the keys available in the responses of [Input data (API)](#input-data-api). Now we can just add the data received from the SpaceX-API to our data collection and this data can be accessed by the template, after waiting for the data to be received:
-```javascript
+```typescript
 await infoProm;
 data.addAll(cop.elements.ElementCollection.fromMapping(info));
 ```
 The only thing we need to create ourselves is the SpaceX-website hyperlink:
-```javascript
+```typescript
 const website = new cop.elements.Hyperlink(
     'spacex_website',
     (info.links as {[key: string]: string}).website,
@@ -657,19 +657,19 @@ We now add all the information about SpaceX's rockets to our main element collec
 
 ### Description
 First we add the description for the tag `{rockets_description}`:
-```javascript
+```typescript
 const rocketsDescription = new cop.elements.Property('rockets_description', 'Data about the rockets built by SpaceX');
 data.add(rocketsDescription);
 ```
 
 ### Main loop
 Since we want a separate slide for each rocket, we need to add the rockets information in an array to be able to loop through the rockets. So we create a rocket list: 
-```javascript
+```typescript
 const rocketList: cop.elements.Element[] = [];
 ```
 
 We cannot just add the rocket data to our element collection, because we need to do some processing on it. We want the images to be accessible with the tag `{%image}` and we want to choose the size of these images. We also want to add a hyperlink for their Wikipedia page and we want to shorten their description to one sentence. The code for this is the following, again waiting for the rockets data to be received from the API:
-```javascript
+```typescript
 await rocketsProm;
 rockets.forEach(
     (rocket) => {
@@ -697,14 +697,14 @@ rockets.forEach(
 We loop through all the rockets and for each rocket, we first create an element collection with the data received from the API. Then we create the image element and specify its height and width and add this image to the collection. Next we create the hyperlink and also add this to the collection. Finally we shorten the description, add this to the collection and add the rocket element collection to the rocket list created earlier.
 
 Now we need to make an element of the rocket list. Because we use `{!rockets}` in our template to loop over all the rockets, the name of this loop-element needs to be 'rockets'. Finally we add this loop-element to the main data collection:
-```javascript
+```typescript
 const rocketData = new cop.elements.ForEach('rockets', rocketList);
 data.add(rocketData);
 ```
 
 ### Chart
 We also want to implement a chart in our example. The tag in the template is `{$rockets_chart}`. We want to plot the cost per launch for each rocket. That means that on the x-axis we want to see the rocket names and on the y-axis their costs per launch. We thus create two lists like this:
-```javascript
+```typescript
 const x: string[] = [];
 const costY: number[] = [];
 
@@ -716,7 +716,7 @@ rockets.forEach(
 );
 ```
 Each chart can contain multiple data series. Since we only want to show the cost per launch for the rockets, we only need one series. Let's say we want our chart to show the data in vertical bars, then we can use this code:
-```javascript
+```typescript
 const costSeries = new cop.elements.ColumnSeries(
     x,
     costY,
@@ -727,7 +727,7 @@ const costSeries = new cop.elements.ColumnSeries(
 We also specify the name of the series (showed in the legend) and the color of the bars.
 
 Next we want to choose the style of our chart, so we create an element for chart options:
-```javascript
+```typescript
 const rocketsChartOptions = new cop.elements.ChartOptions(
     new cop.elements.ChartAxisOptions(
         undefined,
@@ -771,7 +771,7 @@ const rocketsChartOptions = new cop.elements.ChartOptions(
 We also create styling elements for the axes, which include the title of the axis and its styling, the title rotation and if the grid lines need to be shown. The other options speak for themselves.
 
 Next we would like to have a legend showing on the right side of the chart:
-```javascript
+```typescript
 rocketsChartOptions.setLegend(
     undefined,
     new cop.elements.ChartTextStyle(
@@ -784,7 +784,7 @@ rocketsChartOptions.setLegend(
 The color of the text in the legend is chosen to be black and its position is on the right side of the chart by default.
 
 Now we create the actual chart with the series created earlier and the chart options and add this to the main element collection (data). Because the tag used in our template is `{$rockets_chart}`, the name of the chart element should be 'rockets_chart':
-```javascript
+```typescript
 const rocketsChart = new cop.elements.ColumnChart(
     'rockets_chart',
     [costSeries],
@@ -799,12 +799,12 @@ The argument `columns` expects an array of series. That's why we create an array
 The dragons data can be added in the same way as the rockets.
 
 ### Description
-```javascript
+```typescript
 data.add(new cop.elements.Property('dragons_description', 'Data about the dragon capsules of SpaceX'));
 ```
 
 ### Main loop
-```javascript
+```typescript
 const dragonList: cop.elements.Element[] = [];
 
 // Add dragon images, wikipedia hyperlink and shortened description for each dragon
@@ -839,12 +839,12 @@ data.add(dragonData);
 ## Launch pads
 
 ### Description
-```javascript
+```typescript
 data.add(new cop.elements.Property('launch_pads_description', "Data about SpaceX's launch pads"));
 ```
 
 ### Main loop
-```javascript
+```typescript
 const launchPadList: cop.elements.Element[] = [];
 
 // Add launch pad images, wikipedia hyperlink and shortened description for each launch_pad
@@ -873,12 +873,12 @@ Here we didn't add Wikipedia hyperlinks, because they are not available in the A
 ## Landing pads
 
 ### Description
-```javascript
+```typescript
 data.add(new cop.elements.Property('landing_pads_description', "Data about SpaceX's landing pads"));
 ```
 
 ### Main loop
-```javascript
+```typescript
 const landingPadList: cop.elements.Element[] = [];
 
 // Add landing pad images, wikipedia hyperlink and shortened description for each landing pad
@@ -914,12 +914,12 @@ data.add(landingPadData);
 ## Ships
 
 ### Description
-```javascript
+```typescript
 data.add(new cop.elements.Property('ships_description', 'Data about the ships that assist SpaceX launches, including ASDS drone ships, tugs, fairing recovery ships, and various support ships'));
 ```
 
 ### Main loop
-```javascript
+```typescript
 const shipList: cop.elements.Element[] = [];
 
 // / Add ship images and website hyperlink for each ship
@@ -952,7 +952,7 @@ Here we didn't shorten the description to one sentence, since there is no descri
 
 # Cloud Office Print server and response
 Now that we have the template and the data ready, it is time to let Cloud Office Print merge them together. In the Java-/TypeScript SDK this is implemented by creating a printjob:
-```javascript
+```typescript
 const printjob = new cop.PrintJob(
     // NOTE: change IMAGE_MAX_HEIGHT, IMAGE_MAX_WIDTH and CHART_WIDTH at the beginning
     //  of this script according to filetype
@@ -972,7 +972,7 @@ const printjob = new cop.PrintJob(
 We loaded the template from a local file and passed in our data element collection and our server object.
 
 Finally we actually send this printjob to an Cloud Office Print server and save the response into our output file:
-```javascript
+```typescript
 (await printjob.execute()).toFile('./examples/spacex_example/output');
 ```
 The resulting file can now be found in the specified folder. We will not add the result in this markdown file, but the result can be seen in the files `output.pptx`, `output.xlsx` and `output.docx` which can be found in the folder `examples/spacex_example`.

@@ -28,29 +28,10 @@ for (let i = 0; i < 100; i += 1) {
 }
 
 // Create output configuration: merge PDF
-const conf = new cop.config.OutputConfig(
-    'pdf',
-    undefined,
-    undefined,
-    undefined,
-    undefined,
-    new cop.config.PDFOptions(
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        true,
-    ),
-);
+const conf = new cop.config.OutputConfig();
+conf.filetype = 'pdf';
+conf.pdfOptions = new cop.config.PDFOptions();
+conf.pdfOptions.merge = true;
 
 // Let's assume that the Cloud Office Print server can't handle all the data at once,
 //  so we need to split our data into multiple requests.
