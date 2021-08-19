@@ -8,7 +8,8 @@ import * as cop from '../../src/index';
 const fetch = require('node-fetch').default;
 
 // Setup Cloud Office Print server
-const SERVER_URL = 'https://api.cloudofficeprint.com/';
+// const SERVER_URL = 'https://api.cloudofficeprint.com/';
+const SERVER_URL = 'http://apexofficeprint.com/dev/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
 const server = new cop.config.Server(
@@ -18,6 +19,10 @@ const server = new cop.config.Server(
 
 // Create the main element collection that contains all data
 const data = new cop.elements.ElementCollection();
+
+// Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
+const res = fetch('https://api.le-systeme-solaire.net/rest/bodies/')
+    .then((r: Response) => r.json());
 
 // Add the title to the data
 data.add(new cop.elements.Property('main_title', 'The solar system'));
@@ -32,27 +37,23 @@ data.add(new cop.elements.Hyperlink(
 // Process data: we only want planets
 const planetList: cop.elements.Element[] = [];
 (async () => {
-    // Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
-    await new Promise<void>((resolve) => fetch('https://api.le-systeme-solaire.net/rest/bodies/')
-        .then((r: Response) => r.json())
-        .then((json: {
-            bodies: {
-                [key: string]: string | number | boolean |
-                { [key: string]: unknown; };
-            }[];
-        }) => {
-            json.bodies.forEach(
-                (body: {
-                    [key: string]: string | number | boolean | { [key: string]: unknown }
-                }) => {
-                    if (body.isPlanet) {
-                        const collec = cop.elements.ElementCollection.fromMapping(body);
-                        planetList.push(collec);
-                    }
-                },
-            );
-            resolve();
-        }));
+    await res.then((json: {
+        bodies: {
+            [key: string]: string | number | boolean |
+            { [key: string]: unknown; };
+        }[];
+    }) => {
+        json.bodies.forEach(
+            (body: {
+                [key: string]: string | number | boolean | { [key: string]: unknown }
+            }) => {
+                if (body.isPlanet) {
+                    const collec = cop.elements.ElementCollection.fromMapping(body);
+                    planetList.push(collec);
+                }
+            },
+        );
+    });
 
     const planets = new cop.elements.ForEach('planets', planetList);
     data.add(planets);
