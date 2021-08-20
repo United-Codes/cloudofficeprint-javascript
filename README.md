@@ -5,6 +5,8 @@ This project provides a JavaScript/TypeScript interface for Cloud Office Print.
 After setting up an npm-project (`npm init` in your terminal), you can install the Cloud Office Print Java-/TypeScript package by typing in your terminal:  
 `npm install cloudofficeprint`
 
+The JavaScript/TypeScript SDK can also be used in a web browser by importing the file `bundle.js` from the browser-folder in your HTML file (see browser.html in the browser-folder for an example). The SDK is then available in the browser console as `cop`.
+
 # Usage
 1. Create a template (docx, xlsx, pptx, HTML, md, txt, csv), for the possible tags, click [here](http://www.cloudofficeprint.com/docs/#templates).
 2. Create the input data with this Java-/TypeScript SDK
@@ -93,7 +95,7 @@ To generate the documentation, you can run the following command in the project 
 npx typedoc --out docs src/index.ts
 ```
 
-# Tests 
+## Tests 
 There are tests for all classes and methods. The tests check if the JSON that needs to be sent to the server is as expected. To run the tests:
 1. Open a terminal in the parent directory of this project, which can be found on [Github](https://github.com/United-Codes/cloudofficeprint-javascript).
 2. Type in the terminal:
@@ -102,5 +104,17 @@ There are tests for all classes and methods. The tests check if the JSON that ne
     ```
 In the file `printjob.test.ts`, the tests for the `executeFullJson()`-function and for no input template are skipped because these tests need an API key to succeed. You can enable these tests by removing the `.skip` on the first line (as explained in the test file itself). The tests make use of the [jest](https://jestjs.io/)-package.
 
-# ESLint
+## Compiling
+To compile the TypeScript code to JavaScript code, type in the terminal:
+```bash
+npm run build
+```
+
+To compile the TypeScript code with webpack, so that the package can be used in a browser, type in the terminal:
+```bash
+npm run bundle
+```
+This will create a file `bundle.js` that includes the full project, which can be imported in an HTML file (see `browser.html` in the browser-folder).
+
+## ESLint
 Airbnb style guide is used in this project with some modifications (see .eslintrc.json).
