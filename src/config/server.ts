@@ -206,7 +206,7 @@ export class ServerConfig {
     copRemoteDebug: boolean;
 
     /**
-     * @param apiKey API key to use for communicating with an Cloud Office Print server. Optional.
+     * @param apiKey API key to use for communicating with a Cloud Office Print server. Optional.
      * @param logging Additional key/value pairs you would like to have logged into server
      *  printjob.log on the server. (To be used with the --enable_printlog server flag). Optional.
      * @param printer IP printer to use with this server.

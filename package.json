@@ -1,6 +1,6 @@
 {
-  "name": "apexofficeprint",
-  "version": "21.1",
+  "name": "cloudofficeprint",
+  "version": "21.2.0",
   "description": "JavaScript interface for Cloud Office Print",
   "main": "dist/src/index.js",
   "types": "dist/src",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/United-Codes/apexofficeprint-javascript.git"
+    "url": "git+https://github.com/United-Codes/cloudofficeprint-javascript.git"
   },
   "author": "United Codes",
   "license": "GNU",
   "bugs": {
-    "url": "https://github.com/United-Codes/apexofficeprint-javascript/issues"
+    "url": "https://github.com/United-Codes/cloudofficeprint-javascript/issues"
   },
-  "homepage": "https://github.com/United-Codes/apexofficeprint-javascript#readme",
+  "homepage": "https://github.com/United-Codes/cloudofficeprint-javascript#readme",
   "dependencies": {
     "@jest/globals": "^27.0.6",
     "https-proxy-agent": "^5.0.0",

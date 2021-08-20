@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>apexofficeprint</title>
-	<meta name="description" content="Documentation for apexofficeprint">
+	<title>cloudofficeprint</title>
+	<meta name="description" content="Documentation for cloudofficeprint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">apexofficeprint</a>
+					<a href="index.html" class="title">cloudofficeprint</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -50,7 +50,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>apexofficeprint</h1>
+			<h1>cloudofficeprint</h1>
 		</div>
 	</div>
 </header>
@@ -65,14 +65,14 @@
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h1>Installation</h1>
 				</a>
-				<p>To install the Cloud Office Print Java-/TypeScript package, you can type in your terminal:<br><code>npm install cloudofficeprint</code></p>
+				<p>After setting up an npm-project (<code>npm init</code> in your terminal), you can install the Cloud Office Print Java-/TypeScript package by typing in your terminal:<br><code>npm install cloudofficeprint</code></p>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h1>Usage</h1>
 				</a>
 				<ol>
 					<li>Create a template (docx, xlsx, pptx, HTML, md, txt, csv), for the possible tags, click <a href="http://www.cloudofficeprint.com/docs/#templates">here</a>.</li>
 					<li>Create the input data with this Java-/TypeScript SDK</li>
-					<li>Send template and data to an Cloud Office Print server and save the response to a file with this Java-/TypeScript SDK</li>
+					<li>Send template and data to a Cloud Office Print server and save the response to a file with this Java-/TypeScript SDK</li>
 				</ol>
 				<p>To see the JSON-data that is sent to the Cloud Office Print server, you can turn on verbose-mode by setting the argument <code>copVerbose</code> to <code>True</code> when creating a <code>PrintJob</code>.</p>
 				<a href="#quickstart-hello-world-example" id="quickstart-hello-world-example" style="color: inherit; text-decoration: none;">
@@ -81,8 +81,7 @@
 				<a href="#template-docx" id="template-docx" style="color: inherit; text-decoration: none;">
 					<h2>Template (docx)</h2>
 				</a>
-				<img src="./imgs/hello_world_template.png" width="600" />
-				<!-- TODO: change this link to Github link -->
+				<img src="https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/main/imgs/hello_world_template.png" width="600" />
 				<a href="#data" id="data" style="color: inherit; text-decoration: none;">
 					<h2>Data</h2>
 				</a>
@@ -110,7 +109,7 @@
 				<a href="#cloud-office-print-server" id="cloud-office-print-server" style="color: inherit; text-decoration: none;">
 					<h2>Cloud Office Print server</h2>
 				</a>
-				<p>The template and the data need to be sent to an Cloud Office Print server that merges both. This can be done by setting up the configuration for Cloud Office Print server and passing it to the print job instance. You can get your API key by signing up at <a href="https://www.cloudofficeprint.com">https://www.cloudofficeprint.com</a>.</p>
+				<p>The template and the data need to be sent to a Cloud Office Print server that merges both. This can be done by setting up the configuration for a Cloud Office Print server and passing it to the print job instance. You can get your API key by signing up at <a href="https://www.cloudofficeprint.com">https://www.cloudofficeprint.com</a>.</p>
 				<pre><code class="language-javascript"><span style="color: #000000">...</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">SERVER_URL</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;https://api.cloudofficeprint.com/&#039;</span><span style="color: #000000">;</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">API_KEY</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;YOUR_API_KEY&#039;</span><span style="color: #000000">; </span><span style="color: #008000">// Replace by your own API key</span>
@@ -137,8 +136,7 @@
 				<a href="#result" id="result" style="color: inherit; text-decoration: none;">
 					<h2>Result</h2>
 				</a>
-				<img src="./imgs/hello_world_output.png" width="600" />
-				<!-- TODO: change this link to Github link -->
+				<img src="https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/main/imgs/hello_world_output.png" width="600" />
 				<a href="#other-examples" id="other-examples" style="color: inherit; text-decoration: none;">
 					<h1>Other examples</h1>
 				</a>
@@ -154,24 +152,31 @@
 				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
 					<h1>Documentation</h1>
 				</a>
-				<p>The documentation for this SDK can be found inside the <code>docs/</code> folder on <a href="https://github.com/United-Codes/cloudofficeprint-javascript">Github</a>. If you want to generate this documentation yourself, you can run the following command in the project directory:<br><code>npx typedoc --out docs src/index.ts</code></p>
-				<p>The full Cloud Office Print documentation can be found at the <a href="https://www.cloudofficeprint.com/docs/">Cloud Office Print docs</a>.</p>
+				<p>The documentation for this SDK can be found inside the <code>docs/</code> folder on <a href="https://github.com/United-Codes/cloudofficeprint-javascript">Github</a>. Open the index.html file in a browser.</p>
+				<p>The documentation for Cloud Office Print can be found at the <a href="https://www.cloudofficeprint.com/docs/">Cloud Office Print docs</a>.</p>
+				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
+					<h1>Development</h1>
+				</a>
+				<a href="#documentation-1" id="documentation-1" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
+				<p>To generate the documentation, you can run the following command in the project directory:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npx typedoc --out docs src/index.ts</span>
+</code></pre>
 				<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
 					<h1>Tests</h1>
 				</a>
-				<p>To check if everything works, you can run the tests.</p>
-				<a href="#running-the-tests" id="running-the-tests" style="color: inherit; text-decoration: none;">
-					<h2>Running the tests</h2>
-				</a>
+				<p>There are tests for all classes and methods. The tests check if the JSON that needs to be sent to the server is as expected. To run the tests:</p>
 				<ol>
 					<li>Open a terminal in the parent directory of this project, which can be found on <a href="https://github.com/United-Codes/cloudofficeprint-javascript">Github</a>.</li>
-					<li>Type in the terminal: <code>npm run test</code></li>
+					<li>Type in the terminal:<pre><code class="language-bash"><span style="color: #000000">npm run </span><span style="color: #795E26">test</span>
+</code></pre>
+					In the file <code>printjob.test.ts</code>, the tests for the <code>executeFullJson()</code>-function and for no input template are skipped because these tests need an API key to succeed. You can enable these tests by removing the <code>.skip</code> on the first line (as explained in the test file itself). The tests make use of the <a href="https://jestjs.io/">jest</a>-package.</li>
 				</ol>
-				<p>In the file <code>printjob.test.ts</code>, the tests for the <code>executeFullJson()</code>-function and for no input template are skipped because these tests needs an API key to succeed. You can enable these tests by removing the <code>.skip</code> on the first line (as explained in the test file itself). The tests make use of the <a href="https://jestjs.io/">jest</a>-package.</p>
 				<a href="#eslint" id="eslint" style="color: inherit; text-decoration: none;">
 					<h1>ESLint</h1>
 				</a>
-				<p>Airbnb style guide is used in this project with some tweaks (see .eslintrc.json).</p>
+				<p>Airbnb style guide is used in this project with some modifications (see .eslintrc.json).</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

@@ -11,7 +11,7 @@ const fetch = require('node-fetch').default;
 export const STATIC_OPTS = {
     tool: 'javascript',
     // 'version': "18.2", # optional: version of Cloud Office Print JSON format
-    javascript_sdk_version: '21.1',
+    javascript_sdk_version: '21.2.0',
 };
 
 /**
@@ -92,7 +92,7 @@ export class PrintJob {
      * If you already have the JSON to be sent to the server
      *  (not just the data, but the entire JSON body including your API key and template),
      *  this package will wrap the request to the server.
-     * @param jsonData full JSON data that needs to be sent to an Cloud Office Print server
+     * @param jsonData full JSON data that needs to be sent to a Cloud Office Print server
      * @param server `Server`-object
      * @returns `Response`-object
      */

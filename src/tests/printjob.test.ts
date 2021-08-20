@@ -94,7 +94,6 @@ describe('Tests for class PrintJob', () => {
     test.skip('Test executeFullJson()', async () => {
         const jsonData = {
             aop_remote_debug: 'No',
-            apex_version: 'web editor 2',
             version: '3.0',
             tool: 'webeditor-new',
             prepend_files: [],
