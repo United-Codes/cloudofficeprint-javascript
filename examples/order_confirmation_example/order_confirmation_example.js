@@ -1,4 +1,4 @@
-import * as cop from "../../src/index";
+const cop = require("../../src/index");
 
 const TEMPLATE_PATH =
   "./examples/order_confirmation_example/data/template.docx";

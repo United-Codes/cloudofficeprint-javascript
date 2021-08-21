@@ -1,6 +1,6 @@
 /** This example shows how you can create a PDF signature with the Java-/TypeScript SDK. */
 
-import * as cop from "../../src/index";
+const cop = require("../../src/index");
 
 // Setup Cloud Office Print server
 const SERVER_URL = "https://api.cloudofficeprint.com/";

@@ -7,7 +7,7 @@
  * This example will take a minute to run.
  */
 
-import * as cop from "../../src/index";
+const cop = require("../../src/index");
 
 // Setup Cloud Office Print server
 const SERVER_URL = "https://api.cloudofficeprint.com/";
@@ -22,7 +22,7 @@ const server = new cop.config.Server(
 //  and we want to merge the resulting files into a PDF.
 // In this example, we are just going to repeat the property 'test' with value 'test' 100 times,
 //  but normally you would have different data for each customer.
-const data: { [key: string]: cop.elements.Element } = {};
+const data = {};
 for (let i = 0; i < 100; i += 1) {
   data[`file${i}`] = new cop.elements.Property("test", "test");
 }
@@ -36,11 +36,11 @@ conf.pdfOptions.merge = true;
 // Let's assume that the Cloud Office Print server can't handle all the data at once,
 //  so we need to split our data into multiple requests.
 // Let's use 10 requests with each 10 elements in the data (a total of 100 data elements).
-const outputFilesProm: Promise<cop.Response>[] = [];
+const outputFilesProm = [];
 (async () => {
   for (let i = 0; i < 10; i += 1) {
     // Create print job with 10 data elements
-    const d: { [key: string]: cop.elements.Element } = {};
+    const d = {};
     Object.entries(data)
       .slice(i * 10, (i + 1) * 10)
       .forEach(([key, value]) => {
@@ -62,7 +62,7 @@ const outputFilesProm: Promise<cop.Response>[] = [];
   const outputFiles = await Promise.all(outputFilesProm);
 
   // Wait for the buffers of the server responses
-  const buffersProm: Promise<ArrayBuffer>[] = [];
+  const buffersProm = [];
   outputFiles.forEach((res) => {
     buffersProm.push(res.buffer);
   });
@@ -70,7 +70,7 @@ const outputFilesProm: Promise<cop.Response>[] = [];
 
   // Create the final request to merge all the received (merged) PDFs
   // Create Resource-objects from the Response-objects in output_files
-  const resources: cop.resource.RawResource[] = [];
+  const resources = [];
   buffers.forEach((buff) => {
     resources.push(cop.Resource.fromRaw(Buffer.from(buff), "pdf"));
   });
