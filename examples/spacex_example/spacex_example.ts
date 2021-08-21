@@ -14,13 +14,12 @@ const server = new cop.config.Server(
 // Create data object that contains all the data needed to fill in the template
 const data = new cop.elements.ElementCollection();
 
+/**
+ * Return only the first sentence of an input.
+ * @param input The input that needs to be shortened
+ * @returns first sentence of input string
+ */
 function shortenDescription(input: string): string {
-  /**
-   * Return only the first sentence of an input.
-   * @param input The input that needs to be shortened
-   * @returns first sentence of input string
-   */
-
   return `${input.split(".")[0]}.`;
 }
 
