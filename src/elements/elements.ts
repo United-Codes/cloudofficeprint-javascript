@@ -940,7 +940,7 @@ export class COPChart extends Element {
                 string
             }
         }
-    } {
+        } {
         const ySeries: {
             name: string, data: (string | number |
             { [key: string]: string | number })[]

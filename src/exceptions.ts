@@ -20,8 +20,8 @@ export class COPError extends Error {
         const split = COPError.splitMessage(fullMessage);
         super(split[0]);
         [this.userMessage,
-        this.contactSupportMessage,
-        this.encodedMessage] = COPError.splitMessage(fullMessage);
+            this.contactSupportMessage,
+            this.encodedMessage] = COPError.splitMessage(fullMessage);
     }
 
     /**

@@ -153,7 +153,7 @@ export class Commands {
             [key: string]: string |
             { [key: string]: string } | boolean | number
         }
-    } {
+        } {
         const result: {
             [key: string]: {
                 [key: string]: string |
@@ -240,7 +240,7 @@ export class ServerConfig {
         [key: string]: string | { [key: string]: object } |
         { location: string; version: string; requester: string; jobName: string; } |
         { [key: string]: string | number | boolean | { [key: string]: string; }; }
-    } {
+        } {
         let result: {
             [key: string]: string | { [key: string]: object } |
             { location: string; version: string; requester: string; jobName: string; } |
