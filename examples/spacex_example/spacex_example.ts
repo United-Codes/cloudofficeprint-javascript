@@ -1,6 +1,6 @@
 import * as cop from '../../src/index';
 
-const fetch = require('node-fetch').default;
+const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 // Setup Cloud Office Print server
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
@@ -385,5 +385,5 @@ const shipsProm = new Promise<void>((resolve) => fetch('https://api.spacexdata.c
         // ), // For docx
     );
 
-    (await printjob.execute()).toFile('./examples/spacex_example/output');
+    await (await printjob.execute()).toFile('./examples/spacex_example/output');
 })();

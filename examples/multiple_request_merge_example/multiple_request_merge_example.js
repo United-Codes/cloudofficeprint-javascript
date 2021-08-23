@@ -7,15 +7,15 @@
  * This example will take a minute to run.
  */
 
-const cop = require("../../src/index");
+const cop = require('../../dist/src/index');
 
 // Setup Cloud Office Print server
-const SERVER_URL = "https://api.cloudofficeprint.com/";
-const API_KEY = "YOUR_API_KEY"; // Replace by your own API key
+const SERVER_URL = 'https://api.cloudofficeprint.com/';
+const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
 const server = new cop.config.Server(
-  SERVER_URL,
-  new cop.config.ServerConfig(API_KEY)
+    SERVER_URL,
+    new cop.config.ServerConfig(API_KEY),
 );
 
 // Let's say we have 100 different customers for who we need to fill in the template
@@ -24,12 +24,12 @@ const server = new cop.config.Server(
 //  but normally you would have different data for each customer.
 const data = {};
 for (let i = 0; i < 100; i += 1) {
-  data[`file${i}`] = new cop.elements.Property("test", "test");
+    data[`file${i}`] = new cop.elements.Property('test', 'test');
 }
 
 // Create output configuration: merge PDF
 const conf = new cop.config.OutputConfig();
-conf.filetype = "pdf";
+conf.filetype = 'pdf';
 conf.pdfOptions = new cop.config.PDFOptions();
 conf.pdfOptions.merge = true;
 
@@ -38,56 +38,59 @@ conf.pdfOptions.merge = true;
 // Let's use 10 requests with each 10 elements in the data (a total of 100 data elements).
 const outputFilesProm = [];
 (async () => {
-  for (let i = 0; i < 10; i += 1) {
-    // Create print job with 10 data elements
-    const d = {};
-    Object.entries(data)
-      .slice(i * 10, (i + 1) * 10)
-      .forEach(([key, value]) => {
-        d[key] = value;
-      });
-    const printjob = new cop.PrintJob(
-      d,
-      server,
-      cop.Resource.fromLocalFile(
-        "./examples/multiple_request_merge_example/template.docx"
-      ),
-      conf
+    for (let i = 0; i < 10; i += 1) {
+        // Create print job with 10 data elements
+        const d = {};
+        Object.entries(data).slice(i * 10, (i + 1) * 10).forEach(
+            ([key, value]) => {
+                d[key] = value;
+            },
+        );
+        const printjob = new cop.PrintJob(
+            d,
+            server,
+            cop.Resource.fromLocalFile('./examples/multiple_request_merge_example/template.docx'),
+            conf,
+        );
+
+        // Execute the print job and save the response to a list
+        outputFilesProm.push(printjob.execute());
+    }
+
+    const outputFiles = await Promise.all(outputFilesProm);
+
+    // Wait for the buffers of the server responses
+    const buffersProm = [];
+    outputFiles.forEach(
+        (res) => {
+            buffersProm.push(res.buffer);
+        },
+    );
+    const buffers = await Promise.all(buffersProm);
+
+    // Create the final request to merge all the received (merged) PDFs
+    // Create Resource-objects from the Response-objects in output_files
+    const resources = [];
+    buffers.forEach(
+        (buff) => {
+            resources.push(cop.Resource.fromRaw(
+                Buffer.from(buff),
+                'pdf',
+            ));
+        },
     );
 
-    // Execute the print job and save the response to a list
-    outputFilesProm.push(printjob.execute());
-  }
-
-  const outputFiles = await Promise.all(outputFilesProm);
-
-  // Wait for the buffers of the server responses
-  const buffersProm = [];
-  outputFiles.forEach((res) => {
-    buffersProm.push(res.buffer);
-  });
-  const buffers = await Promise.all(buffersProm);
-
-  // Create the final request to merge all the received (merged) PDFs
-  // Create Resource-objects from the Response-objects in output_files
-  const resources = [];
-  buffers.forEach((buff) => {
-    resources.push(cop.Resource.fromRaw(Buffer.from(buff), "pdf"));
-  });
-
-  // Create the print job for the last request that merges the 10 merged PDF's
-  // As the template we pick the first PDF in the resources-list
-  // The other 9 PDFs from the resources-list can be added to append_files (or prepend_files)
-  const printjob = new cop.PrintJob(
-    new cop.elements.Property("not_used", "not_used"),
-    server,
-    resources[0],
-    undefined,
-    undefined,
-    undefined,
-    resources.slice(1, resources.length)
-  );
-  (await printjob.execute()).toFile(
-    "./examples/multiple_request_merge_example/output"
-  );
+    // Create the print job for the last request that merges the 10 merged PDF's
+    // As the template we pick the first PDF in the resources-list
+    // The other 9 PDFs from the resources-list can be added to append_files (or prepend_files)
+    const printjob = new cop.PrintJob(
+        new cop.elements.Property('not_used', 'not_used'),
+        server,
+        resources[0],
+        undefined,
+        undefined,
+        undefined,
+        resources.slice(1, resources.length),
+    );
+    await (await printjob.execute()).toFile('./examples/multiple_request_merge_example/output');
 })();

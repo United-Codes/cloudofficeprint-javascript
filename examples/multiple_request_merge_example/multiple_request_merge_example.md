@@ -108,5 +108,5 @@ const printjob = new cop.PrintJob(
     undefined,
     resources.slice(1, resources.length),
 );
-(await printjob.execute()).toFile('./examples/multiple_request_merge_example/output');
+await (await printjob.execute()).toFile('./examples/multiple_request_merge_example/output');
 ```

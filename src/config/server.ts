@@ -1,6 +1,6 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
-const fetch = require('node-fetch').default;
+const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 /**
  * This class defines an IP-enabled printer to use with the Cloud Office Print server.
@@ -213,8 +213,8 @@ export class ServerConfig {
      *  See the Cloud Office Print docs for more info and supported printers. Optional.
      * @param commands Configuration for the various command hooks offered. Optional.
      * @param proxies Proxies for contacting the server URL, [as a dictionary](https://requests.readthedocs.io/en/master/user/advanced/#proxies). Optional.
-     * @param copRemoteDebug If True: The Cloud Office Print server will log the JSON into the database
-     *  and this can bee seen when logged into cloudofficeprint.com. Defaults to False.
+     * @param copRemoteDebug If True: The Cloud Office Print server will log the JSON into
+     *  the database and this can bee seen when logged into cloudofficeprint.com. Defaults to False.
      */
     constructor(
         apiKey?: string,

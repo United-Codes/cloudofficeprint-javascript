@@ -30,5 +30,5 @@ const printjob = new cop.PrintJob(
 
 // Execute print job
 (async () => {
-    (await printjob.execute()).toFile('./examples/pdfsignature_example/output');
+    await (await printjob.execute()).toFile('./examples/pdfsignature_example/output');
 })();
