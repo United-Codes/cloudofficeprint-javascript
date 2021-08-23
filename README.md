@@ -122,3 +122,21 @@ To check the project for ESLint errors or warnings, you can type in your termina
 ```bash
 eslint "src/**"
 ```
+
+## Publishing
+To publish this project to [Node Package Manager (npm)](https://www.npmjs.com/), follow these steps:
+1. Create an npm account [here](https://www.npmjs.com/signup).
+2. Create an npm organization [here](https://www.npmjs.com/signup?next=/org/create).
+3. In the parent directory of this project, type in your terminal:
+    ```bash
+    npm login
+    ```
+4. To publish with private visibility:
+    ```bash
+    npm publish
+    ```
+5. To publish with public visibility:
+    ```bash
+    npm publish --access public
+    ```
+More information can be found [here](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages).
