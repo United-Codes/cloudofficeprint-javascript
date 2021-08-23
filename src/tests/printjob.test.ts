@@ -87,7 +87,7 @@ describe('Tests for class PrintJob', () => {
         };
         expect(printjob.asDict()).toEqual(printjobExpected);
         // Commented out because you need an API key, but the saving to a file works as expected
-        // (await printjob.execute()).toFile('./data/tests/prepend_append_subtemplate_test');
+        // await (await printjob.execute()).toFile('./data/tests/prepend_append_subtemplate_test');
     });
     // Works as expected, this test is skipped because an API key is needed
     // Remove '.skip' and enter a valid API key if you want to test this yourself
@@ -111,7 +111,7 @@ describe('Tests for class PrintJob', () => {
             ],
             templates: [],
         };
-        (await cop.PrintJob.executeFullJson(
+        await (await cop.PrintJob.executeFullJson(
             jsonData,
             new cop.config.Server(
                 'https://api.cloudofficeprint.com/',
@@ -140,6 +140,6 @@ describe('Tests for class PrintJob', () => {
             collection,
             server,
         );
-        (await printjob.execute()).toFile('./output');
+        await (await printjob.execute()).toFile('./output');
     });
 });

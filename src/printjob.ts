@@ -6,7 +6,7 @@ import { COPError } from './exceptions';
 import { Resource } from './resource';
 import { Response } from './response';
 
-const fetch = require('node-fetch').default;
+const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 export const STATIC_OPTS = {
     tool: 'javascript',
@@ -17,7 +17,8 @@ export const STATIC_OPTS = {
 /**
  * A print job for a Cloud Office Print server.
  * This class contains all configuration options, resources, render elements ...
- * and the `PrintJob.execute` method to combine all these and send a request to the Cloud Office Print server.
+ * and the `PrintJob.execute` method to combine all these and send a request to
+ * the Cloud Office Print server.
  */
 export class PrintJob {
     data: Element | RESTSource | { [key: string]: Element };

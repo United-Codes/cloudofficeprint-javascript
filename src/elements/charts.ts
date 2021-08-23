@@ -385,7 +385,7 @@ export class ChartOptions {
         number |
         boolean |
         string
-    } {
+        } {
         const result: {
             [key: string]:
             { [key: string]: boolean | string | { [key: string]: string | boolean } } |
@@ -495,7 +495,7 @@ export abstract class Series {
     asDict(): {
         [key: string]: string | number | boolean |
         { [key: string]: string | number }[]
-    } {
+        } {
         const result: { [key: string]: string | { [key: string]: number | string }[] } = {
             data: this.data(),
         };
@@ -556,7 +556,7 @@ export class XYSeries extends Series {
     asDict(): {
         [key: string]: string | number | boolean |
         { [key: string]: string | number }[]
-    } {
+        } {
         const result: {
             [key: string]: string | number | boolean |
             { [key: string]: string | number }[]
@@ -605,7 +605,7 @@ export class PieSeries extends XYSeries {
     asDict(): {
         [key: string]: string | number | boolean |
         { [key: string]: string | number }[]
-    } {
+        } {
         const result: {
             [key: string]: string | number | boolean |
             { [key: string]: string | number }[]
@@ -657,7 +657,7 @@ export class AreaSeries extends XYSeries {
     asDict(): {
         [key: string]: string | number | boolean |
         { [key: string]: string | number }[]
-    } {
+        } {
         const result: {
             [key: string]: string | number | boolean |
             { [key: string]: string | number }[]
@@ -724,7 +724,7 @@ export class LineSeries extends XYSeries {
     asDict(): {
         [key: string]: string | number | boolean |
         { [key: string]: string | number }[]
-    } {
+        } {
         const result: {
             [key: string]: string | number | boolean |
             { [key: string]: string | number }[]
@@ -933,7 +933,7 @@ export class LineChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             lines: Array.from(this.lines.map((line) => line.asDict())),
             type: 'line',
@@ -964,7 +964,7 @@ export class BarChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             bars: Array.from(this.bars.map((bar) => bar.asDict())),
             type: 'bar',
@@ -995,7 +995,7 @@ export class BarStackedChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             bars: Array.from(this.bars.map((bar) => bar.asDict())),
             type: 'barStacked',
@@ -1027,7 +1027,7 @@ export class BarStackedPercentChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             bars: Array.from(this.bars.map((bar) => bar.asDict())),
             type: 'barStackedPercent',
@@ -1058,7 +1058,7 @@ export class ColumnChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             columns: Array.from(this.columns.map((col) => col.asDict())),
             type: 'column',
@@ -1089,7 +1089,7 @@ export class ColumnStackedChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             columns: Array.from(this.columns.map((col) => col.asDict())),
             type: 'columnStacked',
@@ -1121,7 +1121,7 @@ export class ColumnStackedPercentChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             columns: Array.from(this.columns.map((col) => col.asDict())),
             type: 'columnStackedPercent',
@@ -1152,7 +1152,7 @@ export class PieChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             pies: Array.from(this.pies.map((pie) => pie.asDict())),
             type: 'pie',
@@ -1183,7 +1183,7 @@ export class Pie3DChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             pies: Array.from(this.pies.map((pie) => pie.asDict())),
             type: 'pie3d',
@@ -1214,7 +1214,7 @@ export class DoughnutChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             doughnuts: Array.from(this.pies.map((pie) => pie.asDict())),
             type: 'doughnut',
@@ -1245,7 +1245,7 @@ export class RadarChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             radars: Array.from(this.radars.map((rad) => rad.asDict())),
             type: 'radar',
@@ -1276,7 +1276,7 @@ export class AreaChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             areas: Array.from(this.areas.map((ar) => ar.asDict())),
             type: 'area',
@@ -1307,7 +1307,7 @@ export class ScatterChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             scatters: Array.from(this.scatters.map((scat) => scat.asDict())),
             type: 'scatter',
@@ -1338,7 +1338,7 @@ export class BubbleChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             bubbles: Array.from(this.bubbles.map((bub) => bub.asDict())),
             type: 'bubble',
@@ -1369,7 +1369,7 @@ export class StockChart extends Chart {
     asDict(): {
         [key: string]: string |
         { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
-    } {
+        } {
         return this.getDict({
             stocks: Array.from(this.stocks.map((bub) => bub.asDict())),
             type: 'stock',

@@ -186,7 +186,7 @@ const printjob = new cop.PrintJob(data, server, template, conf);
 (async () => {
     try {
         const res = await printjob.execute();
-        res.toFile('./examples/order_confirmation_example/output/output'); // Save response to output file
+        await res.toFile('./examples/order_confirmation_example/output/output'); // Save response to output file
     } catch (err) {
         throw new cop.exceptions.COPError(err);
     }

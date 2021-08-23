@@ -65,7 +65,8 @@ export abstract class CloudAccessToken {
 
     /**
      * Create a token from FTP info.
-     * When an argument is / defaults to None, no data about it is sent to the Cloud Office Print server.
+     * When an argument is / defaults to None, no data about it is sent to the
+     * Cloud Office Print server.
      * The Cloud Office Print server will then fill in default values.
      * @param host host name or IP address
      * @param port port to use; optional
@@ -79,7 +80,8 @@ export abstract class CloudAccessToken {
 
     /**
      * Create a token from SFTP info.
-     * When an argument is / defaults to None, no data about it is sent to the Cloud Office Print server.
+     * When an argument is / defaults to None, no data about it is sent to the
+     * Cloud Office Print server.
      * The Cloud Office Print server will then fill in default values.
      * @param host host name or IP address
      * @param port port to use; optional
@@ -114,7 +116,9 @@ export class OAuthToken extends CloudAccessToken {
      * @returns dict representation for this cloud access token
      */
     asDict(): { [key: string]: string | { [key: string]: string | number } } {
-        const result: { [key: string]: string | { [key: string]: string | number } } = super.asDict();
+        const result: {
+            [key: string]: string | { [key: string]: string | number }
+        } = super.asDict();
         result.cloud_access_token = this.token;
         return result;
     }
@@ -142,7 +146,9 @@ export class AWSToken extends CloudAccessToken {
      * @returns dict representation for this cloud access token
      */
     asDict(): { [key: string]: string | { [key: string]: string | number } } {
-        const result: { [key: string]: string | { [key: string]: string | number } } = super.asDict();
+        const result: {
+            [key: string]: string | { [key: string]: string | number }
+        } = super.asDict();
         result.cloud_access_token = {
             access_key: this.keyId,
             secret_access_key: this.secretKey,
@@ -198,7 +204,9 @@ export class FTPToken extends CloudAccessToken {
             cloudAccessToken.password = this.password;
         }
 
-        const result: { [key: string]: string | { [key: string]: string | number } } = super.asDict();
+        const result: {
+            [key: string]: string | { [key: string]: string | number }
+        } = super.asDict();
         result.cloud_access_token = cloudAccessToken;
         return result;
     }

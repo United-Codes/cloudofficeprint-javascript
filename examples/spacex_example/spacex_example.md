@@ -500,7 +500,7 @@ First we create a new Java-/TypeScript file and import the Cloud Office Print li
 
 ```typescript
 import * as cop from 'cloudofficeprint';
-const fetch = require('node-fetch').default;
+const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 ```
 
 Then we need to set up the Cloud Office Print server where we will send our template and data to:
@@ -947,6 +947,6 @@ We loaded the template from a local file and passed in our data element collecti
 
 Finally we actually send this printjob to a Cloud Office Print server and save the response into our output file:
 ```typescript
-(await printjob.execute()).toFile('./examples/spacex_example/output');
+await (await printjob.execute()).toFile('./examples/spacex_example/output');
 ```
 The resulting file can now be found in the specified folder. We will not add the result in this markdown file, but the result can be seen in the files `output.pptx`, `output.xlsx` and `output.docx` which can be found in the folder `examples/spacex_example`.

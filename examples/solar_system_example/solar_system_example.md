@@ -101,7 +101,7 @@ The beauty of Cloud Office Print is that the data created by the Python SDK can 
 First we create a new file and import the Cloud Office Print library:
 ```typescript
 import * as cop from 'cloudofficeprint';
-const fetch = require('node-fetch').default;
+const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 ```
 Then we need to set up the Cloud Office Print server where we will send our template and data to:
 ```typescript
@@ -242,8 +242,8 @@ We loaded the template from a local file and passed in our data element collecti
 
 Finally we actually send this printjob to a Cloud Office Print server and save the response into our output file:
 ```typescript
-(await printjob.execute()).toFile('./examples/solar_system_example/pptx/output');
-// (await printjob.execute()).toFile('./examples/solar_system_example/docx/output');
+await (await printjob.execute()).toFile('./examples/solar_system_example/pptx/output');
+// await (await printjob.execute()).toFile('./examples/solar_system_example/docx/output');
 ```
 The resulting file can now be found in the specified folder.
 

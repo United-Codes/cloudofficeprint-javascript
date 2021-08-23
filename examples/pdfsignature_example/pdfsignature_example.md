@@ -52,7 +52,7 @@ const printjob = new cop.PrintJob(
 
 // Execute print job
 (async () => {
-    (await printjob.execute()).toFile('./examples/pdfsignature_example/output');
+    await (await printjob.execute()).toFile('./examples/pdfsignature_example/output');
 })();
 ```
 The resulting file will have the invisible signature which can be seen with software like [Adobe Acrobat Reader](https://get.adobe.com/nl/reader/otherversions/).

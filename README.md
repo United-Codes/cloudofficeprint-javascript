@@ -117,4 +117,8 @@ npm run bundle
 This will create a file `bundle.js` that includes the full project, which can be imported in an HTML file (see `browser.html` in the browser-folder).
 
 ## ESLint
-Airbnb style guide is used in this project with some modifications (see .eslintrc.json).
+Airbnb style guide is used in this project with some modifications (see .eslintrc.json).  
+To check the project for ESLint errors or warnings, you can type in your terminal:
+```bash
+eslint "src/**"
+```

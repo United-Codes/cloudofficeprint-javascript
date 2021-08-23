@@ -134,11 +134,13 @@ export class PDFOptions {
             result.output_copies = this.copies;
         }
         if (this.pageMargin !== undefined) {
-            // For Cloud Office Print versions later than 21.1.1, output_page_margin will also be supported
+            // For Cloud Office Print versions later than 21.1.1 output_page_margin will
+            // also be supported
             result.page_margin = this.pageMargin;
         }
         if (this.landscape !== undefined) {
-            // For Cloud Office Print versions later than 21.1.1, output_page_orientation will also be supported
+            // For Cloud Office Print versions later than 21.1.1, output_page_orientation will
+            // also be supported
             result.page_orientation = this.pageOrientation();
         }
         if (this.pageFormat !== undefined) {
