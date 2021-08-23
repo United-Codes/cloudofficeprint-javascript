@@ -80,6 +80,7 @@ export abstract class Resource {
         return new Base64Resource(base64string, filetype);
     }
 
+    /* cop-node-only-start */
     /**
      * Create a Base64Resource with the contents of a local file.
      * The filetype is determined by the extension of the file.
@@ -90,6 +91,7 @@ export abstract class Resource {
         const base64string: string = ownUtils.readFileAsBase64(localPath);
         return new Base64Resource(base64string, ownUtils.pathToExtension(localPath));
     }
+    /* cop-node-only-end */
 
     /**
      * Create a ServerPathResource targeting a file on the server.

@@ -42,6 +42,7 @@ export class Response {
         return Buffer.from(await this.buffer).toString();
     }
 
+    /* cop-node-only-start */
     /**
      * Write the response to a file at the given path without extension.
      * If the given file path does not contain an extension,
@@ -62,4 +63,5 @@ export class Response {
             if (err) throw err;
         });
     }
+    /* cop-node-only-end */
 }
