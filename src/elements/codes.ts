@@ -11,9 +11,8 @@ export abstract class Code extends Element {
      * @param name The name for this Code object (Cloud Office Print tag).
      * @param data The data for this Code object.
      * @param type For the different types of QR-codes and barcodes, we refer to the
-     *  [Cloud Office Print documentation](https://www.cloudofficeprint.com/docs/#barcode-qrcode-tags).
+     *  Cloud Office Print documentation.
      */
-    // TODO: change website for type argument?
     constructor(name: string, data: string, type: string) {
         super(name);
         this.data = data;
@@ -81,7 +80,7 @@ export class BarCode extends Code {
      * @param name The name for this Code object (Cloud Office Print tag).
      * @param data The data for this Code object.
      * @param type For the different types of QR-codes and barcodes, we refer to the
-     *  [Cloud Office Print documentation](https://www.cloudofficeprint.com/docs/#barcode-qrcode-tags).
+     *  Cloud Office Print documentation.
      * @param height The height for the generated code. The default is 200 for QR,
      *  50 for the rest. Optional.
      * @param width The width for the generated code. The default is 200. Optional.
@@ -107,7 +106,6 @@ export class BarCode extends Code {
      *  Please visit https://github.com/bwipp/postscriptbarcode/wiki/Symbologies-Reference
      *  for all the options. Optional.
      */
-    // TODO: change website for type argument?
     constructor(
         name: string,
         data: string,
@@ -209,9 +207,8 @@ export class QRCode extends Code {
      * @param name The name for this Code object (Cloud Office Print tag).
      * @param data The data for this Code object.
      * @param type For the different types of QR-codes and barcodes, we refer to the
-     *  [Cloud Office Print documentation](https://www.cloudofficeprint.com/docs/#barcode-qrcode-tags).
+     *  Cloud Office Print documentation.
      */
-    // TODO: change website for type argument?
     constructor(name: string, data: string, type: string) {
         super(name, data, type);
     }

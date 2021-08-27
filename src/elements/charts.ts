@@ -695,9 +695,8 @@ export class LineSeries extends XYSeries {
      *  (in em, pt, px, cm or in), by default: automatic. Optional.
      * @param lineWidth Thickness of the connecting line in em, pt, px, cm or in. Optional.
      * @param lineStyle Style of the line. Supported options can be found online on the
-     *  [Cloud Office Print documentation](https://www.cloudofficeprint.com/docs/#line). Optional.
+     *  Cloud Office Print documentation. Optional.
      */
-    // TODO: change website for lineStyle argument?
     constructor(
         x: (number | string)[],
         y: number[],

@@ -66,6 +66,7 @@
 					<h1>Installation</h1>
 				</a>
 				<p>After setting up an npm-project (<code>npm init</code> in your terminal), you can install the Cloud Office Print Java-/TypeScript package by typing in your terminal:<br><code>npm install cloudofficeprint</code></p>
+				<p>The JavaScript/TypeScript SDK can also be used in a web browser by importing the file <code>bundle.js</code> from the browser-folder in your HTML file (see browser.html in the browser-folder for an example). The SDK is then available in the browser console as <code>cop</code>.</p>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h1>Usage</h1>
 				</a>
@@ -164,7 +165,7 @@
 				<pre><code class="language-bash"><span style="color: #000000">npx typedoc --out docs src/index.ts</span>
 </code></pre>
 				<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
-					<h1>Tests</h1>
+					<h2>Tests</h2>
 				</a>
 				<p>There are tests for all classes and methods. The tests check if the JSON that needs to be sent to the server is as expected. To run the tests:</p>
 				<ol>
@@ -173,10 +174,39 @@
 </code></pre>
 					In the file <code>printjob.test.ts</code>, the tests for the <code>executeFullJson()</code>-function and for no input template are skipped because these tests need an API key to succeed. You can enable these tests by removing the <code>.skip</code> on the first line (as explained in the test file itself). The tests make use of the <a href="https://jestjs.io/">jest</a>-package.</li>
 				</ol>
-				<a href="#eslint" id="eslint" style="color: inherit; text-decoration: none;">
-					<h1>ESLint</h1>
+				<a href="#compiling" id="compiling" style="color: inherit; text-decoration: none;">
+					<h2>Compiling</h2>
 				</a>
-				<p>Airbnb style guide is used in this project with some modifications (see .eslintrc.json).</p>
+				<p>To compile the TypeScript code to JavaScript code, type in the terminal:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm run build</span>
+</code></pre>
+				<p>To compile the TypeScript code with webpack, so that the package can be used in a browser, type in the terminal:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm run bundle</span>
+</code></pre>
+				<p>This will create a file <code>bundle.js</code> that includes the full project, which can be imported in an HTML file (see <code>browser.html</code> in the browser-folder).</p>
+				<a href="#eslint" id="eslint" style="color: inherit; text-decoration: none;">
+					<h2>ESLint</h2>
+				</a>
+				<p>Airbnb style guide is used in this project with some modifications (see .eslintrc.json).<br>To check the project for ESLint errors or warnings, you can type in your terminal:</p>
+				<pre><code class="language-bash"><span style="color: #000000">eslint </span><span style="color: #A31515">&quot;src/**&quot;</span>
+</code></pre>
+				<a href="#publishing" id="publishing" style="color: inherit; text-decoration: none;">
+					<h2>Publishing</h2>
+				</a>
+				<p>To publish this project to <a href="https://www.npmjs.com/">Node Package Manager (npm)</a>, follow these steps:</p>
+				<ol>
+					<li>Create an npm account <a href="https://www.npmjs.com/signup">here</a>.</li>
+					<li>Create an npm organization <a href="https://www.npmjs.com/signup?next=/org/create">here</a>.</li>
+					<li>In the parent directory of this project, type in your terminal:<pre><code class="language-bash"><span style="color: #000000">npm login</span>
+</code></pre>
+					</li>
+					<li>To publish with private visibility:<pre><code class="language-bash"><span style="color: #000000">npm publish</span>
+</code></pre>
+					</li>
+					<li>To publish with public visibility:<pre><code class="language-bash"><span style="color: #000000">npm publish --access public</span>
+</code></pre>
+					More information can be found <a href="https://docs.npmjs.com/creating-and-publishing-scoped-public-packages">here</a>.</li>
+				</ol>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
