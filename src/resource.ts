@@ -19,14 +19,20 @@ import * as ownUtils from './own_utils/index';
 export abstract class Resource {
     data: string | Buffer;
     filetype: string;
+    startDelimiter: string | undefined;
+    endDelimiter: string | undefined;
 
     /**
      * @param data the data for this resource
      * @param filetype the filetype of this resource
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      */
-    constructor(data: string | Buffer, filetype: string) {
+    constructor(data: string | Buffer, filetype: string, startDelimiter?: string, endDelimiter?: string) {
         this.data = data;
         this.filetype = filetype;
+        this.startDelimiter = startDelimiter;
+        this.endDelimiter = endDelimiter;
     }
 
     /**
@@ -41,9 +47,11 @@ export abstract class Resource {
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): {[key: string]: string} {
+    templateDict(): { 'template_type': string, "start_delimiter"?: string, "end_delimiter"?: string } {
         return {
             template_type: this.filetype,
+            start_delimiter: this.startDelimiter,
+            end_delimiter: this.endDelimiter
         };
     }
 
@@ -132,9 +140,11 @@ export class RawResource extends Resource {
     /**
      * @param rawData raw data as a Buffer
      * @param filetype file type (extension)
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      */
-    constructor(rawData: Buffer, filetype: string) {
-        super(rawData, filetype);
+    constructor(rawData: Buffer, filetype: string, startDelimiter?: string, endDelimiter?: string) {
+        super(rawData, filetype, startDelimiter, endDelimiter);
     }
 
     /**
@@ -149,10 +159,12 @@ export class RawResource extends Resource {
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): { 'template_type': string, 'file': string } {
+    templateDict(): { 'template_type': string, 'file': string, "start_delimiter"?: string, "end_delimiter"?: string } {
         return {
             template_type: this.filetype,
             file: this.base64(),
+            start_delimiter: this.startDelimiter,
+            end_delimiter: this.endDelimiter
         };
     }
 
@@ -178,19 +190,23 @@ export class Base64Resource extends Resource {
     /**
      * @param base64string base64 encoded data
      * @param filetype file type (extension)
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      */
-    constructor(base64string: string, filetype: string) {
-        super(base64string, filetype);
+    constructor(base64string: string, filetype: string, startDelimiter?: string, endDelimiter?: string) {
+        super(base64string, filetype, startDelimiter, endDelimiter);
     }
 
     /**
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): { 'template_type': string, 'file': string } {
+    templateDict(): { 'template_type': string, 'file': string, "start_delimiter"?: string, "end_delimiter"?: string } {
         return {
             template_type: this.filetype,
             file: this.data as string,
+            start_delimiter: this.startDelimiter,
+            end_delimiter: this.endDelimiter
         };
     }
 
@@ -215,19 +231,23 @@ export class Base64Resource extends Resource {
 export class ServerPathResource extends Resource {
     /**
      * @param serverPath path on the server to target
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      */
-    constructor(serverPath: string) {
-        super(serverPath, ownUtils.pathToExtension(serverPath));
+    constructor(serverPath: string, startDelimiter?: string, endDelimiter?: string) {
+        super(serverPath, ownUtils.pathToExtension(serverPath), startDelimiter, endDelimiter);
     }
 
     /**
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): { 'template_type': string, 'filename': string } {
+    templateDict(): { 'template_type': string, 'filename': string, "start_delimiter"?: string, "end_delimiter"?: string } {
         return {
             template_type: this.filetype,
             filename: this.data as string,
+            start_delimiter: this.startDelimiter,
+            end_delimiter: this.endDelimiter
         };
     }
 
@@ -253,19 +273,23 @@ export class URLResource extends Resource {
     /**
      * @param url URL location of the file
      * @param filetype file type (extension)
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      */
-    constructor(url: string, filetype: string) {
-        super(url, filetype);
+    constructor(url: string, filetype: string, startDelimiter?: string, endDelimiter?: string) {
+        super(url, filetype, startDelimiter, endDelimiter);
     }
 
     /**
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): { 'template_type': string, 'url': string } {
+    templateDict(): { 'template_type': string, 'url': string, "start_delimiter"?: string, "end_delimiter"?: string } {
         return {
             template_type: this.filetype,
             url: this.data as string,
+            start_delimiter: this.startDelimiter,
+            end_delimiter: this.endDelimiter
         };
     }
 
@@ -294,9 +318,11 @@ export class HTMLResource extends Resource {
      * @param htmlstring HTML input in plain text
      * @param landscape Whether or not the HTML should be rendered as landscape-oriented page.
      *  Defaults to false.
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      */
-    constructor(htmlstring: string, landscape: boolean = false) {
-        super(htmlstring, 'html');
+    constructor(htmlstring: string, landscape: boolean = false, startDelimiter?: string, endDelimiter?: string) {
+        super(htmlstring, 'html', startDelimiter, endDelimiter);
         this.landscape = landscape;
     }
 
@@ -315,10 +341,12 @@ export class HTMLResource extends Resource {
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): {[key: string]: string} {
-        const result: {[key: string]: string} = {
+    templateDict(): { 'template_type': string, "html_template_content": string, "orientation"?: string, "start_delimiter"?: string, "end_delimiter"?: string } {
+        const result: { 'template_type': string, "html_template_content": string, "orientation"?: string, "start_delimiter"?: string, "end_delimiter"?: string } = {
             template_type: this.filetype,
             html_template_content: this.data as string,
+            start_delimiter: this.startDelimiter,
+            end_delimiter: this.endDelimiter
         };
         if (this.orientation()) {
             // Update result
