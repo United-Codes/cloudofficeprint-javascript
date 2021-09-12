@@ -81,20 +81,39 @@ export abstract class Resource {
      * Create a RawResource from raw file data and a file type (extension)
      * @param rawData raw data as a Buffer object
      * @param filetype file type (extension)
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromRaw(rawData: Buffer, filetype: string): RawResource {
-        return new RawResource(rawData, filetype);
+    static fromRaw(
+        rawData: Buffer,
+        filetype: string,
+        startDelimiter?: string,
+        endDelimiter?: string,
+    ): RawResource {
+        return new RawResource(rawData, filetype, startDelimiter, endDelimiter);
     }
 
     /**
      * Create a Base64Resource from a base64 string and a file type (extension)
      * @param base64string base64 encoded representation of a file
      * @param filetype file type (extension)
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromBase64(base64string: string, filetype: string): Base64Resource {
-        return new Base64Resource(base64string, filetype);
+    static fromBase64(
+        base64string: string,
+        filetype: string,
+        startDelimiter?: string,
+        endDelimiter?: string,
+    ): Base64Resource {
+        return new Base64Resource(
+            base64string,
+            filetype,
+            startDelimiter,
+            endDelimiter,
+        );
     }
 
     /* cop-node-only-start */
@@ -102,13 +121,20 @@ export abstract class Resource {
      * Create a Base64Resource with the contents of a local file.
      * The filetype is determined by the extension of the file.
      * @param localPath path to local file
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromLocalFile(localPath: string): Base64Resource {
-        const base64string: string = ownUtils.readFileAsBase64(localPath);
+    static fromLocalFile(
+        localPath: string,
+        startDelimiter?: string,
+        endDelimiter?: string,
+    ): Base64Resource {
         return new Base64Resource(
-            base64string,
+            ownUtils.readFileAsBase64(localPath),
             ownUtils.pathToExtension(localPath),
+            startDelimiter,
+            endDelimiter,
         );
     }
     /* cop-node-only-end */
@@ -117,20 +143,33 @@ export abstract class Resource {
      * Create a ServerPathResource targeting a file on the server.
      * The filetype is determined by the extension of the file.
      * @param serverPath location of target file on the server
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromServerPath(serverPath: string): ServerPathResource {
-        return new ServerPathResource(serverPath);
+    static fromServerPath(
+        serverPath: string,
+        startDelimiter?: string,
+        endDelimiter?: string,
+    ): ServerPathResource {
+        return new ServerPathResource(serverPath, startDelimiter, endDelimiter);
     }
 
     /**
      * Create a URLResource targeting the file at url with given filetype (extension).
      * @param url file url
      * @param filetype file type (extension)
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromUrl(url: string, filetype: string): URLResource {
-        return new URLResource(url, filetype);
+    static fromUrl(
+        url: string,
+        filetype: string,
+        startDelimiter?: string,
+        endDelimiter?: string,
+    ): URLResource {
+        return new URLResource(url, filetype, startDelimiter, endDelimiter);
     }
 
     /**
@@ -138,13 +177,22 @@ export abstract class Resource {
      * Landscape is not supported for prepend/append sources, only for template resources.
      * @param htmlstring html content
      * @param landscape Whether or not the orientation needs to be landscape. Defaults to false.
+     * @param startDelimiter the starting delimiter
+     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
     static fromHtml(
         htmlstring: string,
         landscape: boolean = false,
+        startDelimiter?: string,
+        endDelimiter?: string,
     ): HTMLResource {
-        return new HTMLResource(htmlstring, landscape);
+        return new HTMLResource(
+            htmlstring,
+            landscape,
+            startDelimiter,
+            endDelimiter,
+        );
     }
 }
 
