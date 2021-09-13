@@ -1,6 +1,5 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
-
-const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
+import fetch from 'node-fetch';
 
 /**
  * This class defines an IP-enabled printer to use with the Cloud Office Print server.
@@ -393,6 +392,24 @@ export class Server {
             { agent: proxy },
         );
         return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/verify_template_hash?hash=hashcode.
+     * @param hashcode md5 hash of file
+     * @returns whether the hash is valid and present in cache.
+     */
+    async verifyTemplateHash(hashcode: string): Promise<boolean> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(
+            new URL(`verify_template_hash?hash=${hashcode}`, this.url).href,
+            { agent: proxy },
+        );
+        return (await response.json()).valid;
     }
 
     /**
