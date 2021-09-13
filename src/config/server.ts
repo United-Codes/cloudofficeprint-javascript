@@ -17,7 +17,12 @@ export class Printer {
      * @param requester the name of the requester; defaults to 'Cloud Office Print'
      * @param jobName the name of the print job; defaults to 'Cloud Office Print'
      */
-    constructor(location: string, version: string, requester: string = 'Cloud Office Print', jobName: string = 'Cloud Office Print') {
+    constructor(
+        location: string,
+        version: string,
+        requester: string = 'Cloud Office Print',
+        jobName: string = 'Cloud Office Print',
+    ) {
         this.location = location;
         this.version = version;
         this.requester = requester;
@@ -28,7 +33,12 @@ export class Printer {
      * The dict representation of this Printer object.
      * @returns The dict representation of this Printer object.
      */
-    asDict(): { 'location': string, 'version': string, 'requester': string, 'job_name': string } {
+    asDict(): {
+        location: string;
+        version: string;
+        requester: string;
+        job_name: string;
+    } {
         return {
             location: this.location,
             version: this.version,
@@ -43,7 +53,7 @@ export class Printer {
  */
 export class Command {
     command: string;
-    parameters: { [key: string]: string } | undefined;
+    parameters?: { [key: string]: string };
 
     /**
      * @param command The name of the command to execute.
@@ -59,10 +69,8 @@ export class Command {
      * The dict representation of this command.
      * @returns The dict representation of this command.
      */
-    asDict(): { [key: string]: string | { [key: string]: string } } {
-        const result: { [key: string]: string | { [key: string]: string } } = {
-            command: this.command,
-        };
+    asDict(): { [key: string]: any } {
+        const result: { [key: string]: any } = { command: this.command };
 
         if (this.parameters !== undefined) {
             result.command_parameters = this.parameters;
@@ -76,13 +84,13 @@ export class Command {
      *  This is used for pre-conversion commands.
      * @returns dict representation of this command, with 'pre' prepended to the keys
      */
-    asDictPre(): { [key: string]: string | { [key: string]: string } } {
-        const result: { [key: string]: string | { [key: string]: string } } = {};
+    asDictPre(): { [key: string]: any } {
+        const result: { [key: string]: any } = {};
 
         // prepend 'pre_' to the keys
-        Object.entries(this.asDict()).forEach(
-            ([key, val]) => { result[`pre_${key}`] = val; },
-        );
+        Object.entries(this.asDict()).forEach(([key, val]) => {
+            result[`pre_${key}`] = val;
+        });
 
         return result;
     }
@@ -92,13 +100,13 @@ export class Command {
      *  This is used for post-process, post-conversion and post-merge commands.
      * @returns dict representation of this command, with 'post' prepended to the keys
      */
-    asDictPost(): { [key: string]: string | { [key: string]: string } } {
-        const result: { [key: string]: string | { [key: string]: string } } = {};
+    asDictPost(): { [key: string]: any } {
+        const result: { [key: string]: any } = {};
 
         // prepend 'post_' to the keys
-        Object.entries(this.asDict()).forEach(
-            ([key, val]) => { result[`post_${key}`] = val; },
-        );
+        Object.entries(this.asDict()).forEach(([key, val]) => {
+            result[`post_${key}`] = val;
+        });
 
         return result;
     }
@@ -108,12 +116,12 @@ export class Command {
  * Command hook configuration class.
  */
 export class Commands {
-    postProcess: Command | undefined;
-    postProcessReturn: boolean | undefined;
-    postProcessDeleteDelay: number | undefined;
-    preConversion: Command | undefined;
-    postConversion: Command | undefined;
-    postMerge: Command | undefined;
+    postProcess?: Command;
+    postProcessReturn?: boolean;
+    postProcessDeleteDelay?: number;
+    preConversion?: Command;
+    postConversion?: Command;
+    postMerge?: Command;
 
     /**
      * @param postProcess Command to run after the given request has been processed
@@ -148,24 +156,11 @@ export class Commands {
      * The dict representation of this Commands object.
      * @returns The dict representation of this Commands object.
      */
-    asDict(): {
-        [key: string]: {
-            [key: string]: string |
-            { [key: string]: string } | boolean | number
-        }
-        } {
-        const result: {
-            [key: string]: {
-                [key: string]: string |
-                { [key: string]: string } | boolean | number
-            }
-        } = {};
+    asDict(): { [key: string]: any } {
+        const result: { [key: string]: any } = {};
 
         if (this.postProcess !== undefined) {
-            const toAdd: {
-                [key: string]: string |
-                { [key: string]: string } | boolean | number
-            } = this.postProcess.asDict();
+            const toAdd: { [key: string]: any } = this.postProcess.asDict();
             if (this.postProcessReturn !== undefined) {
                 toAdd.return_output = this.postProcessReturn;
             }
@@ -175,7 +170,10 @@ export class Commands {
             result.post_process = toAdd;
         }
 
-        if (this.preConversion !== undefined || this.postConversion !== undefined) {
+        if (
+            this.preConversion !== undefined ||
+            this.postConversion !== undefined
+        ) {
             let toAdd = {};
             if (this.preConversion !== undefined) {
                 toAdd = { ...toAdd, ...this.preConversion.asDictPre() };
@@ -198,11 +196,11 @@ export class Commands {
  * Class for configuring the server options.
  */
 export class ServerConfig {
-    apiKey: string | undefined;
-    logging: { [key: string]: object } | undefined;
-    printer: Printer | undefined;
-    commands: Commands | undefined;
-    proxies: { [key: string]: string } | undefined;
+    apiKey?: string;
+    logging?: { [key: string]: object };
+    printer?: Printer;
+    commands?: Commands;
+    proxies?: { [key: string]: string };
     copRemoteDebug: boolean;
 
     /**
@@ -236,22 +234,15 @@ export class ServerConfig {
      * The dict representation of these server configurations.
      * @returns The dict representation of these server configurations.
      */
-    asDict(): {
-        [key: string]: string | { [key: string]: object } |
-        { location: string; version: string; requester: string; jobName: string; } |
-        { [key: string]: string | number | boolean | { [key: string]: string; }; }
-        } {
-        let result: {
-            [key: string]: string | { [key: string]: object } |
-            { location: string; version: string; requester: string; jobName: string; } |
-            { [key: string]: string | number | boolean | { [key: string]: string; }; }
-        } = {};
+    asDict(): { [key: string]: any } {
+        let result: { [key: string]: any } = {};
 
         if (this.apiKey !== undefined) result.api_key = this.apiKey;
         if (this.logging !== undefined) result.logging = this.logging;
         if (this.printer !== undefined) result.ipp = this.printer.asDict();
         if (this.copRemoteDebug) result.aop_remote_debug = 'Yes';
-        if (this.commands !== undefined) result = { ...result, ...this.commands.asDict() };
+        if (this.commands !== undefined)
+            result = { ...result, ...this.commands.asDict() };
 
         return result;
     }
@@ -262,7 +253,7 @@ export class ServerConfig {
  */
 export class Server {
     url: string;
-    config: ServerConfig | undefined;
+    config?: ServerConfig;
 
     /**
      * @param url server url
@@ -279,8 +270,11 @@ export class Server {
      */
     async isReachable(): Promise<boolean> {
         try {
-            return await fetch(new URL('marco', this.url).href)
-                .then((res: Response) => res.text()) === 'polo';
+            return (
+                (await fetch(new URL('marco', this.url).href).then(
+                    (res: Response) => res.text(),
+                )) === 'polo'
+            );
         } catch (error) {
             return false;
         }
@@ -291,7 +285,8 @@ export class Server {
      */
     async raiseIfUnreachable() {
         const isReachable: boolean = await this.isReachable();
-        if (!isReachable) throw new Error(`Could not reach server at ${this.url}`);
+        if (!isReachable)
+            throw new Error(`Could not reach server at ${this.url}`);
     }
 
     /**
@@ -304,7 +299,9 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(new URL('soffice', this.url).href, { agent: proxy });
+        const response = await fetch(new URL('soffice', this.url).href, {
+            agent: proxy,
+        });
         return response.text();
     }
 
@@ -319,7 +316,9 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(new URL('officetopdf', this.url).href, { agent: proxy });
+        const response = await fetch(new URL('officetopdf', this.url).href, {
+            agent: proxy,
+        });
         return response.text();
     }
 
@@ -333,7 +332,10 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(new URL('supported_template_mimetypes', this.url).href, { agent: proxy });
+        const response = await fetch(
+            new URL('supported_template_mimetypes', this.url).href,
+            { agent: proxy },
+        );
         return response.json();
     }
 
@@ -349,7 +351,13 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(new URL(`supported_output_mimetypes?template=${inputType}`, this.url).href, { agent: proxy });
+        const response = await fetch(
+            new URL(
+                `supported_output_mimetypes?template=${inputType}`,
+                this.url,
+            ).href,
+            { agent: proxy },
+        );
         return response.json();
     }
 
@@ -363,7 +371,10 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(new URL('supported_prepend_mimetypes', this.url).href, { agent: proxy });
+        const response = await fetch(
+            new URL('supported_prepend_mimetypes', this.url).href,
+            { agent: proxy },
+        );
         return response.json();
     }
 
@@ -377,7 +388,10 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(new URL('supported_append_mimetypes', this.url).href, { agent: proxy });
+        const response = await fetch(
+            new URL('supported_append_mimetypes', this.url).href,
+            { agent: proxy },
+        );
         return response.json();
     }
 
@@ -391,7 +405,9 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        const response = await fetch(new URL('version', this.url).href, { agent: proxy });
+        const response = await fetch(new URL('version', this.url).href, {
+            agent: proxy,
+        });
         return response.text();
     }
 }
