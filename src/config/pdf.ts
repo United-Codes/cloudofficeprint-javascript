@@ -5,39 +5,47 @@
  *  in an OutputConfig is also optional.
  */
 export class PDFOptions {
-    readPassword: string | undefined;
-    watermark: string | undefined;
-    pageWidth: string | number | undefined;
-    pageHeight: string | number | undefined;
-    evenPage: boolean | undefined;
-    mergeMakingEven: boolean | undefined;
-    modifyPassword: string | undefined;
-    passwordProtectionFlag: number | undefined;
-    lockForm: boolean | undefined;
-    copies: number | undefined;
-    pageMargin: number | { [key: string]: number } | undefined
-    landscape: boolean | undefined;
-    pageFormat: string | undefined;
-    merge: boolean | undefined;
-    signCertificate: string | undefined;
-    identifyFormFields: boolean | undefined;
-    split: boolean | undefined;
+    evenPage?: boolean;
+    mergeMakingEven?: boolean;
+    modifyPassword?: string;
+    readPassword?: string;
+    passwordProtectionFlag?: number;
+    watermark?: string;
+    watermarkColor?: string;
+    watermarkFont?: string;
+    watermarkOpacity?: string;
+    watermarkSize?: string;
+    lockForm?: boolean;
+    copies?: number;
+    pageMargin?: number | { [key: string]: number };
+    landscape?: boolean;
+    pageWidth?: string | number;
+    pageHeight?: string | number;
+    pageFormat?: string;
+    merge?: boolean;
+    split?: boolean;
+    identifyFormFields?: boolean;
+    signCertificate?: string;
 
     /**
-     * @param readPassword The password needed to open the PDF. Optional.
-     * @param watermark Setting this generates a diagonal custom watermark on every
-     *  page in the PDF file. Optional.
-     * @param pageWidth Only for HTML to PDF. Page width in px, mm, cm, in.
-     *  No unit means px. Optional.
-     * @param pageHeight Only for HTML to PDF. Page height in px, mm, cm, in.
-     *  No unit means px. Optional.
      * @param evenPage If you want your output to have even pages, for example
      *  printing on both sides after merging, you can set this to be true. Optional.
      * @param mergeMakingEven Merge each given document making even paged. Optional.
      * @param modifyPassword The password needed to modify the PDF. Optional.
+     * @param readPassword The password needed to open the PDF. Optional.
      * @param passwordProtectionFlag Bit field explained in the PDF specs in table 3.20 in
      *  section 3.5.2, should be given as an integer.
      *  [More info](https://pdfhummus.com/post/147451287581/hummus-1058-and-pdf-writer-updates-encryption). Optional.
+     * @param watermark Setting this generates a diagonal custom watermark on every
+     *  page in the PDF file. Optional.
+     * @param watermarkColor Specifies the font of the watermark text specified, with a default of
+     *  "black". Optional.
+     * @param watermarkFont Specifies the font of the watermark text specified, with a default of
+     *  "Arial". Optional.
+     * @param watermarkOpacity Specifies the opacity of the watermark text specified, should be as
+     *  a percentage, i.e. 45. Optional.
+     * @param watermarkSize Specifies the size of watermark text specified, should be a number in
+     *  px, i.e. 45. Optional.
      * @param lockForm Locks / flattens the forms in the PDF. Optional.
      * @param copies Repeats the output pdf for the given number of times. Optional.
      * @param pageMargin Only for HTML to PDF. Margin in px. Returns either a dict containing:
@@ -45,76 +53,76 @@ export class PDFOptions {
      *  or just an int to be used on all sides. Optional.
      * @param landscape Only for HTML to PDF. If True: the orientation of the output file
      *  is landscape; else portrait (default). Optional.
+     * @param pageWidth Only for HTML to PDF. Page width in px, mm, cm, in.
+     *  No unit means px. Optional.
+     * @param pageHeight Only for HTML to PDF. Page height in px, mm, cm, in.
+     *  No unit means px. Optional.
      * @param pageFormat Only for HTML to PDF. The page format: 'a4' (default)
      *  or 'letter'. Optional.
      * @param merge If True: instead of returning back a zip file for multiple output,
      *  merge it. Optional.
+     * @param split You can specify to split a PDF in separate files.
+     *  You will get one file per page in a zip file. Optional.
+     * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
+     *  of each field into the respective field. Optional.
      * @param signCertificate Signing certificate for the output PDF (pkcs #12 .p12/.pfx)
      *  as a base64 string, URL, FTP location or a server path.
      *  The function readFileAsBase64() from file_utils.ts can be used to read local
      *  .p12 or .pfx file as base64. Optional.
-     * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
-     *  of each field into the respective field. Optional.
-     * @param split You can specify to split a PDF in separate files.
-     *  You will get one file per page in a zip file. Optional.
      */
     constructor(
-        readPassword?: string,
-        watermark?: string,
-        pageWidth?: string | number,
-        pageHeight?: string | number,
         evenPage?: boolean,
         mergeMakingEven?: boolean,
         modifyPassword?: string,
+        readPassword?: string,
         passwordProtectionFlag?: number,
+        watermark?: string,
+        watermarkColor?: string,
+        watermarkFont?: string,
+        watermarkOpacity?: string,
+        watermarkSize?: string,
         lockForm?: boolean,
         copies?: number,
         pageMargin?: number | { [key: string]: number },
         landscape?: boolean,
+        pageWidth?: string | number,
+        pageHeight?: string | number,
         pageFormat?: string,
         merge?: boolean,
-        signCertificate?: string,
-        identifyFormFields?: boolean,
         split?: boolean,
+        identifyFormFields?: boolean,
+        signCertificate?: string,
     ) {
-        this.readPassword = readPassword;
-        this.watermark = watermark;
-        this.pageWidth = pageWidth;
-        this.pageHeight = pageHeight;
         this.evenPage = evenPage;
         this.mergeMakingEven = mergeMakingEven;
         this.modifyPassword = modifyPassword;
+        this.readPassword = readPassword;
         this.passwordProtectionFlag = passwordProtectionFlag;
+        this.watermark = watermark;
+        this.watermarkColor = watermarkColor;
+        this.watermarkFont = watermarkFont;
+        this.watermarkOpacity = watermarkOpacity;
+        this.watermarkSize = watermarkSize;
         this.lockForm = lockForm;
         this.copies = copies;
         this.pageMargin = pageMargin;
         this.landscape = landscape;
+        this.pageWidth = pageWidth;
+        this.pageHeight = pageHeight;
         this.pageFormat = pageFormat;
         this.merge = merge;
-        this.signCertificate = signCertificate;
-        this.identifyFormFields = identifyFormFields;
         this.split = split;
+        this.identifyFormFields = identifyFormFields;
+        this.signCertificate = signCertificate;
     }
 
     /**
      * The dict representation of these PDF options.
      * @returns the dict representation of these PDF options
      */
-    asDict(): { [key: string]: string | number | boolean | { [key: string]: number } } {
-        const result: { [key: string]: string | number | boolean | { [key: string]: number } } = {};
+    asDict(): { [key: string]: any } {
+        const result: { [key: string]: any } = {};
 
-        if (this.readPassword !== undefined) {
-            result.output_read_password = this.readPassword;
-        }
-        if (this.watermark !== undefined) {
-            result.output_watermark = this.watermark;
-        }
-        if (this.pageWidth !== undefined) {
-            result.output_page_width = this.pageWidth;
-        }
-        if (this.pageHeight !== undefined) {
-            result.output_page_height = this.pageHeight;
-        }
         if (this.evenPage !== undefined) {
             result.output_even_page = this.evenPage;
         }
@@ -124,8 +132,27 @@ export class PDFOptions {
         if (this.modifyPassword !== undefined) {
             result.output_modify_password = this.modifyPassword;
         }
+        if (this.readPassword !== undefined) {
+            result.output_read_password = this.readPassword;
+        }
         if (this.passwordProtectionFlag !== undefined) {
-            result.output_password_protection_flag = this.passwordProtectionFlag;
+            result.output_password_protection_flag =
+                this.passwordProtectionFlag;
+        }
+        if (this.watermark !== undefined) {
+            result.output_watermark = this.watermark;
+        }
+        if (this.watermarkColor !== undefined) {
+            result.output_watermark_color = this.watermarkColor;
+        }
+        if (this.watermarkFont !== undefined) {
+            result.output_watermark_font = this.watermarkFont;
+        }
+        if (this.watermarkOpacity !== undefined) {
+            result.output_watermark_opacity = this.watermarkOpacity;
+        }
+        if (this.watermarkSize !== undefined) {
+            result.output_watermark_size = this.watermarkSize;
         }
         if (this.lockForm !== undefined) {
             result.lock_form = this.lockForm;
@@ -143,22 +170,52 @@ export class PDFOptions {
             // also be supported
             result.page_orientation = this.pageOrientation();
         }
+        if (this.pageWidth !== undefined) {
+            result.output_page_width = this.pageWidth;
+        }
+        if (this.pageHeight !== undefined) {
+            result.output_page_height = this.pageHeight;
+        }
         if (this.pageFormat !== undefined) {
             result.output_page_format = this.pageFormat;
         }
         if (this.merge !== undefined) {
             result.output_merge = this.merge;
         }
-        if (this.signCertificate !== undefined) {
-            result.output_sign_certificate = this.signCertificate;
+        if (this.split !== undefined) {
+            result.output_split = this.split;
         }
         if (this.identifyFormFields !== undefined) {
             result.identify_form_fields = this.identifyFormFields;
         }
-        if (this.split !== undefined) {
-            result.output_split = this.split;
+        if (this.signCertificate !== undefined) {
+            result.output_sign_certificate = this.signCertificate;
         }
         return result;
+    }
+
+    /**
+     * Set a diagonal custom watermark on every page in the PDF file with a specific text, color,
+     *  font, opacity and size.
+     * Setting all to undefined will remove the watermark.
+     * @param text Specifies the text of the watermark. Optional.
+     * @param color Specifies the color of the watermark. Optional.
+     * @param font Specifies the font of the watermark.
+     * @param opacity Specifies the opacity of the watermark.
+     * @param size Specifies the size of the watermark.
+     */
+    setWatermark(
+        text?: string,
+        color?: string,
+        font?: string,
+        opacity?: string,
+        size?: string,
+    ) {
+        this.watermark = text;
+        this.watermarkColor = color;
+        this.watermarkFont = font;
+        this.watermarkOpacity = opacity;
+        this.watermarkSize = size;
     }
 
     /**
@@ -174,9 +231,7 @@ export class PDFOptions {
                 this.pageMargin[position] = value;
             } else if (this.pageMargin === undefined) {
                 // page margin not yet defined, set it to a dict with this position defined
-                this.pageMargin = {
-                    [position]: value,
-                };
+                this.pageMargin = { [position]: value };
             } else {
                 // page margin defined but no dict, convert to dict first
                 const current: number = this.pageMargin;
