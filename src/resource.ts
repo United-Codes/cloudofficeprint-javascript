@@ -19,8 +19,8 @@ import * as ownUtils from './own_utils/index';
 export abstract class Resource {
     data: string | Buffer;
     filetype: string;
-    startDelimiter: string | undefined;
-    endDelimiter: string | undefined;
+    startDelimiter?: string;
+    endDelimiter?: string;
 
     /**
      * @param data the data for this resource
