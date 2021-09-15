@@ -13,8 +13,8 @@ export class PDFOptions {
     watermark?: string;
     watermarkColor?: string;
     watermarkFont?: string;
-    watermarkOpacity?: string;
-    watermarkSize?: string;
+    watermarkOpacity?: number;
+    watermarkSize?: number;
     lockForm?: boolean;
     copies?: number;
     pageMargin?: number | { [key: string]: number };
@@ -36,16 +36,16 @@ export class PDFOptions {
      * @param passwordProtectionFlag Bit field explained in the PDF specs in table 3.20 in
      *  section 3.5.2, should be given as an integer.
      *  [More info](https://pdfhummus.com/post/147451287581/hummus-1058-and-pdf-writer-updates-encryption). Optional.
-     * @param watermark Setting this generates a diagonal custom watermark on every
-     *  page in the PDF file. Optional.
-     * @param watermarkColor Specifies the font of the watermark text specified, with a default of
-     *  "black". Optional.
-     * @param watermarkFont Specifies the font of the watermark text specified, with a default of
-     *  "Arial". Optional.
-     * @param watermarkOpacity Specifies the opacity of the watermark text specified, should be as
-     *  a percentage, i.e. 45. Optional.
-     * @param watermarkSize Specifies the size of watermark text specified, should be a number in
-     *  px, i.e. 45. Optional.
+     * @param watermark Requires PDF output, generates a diagonal custom watermark on every page of
+     *  the PDF file. Optional.
+     * @param watermarkColor Requires PDF output, specifies the font of the watermark text
+     *  specified, with a default of "black". Optional.
+     * @param watermarkFont Requires PDF output, specifies the font of the watermark text
+     *  specified, with a default of "Arial". Optional.
+     * @param watermarkOpacity Requires PDF output, specifies the opacity of the watermark text
+     *  specified, should be as a percentage, i.e. 45. Optional.
+     * @param watermarkSize Requires PDF output, specifies the size of watermark text specified,
+     *  should be a number in px, i.e. 45. Optional.
      * @param lockForm Locks / flattens the forms in the PDF. Optional.
      * @param copies Repeats the output pdf for the given number of times. Optional.
      * @param pageMargin Only for HTML to PDF. Margin in px. Returns either a dict containing:
@@ -79,8 +79,8 @@ export class PDFOptions {
         watermark?: string,
         watermarkColor?: string,
         watermarkFont?: string,
-        watermarkOpacity?: string,
-        watermarkSize?: string,
+        watermarkOpacity?: number,
+        watermarkSize?: number,
         lockForm?: boolean,
         copies?: number,
         pageMargin?: number | { [key: string]: number },
@@ -199,17 +199,18 @@ export class PDFOptions {
      *  font, opacity and size.
      * Setting all to undefined will remove the watermark.
      * @param text Specifies the text of the watermark. Optional.
-     * @param color Specifies the color of the watermark. Optional.
-     * @param font Specifies the font of the watermark.
-     * @param opacity Specifies the opacity of the watermark.
-     * @param size Specifies the size of the watermark.
+     * @param color Specifies the color of the watermark, with a default of "black". Optional.
+     * @param font Specifies the font of the watermark, with a default of "Arial". Optional.
+     * @param opacity Specifies the opacity of the watermark, should be as a percentage, i.e. 45.
+     *  Optional.
+     * @param size Specifies the size of the watermark, should be a number in px, i.e. 45. Optional.
      */
     setWatermark(
         text?: string,
         color?: string,
         font?: string,
-        opacity?: string,
-        size?: string,
+        opacity?: number,
+        size?: number,
     ) {
         this.watermark = text;
         this.watermarkColor = color;
