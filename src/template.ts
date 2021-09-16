@@ -29,6 +29,16 @@ export class Template {
         this.templateHash = templateHash;
     }
 
+    updateHash(templateHash: string): void {
+        this.templateHash = templateHash;
+        this.shouldHash = false;
+    }
+
+    resetHash(): void {
+        this.templateHash = undefined;
+        this.shouldHash = true;
+    }
+
     /**
      * Template type as a mime type
      * @returns Template type as a mime type
@@ -42,6 +52,14 @@ export class Template {
      * @returns the dictionary representation of this template
      */
     templateDict(): { [key: string]: string | boolean | undefined } {
+        if (this.templateHash && !this.shouldHash) {
+            return {
+                template_type: this.resource.filetype,
+                template_hash: this.templateHash,
+                start_delimiter: this.startDelimiter,
+                end_delimiter: this.endDelimiter,
+            };
+        }
         return {
             ...this.resource.templateDict(),
             start_delimiter: this.startDelimiter,

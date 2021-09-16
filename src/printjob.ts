@@ -76,14 +76,17 @@ export class PrintJob {
             this.server.config && this.server.config.proxies
                 ? new HttpsProxyAgent(this.server.config.proxies)
                 : undefined;
-        return PrintJob.handleResponse(
-            await fetch(this.server.url, {
-                method: 'post',
-                body: JSON.stringify(this.asDict()),
-                agent: proxy,
-                headers: { 'Content-type': 'application/json' },
-            }),
-        );
+        const response = await fetch(this.server.url, {
+            method: 'post',
+            body: JSON.stringify(this.asDict()),
+            agent: proxy,
+            headers: { 'Content-type': 'application/json' },
+        });
+        if (this.template instanceof Template && this.template.shouldHash) {
+            const templateHash = response.headers.get('Template-Hash');
+            if (templateHash) this.template.updateHash(templateHash);
+        }
+        return PrintJob.handleResponse(response);
     }
 
     /**
