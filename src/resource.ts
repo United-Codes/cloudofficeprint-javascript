@@ -13,31 +13,19 @@ import * as ownUtils from './own_utils/index';
  * alternatively, the [[Resource]] subclasses can be constructed to form a valid `Resource`.
  */
 
-/**
- * The abstract base class for the resources
- */
+/** The abstract base class for the resources */
 export abstract class Resource {
     data: string | Buffer;
     filetype: string;
-    startDelimiter?: string;
-    endDelimiter?: string;
 
     /**
+     * Create a new Resource
      * @param data the data for this resource
      * @param filetype the filetype of this resource
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      */
-    constructor(
-        data: string | Buffer,
-        filetype: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ) {
+    constructor(data: string | Buffer, filetype: string) {
         this.data = data;
         this.filetype = filetype;
-        this.startDelimiter = startDelimiter;
-        this.endDelimiter = endDelimiter;
     }
 
     /**
@@ -52,16 +40,8 @@ export abstract class Resource {
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): {
-        template_type: string;
-        start_delimiter?: string;
-        end_delimiter?: string;
-    } {
-        return {
-            template_type: this.filetype,
-            start_delimiter: this.startDelimiter,
-            end_delimiter: this.endDelimiter,
-        };
+    templateDict(): { [key: string]: string } {
+        return { template_type: this.filetype };
     }
 
     /**
@@ -81,39 +61,20 @@ export abstract class Resource {
      * Create a RawResource from raw file data and a file type (extension)
      * @param rawData raw data as a Buffer object
      * @param filetype file type (extension)
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromRaw(
-        rawData: Buffer,
-        filetype: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ): RawResource {
-        return new RawResource(rawData, filetype, startDelimiter, endDelimiter);
+    static fromRaw(rawData: Buffer, filetype: string): RawResource {
+        return new RawResource(rawData, filetype);
     }
 
     /**
      * Create a Base64Resource from a base64 string and a file type (extension)
      * @param base64string base64 encoded representation of a file
      * @param filetype file type (extension)
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromBase64(
-        base64string: string,
-        filetype: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ): Base64Resource {
-        return new Base64Resource(
-            base64string,
-            filetype,
-            startDelimiter,
-            endDelimiter,
-        );
+    static fromBase64(base64string: string, filetype: string): Base64Resource {
+        return new Base64Resource(base64string, filetype);
     }
 
     /* cop-node-only-start */
@@ -121,55 +82,34 @@ export abstract class Resource {
      * Create a Base64Resource with the contents of a local file.
      * The filetype is determined by the extension of the file.
      * @param localPath path to local file
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromLocalFile(
-        localPath: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ): Base64Resource {
+    static fromLocalFile(localPath: string): Base64Resource {
         return new Base64Resource(
             ownUtils.readFileAsBase64(localPath),
             ownUtils.pathToExtension(localPath),
-            startDelimiter,
-            endDelimiter,
         );
     }
-    /* cop-node-only-end */
 
+    /* cop-node-only-end */
     /**
      * Create a ServerPathResource targeting a file on the server.
      * The filetype is determined by the extension of the file.
      * @param serverPath location of target file on the server
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromServerPath(
-        serverPath: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ): ServerPathResource {
-        return new ServerPathResource(serverPath, startDelimiter, endDelimiter);
+    static fromServerPath(serverPath: string): ServerPathResource {
+        return new ServerPathResource(serverPath);
     }
 
     /**
      * Create a URLResource targeting the file at url with given filetype (extension).
      * @param url file url
      * @param filetype file type (extension)
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
-    static fromUrl(
-        url: string,
-        filetype: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ): URLResource {
-        return new URLResource(url, filetype, startDelimiter, endDelimiter);
+    static fromUrl(url: string, filetype: string): URLResource {
+        return new URLResource(url, filetype);
     }
 
     /**
@@ -177,42 +117,25 @@ export abstract class Resource {
      * Landscape is not supported for prepend/append sources, only for template resources.
      * @param htmlstring html content
      * @param landscape Whether or not the orientation needs to be landscape. Defaults to false.
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      * @returns the created Resource
      */
     static fromHtml(
         htmlstring: string,
         landscape: boolean = false,
-        startDelimiter?: string,
-        endDelimiter?: string,
     ): HTMLResource {
-        return new HTMLResource(
-            htmlstring,
-            landscape,
-            startDelimiter,
-            endDelimiter,
-        );
+        return new HTMLResource(htmlstring, landscape);
     }
 }
 
-/**
- * A [[Resource]] containing raw buffer data
- */
+/** A [[Resource]] containing raw buffer data */
 export class RawResource extends Resource {
     /**
+     * Create a new RawResource
      * @param rawData raw data as a Buffer
      * @param filetype file type (extension)
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      */
-    constructor(
-        rawData: Buffer,
-        filetype: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ) {
-        super(rawData, filetype, startDelimiter, endDelimiter);
+    constructor(rawData: Buffer, filetype: string) {
+        super(rawData, filetype);
     }
 
     /**
@@ -230,14 +153,10 @@ export class RawResource extends Resource {
     templateDict(): {
         template_type: string;
         file: string;
-        start_delimiter?: string;
-        end_delimiter?: string;
     } {
         return {
             template_type: this.filetype,
             file: this.base64(),
-            start_delimiter: this.startDelimiter,
-            end_delimiter: this.endDelimiter,
         };
     }
 
@@ -260,23 +179,15 @@ export class RawResource extends Resource {
     }
 }
 
-/**
- * A [[Resource]] containing base64 data
- */
+/** A [[Resource]] containing base64 data */
 export class Base64Resource extends Resource {
     /**
+     * Create a mew Base64Resource
      * @param base64string base64 encoded data
      * @param filetype file type (extension)
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      */
-    constructor(
-        base64string: string,
-        filetype: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ) {
-        super(base64string, filetype, startDelimiter, endDelimiter);
+    constructor(base64string: string, filetype: string) {
+        super(base64string, filetype);
     }
 
     /**
@@ -286,14 +197,10 @@ export class Base64Resource extends Resource {
     templateDict(): {
         template_type: string;
         file: string;
-        start_delimiter?: string;
-        end_delimiter?: string;
     } {
         return {
             template_type: this.filetype,
             file: this.data as string,
-            start_delimiter: this.startDelimiter,
-            end_delimiter: this.endDelimiter,
         };
     }
 
@@ -316,26 +223,14 @@ export class Base64Resource extends Resource {
     }
 }
 
-/**
- * A [[Resource]] targeting a file on the server
- */
+/** A [[Resource]] targeting a file on the server */
 export class ServerPathResource extends Resource {
     /**
+     * Create a new ServerPathResource
      * @param serverPath path on the server to target
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      */
-    constructor(
-        serverPath: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ) {
-        super(
-            serverPath,
-            ownUtils.pathToExtension(serverPath),
-            startDelimiter,
-            endDelimiter,
-        );
+    constructor(serverPath: string) {
+        super(serverPath, ownUtils.pathToExtension(serverPath));
     }
 
     /**
@@ -345,14 +240,10 @@ export class ServerPathResource extends Resource {
     templateDict(): {
         template_type: string;
         filename: string;
-        start_delimiter?: string;
-        end_delimiter?: string;
     } {
         return {
             template_type: this.filetype,
             filename: this.data as string,
-            start_delimiter: this.startDelimiter,
-            end_delimiter: this.endDelimiter,
         };
     }
 
@@ -375,23 +266,15 @@ export class ServerPathResource extends Resource {
     }
 }
 
-/**
- * A [[Resource]] targeting a file at a URL
- */
+/** A [[Resource]] targeting a file at a URL */
 export class URLResource extends Resource {
     /**
+     * Create a new URLResource
      * @param url URL location of the file
      * @param filetype file type (extension)
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      */
-    constructor(
-        url: string,
-        filetype: string,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ) {
-        super(url, filetype, startDelimiter, endDelimiter);
+    constructor(url: string, filetype: string) {
+        super(url, filetype);
     }
 
     /**
@@ -401,14 +284,10 @@ export class URLResource extends Resource {
     templateDict(): {
         template_type: string;
         url: string;
-        start_delimiter?: string;
-        end_delimiter?: string;
     } {
         return {
             template_type: this.filetype,
             url: this.data as string,
-            start_delimiter: this.startDelimiter,
-            end_delimiter: this.endDelimiter,
         };
     }
 
@@ -431,26 +310,18 @@ export class URLResource extends Resource {
     }
 }
 
-/**
- * A [[Resource]] containing HTML data in plain text
- */
+/** A [[Resource]] containing HTML data in plain text */
 export class HTMLResource extends Resource {
     landscape: boolean;
 
     /**
+     * Create a new HTMLResource
      * @param htmlstring HTML input in plain text
      * @param landscape Whether or not the HTML should be rendered as landscape-oriented page.
      *  Defaults to false.
-     * @param startDelimiter the starting delimiter
-     * @param endDelimiter the ending delimiter
      */
-    constructor(
-        htmlstring: string,
-        landscape: boolean = false,
-        startDelimiter?: string,
-        endDelimiter?: string,
-    ) {
-        super(htmlstring, 'html', startDelimiter, endDelimiter);
+    constructor(htmlstring: string, landscape: boolean = false) {
+        super(htmlstring, 'html');
         this.landscape = landscape;
     }
 
@@ -473,15 +344,11 @@ export class HTMLResource extends Resource {
         template_type: string;
         html_template_content: string;
         orientation?: string;
-        start_delimiter?: string;
-        end_delimiter?: string;
     } {
         return {
             template_type: this.filetype,
             html_template_content: this.data as string,
             orientation: this.orientation(),
-            start_delimiter: this.startDelimiter,
-            end_delimiter: this.endDelimiter,
         };
     }
 

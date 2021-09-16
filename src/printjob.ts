@@ -1,9 +1,11 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import fetch, { Response as HTTPReponse } from 'node-fetch';
+
 import { OutputConfig, Server } from './config';
 import { Element, RESTSource } from './elements';
 import { COPError } from './exceptions';
 import { Resource } from './resource';
+import { Template } from './template';
 import { Response } from './response';
 
 export const STATIC_OPTS = {
@@ -21,8 +23,8 @@ export const STATIC_OPTS = {
 export class PrintJob {
     data: Element | RESTSource | { [key: string]: Element };
     server: Server;
+    template?: Template | Resource;
     outputConfig: OutputConfig;
-    template: Resource | undefined;
     subtemplates: { [key: string]: Resource };
     prependFiles: Resource[];
     appendFiles: Resource[];
@@ -172,13 +174,13 @@ export class PrintJob {
 
         if (this.prependFiles.length > 0) {
             result.prepend_files = Array.from(
-                this.prependFiles.map((value) => value.secondaryFileDict()),
+                this.prependFiles.map((file) => file.secondaryFileDict()),
             );
         }
 
         if (this.appendFiles.length > 0) {
             result.append_files = Array.from(
-                this.appendFiles.map((value) => value.secondaryFileDict()),
+                this.appendFiles.map((file) => file.secondaryFileDict()),
             );
         }
 
