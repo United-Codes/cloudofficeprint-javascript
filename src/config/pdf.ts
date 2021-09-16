@@ -260,9 +260,9 @@ export class PDFOptions {
 
     /**
      * Setter for the page orientation.
-     * @param value the page orientation
+     * @param orientation the page orientation
      */
-    setPageOrientation(value: string) {
-        this.landscape = value === 'landscape';
+    setPageOrientation(orientation: 'landscape' | 'portrait') {
+        this.landscape = orientation === 'landscape';
     }
 }
