@@ -3,10 +3,13 @@ import { describe, test, expect } from '@jest/globals';
 import * as cop from '../index';
 
 describe('Tests for class PrintJob', () => {
-    test('Test all options for printjob', async () => {
+    test('Test all options for PrintJob', async () => {
+        const SERVER_URL = 'https://api.cloudofficeprint.com/';
+        const API_KEY = 'YOUR_API_KEY';
+
         const server = new cop.config.Server(
-            'https://api.cloudofficeprint.com/',
-            new cop.config.ServerConfig('YOUR_API_KEY'),
+            SERVER_URL,
+            new cop.config.ServerConfig(API_KEY),
         );
 
         const prependFile = cop.Resource.fromLocalFile(
@@ -28,9 +31,7 @@ describe('Tests for class PrintJob', () => {
         const templateBase64 = template.resource.data;
 
         const data = new cop.elements.ElementCollection('data');
-
-        const textTag = new cop.elements.Property('textTag1', 'test_text_tag1');
-        data.add(textTag);
+        data.add(new cop.elements.Property('textTag1', 'test_text_tag1'));
 
         const outputConf = new cop.config.OutputConfig('pdf');
 
@@ -105,10 +106,81 @@ describe('Tests for class PrintJob', () => {
         // await (await printjob.execute()).toFile('./data/tests/prepend_append_subtemplate_test');
     });
 
+    test('Test Template hashing for PrintJob', async () => {
+        const SERVER_URL = 'https://api.cloudofficeprint.com/';
+        const API_KEY = 'YOUR_API_KEY';
+
+        const server = new cop.config.Server(
+            SERVER_URL,
+            new cop.config.ServerConfig(API_KEY),
+        );
+
+        const template = new cop.Template(
+            cop.Resource.fromLocalFile('./data/tests/template.docx'),
+            undefined,
+            undefined,
+            true,
+        );
+
+        const templateBase64 = template.resource.data;
+
+        const data = new cop.elements.ElementCollection('data');
+        data.add(new cop.elements.Property('textTag1', 'test_text_tag1'));
+
+        const printjob = new cop.PrintJob(data, server, template);
+
+        const printjobExpected1 = {
+            api_key: server.config!.apiKey,
+            files: [{ data: { textTag1: 'test_text_tag1' } }],
+            output: {
+                output_converter: 'libreoffice',
+                output_encoding: 'raw',
+                output_type: 'docx',
+            },
+            template: {
+                file: templateBase64,
+                template_type: 'docx',
+                should_hash: true,
+            },
+            tool: 'javascript',
+            javascript_sdk_version:
+                cop.printjob.STATIC_OPTS.javascript_sdk_version,
+        };
+
+        expect(printjob.asDict()).toEqual(printjobExpected1);
+
+        template.updateHash('test_hash');
+
+        const printjobExpected2 = {
+            api_key: server.config!.apiKey,
+            files: [{ data: { textTag1: 'test_text_tag1' } }],
+            output: {
+                output_converter: 'libreoffice',
+                output_encoding: 'raw',
+                output_type: 'docx',
+            },
+            template: {
+                template_type: 'docx',
+                template_hash: 'test_hash',
+            },
+            tool: 'javascript',
+            javascript_sdk_version:
+                cop.printjob.STATIC_OPTS.javascript_sdk_version,
+        };
+
+        expect(printjob.asDict()).toEqual(printjobExpected2);
+    });
+
     // Works as expected, this test is skipped because an API key is needed
     // Remove '.skip' and enter a valid API key if you want to test this yourself
     test.skip('Test executeFullJson()', async () => {
+        const SERVER_URL = 'https://api.cloudofficeprint.com/';
         const API_KEY = 'YOUR_API_KEY';
+
+        const server = new cop.config.Server(
+            SERVER_URL,
+            new cop.config.ServerConfig(API_KEY),
+        );
 
         const jsonData = {
             aop_remote_debug: 'No',
@@ -130,34 +202,33 @@ describe('Tests for class PrintJob', () => {
             templates: [],
         };
 
-        const response = await cop.PrintJob.executeFullJson(
-            jsonData,
-            new cop.config.Server(
-                'https://api.cloudofficeprint.com/',
-                new cop.config.ServerConfig(API_KEY),
-            ),
-        );
+        const response = await cop.PrintJob.executeFullJson(jsonData, server);
         await response.toFile('./output');
     });
 
     // Works as expected, this test is skipped because an API key is needed
     // Remove '.skip' and enter a valid API key if you want to test this yourself
     test.skip('Test without template', async () => {
-        const collection = new cop.elements.ElementCollection();
-        collection.add(new cop.elements.Property('test_property', 'value'));
-        collection.add(
+        const SERVER_URL = 'https://api.cloudofficeprint.com/';
+        const API_KEY = 'YOUR_API_KEY';
+
+        const server = new cop.config.Server(
+            SERVER_URL,
+            new cop.config.ServerConfig(API_KEY),
+        );
+
+        const data = new cop.elements.ElementCollection();
+        data.add(new cop.elements.Property('test_property', 'value'));
+        data.add(
             cop.elements.Image.fromUrl(
                 'test_image',
                 'https://www.unitedcodes.com/assets/dist/images/logo-united-codes.svg',
             ),
         );
 
-        const server = new cop.config.Server(
-            'https://api.cloudofficeprint.com/',
-            new cop.config.ServerConfig('YOUR_API_KEY'), // Replace by your own API key
-        );
+        const printjob = new cop.PrintJob(data, server);
 
-        const printjob = new cop.PrintJob(collection, server);
-        await (await printjob.execute()).toFile('./output');
+        const response = await printjob.execute();
+        await response.toFile('./output');
     });
 });
