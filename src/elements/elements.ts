@@ -9,9 +9,9 @@ export abstract class CellStyle {
      */
     asDict(propertyName: string) {
         const result: { [key: string]: string | number | boolean } = {};
-        Object.entries(this.asDictSuffixes()).forEach(
-            ([key, val]) => { result[`${propertyName}${key}`] = val; },
-        );
+        Object.entries(this.asDictSuffixes()).forEach(([key, val]) => {
+            result[`${propertyName}${key}`] = val;
+        });
         return result;
     }
 
@@ -52,7 +52,8 @@ export class CellStyleDocx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } =
+            super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
             result._cell_background_color = this.cellBackgroundColor;
@@ -193,7 +194,8 @@ export class CellStyleXlsx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } =
+            super.asDictSuffixes();
 
         if (this.cellLocked !== undefined) {
             result._cell_locked = this.cellLocked;
@@ -487,7 +489,12 @@ export class TableOfContents extends Element {
      * @param tabLeader How the space between title and page number should be filled.
      *  Can be "hyphen", "underscore", or "dot" (default). Optional.
      */
-    constructor(name: string, title?: string, depth?: number, tabLeader?: string) {
+    constructor(
+        name: string,
+        title?: string,
+        depth?: number,
+        tabLeader?: string,
+    ) {
         super(name);
         this.title = title;
         this.depth = depth;
@@ -850,7 +857,9 @@ export class COPChartDateOptions {
  */
 export class COPChart extends Element {
     xData: string[];
-    yDatas: { [key: string]: (string | number | { [key: string]: string | number })[] };
+    yDatas: {
+        [key: string]: (string | number | { [key: string]: string | number })[];
+    };
     date: COPChartDateOptions | undefined;
     title: string | undefined;
     xTitle: string | undefined;
@@ -874,8 +883,15 @@ export class COPChart extends Element {
     constructor(
         name: string,
         xData: string[],
-        yDatas: (string | number | { [key: string]: string | number })[][] |
-        { [key: string]: (string | number | { [key: string]: string | number })[] },
+        yDatas:
+            | (string | number | { [key: string]: string | number })[][]
+            | {
+                  [key: string]: (
+                      | string
+                      | number
+                      | { [key: string]: string | number }
+                  )[];
+              },
         date?: COPChartDateOptions,
         title?: string,
         xTitle?: string,
@@ -894,14 +910,14 @@ export class COPChart extends Element {
         this.yDatas = {};
 
         if (yDatas instanceof Array) {
-            yDatas.forEach(
-                (el, index) => {
-                    this.yDatas[`series ${index + 1}`] = el;
-                },
-            );
+            yDatas.forEach((el, index) => {
+                this.yDatas[`series ${index + 1}`] = el;
+            });
         } else if (yDatas.constructor !== Object) {
             // If yDatas is not an array and not a dictionary: throw error
-            throw new Error(`Expected a dictionary or array, but received ${typeof yDatas}`);
+            throw new Error(
+                `Expected a dictionary or array, but received ${typeof yDatas}`,
+            );
         } else {
             this.yDatas = yDatas;
         }
@@ -912,71 +928,70 @@ export class COPChart extends Element {
      * @returns dictionary representation of this Element
      */
     asDict(): {
-        [key: string]:
-        {
+        [key: string]: {
             [key: string]:
-            {
-                [key: string]:
-                string[] |
-                string |
-                {
-                    [key: string]:
-                    string |
-                    number
-                }
-            } |
-            {
-                [key: string]:
-                {
-                    [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            } |
-            string |
-            {
-                [key: string]:
-                string
-            }
-        }
-        } {
+                | {
+                      [key: string]:
+                          | string[]
+                          | string
+                          | {
+                                [key: string]: string | number;
+                            };
+                  }
+                | {
+                      [key: string]:
+                          | {
+                                [key: string]:
+                                    | string
+                                    | (
+                                          | string
+                                          | number
+                                          | { [key: string]: string | number }
+                                      )[];
+                            }[]
+                          | string;
+                  }
+                | string
+                | {
+                      [key: string]: string;
+                  };
+        };
+    } {
         const ySeries: {
-            name: string, data: (string | number |
-            { [key: string]: string | number })[]
+            name: string;
+            data: (string | number | { [key: string]: string | number })[];
         }[] = [];
-        Object.entries(this.yDatas).forEach(
-            (e) => {
-                ySeries.push({ name: e[0], data: e[1] });
-            },
-        );
+        Object.entries(this.yDatas).forEach((e) => {
+            ySeries.push({ name: e[0], data: e[1] });
+        });
 
         const result: {
             [key: string]:
-            {
-                [key: string]:
-                string[] |
-                string |
-                {
-                    [key: string]:
-                    string |
-                    number
-                }
-            } |
-            {
-                [key: string]:
-                {
-                    [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            } |
-            string |
-            {
-                [key: string]:
-                string
-            }
+                | {
+                      [key: string]:
+                          | string[]
+                          | string
+                          | {
+                                [key: string]: string | number;
+                            };
+                  }
+                | {
+                      [key: string]:
+                          | {
+                                [key: string]:
+                                    | string
+                                    | (
+                                          | string
+                                          | number
+                                          | { [key: string]: string | number }
+                                      )[];
+                            }[]
+                          | string;
+                  }
+                | string
+                | {
+                      [key: string]: string;
+                  };
         } = {
             xAxis: {
                 data: this.xData,
@@ -990,39 +1005,45 @@ export class COPChart extends Element {
             result.title = this.title;
         }
         if (this.date !== undefined) {
-            (result.xAxis as {
-                [key: string]:
-                string[] |
-                string |
-                {
+            (
+                result.xAxis as {
                     [key: string]:
-                    string |
-                    number
+                        | string[]
+                        | string
+                        | {
+                              [key: string]: string | number;
+                          };
                 }
-            }).date = this.date.asDict();
+            ).date = this.date.asDict();
         }
         if (this.xTitle !== undefined) {
-            (result.xAxis as {
-                [key: string]:
-                string[] |
-                string |
-                {
+            (
+                result.xAxis as {
                     [key: string]:
-                    string |
-                    number
+                        | string[]
+                        | string
+                        | {
+                              [key: string]: string | number;
+                          };
                 }
-            }).title = this.xTitle;
+            ).title = this.xTitle;
         }
         if (this.yTitle !== undefined) {
-            (result.yAxis as {
-                [key: string]:
-                {
+            (
+                result.yAxis as {
                     [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            }).title = this.yTitle;
+                        | {
+                              [key: string]:
+                                  | string
+                                  | (
+                                        | string
+                                        | number
+                                        | { [key: string]: string | number }
+                                    )[];
+                          }[]
+                        | string;
+                }
+            ).title = this.yTitle;
         }
         if (this.x2Title !== undefined) {
             result.x2Axis = {
@@ -1208,11 +1229,9 @@ export class ElementCollection extends Element {
      *  this element collection object
      */
     addAll(col: ElementCollection) {
-        col.elements.forEach(
-            (el) => {
-                this.add(el);
-            },
-        );
+        col.elements.forEach((el) => {
+            this.add(el);
+        });
     }
 
     /**
@@ -1230,15 +1249,13 @@ export class ElementCollection extends Element {
     asDict() {
         let result: { [key: string]: unknown } = {};
 
-        this.elements.forEach(
-            (el) => {
-                if (el instanceof ElementCollection) {
-                    result[el.name] = el.asDict();
-                } else {
-                    result = { ...result, ...el.asDict() };
-                }
-            },
-        );
+        this.elements.forEach((el) => {
+            if (el instanceof ElementCollection) {
+                result[el.name] = el.asDict();
+            } else {
+                result = { ...result, ...el.asDict() };
+            }
+        });
 
         return result;
     }
@@ -1250,15 +1267,11 @@ export class ElementCollection extends Element {
     availableTags(): Set<string> {
         const result = new Set<string>();
 
-        this.elements.forEach(
-            (el) => {
-                el.availableTags().forEach(
-                    (tag) => {
-                        result.add(tag);
-                    },
-                );
-            },
-        );
+        this.elements.forEach((el) => {
+            el.availableTags().forEach((tag) => {
+                result.add(tag);
+            });
+        });
 
         return result;
     }
@@ -1269,7 +1282,10 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection
      * @returns the generated element collection from an element and a name
      */
-    static elementToElementCollection(element: Element, name: string = ''): ElementCollection {
+    static elementToElementCollection(
+        element: Element,
+        name: string = '',
+    ): ElementCollection {
         return ElementCollection.fromMapping(element.asDict(), name);
     }
 
@@ -1279,14 +1295,15 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection; defaults to ''
      * @returns an element collection generated from the given mapping and name
      */
-    static fromMapping(mapping: { [key: string]: unknown }, name: string = ''): ElementCollection {
+    static fromMapping(
+        mapping: { [key: string]: unknown },
+        name: string = '',
+    ): ElementCollection {
         const resultSet = new Set<Element>();
 
-        Object.entries(mapping).forEach(
-            (e) => {
-                resultSet.add(new Property(e[0], e[1]));
-            },
-        );
+        Object.entries(mapping).forEach((e) => {
+            resultSet.add(new Property(e[0], e[1]));
+        });
 
         return new ElementCollection(name, Array.from(resultSet));
     }
