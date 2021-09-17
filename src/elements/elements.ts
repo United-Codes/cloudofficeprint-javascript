@@ -1194,6 +1194,29 @@ export class TextBox extends Element {
     }
 }
 
+export class Freeze extends Property {
+    /**
+     *
+     * @param name The name for this property
+     * @param value Three options are available.
+     *  First option, place the pane where the tag is located, using a value of **true**.
+     *  Second option, provide the location to place the pane, e.g. **"C5"**, in the format of
+     *   excel cell and row.
+     *  Third option, dont place a pane, using a value of **false**.
+     */
+    constructor(name: string, value: string | boolean) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{freeze ${this.name}}`]);
+    }
+}
+
 /**
  * A collection used to group multiple elements together.
  * It can contain nested `ElementCollection`s and should be used to pass multiple `Element`s
