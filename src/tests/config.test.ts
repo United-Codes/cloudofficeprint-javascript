@@ -1,4 +1,5 @@
 import { describe, test, expect } from '@jest/globals';
+
 import * as cop from '../index';
 
 describe('Tests for config', () => {
@@ -26,7 +27,7 @@ describe('Tests for config', () => {
             true, // identifyFormFields
             'test_sign_certificate', // signCertificate
         );
-        pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 50, 32);
+        pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32);
         pdfOpts.setPageMarginAt(6, 'top');
         pdfOpts.setPageOrientation('portrait');
         const conf = new cop.config.OutputConfig(
