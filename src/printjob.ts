@@ -49,7 +49,7 @@ export class PrintJob {
     constructor(
         data: Element | RESTSource | { [key: string]: Element },
         server: Server,
-        template?: Resource,
+        template?: Template | Resource,
         outputConfig: OutputConfig = new OutputConfig(),
         subtemplates: { [key: string]: Resource } = {},
         prependFiles: Resource[] = [],
