@@ -7,6 +7,7 @@ describe('Tests for config', () => {
         const pdfOpts = new cop.config.PDFOptions(
             true, // evenPage
             false, // mergeMakingEven
+            false, // removeLastPage
             'test_modify_password', // modifyPassword
             'test_pw', // readPassword
             0, // passwordProtectionFlag
@@ -41,6 +42,7 @@ describe('Tests for config', () => {
         const confExpected = {
             output_even_page: true,
             output_merge_making_even: false,
+            output_remove_last_page: false,
             output_modify_password: 'test_modify_password',
             output_read_password: 'test_pw',
             output_password_protection_flag: 0,
