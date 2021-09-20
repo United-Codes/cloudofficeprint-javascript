@@ -7,6 +7,7 @@
 export class PDFOptions {
     evenPage?: boolean;
     mergeMakingEven?: boolean;
+    removeLastPage?: boolean;
     modifyPassword?: string;
     readPassword?: string;
     passwordProtectionFlag?: number;
@@ -31,6 +32,7 @@ export class PDFOptions {
      * @param evenPage If you want your output to have even pages, for example
      *  printing on both sides after merging, you can set this to be true. Optional.
      * @param mergeMakingEven Merge each given document making even paged. Optional.
+     * @param removeLastPage Remove the last page from the given PDF document. Optional.
      * @param modifyPassword The password needed to modify the PDF. Optional.
      * @param readPassword The password needed to open the PDF. Optional.
      * @param passwordProtectionFlag Bit field explained in the PDF specs in table 3.20 in
@@ -73,6 +75,7 @@ export class PDFOptions {
     constructor(
         evenPage?: boolean,
         mergeMakingEven?: boolean,
+        removeLastPage?: boolean,
         modifyPassword?: string,
         readPassword?: string,
         passwordProtectionFlag?: number,
@@ -95,6 +98,7 @@ export class PDFOptions {
     ) {
         this.evenPage = evenPage;
         this.mergeMakingEven = mergeMakingEven;
+        this.removeLastPage = removeLastPage;
         this.modifyPassword = modifyPassword;
         this.readPassword = readPassword;
         this.passwordProtectionFlag = passwordProtectionFlag;
@@ -128,6 +132,9 @@ export class PDFOptions {
         }
         if (this.mergeMakingEven !== undefined) {
             result.output_merge_making_even = this.mergeMakingEven;
+        }
+        if (this.removeLastPage !== undefined) {
+            result.output_remove_last_page = this.removeLastPage;
         }
         if (this.modifyPassword !== undefined) {
             result.output_modify_password = this.modifyPassword;
