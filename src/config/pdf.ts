@@ -1,5 +1,4 @@
 import { Base64Resource, ServerPathResource, URLResource } from '../resource';
-import * as ownUtils from '../own_utils/index';
 
 /**
  * Class of optional PDF options.
@@ -286,7 +285,7 @@ export class PDFOptions {
     }
 
     /**
-     * Sign the output PDF with a local certificate file.
+     * Sign the output PDF with a certificate file.
      * @param certificate Resource of the certificate file.
      * @param password password of the certificate. Optional.
      */
