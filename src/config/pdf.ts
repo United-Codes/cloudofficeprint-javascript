@@ -1,3 +1,4 @@
+import { Base64Resource, ServerPathResource, URLResource } from '../resource';
 import * as ownUtils from '../own_utils/index';
 
 /**
@@ -286,11 +287,14 @@ export class PDFOptions {
 
     /**
      * Sign the output PDF with a local certificate file.
-     * @param localCertificatePath path to the local certificate file.
+     * @param certificate Resource of the certificate file.
      * @param password password of the certificate. Optional.
      */
-    sign(localCertificatePath: string, password?: string): void {
-        this.signCertificate = ownUtils.readFileAsBase64(localCertificatePath);
+    sign(
+        certificate: Base64Resource | ServerPathResource | URLResource,
+        password?: string,
+    ): void {
+        this.signCertificate = certificate.data as string;
         this.signCertificatePassword = password;
     }
 }
