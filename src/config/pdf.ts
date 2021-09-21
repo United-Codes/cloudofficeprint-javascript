@@ -1,3 +1,5 @@
+import * as ownUtils from '../own_utils/index';
+
 /**
  * Class of optional PDF options.
  * The properties of this class define all possible PDF output options.
@@ -27,6 +29,7 @@ export class PDFOptions {
     split?: boolean;
     identifyFormFields?: boolean;
     signCertificate?: string;
+    signCertificatePassword?: string;
 
     /**
      * @param evenPage If you want your output to have even pages, for example
@@ -71,6 +74,8 @@ export class PDFOptions {
      *  as a base64 string, URL, FTP location or a server path.
      *  The function readFileAsBase64() from file_utils.ts can be used to read local
      *  .p12 or .pfx file as base64. Optional.
+     * @param signCertificatePassword If you are signing with password protected certificates,
+     *  you can specify the password as a plain string.
      */
     constructor(
         evenPage?: boolean,
@@ -95,6 +100,7 @@ export class PDFOptions {
         split?: boolean,
         identifyFormFields?: boolean,
         signCertificate?: string,
+        signCertificatePassword?: string,
     ) {
         this.evenPage = evenPage;
         this.mergeMakingEven = mergeMakingEven;
@@ -118,6 +124,7 @@ export class PDFOptions {
         this.split = split;
         this.identifyFormFields = identifyFormFields;
         this.signCertificate = signCertificate;
+        this.signCertificatePassword = signCertificatePassword;
     }
 
     /**
@@ -198,6 +205,10 @@ export class PDFOptions {
         if (this.signCertificate !== undefined) {
             result.output_sign_certificate = this.signCertificate;
         }
+        if (this.signCertificatePassword !== undefined) {
+            result.output_sign_certificate_password =
+                this.signCertificatePassword;
+        }
         return result;
     }
 
@@ -271,5 +282,15 @@ export class PDFOptions {
      */
     setPageOrientation(orientation: 'landscape' | 'portrait') {
         this.landscape = orientation === 'landscape';
+    }
+
+    /**
+     * Sign the output PDF with a local certificate file.
+     * @param localCertificatePath path to the local certificate file.
+     * @param password password of the certificate. Optional.
+     */
+    sign(localCertificatePath: string, password?: string): void {
+        this.signCertificate = ownUtils.readFileAsBase64(localCertificatePath);
+        this.signCertificatePassword = password;
     }
 }
