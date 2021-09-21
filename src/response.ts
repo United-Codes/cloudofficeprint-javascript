@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import { Response as HTTPReponse } from 'node-fetch';
+
 import * as ownUtils from './own_utils';
 
 /**
@@ -56,7 +57,7 @@ export class Response {
         let pathCopy = path;
         const pathSplit = pathCopy.split('/');
         const fileName = pathSplit[pathSplit.length - 1];
-        if (!(fileName.includes('.'))) {
+        if (!fileName.includes('.')) {
             pathCopy = `${path}.${this.filetype()}`;
         }
         fs.writeFile(pathCopy, Buffer.from(await this.buffer), (err) => {

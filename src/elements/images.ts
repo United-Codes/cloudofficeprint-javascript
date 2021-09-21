@@ -75,8 +75,8 @@ export class Image extends Element {
      * @returns the dict representation of the suffixes that need to be appended to the name of
      *  this property in this object's dict representation
      */
-    asDictSuffixes(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {};
+    asDictSuffixes(): { [key: string]: string | number } {
+        const result: { [key: string]: string | number } = {};
 
         if (this.maxWidth !== undefined) {
             result._max_width = this.maxWidth;
@@ -113,16 +113,14 @@ export class Image extends Element {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {
+    asDict(): { [key: string]: string | number } {
+        const result: { [key: string]: string | number } = {
             [this.name]: this.source,
         };
 
-        Object.entries(this.asDictSuffixes()).forEach(
-            ([key, value]) => {
-                result[`${this.name}${key}`] = value;
-            },
-        );
+        Object.entries(this.asDictSuffixes()).forEach(([key, value]) => {
+            result[`${this.name}${key}`] = value;
+        });
 
         return result;
     }

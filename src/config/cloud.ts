@@ -74,7 +74,12 @@ export abstract class CloudAccessToken {
      * @param password password for username; optional
      * @returns created token
      */
-    static fromFTP(host: string, port?: number, user?: string, password?: string): FTPToken {
+    static fromFTP(
+        host: string,
+        port?: number,
+        user?: string,
+        password?: string,
+    ): FTPToken {
         return new FTPToken(host, false, port, user, password);
     }
 
@@ -91,7 +96,12 @@ export abstract class CloudAccessToken {
      *  This is an FTPToken object, with sftp=True passed into the constructor.
      *  The only difference with FTP is CloudAccessToken.servicename.
      */
-    static fromSFTP(host: string, port?: number, user?: string, password?: string): FTPToken {
+    static fromSFTP(
+        host: string,
+        port?: number,
+        user?: string,
+        password?: string,
+    ): FTPToken {
         return new FTPToken(host, true, port, user, password);
     }
 }
@@ -117,7 +127,7 @@ export class OAuthToken extends CloudAccessToken {
      */
     asDict(): { [key: string]: string | { [key: string]: string | number } } {
         const result: {
-            [key: string]: string | { [key: string]: string | number }
+            [key: string]: string | { [key: string]: string | number };
         } = super.asDict();
         result.cloud_access_token = this.token;
         return result;
@@ -147,7 +157,7 @@ export class AWSToken extends CloudAccessToken {
      */
     asDict(): { [key: string]: string | { [key: string]: string | number } } {
         const result: {
-            [key: string]: string | { [key: string]: string | number }
+            [key: string]: string | { [key: string]: string | number };
         } = super.asDict();
         result.cloud_access_token = {
             access_key: this.keyId,
@@ -173,11 +183,13 @@ export class FTPToken extends CloudAccessToken {
      * @param user username for the FTP/SFTP server; optional
      * @param password password for the user; optional
      */
-    constructor(host: string,
+    constructor(
+        host: string,
         sftp: boolean = false,
         port?: number,
         user?: string,
-        password?: string) {
+        password?: string,
+    ) {
         super(sftp ? 'sftp' : 'ftp');
         this.host = host;
         this.port = port;
@@ -205,7 +217,7 @@ export class FTPToken extends CloudAccessToken {
         }
 
         const result: {
-            [key: string]: string | { [key: string]: string | number }
+            [key: string]: string | { [key: string]: string | number };
         } = super.asDict();
         result.cloud_access_token = cloudAccessToken;
         return result;

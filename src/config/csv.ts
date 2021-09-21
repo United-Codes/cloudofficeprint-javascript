@@ -32,8 +32,8 @@ export class CsvOptions {
      * The dict representation of these csv options.
      * @returns the dict representation of these csv options
      */
-    asDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {};
+    asDict(): { [key: string]: string | number } {
+        const result: { [key: string]: string | number } = {};
 
         if (this.textDelimiter !== undefined) {
             result.output_text_delimiter = this.textDelimiter;

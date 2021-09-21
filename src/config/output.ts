@@ -53,12 +53,18 @@ export class OutputConfig {
      * @returns the dict representation of this output config
      */
     asDict(): {
-        [key: string]: string | number | boolean | { [key: string]: number } |
-        { [key: string]: string | number }
-        } {
+        [key: string]:
+            | string
+            | number
+            | boolean
+            | { [key: string]: string | number };
+    } {
         let result: {
-            [key: string]: string | number | boolean | { [key: string]: number } |
-            { [key: string]: string | number }
+            [key: string]:
+                | string
+                | number
+                | boolean
+                | { [key: string]: string | number };
         } = {
             output_encoding: this.encoding,
             output_converter: this.converter,
