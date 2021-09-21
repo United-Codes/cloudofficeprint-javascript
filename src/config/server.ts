@@ -425,4 +425,24 @@ export class Server {
         });
         return response.text();
     }
+
+    /**
+     * Sends a GET request to server-url/ipp_check.
+     * @param ippURL the URL of the IPP printer.
+     * @param version the version of the IPP printer.
+     * @returns the status of the IPP printer.
+     */
+    async getIppCheck(ippURL: string, version: string): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(
+            new URL(`ipp_check?ipp_url=${ippURL}&version=${version}`, this.url)
+                .href,
+            { agent: proxy },
+        );
+        return response.json();
+    }
 }
