@@ -74,7 +74,7 @@ export class PDFOptions {
      *  as a base64 string, URL, FTP location or a server path.
      *  The function readFileAsBase64() from file_utils.ts can be used to read local
      *  .p12 or .pfx file as base64. Optional.
-     * @param signCertificatePassword If you are signing with password protected certificates,
+     * @param signCertificatePassword If you are signing with a password protected certificate,
      *  you can specify the password as a plain string.
      */
     constructor(
