@@ -1194,6 +1194,10 @@ export class TextBox extends Element {
     }
 }
 
+/**
+ * Only supported in Excel. Represents an object that indicates to put a freeze
+ * pane in the excel template.
+ */
 export class Freeze extends Property {
     /**
      *
@@ -1202,7 +1206,7 @@ export class Freeze extends Property {
      *  First option, place the pane where the tag is located, using a value of **true**.
      *  Second option, provide the location to place the pane, e.g. **"C5"**, in the format of
      *   excel cell and row.
-     *  Third option, dont place a pane, using a value of **false**.
+     *  Third option, don't place a pane, using a value of **false**.
      */
     constructor(name: string, value: string | boolean) {
         super(name, value);
