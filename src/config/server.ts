@@ -394,7 +394,7 @@ export class Server {
 
     /**
      * Sends a GET request to server-url/verify_template_hash?hash=hashcode.
-     * @param hashcode md5 hash of file
+     * @param hashcode md5 hash of file.
      * @returns whether the hash is valid and present in cache.
      */
     async verifyTemplateHash(hashcode: string): Promise<boolean> {
@@ -427,12 +427,12 @@ export class Server {
     }
 
     /**
-     * Sends a GET request to server-url/ipp_check.
+     * Sends a GET request to server-url/ipp_check?ipp_url=ippURL&version=version.
      * @param ippURL the URL of the IPP printer.
      * @param version the version of the IPP printer.
      * @returns the status of the IPP printer.
      */
-    async getIppCheck(ippURL: string, version: string): Promise<JSON> {
+    async checkIpp(ippURL: string, version: string): Promise<JSON> {
         await this.raiseIfUnreachable();
         let proxy;
         if (this.config && this.config.proxies) {
