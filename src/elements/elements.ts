@@ -1222,6 +1222,60 @@ export class Freeze extends Property {
 }
 
 /**
+ * The class for the link/target tags.
+ * This tags allows you to place a link to a target in the same document.
+ * If the uid is not provided, a new uid will be generated uniquely for every link and target pair.
+ */
+export class Link extends Property {
+    uidName?: string;
+    uidValue?: string;
+
+    /**
+     * Create a new link/target tag pair.
+     * If the uid is not provided, a new uid will be generated uniquely for each link/target pair.
+     * @param name the name of the link/target tags.
+     * @param value the value of the link/target tags.
+     * @param uidName the name of the uid of the link/target pair.
+     * @param uidValue the value of the uid of the link/target pair.
+     */
+    constructor(
+        name: string,
+        value: string,
+        uidName?: string,
+        uidValue?: string,
+    ) {
+        super(name, value);
+        this.uidName = uidName;
+        this.uidValue = uidValue;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        if (this.uidName && this.uidValue) {
+            return { [this.name]: this.value, [this.uidName]: this.uidValue };
+        }
+        return { [this.name]: this.value };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        if (this.uidName && this.uidValue) {
+            return new Set([
+                `{link ${this.name}:${this.uidName}}`,
+                `{target ${this.name}:${this.uidName}}`,
+            ]);
+        }
+        return new Set([`{link ${this.name}}`, `{target ${this.name}}`]);
+    }
+}
+
+/**
  * A collection used to group multiple elements together.
  * It can contain nested `ElementCollection`s and should be used to pass multiple `Element`s
  * as PrintJob data, as well as to allow for nested elements.
