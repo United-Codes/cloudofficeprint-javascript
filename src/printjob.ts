@@ -176,27 +176,21 @@ export class PrintJob {
         }
 
         if (this.prependFiles.length > 0) {
-            result.prepend_files = Array.from(
-                this.prependFiles.map((file) => file.secondaryFileDict()),
+            result.prepend_files = this.prependFiles.map((file) =>
+                file.secondaryFileDict(),
             );
         }
 
         if (this.appendFiles.length > 0) {
-            result.append_files = Array.from(
-                this.appendFiles.map((file) => file.secondaryFileDict()),
+            result.append_files = this.appendFiles.map((file) =>
+                file.secondaryFileDict(),
             );
         }
 
         if (Object.keys(this.subtemplates).length > 0) {
-            const templatesArray: { [key: string]: string }[] = [];
-
-            Object.entries(this.subtemplates).forEach(([name, res]) => {
-                const toAdd = res.secondaryFileDict();
-                toAdd.name = name;
-                templatesArray.push(toAdd);
-            });
-
-            result.templates = templatesArray;
+            result.templates = Object.entries(this.subtemplates).map(
+                ([name, file]) => ({ ...file.secondaryFileDict(), name }),
+            );
         }
 
         // If verbose mode is activated, print the result to the terminal
