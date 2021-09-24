@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Formula | cloudofficeprint</title>
+	<title>Link | cloudofficeprint</title>
 	<meta name="description" content="Documentation for cloudofficeprint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,16 +58,25 @@
 					<a href="../modules/elements.html">elements</a>
 				</li>
 				<li>
-					<a href="elements.Formula.html">Formula</a>
+					<a href="elements.Link.html">Link</a>
 				</li>
 			</ul>
-			<h1>Class Formula</h1>
+			<h1>Class Link</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The class for the link/target tags.
+							This tags allows you to place a link to a target in the same document.
+						If the uid is not provided, a new uid will be generated uniquely for every link and target pair.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -75,7 +84,7 @@
 						<a href="elements.Property.html" class="tsd-signature-type" data-tsd-kind="Class">Property</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">Formula</span>
+								<span class="target">Link</span>
 							</li>
 						</ul>
 					</li>
@@ -88,21 +97,23 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Formula.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Link.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-inherited">
+						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Formula.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Formula.html#value" class="tsd-kind-icon">value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Link.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.Link.html#uidName" class="tsd-kind-icon">uid<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.Link.html#uidValue" class="tsd-kind-icon">uid<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Link.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="elements.Formula.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Formula.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Link.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Link.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a></li>
 							</ul>
 						</section>
 					</div>
@@ -114,41 +125,63 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Formula<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, formula<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.Formula.html" class="tsd-signature-type" data-tsd-kind="Class">Formula</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Link<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, uidName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, uidValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.Link.html" class="tsd-signature-type" data-tsd-kind="Class">Link</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Property.html">Property</a>.<a href="elements.Property.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L593">src/elements/elements.ts:593</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L1241">src/elements/elements.ts:1241</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a new link/target tag pair.
+									If the uid is not provided, a new uid will be generated uniquely for each link/target pair.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the name for this property</p>
+											<p>the name of the link/target tags.</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5>formula: <span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the formula</p>
+											<p>the value of the link/target tags.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> uidName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the name of the uid of the link/target pair.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> uidValue: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>the value of the uid of the link/target pair.</p>
 										</div>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="elements.Formula.html" class="tsd-signature-type" data-tsd-kind="Class">Formula</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="elements.Link.html" class="tsd-signature-type" data-tsd-kind="Class">Link</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
@@ -158,6 +191,26 @@
 						<p>Inherited from <a href="elements.Property.html">Property</a>.<a href="elements.Property.html#name">name</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L284">src/elements/elements.ts:284</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="uidName" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> uid<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">uid<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L1230">src/elements/elements.ts:1230</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="uidValue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> uid<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">uid<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L1231">src/elements/elements.ts:1231</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -175,18 +228,18 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="asDict" class="tsd-anchor"></a>
 					<h3>as<wbr>Dict</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 						<li class="tsd-signature tsd-kind-icon">as<wbr>Dict<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="elements.Property.html">Property</a>.<a href="elements.Property.html#asDict">asDict</a></p>
+								<p>Overrides <a href="elements.Property.html">Property</a>.<a href="elements.Property.html#asDict">asDict</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L331">src/elements/elements.ts:331</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L1256">src/elements/elements.ts:1256</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -215,7 +268,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Property.html">Property</a>.<a href="elements.Property.html#availableTags">availableTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L601">src/elements/elements.ts:601</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L1267">src/elements/elements.ts:1267</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -267,22 +320,28 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-namespace">
-						<a href="elements.Formula.html" class="tsd-kind-icon">Formula</a>
+						<a href="elements.Link.html" class="tsd-kind-icon">Link</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.Formula.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="elements.Link.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.Formula.html#name" class="tsd-kind-icon">name</a>
+								<a href="elements.Link.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="elements.Link.html#uidName" class="tsd-kind-icon">uid<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="elements.Link.html#uidValue" class="tsd-kind-icon">uid<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.Formula.html#value" class="tsd-kind-icon">value</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.Formula.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
+								<a href="elements.Link.html#value" class="tsd-kind-icon">value</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.Formula.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a>
+								<a href="elements.Link.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="elements.Link.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a>
 							</li>
 						</ul>
 					</li>
@@ -299,11 +358,11 @@
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 		</div>
 	</div>

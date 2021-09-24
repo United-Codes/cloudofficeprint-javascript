@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Formula | cloudofficeprint</title>
+	<title>Freeze | cloudofficeprint</title>
 	<meta name="description" content="Documentation for cloudofficeprint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,16 +58,24 @@
 					<a href="../modules/elements.html">elements</a>
 				</li>
 				<li>
-					<a href="elements.Formula.html">Formula</a>
+					<a href="elements.Freeze.html">Freeze</a>
 				</li>
 			</ul>
-			<h1>Class Formula</h1>
+			<h1>Class Freeze</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Only supported in Excel. Represents an object that indicates to put a freeze
+						pane in the excel template.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -75,7 +83,7 @@
 						<a href="elements.Property.html" class="tsd-signature-type" data-tsd-kind="Class">Property</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">Formula</span>
+								<span class="target">Freeze</span>
 							</li>
 						</ul>
 					</li>
@@ -88,21 +96,21 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Formula.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Freeze.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Formula.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Formula.html#value" class="tsd-kind-icon">value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Freeze.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Freeze.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="elements.Formula.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Formula.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="elements.Freeze.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Freeze.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a></li>
 							</ul>
 						</section>
 					</div>
@@ -114,14 +122,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Formula<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, formula<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.Formula.html" class="tsd-signature-type" data-tsd-kind="Class">Formula</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Freeze<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.Freeze.html" class="tsd-signature-type" data-tsd-kind="Class">Freeze</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Property.html">Property</a>.<a href="elements.Property.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L593">src/elements/elements.ts:593</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L1211">src/elements/elements.ts:1211</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -130,20 +138,24 @@
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the name for this property</p>
+											<p>The name for this property</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5>formula: <span class="tsd-signature-type">string</span></h5>
+									<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the formula</p>
+											<p>Three options are available.
+												First option, place the pane where the tag is located, using a value of <strong>true</strong>.
+												Second option, provide the location to place the pane, e.g. <strong>&quot;C5&quot;</strong>, in the format of
+												excel cell and row.
+											Third option, don&#39;t place a pane, using a value of <strong>false</strong>.</p>
 										</div>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="elements.Formula.html" class="tsd-signature-type" data-tsd-kind="Class">Formula</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="elements.Freeze.html" class="tsd-signature-type" data-tsd-kind="Class">Freeze</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -215,7 +227,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Property.html">Property</a>.<a href="elements.Property.html#availableTags">availableTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L601">src/elements/elements.ts:601</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/e4c9018/src/elements/elements.ts#L1219">src/elements/elements.ts:1219</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -267,22 +279,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-namespace">
-						<a href="elements.Formula.html" class="tsd-kind-icon">Formula</a>
+						<a href="elements.Freeze.html" class="tsd-kind-icon">Freeze</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.Formula.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="elements.Freeze.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.Formula.html#name" class="tsd-kind-icon">name</a>
+								<a href="elements.Freeze.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.Formula.html#value" class="tsd-kind-icon">value</a>
+								<a href="elements.Freeze.html#value" class="tsd-kind-icon">value</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.Formula.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
+								<a href="elements.Freeze.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.Formula.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a>
+								<a href="elements.Freeze.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a>
 							</li>
 						</ul>
 					</li>

@@ -82,7 +82,7 @@
 				<a href="#template-docx" id="template-docx" style="color: inherit; text-decoration: none;">
 					<h2>Template (docx)</h2>
 				</a>
-				<img src="https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/main/imgs/hello_world_template.png" width="600" />
+				<p><img src="https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/main/imgs/hello_world_template.png" alt=""></p>
 				<a href="#data" id="data" style="color: inherit; text-decoration: none;">
 					<h2>Data</h2>
 				</a>
@@ -137,7 +137,7 @@
 				<a href="#result" id="result" style="color: inherit; text-decoration: none;">
 					<h2>Result</h2>
 				</a>
-				<img src="https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/main/imgs/hello_world_output.png" width="600" />
+				<p><img src="https://raw.githubusercontent.com/United-Codes/cloudofficeprint-javascript/main/imgs/hello_world_output.png" alt=""></p>
 				<a href="#other-examples" id="other-examples" style="color: inherit; text-decoration: none;">
 					<h1>Other examples</h1>
 				</a>
@@ -170,8 +170,7 @@
 				<p>There are tests for all classes and methods. The tests check if the JSON that needs to be sent to the server is as expected. To run the tests:</p>
 				<ol>
 					<li>Open a terminal in the parent directory of this project, which can be found on <a href="https://github.com/United-Codes/cloudofficeprint-javascript">Github</a>.</li>
-					<li>Type in the terminal:<pre><code class="language-bash"><span style="color: #000000">npm run </span><span style="color: #795E26">test</span>
-</code></pre>
+					<li>Type in the terminal: <code>bash npm run test</code>.
 					In the file <code>printjob.test.ts</code>, the tests for the <code>executeFullJson()</code>-function and for no input template are skipped because these tests need an API key to succeed. You can enable these tests by removing the <code>.skip</code> on the first line (as explained in the test file itself). The tests make use of the <a href="https://jestjs.io/">jest</a>-package.</li>
 				</ol>
 				<a href="#compiling" id="compiling" style="color: inherit; text-decoration: none;">
@@ -203,8 +202,8 @@
 					<li>To publish with private visibility:<pre><code class="language-bash"><span style="color: #000000">npm publish</span>
 </code></pre>
 					</li>
-					<li>To publish with public visibility:<pre><code class="language-bash"><span style="color: #000000">npm publish --access public</span>
-</code></pre>
+					<li>To publish with public visibility:
+						<code>bash npm publish --access public </code>
 					More information can be found <a href="https://docs.npmjs.com/creating-and-publishing-scoped-public-packages">here</a>.</li>
 				</ol>
 			</div>
@@ -236,6 +235,9 @@
 					<li class=" tsd-kind-namespace">
 						<a href="modules/response.html">response</a>
 					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="modules/template.html">template</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -248,6 +250,9 @@
 					</li>
 					<li class=" tsd-kind-reference">
 						<a href="modules.html#Response" class="tsd-kind-icon">Response</a>
+					</li>
+					<li class=" tsd-kind-reference">
+						<a href="modules.html#Template" class="tsd-kind-icon">Template</a>
 					</li>
 				</ul>
 			</nav>
