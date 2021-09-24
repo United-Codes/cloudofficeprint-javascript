@@ -99,8 +99,8 @@ export abstract class Resource {
     }
 
     /**
-     * Create a URLResource targeting a file at the given url.
-     * @param url the file url.
+     * Create a URLResource targeting a file at the given URL.
+     * @param url the file URL.
      * @param filetype the file type (extension).
      * @returns the created URLResource.
      */
@@ -135,7 +135,7 @@ export class RawResource extends Resource {
     }
 
     /**
-     * @returns base64 representation of the raw data in `RawResource.data`
+     * @returns the base64 representation of the raw data in `RawResource.data`.
      */
     base64(): string {
         return this.data.toString('base64');

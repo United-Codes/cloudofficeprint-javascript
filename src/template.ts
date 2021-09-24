@@ -43,7 +43,7 @@ export class Template {
 
     /**
      * Reset the stored hash of the template.
-     * @param shouldHash whether the template should be hashed on the server.
+     * @param shouldHash whether the template should be hashed on the server, defaults to true.
      */
     resetHash(shouldHash: boolean = true): void {
         this.templateHash = undefined;
