@@ -106,14 +106,13 @@ export class PrintJob {
             server.config && server.config.proxies
                 ? new HttpsProxyAgent(server.config.proxies)
                 : undefined;
-        return PrintJob.handleResponse(
-            await fetch(server.url, {
-                method: 'post',
-                body: JSON.stringify(jsonData),
-                agent: proxy,
-                headers: { 'Content-type': 'application/json' },
-            }),
-        );
+        const response = await fetch(server.url, {
+            method: 'post',
+            body: JSON.stringify(jsonData),
+            agent: proxy,
+            headers: { 'Content-type': 'application/json' },
+        });
+        return PrintJob.handleResponse(response);
     }
 
     /**
