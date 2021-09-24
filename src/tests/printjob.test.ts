@@ -12,19 +12,11 @@ describe('Tests for class PrintJob', () => {
             new cop.config.ServerConfig(API_KEY),
         );
 
-        const prependFile = cop.Resource.fromLocalFile(
-            './data/tests/template.docx',
-        );
-        const appendFile = cop.Resource.fromLocalFile(
-            './data/tests/template.docx',
-        );
         const resource = cop.Resource.fromLocalFile(
             './data/tests/template.docx',
         );
-        const template = new cop.Template(
-            cop.Resource.fromLocalFile(
-                './data/tests/template_prepend_append_subtemplate.docx',
-            ),
+        const template = cop.Template.fromLocalFile(
+            './data/tests/template_prepend_append_subtemplate.docx',
         );
 
         const resourceBase64 = resource.data;
@@ -41,8 +33,8 @@ describe('Tests for class PrintJob', () => {
             template,
             outputConf,
             { sub1: resource, sub2: resource },
-            [prependFile],
-            [appendFile],
+            [resource],
+            [resource],
         );
 
         const printjobExpected = {
@@ -115,8 +107,8 @@ describe('Tests for class PrintJob', () => {
             new cop.config.ServerConfig(API_KEY),
         );
 
-        const template = new cop.Template(
-            cop.Resource.fromLocalFile('./data/tests/template.docx'),
+        const template = cop.Template.fromLocalFile(
+            './data/tests/template.docx',
             undefined,
             undefined,
             true,

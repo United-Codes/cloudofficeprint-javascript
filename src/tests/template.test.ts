@@ -7,9 +7,7 @@ describe('Tests for class Template', () => {
     test('Test Template local file', async () => {
         const localPath = './data/tests/template.docx';
         const data = await fs.readFile(localPath);
-        const resource = new cop.Template(
-            cop.Resource.fromLocalFile(localPath),
-        );
+        const resource = cop.Template.fromLocalFile(localPath);
         const resourceExpected = {
             file: cop.ownUtils.rawToBase64(data),
             template_type: 'docx',
@@ -20,11 +18,7 @@ describe('Tests for class Template', () => {
     test('Test Template delimiters', async () => {
         const localPath = './data/tests/template.docx';
         const data = await fs.readFile(localPath);
-        const resource = new cop.Template(
-            cop.Resource.fromLocalFile(localPath),
-            '<',
-            '>',
-        );
+        const resource = cop.Template.fromLocalFile(localPath, '<', '>');
         const resourceExpected = {
             file: cop.ownUtils.rawToBase64(data),
             template_type: 'docx',
@@ -37,12 +31,7 @@ describe('Tests for class Template', () => {
     test('Test Template hashing', async () => {
         const localPath = './data/tests/template.docx';
         const data = await fs.readFile(localPath);
-        const resource = new cop.Template(
-            cop.Resource.fromLocalFile(localPath),
-            '{',
-            '}',
-            true,
-        );
+        const resource = cop.Template.fromLocalFile(localPath, '{', '}', true);
         const resourceExpected = {
             file: cop.ownUtils.rawToBase64(data),
             template_type: 'docx',
@@ -55,12 +44,7 @@ describe('Tests for class Template', () => {
 
     test('Test Template updating hash', async () => {
         const localPath = './data/tests/template.docx';
-        const resource = new cop.Template(
-            cop.Resource.fromLocalFile(localPath),
-            '{',
-            '}',
-            true,
-        );
+        const resource = cop.Template.fromLocalFile(localPath, '{', '}', true);
         resource.updateHash('test_hash');
         const resourceExpected = {
             template_type: 'docx',
