@@ -4,7 +4,6 @@ const cop = require('../../dist/src/index');
 // Setup Cloud Office Print server
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
-
 const server = new cop.config.Server(
     SERVER_URL,
     new cop.config.ServerConfig(API_KEY),
@@ -39,9 +38,8 @@ const CHART_WIDTH = 800; // pptx, xlsx
         fetch('https://api.spacexdata.com/v4/landpads'),
         fetch('https://api.spacexdata.com/v4/ships'),
     ]);
-
-    const [info, rockets, dragons, launchPads, landingPads, ships] = await Promise
-        .all(responses.map((res) => res.json()));
+    const [info, rockets, dragons, launchPads, landingPads, ships] =
+        await Promise.all(responses.map((res) => res.json()));
 
     // Add data source hyperlink
     const dataSource = new cop.elements.Hyperlink(
@@ -70,16 +68,16 @@ const CHART_WIDTH = 800; // pptx, xlsx
     );
     data.add(rocketsDescription);
 
-    // / Add rocket data to a list
-    const rocketList = [];
-
-    // / Add rocket images, wikipedia hyperlink and shortened description for each rocket
-    rockets.forEach((rocket) => {
+    // / Add rocket images, wikipedia hyperlink and shortened description for each rocket to a list
+    const rocketList = rockets.map((rocket) => {
         const collec = cop.elements.ElementCollection.fromMapping(rocket);
 
-        const img = cop.elements.Image.fromUrl('image', rocket.flickr_images[0]);
-        img.maxHeight = IMAGE_MAX_HEIGHT;
-        img.maxWidth = IMAGE_MAX_WIDTH;
+        const img = cop.elements.Image.fromUrl(
+            'image',
+            rocket.flickr_images[0],
+            IMAGE_MAX_WIDTH,
+            IMAGE_MAX_HEIGHT,
+        );
         collec.add(img);
 
         const hyper = new cop.elements.Hyperlink(
@@ -95,20 +93,15 @@ const CHART_WIDTH = 800; // pptx, xlsx
         );
         collec.add(shortDescription); // Overwrites the current description
 
-        rocketList.push(collec);
+        return collec;
     });
 
     const rocketData = new cop.elements.ForEach('rockets', rocketList);
     data.add(rocketData);
 
     // / Add rocket chart
-    const x = [];
-    const costY = [];
-
-    rockets.forEach((rocket) => {
-        x.push(rocket.name);
-        costY.push(rocket.cost_per_launch);
-    });
+    const x = rockets.forEach((rocket) => rocket.name);
+    const costY = rockets.forEach((rocket) => rocket.cost_per_launch);
 
     const costSeries = new cop.elements.ColumnSeries(
         x,
@@ -159,28 +152,27 @@ const CHART_WIDTH = 800; // pptx, xlsx
         [costSeries],
         rocketsChartOptions,
     );
-
     data.add(rocketsChart);
 
     // Add dragons data
+
     // / Add dragons description
-    data.add(
-        new cop.elements.Property(
-            'dragons_description',
-            'Data about the dragon capsules of SpaceX',
-        ),
+    const dragonDescription = new cop.elements.Property(
+        'dragons_description',
+        'Data about the dragon capsules of SpaceX',
     );
+    data.add(dragonDescription);
 
-    // / Add dragon data to a list
-    const dragonList = [];
-
-    // / Add dragon images, wikipedia hyperlink and shortened description for each dragon
-    dragons.forEach((dragon) => {
+    // / Add dragon images, wikipedia hyperlink and shortened description for each dragon to a list
+    const dragonList = dragons.map((dragon) => {
         const collec = cop.elements.ElementCollection.fromMapping(dragon);
 
-        const img = cop.elements.Image.fromUrl('image', dragon.flickr_images[0]);
-        img.maxHeight = IMAGE_MAX_HEIGHT;
-        img.maxWidth = IMAGE_MAX_WIDTH;
+        const img = cop.elements.Image.fromUrl(
+            'image',
+            dragon.flickr_images[0],
+            IMAGE_MAX_WIDTH,
+            IMAGE_MAX_HEIGHT,
+        );
         collec.add(img);
 
         const hyper = new cop.elements.Hyperlink(
@@ -196,31 +188,31 @@ const CHART_WIDTH = 800; // pptx, xlsx
         );
         collec.add(shortDescription); // Overwrites the current description
 
-        dragonList.push(collec);
+        return collec;
     });
 
     const dragonData = new cop.elements.ForEach('dragons', dragonList);
     data.add(dragonData);
 
     // Add launch pads data
-    // / Add launch pads description
-    data.add(
-        new cop.elements.Property(
-            'launch_pads_description',
-            "Data about SpaceX's launch pads",
-        ),
-    );
 
-    // / Add launch pad data to a list
-    const launchPadList = [];
+    // / Add launch pads description
+    const launchPadDescription = new cop.elements.Property(
+        'launch_pads_description',
+        "Data about SpaceX's launch pads",
+    );
+    data.add(launchPadDescription);
 
     // / Add launch pad images, wikipedia hyperlink and shortened description for each launch_pad
-    launchPads.forEach((launchPad) => {
+    const launchPadList = launchPads.map((launchPad) => {
         const collec = cop.elements.ElementCollection.fromMapping(launchPad);
 
-        const img = cop.elements.Image.fromUrl('image', launchPad.images.large[0]);
-        img.maxHeight = IMAGE_MAX_HEIGHT;
-        img.maxWidth = IMAGE_MAX_WIDTH;
+        const img = cop.elements.Image.fromUrl(
+            'image',
+            launchPad.images.large[0],
+            IMAGE_MAX_WIDTH,
+            IMAGE_MAX_HEIGHT,
+        );
         collec.add(img);
 
         const shortDescription = new cop.elements.Property(
@@ -229,31 +221,34 @@ const CHART_WIDTH = 800; // pptx, xlsx
         );
         collec.add(shortDescription); // Overwrites the current description
 
-        launchPadList.push(collec);
+        return collec;
     });
 
-    const launchPadData = new cop.elements.ForEach('launch_pads', launchPadList);
+    const launchPadData = new cop.elements.ForEach(
+        'launch_pads',
+        launchPadList,
+    );
     data.add(launchPadData);
 
     // Add landing pads data
-    // / Add landing pads description
-    data.add(
-        new cop.elements.Property(
-            'landing_pads_description',
-            "Data about SpaceX's landing pads",
-        ),
-    );
 
-    // / Add landing pad data to a list
-    const landingPadList = [];
+    // / Add landing pads description
+    const landingPadDescription = new cop.elements.Property(
+        'landing_pads_description',
+        "Data about SpaceX's landing pads",
+    );
+    data.add(landingPadDescription);
 
     // / Add landing pad images, wikipedia hyperlink and shortened description for each landing pad
-    landingPads.forEach((landingPad) => {
+    const landingPadList = landingPads.map((landingPad) => {
         const collec = cop.elements.ElementCollection.fromMapping(landingPad);
 
-        const img = cop.elements.Image.fromUrl('image', landingPad.images.large[0]);
-        img.maxHeight = IMAGE_MAX_HEIGHT;
-        img.maxWidth = IMAGE_MAX_WIDTH;
+        const img = cop.elements.Image.fromUrl(
+            'image',
+            landingPad.images.large[0],
+            IMAGE_MAX_WIDTH,
+            IMAGE_MAX_HEIGHT,
+        );
         collec.add(img);
 
         const hyper = new cop.elements.Hyperlink(
@@ -269,41 +264,44 @@ const CHART_WIDTH = 800; // pptx, xlsx
         );
         collec.add(shortDescription); // Overwrites the current description
 
-        landingPadList.push(collec);
+        return collec;
     });
 
     const landingPadData = new cop.elements.ForEach(
         'landing_pads',
         landingPadList,
     );
-
     data.add(landingPadData);
 
     // Add ships data
-    // / Add ships description
-    data.add(
-        new cop.elements.Property(
-            'ships_description',
-            'Data about the ships that assist SpaceX launches, including ASDS drone ships, tugs, fairing recovery ships, and various support ships',
-        ),
-    );
 
-    // / Add ship data to a list
-    const shipList = [];
+    // / Add ships description
+    const shipDescription = new cop.elements.Property(
+        'ships_description',
+        'Data about the ships that assist SpaceX launches, including ASDS drone ships, tugs, fairing recovery ships, and various support ships',
+    );
+    data.add(shipDescription);
 
     // / Add ship images and website hyperlink for each ship
-    ships.forEach((ship) => {
+    const shipList = ships.map((ship) => {
         const collec = cop.elements.ElementCollection.fromMapping(ship);
 
-        const img = cop.elements.Image.fromUrl('image', ship.image);
-        img.maxHeight = IMAGE_MAX_HEIGHT;
-        img.maxWidth = IMAGE_MAX_WIDTH;
+        const img = cop.elements.Image.fromUrl(
+            'image',
+            ship.image,
+            IMAGE_MAX_WIDTH,
+            IMAGE_MAX_HEIGHT,
+        );
         collec.add(img);
 
-        const hyper = new cop.elements.Hyperlink('website', ship.link, 'Website');
+        const hyper = new cop.elements.Hyperlink(
+            'website',
+            ship.link,
+            'Website',
+        );
         collec.add(hyper);
 
-        shipList.push(collec);
+        return collec;
     });
 
     const shipData = new cop.elements.ForEach('ships', shipList);
@@ -315,7 +313,9 @@ const CHART_WIDTH = 800; // pptx, xlsx
         //  of this script according to filetype
         data,
         server,
-        cop.Resource.fromLocalFile('./examples/spacex_example/spacex_template.pptx'), // For pptx
+        cop.Templates.fromLocalFile(
+            './examples/spacex_example/spacex_template.pptx',
+        ), // For pptx
         // cop.Resource.fromLocalFile(
         //     './examples/spacex_example/spacex_template.xlsx',
         // ), // For xlsx
