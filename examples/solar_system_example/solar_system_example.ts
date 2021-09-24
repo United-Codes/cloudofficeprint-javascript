@@ -3,9 +3,10 @@
  * The SpaceX example `spacex_example.ts` is a more advanced example using this approach.
  */
 
-import fetch from 'node-fetch';
 import * as cop from '../../src/index';
-// const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
+
+// import fetch from 'node-fetch';
+const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 // Setup Cloud Office Print server
 const SERVER_URL = 'https://api.cloudofficeprint.com/';

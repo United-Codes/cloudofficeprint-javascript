@@ -1,6 +1,7 @@
-import fetch from 'node-fetch';
-// const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 import { HttpsProxyAgent } from 'https-proxy-agent';
+
+// import fetch from 'node-fetch';
+const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 /**
  * This class defines an IP-enabled printer to use with the Cloud Office Print server.
