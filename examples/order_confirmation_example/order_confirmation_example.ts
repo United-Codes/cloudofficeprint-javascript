@@ -1,12 +1,10 @@
-import * as cop from '../../src/index';
+// import * as cop from 'cloudofficeprint';
+import * as cop from '../../src';
 
-const TEMPLATE_PATH =
-    './examples/order_confirmation_example/data/template.docx';
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
-const template = cop.Template.fromLocalFile(TEMPLATE_PATH);
-
+// Setup Cloud Office Print server
 const server = new cop.config.Server(
     SERVER_URL,
     new cop.config.ServerConfig(API_KEY),
@@ -34,8 +32,6 @@ const cust = cop.elements.ElementCollection.fromMapping({
     cust_first_name: 'Albertos',
     cust_last_name: 'Lambert',
 });
-
-// / Add customer information to data
 data.addAll(cust);
 
 // Order information
@@ -152,14 +148,12 @@ const orders = new cop.elements.ForEach('orders', [order1, order2]);
 data.add(orders);
 
 // Merge template and data to generate the output file
-const conf = new cop.config.OutputConfig('pdf'); // Optional
-const printjob = new cop.PrintJob(data, server, template, conf);
+const template = cop.Template.fromLocalFile('order_confirmation_example.docx');
+const config = new cop.config.OutputConfig('pdf'); // Optional
+const printJob = new cop.PrintJob(data, server, template, config);
 
+// Asynchronously execute print job and save response to file
 (async () => {
-    try {
-        const res = await printjob.execute();
-        await res.toFile('./examples/order_confirmation_example/output/output'); // Save response to output file
-    } catch (err) {
-        throw new cop.exceptions.COPError(err);
-    }
+    const response = await printJob.execute();
+    await response.toFile('output');
 })();

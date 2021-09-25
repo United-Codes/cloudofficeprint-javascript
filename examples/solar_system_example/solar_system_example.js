@@ -3,13 +3,15 @@
  * The SpaceX example `spacex_example.ts` is a more advanced example using this approach.
  */
 
-const fetch = require('node-fetch');
-const cop = require('../../dist/src/index');
+// const cop = require('cloudofficeprint');
+const cop = require('../../dist/src');
 
-// Setup Cloud Office Print server
+const fetch = require('node-fetch');
+
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
+// Setup Cloud Office Print server
 const server = new cop.config.Server(
     SERVER_URL,
     new cop.config.ServerConfig(API_KEY),
@@ -20,10 +22,8 @@ const data = new cop.elements.ElementCollection();
 
 (async () => {
     // Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
-    const response = await fetch(
-        'https://api.le-systeme-solaire.net/rest/bodies/',
-    );
-    const json = await response.json();
+    const res = await fetch('https://api.le-systeme-solaire.net/rest/bodies/');
+    const json = await res.json();
 
     // Add the title to the data
     const mainTitle = new cop.elements.Property(
@@ -80,20 +80,15 @@ const data = new cop.elements.ElementCollection();
     );
     data.add(radiusChart);
 
-    // Create printjob
-    const printjob = new cop.PrintJob(
+    // Create printJob
+    const printJob = new cop.PrintJob(
         data,
         server,
-        cop.Template.fromLocalFile(
-            './examples/solar_system_example/pptx/solar_system_template.pptx',
-        ), // pptx
-        // cop.Resource.fromLocalFile(
-        //     './examples/solar_system_example/docx/solar_system_template.docx',
-        // ), // docx
+        cop.Template.fromLocalFile('solar_system_template.pptx'), // pptx
+        // cop.Template.fromLocalFile('solar_system_template.docx'), // docx
     );
 
-    await (
-        await printjob.execute()
-    ).toFile('./examples/solar_system_example/pptx/output');
-    // await (await printjob.execute()).toFile('./examples/solar_system_example/docx/output');
+    // Send the print job to the server and save the response
+    const response = await printJob.execute();
+    await response.toFile('output');
 })();

@@ -329,6 +329,7 @@ function shortenDescription(input: string): string {
         // cop.Template.fromLocalFile('spacex_template.docx'), // For docx
     );
 
+    // Send the print job to the server and save the response
     const response = await printJob.execute();
     await response.toFile('output');
 })();
