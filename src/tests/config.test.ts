@@ -253,6 +253,7 @@ describe('Tests for config', () => {
             new cop.config.ServerConfig('YOUR_API_KEY'),
         );
         expect(await serv.isReachable()).toBeTruthy();
+        expect(typeof (await serv.getVersionCop())).toBe('string');
         expect(typeof (await serv.getVersionSoffice())).toBe('string');
         expect(typeof (await serv.getVersionOfficetopdf())).toBe('string');
         expect(typeof (await serv.getSupportedTemplateMimetypes())).toBe(
@@ -267,6 +268,11 @@ describe('Tests for config', () => {
         expect(typeof (await serv.getSupportedAppendMimetypes())).toBe(
             'object',
         );
-        expect(typeof (await serv.getVersionCop())).toBe('string');
+        // expect(typeof (await serv.verifyTemplateHash('test_hash'))).toBe(
+        //     'object',
+        // );
+        // expect(
+        //     typeof (await serv.checkIpp('http://localhost:3000', '1.1')),
+        // ).toBe('object');
     });
 });
