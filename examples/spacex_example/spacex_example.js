@@ -1,9 +1,19 @@
-const fetch = require('node-fetch');
-const cop = require('../../dist/src/index');
+// const cop = require('cloudofficeprint');
+const cop = require('../../dist/src');
 
-// Setup Cloud Office Print server
+const fetch = require('node-fetch');
+
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
+
+const IMAGE_MAX_HEIGHT = 250; // pptx, xlsx
+const IMAGE_MAX_WIDTH = 400; // pptx, xlsx
+const CHART_WIDTH = 800; // pptx, xlsx
+// const IMAGE_MAX_HEIGHT = 500; // docx
+// const IMAGE_MAX_WIDTH = 640; // docx
+// const CHART_WIDTH = 650; // docx
+
+// Setup Cloud Office Print server
 const server = new cop.config.Server(
     SERVER_URL,
     new cop.config.ServerConfig(API_KEY),
@@ -20,13 +30,6 @@ const data = new cop.elements.ElementCollection();
 function shortenDescription(input) {
     return `${input.split('.')[0]}.`;
 }
-
-const IMAGE_MAX_HEIGHT = 250; // pptx, xlsx
-const IMAGE_MAX_WIDTH = 400; // pptx, xlsx
-const CHART_WIDTH = 800; // pptx, xlsx
-// const IMAGE_MAX_HEIGHT = 500; // docx
-// const IMAGE_MAX_WIDTH = 640; // docx
-// const CHART_WIDTH = 650; // docx
 
 (async () => {
     // Get SpaceX data from https://docs.spacexdata.com
@@ -307,22 +310,17 @@ const CHART_WIDTH = 800; // pptx, xlsx
     const shipData = new cop.elements.ForEach('ships', shipList);
     data.add(shipData);
 
-    // Create printjob
-    const printjob = new cop.PrintJob(
+    // Create printJob
+    const printJob = new cop.PrintJob(
         // NOTE: change IMAGE_MAX_HEIGHT, IMAGE_MAX_WIDTH and CHART_WIDTH at the beginning
         //  of this script according to filetype
         data,
         server,
-        cop.Templates.fromLocalFile(
-            './examples/spacex_example/spacex_template.pptx',
-        ), // For pptx
-        // cop.Resource.fromLocalFile(
-        //     './examples/spacex_example/spacex_template.xlsx',
-        // ), // For xlsx
-        // cop.Resource.fromLocalFile(
-        //     './examples/spacex_example/spacex_template.docx',
-        // ), // For docx
+        cop.Template.fromLocalFile('spacex_template.pptx'), // For pptx
+        // cop.Template.fromLocalFile('spacex_template.xlsx'), // For xlsx
+        // cop.Template.fromLocalFile('spacex_template.docx'), // For docx
     );
 
-    await (await printjob.execute()).toFile('./examples/spacex_example/output');
+    const response = await printJob.execute();
+    await response.toFile('output');
 })();
