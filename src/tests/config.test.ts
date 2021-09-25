@@ -27,6 +27,7 @@ describe('Tests for config', () => {
             true, // split
             true, // identifyFormFields
             'test_sign_certificate', // signCertificate
+            'test_certificate_password', // signCertificatePassword
         );
         pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32);
         pdfOpts.setPageMarginAt(6, 'top');
@@ -68,6 +69,7 @@ describe('Tests for config', () => {
             output_page_format: 'test_page_format',
             output_merge: false,
             output_sign_certificate: 'test_sign_certificate',
+            output_sign_certificate_password: 'test_certificate_password',
             identify_form_fields: true,
             output_split: true,
         };
