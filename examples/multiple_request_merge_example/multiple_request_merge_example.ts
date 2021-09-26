@@ -29,10 +29,10 @@ for (let i = 0; i < 100; i += 1) {
 }
 
 // Create output configuration: merge PDF
-const conf = new cop.config.OutputConfig();
-conf.filetype = 'pdf';
-conf.pdfOptions = new cop.config.PDFOptions();
-conf.pdfOptions.merge = true;
+const config = new cop.config.OutputConfig();
+config.filetype = 'pdf';
+config.pdfOptions = new cop.config.PDFOptions();
+config.pdfOptions.merge = true;
 
 (async () => {
     // Let's assume that the Cloud Office Print server can't handle all the data at once,
@@ -42,21 +42,21 @@ conf.pdfOptions.merge = true;
 
     for (let i = 0; i < 10; i += 1) {
         // Create print job with 10 data elements
-        const d: { [key: string]: cop.elements.Element } = {};
+        const dataSplit: { [key: string]: cop.elements.Element } = {};
         Object.entries(data)
             .slice(i * 10, (i + 1) * 10)
             .forEach(([key, value]) => {
-                d[key] = value;
+                dataSplit[key] = value;
             });
-        const printjob = new cop.PrintJob(
-            d,
+        const printJob = new cop.PrintJob(
+            dataSplit,
             server,
-            cop.Template.fromLocalFile('./template.docx'),
-            conf,
+            cop.Resource.fromLocalFile('template.docx'),
+            config,
         );
 
         // Execute the print job and save the response to a list
-        outputFilesProm.push(printjob.execute());
+        outputFilesProm.push(printJob.execute());
     }
 
     const outputFiles = await Promise.all(outputFilesProm);
