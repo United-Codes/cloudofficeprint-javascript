@@ -24,8 +24,8 @@ const data = new cop.elements.ElementCollection();
 
 /**
  * Return only the first sentence of an input.
- * @param {string} input
- * @returns {string}
+ * @param {string} input The input that needs to be shortened
+ * @returns {string} first sentence of input string
  */
 function shortenDescription(input) {
     return `${input.split('.')[0]}.`;
