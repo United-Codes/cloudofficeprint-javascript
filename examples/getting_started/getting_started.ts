@@ -28,7 +28,7 @@ collection.add(text);
 const printJob = new cop.PrintJob(
     collection,
     server,
-    cop.Resource.fromLocalFile('getting_started.docx'),
+    cop.Template.fromLocalFile('getting_started.docx'),
 );
 
 // Asynchronously execute print job and save response to file
