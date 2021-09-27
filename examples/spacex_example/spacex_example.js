@@ -34,7 +34,7 @@ function shortenDescription(input) {
 (async () => {
     // Get SpaceX data from https://docs.spacexdata.com
     const responses = await Promise.all([
-        fetch('https://api.spacexdata.com/v3/info'),
+        fetch('https://api.spacexdata.com/v3/info'), // v4 not supported
         fetch('https://api.spacexdata.com/v4/rockets'),
         fetch('https://api.spacexdata.com/v4/dragons'),
         fetch('https://api.spacexdata.com/v4/launchpads'),
