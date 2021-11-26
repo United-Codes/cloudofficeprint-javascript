@@ -22,6 +22,7 @@ export class PDFOptions {
     signCertificate: string | undefined;
     identifyFormFields: boolean | undefined;
     split: boolean | undefined;
+    removeLastPage: boolean | undefined;
 
     /**
      * @param readPassword The password needed to open the PDF. Optional.
@@ -57,6 +58,7 @@ export class PDFOptions {
      *  of each field into the respective field. Optional.
      * @param split You can specify to split a PDF in separate files.
      *  You will get one file per page in a zip file. Optional.
+     * @param removeLastPage You can specify to remove last page from output file if it has any blank page.
      */
     constructor(
         readPassword?: string,
@@ -76,6 +78,7 @@ export class PDFOptions {
         signCertificate?: string,
         identifyFormFields?: boolean,
         split?: boolean,
+        removeLastPage?: boolean,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
@@ -94,6 +97,7 @@ export class PDFOptions {
         this.signCertificate = signCertificate;
         this.identifyFormFields = identifyFormFields;
         this.split = split;
+        this.removeLastPage = removeLastPage;
     }
 
     /**
@@ -157,6 +161,9 @@ export class PDFOptions {
         }
         if (this.split !== undefined) {
             result.output_split = this.split;
+        }
+        if (this.removeLastPage !== undefined) {
+            result.output_remove_last_page = this.removeLastPage;
         }
         return result;
     }
