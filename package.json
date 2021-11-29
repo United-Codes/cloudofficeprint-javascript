@@ -8,6 +8,7 @@
     "build": "npx tsc",
     "test": "jest --silent",
     "test:loud": "jest --verbose false",
+    "generateDocumentation":"npx typedoc --out docs src/index.ts",
     "bundle": "webpack"
   },
   "repository": {
