@@ -8,7 +8,7 @@
     "build": "npx tsc",
     "test": "jest --silent",
     "test:loud": "jest --verbose false",
-    "generateDocumentation":"npx typedoc --out docs src/index.ts",
+    "generateDocumentation": "npx typedoc --out docs src/index.ts",
     "bundle": "webpack"
   },
   "repository": {
@@ -34,25 +34,28 @@
   "homepage": "https://github.com/United-Codes/cloudofficeprint-javascript#readme",
   "dependencies": {
     "https-proxy-agent": "^5.0.0",
+    "ipp-printer": "^1.0.0",
     "mime-types": "^2.1.31",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "url-parse": "^1.5.3"
   },
   "devDependencies": {
     "@jest/globals": "^27.0.6",
-    "jest": "^27.0.6",
-    "path-browserify": "^1.0.1",
-    "typedoc": "^0.21.4",
-    "webpack": "^5.48.0",
-    "webpack-strip-block": "^0.3.0",
-    "typescript": "^4.3.5",
-    "ts-jest": "^27.0.4",
     "@types/mime-types": "^2.1.0",
     "@types/node-fetch": "^2.5.12",
+    "@types/url-parse": "^1.4.5",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
     "eslint": "^7.31.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
-    "webpack-cli": "^4.7.2"
+    "jest": "^27.0.6",
+    "path-browserify": "^1.0.1",
+    "ts-jest": "^27.0.4",
+    "typedoc": "^0.21.4",
+    "typescript": "^4.3.5",
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-strip-block": "^0.3.0"
   }
 }
