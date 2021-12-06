@@ -1,5 +1,5 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
-
+import * as http from 'http';
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 /**
@@ -24,6 +24,34 @@ export class Printer {
         this.jobName = jobName;
     }
 
+    checkIfReachable() {
+        if (!this.location || !this.version) throw new Error(`Both, location of ipp printer and ipp version is required`);
+        else {
+            return new Promise((resolve, reject) => {
+                const options = {
+                    hostname: 'localhost',
+                    port: 8010,
+                    path: `/ipp_check?ipp_url=${this.location}&version=${this.version}`,
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }
+                const req = http.request(options, res => {
+                    if (res.statusCode === 200) {
+                        resolve(true)
+                    }
+                    res.on('error', error => {
+                        reject(error)
+                    })
+                })
+                req.on('error', error => {
+                    reject(error)
+                })
+                req.end()
+            })
+        }
+    }
     /**
      * The dict representation of this Printer object.
      * @returns The dict representation of this Printer object.
@@ -153,7 +181,7 @@ export class Commands {
             [key: string]: string |
             { [key: string]: string } | boolean | number
         }
-        } {
+    } {
         const result: {
             [key: string]: {
                 [key: string]: string |
@@ -240,7 +268,7 @@ export class ServerConfig {
         [key: string]: string | { [key: string]: object } |
         { location: string; version: string; requester: string; jobName: string; } |
         { [key: string]: string | number | boolean | { [key: string]: string; }; }
-        } {
+    } {
         let result: {
             [key: string]: string | { [key: string]: object } |
             { location: string; version: string; requester: string; jobName: string; } |
@@ -249,7 +277,14 @@ export class ServerConfig {
 
         if (this.apiKey !== undefined) result.api_key = this.apiKey;
         if (this.logging !== undefined) result.logging = this.logging;
-        if (this.printer !== undefined) result.ipp = this.printer.asDict();
+        if (this.printer !== undefined) {
+            try {
+                this.printer.checkIfReachable()
+                result.ipp = this.printer.asDict()
+            } catch (err) {
+                throw new Error(`Ipp printer not found ${err}`)
+            }
+        }
         if (this.copRemoteDebug) result.aop_remote_debug = 'Yes';
         if (this.commands !== undefined) result = { ...result, ...this.commands.asDict() };
 
