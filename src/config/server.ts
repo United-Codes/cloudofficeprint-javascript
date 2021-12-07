@@ -10,20 +10,27 @@ export class Printer {
     version: string;
     requester: string;
     jobName: string;
+    returnOutput: boolean;
 
     /**
      * @param location IP address of the printer
      * @param version IPP version
      * @param requester the name of the requester; defaults to 'Cloud Office Print'
      * @param jobName the name of the print job; defaults to 'Cloud Office Print'
+     * @param returnOutput You can specify whether to return the response from AOP server or not. default is false.
      */
-    constructor(location: string, version: string, requester: string = 'Cloud Office Print', jobName: string = 'Cloud Office Print') {
+    constructor(location: string, version: string, requester: string = 'Cloud Office Print', jobName: string = 'Cloud Office Print', returnOutput: boolean = false) {
         this.location = location;
         this.version = version;
         this.requester = requester;
         this.jobName = jobName;
+        this.returnOutput = returnOutput;
     }
-
+    /**
+     * @description checks whether the parameter passed for ipp printer are valid or not and if the printer is reachable with those parameter.
+     * @returns  raise an error if parameter for ipp printer are invalid or returns the promise that resolves if the printer is reached succesfully
+     * and reject if the printer is not reacheable.
+     */
     checkIfReachable() {
         if (!this.location || !this.version) throw new Error(`Both, location of ipp printer and ipp version is required`);
         else {
@@ -56,12 +63,13 @@ export class Printer {
      * The dict representation of this Printer object.
      * @returns The dict representation of this Printer object.
      */
-    asDict(): { 'location': string, 'version': string, 'requester': string, 'job_name': string } {
+    asDict(): { 'location': string, 'version': string, 'requester': string, 'job_name': string, "return_output": boolean } {
         return {
             location: this.location,
             version: this.version,
             requester: this.requester,
             job_name: this.jobName,
+            return_output: this.returnOutput,
         };
     }
 }
