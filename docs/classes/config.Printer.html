@@ -99,6 +99,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#jobName" class="tsd-kind-icon">job<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#location" class="tsd-kind-icon">location</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#requester" class="tsd-kind-icon">requester</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#returnOutput" class="tsd-kind-icon">return<wbr>Output</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.Printer.html#version" class="tsd-kind-icon">version</a></li>
 							</ul>
 						</section>
@@ -106,6 +107,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="config.Printer.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="config.Printer.html#checkIfReachable" class="tsd-kind-icon">check<wbr>IfReachable</a></li>
 							</ul>
 						</section>
 					</div>
@@ -117,13 +119,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Printer<span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, requester<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, jobName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.Printer.html" class="tsd-signature-type" data-tsd-kind="Class">Printer</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Printer<span class="tsd-signature-symbol">(</span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, requester<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, jobName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, returnOutput<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.Printer.html" class="tsd-signature-type" data-tsd-kind="Class">Printer</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7ffa527/src/config/server.ts#L20">src/config/server.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/10badac/src/config/server.ts#L22">src/config/server.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -160,6 +162,14 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<h5>returnOutput: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>You can specify whether to return the response from AOP server or not. default is false.</p>
+										</div>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="config.Printer.html" class="tsd-signature-type" data-tsd-kind="Class">Printer</a></h4>
 						</li>
@@ -174,7 +184,7 @@
 					<div class="tsd-signature tsd-kind-icon">job<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7ffa527/src/config/server.ts#L12">src/config/server.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/10badac/src/config/server.ts#L12">src/config/server.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -184,7 +194,7 @@
 					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7ffa527/src/config/server.ts#L9">src/config/server.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/10badac/src/config/server.ts#L9">src/config/server.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -194,7 +204,17 @@
 					<div class="tsd-signature tsd-kind-icon">requester<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7ffa527/src/config/server.ts#L11">src/config/server.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/10badac/src/config/server.ts#L11">src/config/server.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="returnOutput" class="tsd-anchor"></a>
+					<h3>return<wbr>Output</h3>
+					<div class="tsd-signature tsd-kind-icon">return<wbr>Output<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/10badac/src/config/server.ts#L13">src/config/server.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +224,7 @@
 					<div class="tsd-signature tsd-kind-icon">version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7ffa527/src/config/server.ts#L10">src/config/server.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/10badac/src/config/server.ts#L10">src/config/server.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -215,13 +235,13 @@
 					<a name="asDict" class="tsd-anchor"></a>
 					<h3>as<wbr>Dict</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">as<wbr>Dict<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>job_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>requester<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></li>
+						<li class="tsd-signature tsd-kind-icon">as<wbr>Dict<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>job_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>requester<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>return_output<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7ffa527/src/config/server.ts#L31">src/config/server.ts:31</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/10badac/src/config/server.ts#L66">src/config/server.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -229,7 +249,7 @@
 									<p>The dict representation of this Printer object.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>job_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>requester<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>job_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>location<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>requester<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>return_output<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h4>
 							<p>The dict representation of this Printer object.</p>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter">
@@ -242,9 +262,38 @@
 									<h5>requester<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li class="tsd-parameter">
+									<h5>return_<wbr>output<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li class="tsd-parameter">
 									<h5>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="checkIfReachable" class="tsd-anchor"></a>
+					<h3>check<wbr>IfReachable</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">check<wbr>IfReachable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/10badac/src/config/server.ts#L34">src/config/server.ts:34</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>checks whether the parameter passed for ipp printer are valid or not and if the printer is reachable with those parameter.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>raise an error if parameter for ipp printer are invalid or returns the promise that resolves if the printer is reached succesfully
+							and reject if the printer is not reacheable.</p>
 						</li>
 					</ul>
 				</section>
@@ -326,10 +375,16 @@
 								<a href="config.Printer.html#requester" class="tsd-kind-icon">requester</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="config.Printer.html#returnOutput" class="tsd-kind-icon">return<wbr>Output</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="config.Printer.html#version" class="tsd-kind-icon">version</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="config.Printer.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="config.Printer.html#checkIfReachable" class="tsd-kind-icon">check<wbr>IfReachable</a>
 							</li>
 						</ul>
 					</li>
