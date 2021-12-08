@@ -26,53 +26,7 @@ export class Printer {
         this.jobName = jobName;
         this.returnOutput = returnOutput;
     }
-    /**
-     * @description checks whether the parameter passed for ipp printer are valid or not and if the printer is reachable with those parameter.
-     * @returns  raise an error if parameter for ipp printer are invalid or returns the promise that resolves if the printer is reached succesfully
-     * and reject if the printer is not reacheable.
-     */
-    checkIfReachable() {
-        if (!this.location || !this.version) throw new Error(`Both, location of ipp printer and ipp version is required`);
-        else {
-            return new Promise<boolean>((resolve, reject) => {
-                const options = {
-                    hostname: 'localhost',
-                    port: 8010,
-                    path: `/ipp_check?ipp_url=${this.location}&version=${this.version}`,
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                }
-                const req = http.request(options, res => {
-                    let body: string = "";
-                    res.on("data", d => {
-                        body += d;
-                    })
-                    res.on("end", () => {
-                        try {
-                            if (JSON.parse(body).statusCode === "successful-ok") {
-                                resolve(true)
-                            }
-                            else {
-                                throw new Error(`Ipp printer not reachable and the response is ${body}`)
-                            }
-                        }
-                        catch (err) {
-                            throw new Error(`Ipp printer not reachable and the response is ${body}`)
-                        }
-                    })
-                    res.on('error', error => {
-                        throw new Error(`Ipp printer not found ${error}`)
-                    })
-                })
-                req.on('error', error => {
-                    throw new Error(`Error while sending ipp check for printer ${error}`)
-                })
-                req.end()
-            })
-        }
-    }
+
     /**
      * The dict representation of this Printer object.
      * @returns The dict representation of this Printer object.
@@ -296,10 +250,7 @@ export class ServerConfig {
         if (this.apiKey !== undefined) result.api_key = this.apiKey;
         if (this.logging !== undefined) result.logging = this.logging;
         if (this.printer !== undefined) {
-            try {
-                await this.printer.checkIfReachable()
-                result.ipp = this.printer.asDict()
-            } catch { }
+            result.ipp = this.printer.asDict()
         }
         if (this.copRemoteDebug) result.aop_remote_debug = 'Yes';
         if (this.commands !== undefined) result = { ...result, ...this.commands.asDict() };
@@ -332,6 +283,18 @@ export class Server {
         try {
             return await fetch(new URL('marco', this.url).href)
                 .then((res: Response) => res.text()) === 'polo';
+        } catch (error) {
+            return false;
+        }
+    }
+    /**
+     * Checks the status of ipp-printer based on the location of ipp-printer and the verssion
+     * @returns whether the ipp-printer is reachable
+     */
+    async isIppPrinterReachable() {
+        try {
+            return await fetch(new URL(`ipp_check?ipp_url=${this.config?.printer?.location}&version=${this.config?.printer?.version}`, this.url).href)
+                .then((res: Response) => res.json().then(jsonBody => jsonBody.statusCode)) === "successful-ok"
         } catch (error) {
             return false;
         }
