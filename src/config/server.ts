@@ -34,7 +34,7 @@ export class Printer {
     checkIfReachable() {
         if (!this.location || !this.version) throw new Error(`Both, location of ipp printer and ipp version is required`);
         else {
-            return new Promise((resolve, reject) => {
+            return new Promise<boolean>((resolve, reject) => {
                 const options = {
                     hostname: 'localhost',
                     port: 8010,
@@ -45,15 +45,29 @@ export class Printer {
                     }
                 }
                 const req = http.request(options, res => {
-                    if (res.statusCode === 200) {
-                        resolve(true)
-                    }
+                    let body: string = "";
+                    res.on("data", d => {
+                        body += d;
+                    })
+                    res.on("end", () => {
+                        try {
+                            if (JSON.parse(body).statusCode === "successful-ok") {
+                                resolve(true)
+                            }
+                            else {
+                                throw new Error(`Ipp printer not reachable and the response is ${body}`)
+                            }
+                        }
+                        catch (err) {
+                            throw new Error(`Ipp printer not reachable and the response is ${body}`)
+                        }
+                    })
                     res.on('error', error => {
-                        reject(error)
+                        throw new Error(`Ipp printer not found ${error}`)
                     })
                 })
                 req.on('error', error => {
-                    reject(error)
+                    throw new Error(`Error while sending ipp check for printer ${error}`)
                 })
                 req.end()
             })
@@ -272,11 +286,7 @@ export class ServerConfig {
      * The dict representation of these server configurations.
      * @returns The dict representation of these server configurations.
      */
-    asDict(): {
-        [key: string]: string | { [key: string]: object } |
-        { location: string; version: string; requester: string; jobName: string; } |
-        { [key: string]: string | number | boolean | { [key: string]: string; }; }
-    } {
+    async asDict(): Promise<{ [key: string]: string | { [key: string]: object; } | { location: string; version: string; requester: string; jobName: string; } | { [key: string]: string | number | boolean | { [key: string]: string; }; }; }> {
         let result: {
             [key: string]: string | { [key: string]: object } |
             { location: string; version: string; requester: string; jobName: string; } |
@@ -287,11 +297,9 @@ export class ServerConfig {
         if (this.logging !== undefined) result.logging = this.logging;
         if (this.printer !== undefined) {
             try {
-                this.printer.checkIfReachable()
+                await this.printer.checkIfReachable()
                 result.ipp = this.printer.asDict()
-            } catch (err) {
-                throw new Error(`Ipp printer not found ${err}`)
-            }
+            } catch { }
         }
         if (this.copRemoteDebug) result.aop_remote_debug = 'Yes';
         if (this.commands !== undefined) result = { ...result, ...this.commands.asDict() };
