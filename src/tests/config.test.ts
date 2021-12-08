@@ -72,12 +72,14 @@ describe('Tests for config', () => {
             'version',
             'requester',
             'job_name',
+            true
         );
         const printerExpected = {
             location: 'location',
             version: 'version',
             requester: 'requester',
             job_name: 'job_name',
+            return_output: true
         };
         expect(printer.asDict()).toEqual(printerExpected);
     });
@@ -195,6 +197,7 @@ describe('Tests for config', () => {
             new cop.config.ServerConfig('YOUR_API_KEY'),
         );
         expect(await serv.isReachable()).toBeTruthy();
+        expect(await serv.isIppPrinterReachable()).toBeTruthy();
         expect(typeof await serv.getVersionSoffice()).toBe('string');
         expect(typeof await serv.getVersionOfficetopdf()).toBe('string');
         expect(typeof await serv.getSupportedTemplateMimetypes()).toBe('object');
