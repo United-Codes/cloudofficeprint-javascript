@@ -7,6 +7,10 @@
 export class PDFOptions {
     readPassword: string | undefined;
     watermark: string | undefined;
+    watermarkSize: number | undefined;
+    watermarkOpacity: number | undefined;
+    watermarkColor: string | undefined;
+    watermarkFont: string | undefined;
     pageWidth: string | number | undefined;
     pageHeight: string | number | undefined;
     evenPage: boolean | undefined;
@@ -20,6 +24,7 @@ export class PDFOptions {
     pageFormat: string | undefined;
     merge: boolean | undefined;
     signCertificate: string | undefined;
+    signCertificateWithPassword: string | undefined;
     identifyFormFields: boolean | undefined;
     split: boolean | undefined;
     removeLastPage: boolean | undefined;
@@ -28,6 +33,10 @@ export class PDFOptions {
      * @param readPassword The password needed to open the PDF. Optional.
      * @param watermark Setting this generates a diagonal custom watermark on every
      *  page in the PDF file. Optional.
+     * @param watermarkColor You can specify to change watermark color, default color value is black. Optional
+     * @param watermarkFont You can specify to channge the font of watermark, default font is Aerial. Optional
+     * @param watermarkOpacity You can specify to change the opacity of watermark, value should be in percentage. Should be in percentage. Optional
+     * @param watermarkSize YOu can specify to change the size of watemark. Should be a number(px) ie: 45 . Optional
      * @param pageWidth Only for HTML to PDF. Page width in px, mm, cm, in.
      *  No unit means px. Optional.
      * @param pageHeight Only for HTML to PDF. Page height in px, mm, cm, in.
@@ -54,6 +63,8 @@ export class PDFOptions {
      *  as a base64 string, URL, FTP location or a server path.
      *  The function readFileAsBase64() from file_utils.ts can be used to read local
      *  .p12 or .pfx file as base64. Optional.
+     * @param signCertificateWithPassword Signing certificate for the output PDF (pkcs #12 .p12/.pfx) as a base64 string, URL, FTP location or a server path.
+     *  The function read_file_as_base64() from file_utils.py can be used to read local .p12 or .pfx file as base64. Defaults to None. Optional
      * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
      *  of each field into the respective field. Optional.
      * @param split You can specify to split a PDF in separate files.
@@ -63,6 +74,10 @@ export class PDFOptions {
     constructor(
         readPassword?: string,
         watermark?: string,
+        watermarkSize?: number,
+        watermarkOpacity?: number,
+        watermarkColor?: string,
+        watermarkFont?: string,
         pageWidth?: string | number,
         pageHeight?: string | number,
         evenPage?: boolean,
@@ -76,12 +91,17 @@ export class PDFOptions {
         pageFormat?: string,
         merge?: boolean,
         signCertificate?: string,
+        signCertificateWithPassword?: string,
         identifyFormFields?: boolean,
         split?: boolean,
         removeLastPage?: boolean,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
+        this.watermarkColor = watermarkColor;
+        this.watermarkFont = watermarkFont;
+        this.watermarkOpacity = watermarkOpacity;
+        this.watermarkSize = watermarkSize
         this.pageWidth = pageWidth;
         this.pageHeight = pageHeight;
         this.evenPage = evenPage;
@@ -95,6 +115,7 @@ export class PDFOptions {
         this.pageFormat = pageFormat;
         this.merge = merge;
         this.signCertificate = signCertificate;
+        this.signCertificateWithPassword = signCertificateWithPassword;
         this.identifyFormFields = identifyFormFields;
         this.split = split;
         this.removeLastPage = removeLastPage;
@@ -112,6 +133,18 @@ export class PDFOptions {
         }
         if (this.watermark !== undefined) {
             result.output_watermark = this.watermark;
+        }
+        if (this.watermarkSize !== undefined) {
+            result.output_watermark_size = this.watermarkSize;
+        }
+        if (this.watermarkOpacity !== undefined) {
+            result.output_watermark_opacity = this.watermarkOpacity;
+        }
+        if (this.watermarkColor !== undefined) {
+            result.output_watermark_color = this.watermarkColor;
+        }
+        if (this.watermarkFont !== undefined) {
+            result.output_watermark_font = this.watermarkFont;
         }
         if (this.pageWidth !== undefined) {
             result.output_page_width = this.pageWidth;
@@ -155,6 +188,9 @@ export class PDFOptions {
         }
         if (this.signCertificate !== undefined) {
             result.output_sign_certificate = this.signCertificate;
+        }
+        if (this.signCertificateWithPassword !== undefined) {
+            result.output_sign_certificate_password = this.signCertificateWithPassword;
         }
         if (this.identifyFormFields !== undefined) {
             result.identify_form_fields = this.identifyFormFields;
