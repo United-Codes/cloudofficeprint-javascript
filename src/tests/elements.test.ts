@@ -264,11 +264,11 @@ describe('Tests for elements', () => {
         };
         expect(collection.asDict()).toEqual(collectionExpected);
     });
-    test('Test freeze element',()=>{
-        const freezeElement = new cop.elements.freezeElement('freeze tag name',"c10")
+    test('Test freeze element', () => {
+        const freezeElement = new cop.elements.Freeze('freeze tag name', "c10")
         const freezeElementExpected = {
-            freeze_tagname:"freeze tag name",
-            freeze_value:"c10"
+            freeze_tagname: "freeze tag name",
+            freeze_value: "c10"
         };
         expect(freezeElement.asDict()).toEqual(freezeElementExpected);
     })

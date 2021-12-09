@@ -1308,7 +1308,7 @@ export class ElementCollection extends Element {
  * Second option, we can provide the location where we want to place the pane such as "C5".
  * Finally, the third option is false which doesn't place a pane.
  */
-export class freezeElement extends Element {
+export class Freeze extends Element {
     freezeValue: string | boolean | undefined;
     /**
      * @param name name of the freeze tag
