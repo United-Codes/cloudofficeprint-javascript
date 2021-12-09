@@ -940,7 +940,7 @@ export class COPChart extends Element {
                 string
             }
         }
-        } {
+    } {
         const ySeries: {
             name: string, data: (string | number |
             { [key: string]: string | number })[]
@@ -1299,5 +1299,44 @@ export class ElementCollection extends Element {
      */
     static fromJson(jsonStr: string, name: string = ''): ElementCollection {
         return ElementCollection.fromMapping(JSON.parse(jsonStr), name);
+    }
+}
+
+/**
+ * This tag will allow you to utilize freeze pane property of the excel.Three options are available. 
+ * First option, we can directly place the pane where the tag located. For this option we should provide true parameter.
+ * Second option, we can provide the location where we want to place the pane such as "C5".
+ * Finally, the third option is false which doesn't place a pane.
+ */
+export class freezeElement extends Element {
+    freezeValue: string | boolean | undefined;
+    /**
+     * @param name name of the freeze tag
+     * @param freezeValue value for the freeze tag
+     */
+    constructor(name: string, freezeValue?: string | boolean) {
+        super(name);
+        this.freezeValue = freezeValue
+        if (this.freezeValue !== undefined) {
+            this.freezeValue = freezeValue;
+        }
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        return {
+            [this.name]: this.freezeValue,
+        };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{${this.name}}`]);
     }
 }
