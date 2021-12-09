@@ -6,6 +6,10 @@ describe('Tests for config', () => {
         const pdfOpts = new cop.config.PDFOptions(
             'test_pw',
             'test_watermark',
+            30,
+            70,
+            "blue",
+            'Aerial',
             500,
             500,
             true,
@@ -19,6 +23,7 @@ describe('Tests for config', () => {
             'test_page_format',
             false,
             'test_sign_certificate',
+            'test_sign_certificate_with_password',
             true,
             true,
         );
@@ -30,6 +35,10 @@ describe('Tests for config', () => {
             output_converter: 'libreoffice',
             output_read_password: 'test_pw',
             output_watermark: 'test_watermark',
+            output_watermark_opacity:70,
+            output_watermark_color:"blue",
+            output_watermark_font:"Aerial",
+            output_watermark_size:30,
             output_page_width: 500,
             output_page_height: 500,
             output_even_page: true,
@@ -48,8 +57,10 @@ describe('Tests for config', () => {
             output_page_format: 'test_page_format',
             output_merge: false,
             output_sign_certificate: 'test_sign_certificate',
+            output_sign_certificate_password: "signg_certificate_with_password",
             identify_form_fields: true,
             output_split: true,
+            output_remove_last_page : true,
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
