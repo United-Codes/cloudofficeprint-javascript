@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Hyperlink | cloudofficeprint</title>
+	<title>freezeElement | cloudofficeprint</title>
 	<meta name="description" content="Documentation for cloudofficeprint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,16 +58,26 @@
 					<a href="../modules/elements.html">elements</a>
 				</li>
 				<li>
-					<a href="elements.Hyperlink.html">Hyperlink</a>
+					<a href="elements.freezeElement.html">freezeElement</a>
 				</li>
 			</ul>
-			<h1>Class Hyperlink</h1>
+			<h1>Class freezeElement</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This tag will allow you to utilize freeze pane property of the excel.Three options are available.
+							First option, we can directly place the pane where the tag located. For this option we should provide true parameter.
+							Second option, we can provide the location where we want to place the pane such as &quot;C5&quot;.
+						Finally, the third option is false which doesn&#39;t place a pane.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -75,7 +85,7 @@
 						<a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">Hyperlink</span>
+								<span class="target">freezeElement</span>
 							</li>
 						</ul>
 					</li>
@@ -88,22 +98,21 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Hyperlink.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="elements.freezeElement.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Hyperlink.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.Hyperlink.html#text" class="tsd-kind-icon">text</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.Hyperlink.html#url" class="tsd-kind-icon">url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.freezeElement.html#freezeValue" class="tsd-kind-icon">freeze<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.freezeElement.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Hyperlink.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Hyperlink.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.freezeElement.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.freezeElement.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a></li>
 							</ul>
 						</section>
 					</div>
@@ -115,14 +124,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Hyperlink<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.Hyperlink.html" class="tsd-signature-type" data-tsd-kind="Class">Hyperlink</a></li>
+						<li class="tsd-signature tsd-kind-icon">new freeze<wbr>Element<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, freezeValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.freezeElement.html" class="tsd-signature-type" data-tsd-kind="Class">freezeElement</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L447">src/elements/elements.ts:447</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L1317">src/elements/elements.ts:1317</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -131,34 +140,36 @@
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the name for this element</p>
+											<p>name of the freeze tag</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5>url: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> freezeValue: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the URL for the hyperlink</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> text: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>the text for the hyperlink; optional</p>
+											<p>value for the freeze tag</p>
 										</div>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="elements.Hyperlink.html" class="tsd-signature-type" data-tsd-kind="Class">Hyperlink</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="elements.freezeElement.html" class="tsd-signature-type" data-tsd-kind="Class">freezeElement</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="freezeValue" class="tsd-anchor"></a>
+					<h3>freeze<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">freeze<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L1312">src/elements/elements.ts:1312</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
 					<h3>name</h3>
@@ -167,26 +178,6 @@
 						<p>Inherited from <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#name">name</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L282">src/elements/elements.ts:282</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="text" class="tsd-anchor"></a>
-					<h3>text</h3>
-					<div class="tsd-signature tsd-kind-icon">text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L440">src/elements/elements.ts:440</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="url" class="tsd-anchor"></a>
-					<h3>url</h3>
-					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L439">src/elements/elements.ts:439</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +195,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#asDict">asDict</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L457">src/elements/elements.ts:457</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L1329">src/elements/elements.ts:1329</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,7 +207,7 @@
 							<p>dictionary representation of this Element</p>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter-index-signature">
-									<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
 						</li>
@@ -233,7 +224,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#availableTags">availableTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L473">src/elements/elements.ts:473</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1a4e20f/src/elements/elements.ts#L1339">src/elements/elements.ts:1339</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -282,25 +273,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-namespace">
-						<a href="elements.Hyperlink.html" class="tsd-kind-icon">Hyperlink</a>
+						<a href="elements.freezeElement.html" class="tsd-kind-icon">freeze<wbr>Element</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.Hyperlink.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="elements.freezeElement.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="elements.freezeElement.html#freezeValue" class="tsd-kind-icon">freeze<wbr>Value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.Hyperlink.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="elements.Hyperlink.html#text" class="tsd-kind-icon">text</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="elements.Hyperlink.html#url" class="tsd-kind-icon">url</a>
+								<a href="elements.freezeElement.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.Hyperlink.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
+								<a href="elements.freezeElement.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.Hyperlink.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a>
+								<a href="elements.freezeElement.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a>
 							</li>
 						</ul>
 					</li>
