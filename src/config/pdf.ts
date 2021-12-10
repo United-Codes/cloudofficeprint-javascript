@@ -33,10 +33,10 @@ export class PDFOptions {
      * @param readPassword The password needed to open the PDF. Optional.
      * @param watermark Setting this generates a diagonal custom watermark on every
      *  page in the PDF file. Optional.
-     * @param watermarkColor You can specify to change watermark color, accepts css color only. default color value is black. Optional
+     * @param watermarkColor You can specify to change watermark color, accepts css colors. Default color value is black. Optional
      * @param watermarkFont You can specify to channge the font of watermark, default font is Aerial. Optional
-     * @param watermarkOpacity You can specify to change the opacity of watermark, value should be in percentage. Should be in percentage. Optional
-     * @param watermarkFontSize YOu can specify to change the font size of watemark. Should be a number(px) ie: 45 . Optional
+     * @param watermarkOpacity You can specify to change the opacity of watermark. Should be in percentage. Optional
+     * @param watermarkFontSize You can specify to change the font size of watemark. Should be a number(px) ie: 45 . Optional
      * @param pageWidth Only for HTML to PDF. Page width in px, mm, cm, in.
      *  No unit means px. Optional.
      * @param pageHeight Only for HTML to PDF. Page height in px, mm, cm, in.
