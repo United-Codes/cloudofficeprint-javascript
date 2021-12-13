@@ -14,6 +14,7 @@ export class OutputConfig {
     serverDirectory: string | undefined;
     pdfOptions: PDFOptions | undefined;
     csvOptions: CsvOptions | undefined;
+    outputAppendPerPage: boolean | undefined;
 
     /**
      * @param filetype The file type (as extension) to use for the output.
@@ -29,6 +30,7 @@ export class OutputConfig {
      *  Can only be used if the server allows to save on disk.
      *  The specific output path for each file is appended to the base path. Optional.
      * @param pdfOptions Optional PDF options. Optional.
+     * @param appendPerPage ability to prepend/append file after each page of output. Optional.
      */
     constructor(
         filetype?: string,
@@ -38,6 +40,7 @@ export class OutputConfig {
         serverDirectory?: string,
         pdfOptions?: PDFOptions,
         csvOptions?: CsvOptions,
+        appendPerPage?: boolean,
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -46,6 +49,7 @@ export class OutputConfig {
         this.serverDirectory = serverDirectory;
         this.pdfOptions = pdfOptions;
         this.csvOptions = csvOptions;
+        this.outputAppendPerPage = appendPerPage;
     }
 
     /**
@@ -79,7 +83,9 @@ export class OutputConfig {
         if (this.csvOptions !== undefined) {
             result = { ...result, ...this.csvOptions.asDict() };
         }
-
+        if (this.outputAppendPerPage !== undefined){
+            result.output_append_per_page = this.outputAppendPerPage;
+        }
         return result;
     }
 }
