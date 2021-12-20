@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AreaChart | cloudofficeprint</title>
+	<title>Insert | cloudofficeprint</title>
 	<meta name="description" content="Documentation for cloudofficeprint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/elements.html">elements</a>
 				</li>
 				<li>
-					<a href="elements.AreaChart.html">AreaChart</a>
+					<a href="elements.Insert.html">Insert</a>
 				</li>
 			</ul>
-			<h1>Class AreaChart</h1>
+			<h1>Class Insert</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Class for a area chart</p>
+						<p>Inside Word and PowerPoint documents, the tag {?insert fileToInsert} can be used
+						to insert files like Word, Excel, Powerpoint and PDF documents.</p>
 					</div>
 				</div>
 			</section>
@@ -79,10 +80,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="elements.Chart.html" class="tsd-signature-type" data-tsd-kind="Class">Chart</a>
+						<a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">AreaChart</span>
+								<span class="target">Insert</span>
 							</li>
 						</ul>
 					</li>
@@ -95,23 +96,21 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="elements.AreaChart.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Insert.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.AreaChart.html#areas" class="tsd-kind-icon">areas</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.AreaChart.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.AreaChart.html#options" class="tsd-kind-icon">options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.Insert.html#documentToInsert" class="tsd-kind-icon">document<wbr>ToInsert</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.Insert.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.AreaChart.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="elements.AreaChart.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="elements.AreaChart.html#getDict" class="tsd-kind-icon">get<wbr>Dict</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Insert.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="elements.Insert.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a></li>
 							</ul>
 						</section>
 					</div>
@@ -123,14 +122,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Area<wbr>Chart<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, areas<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><a href="elements.XYSeries.html" class="tsd-signature-type" data-tsd-kind="Class">XYSeries</a><span class="tsd-signature-symbol"> | </span><a href="elements.AreaSeries.html" class="tsd-signature-type" data-tsd-kind="Class">AreaSeries</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span>, options<span class="tsd-signature-symbol">?: </span><a href="elements.ChartOptions.html" class="tsd-signature-type" data-tsd-kind="Class">ChartOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.AreaChart.html" class="tsd-signature-type" data-tsd-kind="Class">AreaChart</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Insert<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, documentToInsert<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.Insert.html" class="tsd-signature-type" data-tsd-kind="Class">Insert</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="elements.Chart.html">Chart</a>.<a href="elements.Chart.html#constructor">constructor</a></p>
+								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/charts.ts#L1266">src/elements/charts.ts:1266</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/elements.ts#L1352">src/elements/elements.ts:1352</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -139,23 +138,20 @@
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The name of the chart.</p>
+											<p>Name of the insert tag.</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5>areas: <span class="tsd-signature-symbol">(</span><a href="elements.XYSeries.html" class="tsd-signature-type" data-tsd-kind="Class">XYSeries</a><span class="tsd-signature-symbol"> | </span><a href="elements.AreaSeries.html" class="tsd-signature-type" data-tsd-kind="Class">AreaSeries</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="elements.ChartOptions.html" class="tsd-signature-type" data-tsd-kind="Class">ChartOptions</a></h5>
+									<h5>documentToInsert: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The options for the chart. Optional.</p>
+											<p>Base64 encoded document.</p>
 										</div>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="elements.AreaChart.html" class="tsd-signature-type" data-tsd-kind="Class">AreaChart</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="elements.Insert.html" class="tsd-signature-type" data-tsd-kind="Class">Insert</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -163,12 +159,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="areas" class="tsd-anchor"></a>
-					<h3>areas</h3>
-					<div class="tsd-signature tsd-kind-icon">areas<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><a href="elements.XYSeries.html" class="tsd-signature-type" data-tsd-kind="Class">XYSeries</a><span class="tsd-signature-symbol"> | </span><a href="elements.AreaSeries.html" class="tsd-signature-type" data-tsd-kind="Class">AreaSeries</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="documentToInsert" class="tsd-anchor"></a>
+					<h3>document<wbr>ToInsert</h3>
+					<div class="tsd-signature tsd-kind-icon">document<wbr>ToInsert<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/charts.ts#L1259">src/elements/charts.ts:1259</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/elements.ts#L1346">src/elements/elements.ts:1346</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -177,20 +173,9 @@
 					<h3>name</h3>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="elements.Chart.html">Chart</a>.<a href="elements.Chart.html#name">name</a></p>
+						<p>Inherited from <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#name">name</a></p>
 						<ul>
 							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/elements.ts#L282">src/elements/elements.ts:282</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="options" class="tsd-anchor"></a>
-					<h3>options</h3>
-					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="elements.ChartOptions.html" class="tsd-signature-type" data-tsd-kind="Class">ChartOptions</a></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="elements.Chart.html">Chart</a>.<a href="elements.Chart.html#options">options</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/charts.ts#L873">src/elements/charts.ts:873</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -206,38 +191,33 @@
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Overrides <a href="elements.Chart.html">Chart</a>.<a href="elements.Chart.html#asDict">asDict</a></p>
+								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#asDict">asDict</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/charts.ts#L1275">src/elements/charts.ts:1275</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/elements.ts#L1359">src/elements/elements.ts:1359</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The dict representation of this object</p>
-								</div>
-							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<p>dict representation of this object</p>
+							<p>dictionary representation of this Element</p>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter-index-signature">
-									<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></h5>
+									<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">unknown</span></h5>
 								</li>
 							</ul>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 					<a name="availableTags" class="tsd-anchor"></a>
 					<h3>available<wbr>Tags</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
 						<li class="tsd-signature tsd-kind-icon">available<wbr>Tags<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="elements.Chart.html">Chart</a>.<a href="elements.Chart.html#availableTags">availableTags</a></p>
+								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#availableTags">availableTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/charts.ts#L907">src/elements/charts.ts:907</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/elements.ts#L1368">src/elements/elements.ts:1368</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -247,46 +227,6 @@
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>set of tags associated with this Element</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="getDict" class="tsd-anchor"></a>
-					<h3>get<wbr>Dict</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Dict<span class="tsd-signature-symbol">(</span>updates<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from <a href="elements.Chart.html">Chart</a>.<a href="elements.Chart.html#getDict">getDict</a></p>
-								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/abcabf5/src/elements/charts.ts#L889">src/elements/charts.ts:889</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Update the given dict with the chart options and return the result.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>updates: <span class="tsd-signature-symbol">{}</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>the dict that needs to be updated with the chart options</p>
-									</div>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-index-signature">
-											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">unknown</span></h5>
-										</li>
-									</ul>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<p>the input dict, updated with the chart options</p>
-							<ul class="tsd-parameters">
-							</ul>
 						</li>
 					</ul>
 				</section>
@@ -326,28 +266,22 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-namespace">
-						<a href="elements.AreaChart.html" class="tsd-kind-icon">Area<wbr>Chart</a>
+						<a href="elements.Insert.html" class="tsd-kind-icon">Insert</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.AreaChart.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="elements.Insert.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="elements.AreaChart.html#areas" class="tsd-kind-icon">areas</a>
+								<a href="elements.Insert.html#documentToInsert" class="tsd-kind-icon">document<wbr>ToInsert</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.AreaChart.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.AreaChart.html#options" class="tsd-kind-icon">options</a>
+								<a href="elements.Insert.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="elements.AreaChart.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
+								<a href="elements.Insert.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.AreaChart.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="elements.AreaChart.html#getDict" class="tsd-kind-icon">get<wbr>Dict</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="elements.Insert.html#availableTags" class="tsd-kind-icon">available<wbr>Tags</a>
 							</li>
 						</ul>
 					</li>
@@ -369,7 +303,6 @@
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 		</div>
 	</div>
