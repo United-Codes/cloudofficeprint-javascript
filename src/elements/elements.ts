@@ -1314,12 +1314,9 @@ export class Freeze extends Element {
      * @param name name of the freeze tag
      * @param freezeValue value for the freeze tag
      */
-    constructor(name: string, freezeValue?: string | boolean) {
+    constructor(name: string, freezeValue: string | boolean) {
         super(name);
-        this.freezeValue = freezeValue
-        if (this.freezeValue !== undefined) {
-            this.freezeValue = freezeValue;
-        }
+        this.freezeValue = freezeValue;
     }
 
     /**
@@ -1337,6 +1334,38 @@ export class Freeze extends Element {
      * @returns set of tags associated with this Element
      */
     availableTags(): Set<string> {
-        return new Set([`{${this.name}}`]);
+        return new Set([`{freeze ${this.name}}`]);
+    }
+}
+
+/**
+ * Inside Word and PowerPoint documents, the tag {?insert fileToInsert} can be used 
+ * to insert files like Word, Excel, Powerpoint and PDF documents.
+ */
+export class Insert extends Element{
+    documentToInsert:string;
+    /**
+     * 
+     * @param name Name of the insert tag. 
+     * @param documentToInsert Base64 encoded document. 
+     */
+    constructor(name:string,documentToInsert:string){
+        super(name);
+        this.documentToInsert = documentToInsert;
+    }
+    /**
+     * @returns dictionary representation of this Element
+     */
+    asDict(): {[key:string]:unknown} {
+        return {
+            [this.name]:this.documentToInsert,
+        };
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`?insert ${this.name}`]);
     }
 }
