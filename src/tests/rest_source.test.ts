@@ -61,7 +61,6 @@ describe('Tests for class RESTSource', () => {
         const pjExpected = {
             tool: 'javascript',
             javascript_sdk_version: cop.printjob.STATIC_OPTS.javascript_sdk_version,
-            api_key: serv.config!.apiKey,
             output: {
                 output_converter: 'libreoffice',
                 output_encoding: 'raw',

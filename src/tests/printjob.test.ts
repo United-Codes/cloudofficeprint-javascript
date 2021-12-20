@@ -37,7 +37,6 @@ describe('Tests for class PrintJob', () => {
             [appendFile],
         );
         const printjobExpected = {
-            api_key: serv.config!.apiKey,
             append_files: [
                 {
                     file_content: templateBase64,

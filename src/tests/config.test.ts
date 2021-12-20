@@ -23,7 +23,8 @@ describe('Tests for config', () => {
             'test_page_format',
             false,
             'test_sign_certificate',
-            'test_sign_certificate_with_password',
+            'test_sign_certificate_password',
+            true,
             true,
             true,
         );
@@ -57,10 +58,10 @@ describe('Tests for config', () => {
             output_page_format: 'test_page_format',
             output_merge: false,
             output_sign_certificate: 'test_sign_certificate',
-            output_sign_certificate_password: "signg_certificate_with_password",
+            output_sign_certificate_password: "test_sign_certificate_password",
             identify_form_fields: true,
             output_split: true,
-            output_remove_last_page : true,
+            output_remove_last_page : true
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
@@ -203,9 +204,10 @@ describe('Tests for config', () => {
         expect(postMergeCommands.asDict()).toEqual(postMergeExpected);
     });
     test('Test route paths', async () => {
+        const printer:cop.config.Printer = new cop.config.Printer("http://localhost:3000","1.1")
         const serv: cop.config.Server = new cop.config.Server(
             'https://api.cloudofficeprint.com/',
-            new cop.config.ServerConfig('YOUR_API_KEY'),
+            new cop.config.ServerConfig('YOUR_API_KEY',undefined,printer),
         );
         expect(await serv.isReachable()).toBeTruthy();
         expect(await serv.isIppPrinterReachable()).toBeTruthy();

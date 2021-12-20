@@ -265,12 +265,18 @@ describe('Tests for elements', () => {
         expect(collection.asDict()).toEqual(collectionExpected);
     });
     test('Test freeze element', () => {
-        const freezeElement = new cop.elements.Freeze('freeze tag name', "c10")
+        const freezeElement = new cop.elements.Freeze('freeze_tag_name', "C10")
         const freezeElementExpected = {
-            freeze_tagname: "freeze tag name",
-            freeze_value: "c10"
+            freeze_tag_name:"C10",
         };
         expect(freezeElement.asDict()).toEqual(freezeElementExpected);
     })
+    test('Test insert element',()=>{
+        const insertDocument = new cop.elements.Insert('document_to_insert',"base64 encoded document");
+        const insertDocumentExpected = {
+            document_to_insert:"base64 encoded document",
+        }
+        expect(insertDocument.asDict()).toEqual(insertDocumentExpected);
+    });
     // Cloud Office Print charts get tested in charts.test.ts
 });
