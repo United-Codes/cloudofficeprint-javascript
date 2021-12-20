@@ -1308,25 +1308,13 @@ export class ElementCollection extends Element {
  * Second option, we can provide the location where we want to place the pane such as "C5".
  * Finally, the third option is false which doesn't place a pane.
  */
-export class Freeze extends Element {
-    freezeValue: string | boolean | undefined;
+export class Freeze extends Property {
     /**
      * @param name name of the freeze tag
      * @param freezeValue value for the freeze tag
      */
     constructor(name: string, freezeValue: string | boolean) {
-        super(name);
-        this.freezeValue = freezeValue;
-    }
-
-    /**
-     * Dictionary representation of this Element.
-     * @returns dictionary representation of this Element
-     */
-    asDict(): { [key: string]: unknown } {
-        return {
-            [this.name]: this.freezeValue,
-        };
+        super(name, freezeValue);
     }
 
     /**
@@ -1342,24 +1330,13 @@ export class Freeze extends Element {
  * Inside Word and PowerPoint documents, the tag {?insert fileToInsert} can be used 
  * to insert files like Word, Excel, Powerpoint and PDF documents.
  */
-export class Insert extends Element{
-    documentToInsert:string;
+export class Insert extends Property {
     /**
-     * 
      * @param name Name of the insert tag. 
      * @param documentToInsert Base64 encoded document. 
      */
-    constructor(name:string,documentToInsert:string){
-        super(name);
-        this.documentToInsert = documentToInsert;
-    }
-    /**
-     * @returns dictionary representation of this Element
-     */
-    asDict(): {[key:string]:unknown} {
-        return {
-            [this.name]:this.documentToInsert,
-        };
+    constructor(name: string, documentToInsert: string) {
+        super(name, documentToInsert);
     }
     /**
      * A set containing all available template tags this Element reacts to.
