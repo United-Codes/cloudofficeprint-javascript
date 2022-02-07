@@ -434,6 +434,29 @@ export class FootNote extends Property {
         return new Set([`{+${this.name}}`]);
     }
 }
+/**
+ * This tag will allow you to insert text into the document detecting links.
+ * The value may or may not have any links.
+ * 
+ */
+export class AutoText extends Property {
+
+    /**
+     * @param name the name for this element
+     * @param value the value for the autoText.
+     */
+    constructor(name: string, value: string) {
+        super(name,value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{*auto ${this.name}}`]);
+    }
+}
 
 export class Hyperlink extends Element {
     url: string;
