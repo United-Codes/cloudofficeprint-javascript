@@ -439,11 +439,11 @@ export class FootNote extends Property {
  * The value may or may not have any links.
  * 
  */
-export class AutoText extends Property {
+export class AutoLink extends Property {
 
     /**
      * @param name the name for this element
-     * @param value the value for the autoText.
+     * @param value the value for the AutoLink.
      */
     constructor(name: string, value: string) {
         super(name,value);

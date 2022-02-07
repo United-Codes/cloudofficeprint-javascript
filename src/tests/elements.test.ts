@@ -95,13 +95,13 @@ describe('Tests for elements', () => {
         };
         expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
     });
-    test('Test autoText', () => {
+    test('Test AutoLink', () => {
         const hyperlink = new cop.elements.Hyperlink(
-            'autoText',
-            'autoText including hyperlinks and text combined',
+            'AutoLink',
+            'AutoLink including hyperlinks and text combined',
         );
         const hyperlinkExpected = {
-            autoText:'autoText including hyperlinks and text combined'
+            AutoLink:'AutoLink including hyperlinks and text combined'
         };
         expect(hyperlink.asDict()).toEqual(hyperlinkExpected);
     });
