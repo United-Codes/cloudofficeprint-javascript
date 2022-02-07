@@ -1,6 +1,6 @@
 {
   "name": "cloudofficeprint",
-  "version": "21.2.3",
+  "version": "22.0.1",
   "description": "JavaScript interface for Cloud Office Print",
   "main": "dist/src/index.js",
   "types": "dist/src",
