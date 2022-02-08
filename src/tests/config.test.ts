@@ -204,13 +204,18 @@ describe('Tests for config', () => {
         expect(postMergeCommands.asDict()).toEqual(postMergeExpected);
     });
     test('Test route paths', async () => {
-        const printer:cop.config.Printer = new cop.config.Printer("http://localhost:3000","1.1")
+        //If you are testing for ipp-printer-> enable ipp-printer on port 3000 and test it.
+        // const printer:cop.config.Printer = new cop.config.Printer("http://localhost:3000","1.1")
+        // const serv: cop.config.Server = new cop.config.Server(
+        //     'http://localhost:8010/',
+        //     new cop.config.ServerConfig('YOUR_API_KEY',undefined,printer)
+        // );
         const serv: cop.config.Server = new cop.config.Server(
-            'https://api.cloudofficeprint.com/',
-            new cop.config.ServerConfig('YOUR_API_KEY',undefined,printer),
+            'http://localhost:8010/',
+            new cop.config.ServerConfig('YOUR_API_KEY')
         );
         expect(await serv.isReachable()).toBeTruthy();
-        expect(await serv.isIppPrinterReachable()).toBeTruthy();
+        // expect(await serv.isIppPrinterReachable()).toBeTruthy();
         expect(typeof await serv.getVersionSoffice()).toBe('string');
         expect(typeof await serv.getVersionOfficetopdf()).toBe('string');
         expect(typeof await serv.getSupportedTemplateMimetypes()).toBe('object');
