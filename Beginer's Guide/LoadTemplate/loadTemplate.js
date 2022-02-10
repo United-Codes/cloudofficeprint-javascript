@@ -38,7 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 //In this example we load template from differnt locations
 // Install cloudofficeprint using npm install cloudofficeprint 
-var cop = require("../../");
+var cop = require('cloudofficeprint')
 var fs = require("fs");
 var templates = {};
 //-----------FROM URL------------------//
