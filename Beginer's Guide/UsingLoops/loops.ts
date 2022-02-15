@@ -4,20 +4,28 @@ import * as cop from 'cloudofficeprint';
 // Main object that holds the data
 const collection = new cop.elements.ElementCollection();
 
-// Create the title element and add it to the element collection
-const title = new cop.elements.Property(
-    "title",
-    "Hello World!",
+
+//------------------for loop-------------------//
+const element1 = cop.elements.ElementCollection.fromMapping(
+    {
+        a: 1,
+        b: 2,
+        c: 3,
+    },
 );
-collection.add(title);
-const PATH_TO_TEMPLATE_FILE = './data/template.docx';
-const PATH_OF_OUTPUT_FILE = './output/output.docx';
-// Create the text element and add it to the element collection
-const text = new cop.elements.Property(
-    "text",
-    "This is an example created with the Cloud Office Print TypeScript SDK",
+const element2 = cop.elements.ElementCollection.fromMapping(
+    {
+        a: 4,
+        b: 5,
+        c: 6,
+    },
 );
-collection.add(text);
+const loop = new cop.elements.ForEach(
+    'loop_name',
+    [element1, element2],
+);
+
+collection.add(loop);
 
 // Add server
 // If you are using onpremise-version do not need to specify YOUR_API_KEY else replace it with your api key.
@@ -30,14 +38,14 @@ const server = new cop.config.Server(
 const printjob = new cop.PrintJob(
     collection,
     server,
-    cop.Resource.fromLocalFile(PATH_TO_TEMPLATE_FILE),
+    cop.Resource.fromLocalFile('./data/loop_template.docx'),
 );
 
 // Asynchronously execute print job and save response to file
 (async () => {
     try{
         const response = await printjob.execute();
-        await response.toFile(PATH_OF_OUTPUT_FILE);
+        await response.toFile('./output/output');
     }catch(err){
         console.log(err);
     }

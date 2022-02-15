@@ -1,5 +1,12 @@
-// Install cloudofficeprint using npm install cloudofficeprint 
-import * as cop from 'cloudofficeprint';
+//In this example we load template from differnt locations
+// Install cloudofficeprint ``` using npm install cloudofficeprint ```
+
+import * as cop from 'cloudofficeprint'
+import * as fs from 'fs';
+
+//-----------FROM URL------------------//
+const UrlTemplate = cop.Resource.fromUrl('https://docs.google.com/document/d/1CCBbvNjI2FwIHXJoG2F3HsY7ncskeUhKj0LkqAVZtHA/edit?usp=sharing','docx');
+
 
 // Main object that holds the data
 const collection = new cop.elements.ElementCollection();
@@ -10,8 +17,6 @@ const title = new cop.elements.Property(
     "Hello World!",
 );
 collection.add(title);
-const PATH_TO_TEMPLATE_FILE = './data/template.docx';
-const PATH_OF_OUTPUT_FILE = './output/output.docx';
 // Create the text element and add it to the element collection
 const text = new cop.elements.Property(
     "text",
@@ -26,18 +31,16 @@ const server = new cop.config.Server(
     new cop.config.ServerConfig("YOUR_API_KEY"),
 );
 
-// Create print job
 const printjob = new cop.PrintJob(
     collection,
     server,
-    cop.Resource.fromLocalFile(PATH_TO_TEMPLATE_FILE),
+    UrlTemplate
 );
-
 // Asynchronously execute print job and save response to file
 (async () => {
     try{
         const response = await printjob.execute();
-        await response.toFile(PATH_OF_OUTPUT_FILE);
+        await response.toFile(`./output/output_fromUrl1`);
     }catch(err){
         console.log(err);
     }
