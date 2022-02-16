@@ -4,7 +4,7 @@
 import * as cop from 'cloudofficeprint'
 import * as fs from 'fs';
 
-var templates = {};
+var templates:any = {};
 
 //-----------FROM URL------------------//
 const UrlTemplate = cop.Resource.fromUrl('https://docs.google.com/document/d/1CCBbvNjI2FwIHXJoG2F3HsY7ncskeUhKj0LkqAVZtHA/edit?usp=sharing','docx');

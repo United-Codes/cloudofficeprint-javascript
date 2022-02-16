@@ -1,4 +1,4 @@
-import * as cop from "cloudofficeprintdist/src"
+import * as cop from "cloudofficeprint"
 
 // Main object that holds the data
 const collection = new cop.elements.ElementCollection();
