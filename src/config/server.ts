@@ -408,4 +408,137 @@ export class Server {
         const response = await fetch(new URL('version', this.url).href, { agent: proxy });
         return response.text();
     }
+
+    /**
+     * Sends a GET request to server-url/verify_template_hash?hash=hashcode.
+     * @param hashcode the hash of the cached template.
+     * @returns JSON of the verify status of the given template hash.
+     */
+    async verifyTemplateHash(hashcode: string): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(new URL(`verify_template_hash?hash=${hashcode}`, this.url).href, { agent: proxy });
+        return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/renew_template_hash?hash=hashcode.
+     * @param hashcode the hash of the cached template.
+     * @returns JSON of the renew status of the given template hash.
+     */
+    async renewTemplateHash(hashcode: string): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(new URL(`renew_template_hash?hash=${hashcode}`, this.url).href, { agent: proxy });
+        return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/invalidate_template_hash?hash=hashcode.
+     * @param hashcode the hash of the cached template.
+     * @returns JSON of the invalidate status of the given template hash.
+     */
+    async invalidateTemplateHash(hashcode: string): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        const response = await fetch(new URL(`invalidate_template_hash?hash=${hashcode}`, this.url).href, { agent: proxy });
+        return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/stats.
+     * @param accessToken the access token.
+     * @returns JSON of the current statistics of the Cloud Office Print server.
+     */
+    async getStats(accessToken?: string): Promise<JSON> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        let params = new URLSearchParams();
+        if (accessToken !== undefined) {
+            params.set('access_token', accessToken);
+        }
+        const response = await fetch(new URL('stats', this.url).href, { agent: proxy, search: params });
+        return response.json();
+    }
+
+    /**
+     * Sends a GET request to server-url/server_errors.
+     * @param latest amount of the latest lines wanted from the error log file.
+     * @param accessToken the access token.
+     * @returns the server errors in log file format.
+     */
+    async getErrors(latest?: number, accessToken?: string): Promise<string> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        let params = new URLSearchParams();
+        if (latest !== undefined) {
+            params.set('latest', latest.toString());
+        }
+        if (accessToken !== undefined) {
+            params.set('access_token', accessToken);
+        }
+        const response = await fetch(new URL('server_errors', this.url).href, { agent: proxy, search: params });
+        return response.text();
+    }
+
+    /**
+     * Sends a GET request to server-url/server_printjobs.
+     * @param date specified date in the format 'YYYYMMDD'.
+     * @param accessToken the access token.
+     * @returns the server print jobs in log file format.
+     */
+    async getPrintJobs(date?: string, accessToken?: string): Promise<string> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        let params = new URLSearchParams();
+        if (date !== undefined) {
+            params.set('date', date);
+        }
+        if (accessToken !== undefined) {
+            params.set('access_token', accessToken);
+        }
+        const response = await fetch(new URL('server_printjobs', this.url).href, { agent: proxy, search: params });
+        return response.text();
+    }
+
+    /**
+     * Sends a GET request to server-url/network_logs.
+     * @param date specified date in the format 'YYYYMMDD'.
+     * @param accessToken the access token.
+     * @returns the network logs in log file format.
+     */
+    async getNetworkLogs(date?: string, accessToken?: string): Promise<string> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        let params = new URLSearchParams();
+        if (date !== undefined) {
+            params.set('date', date);
+        }
+        if (accessToken !== undefined) {
+            params.set('access_token', accessToken);
+        }
+        const response = await fetch(new URL('network_logs', this.url).href, { agent: proxy, search: params });
+        return response.text();
+    }
 }

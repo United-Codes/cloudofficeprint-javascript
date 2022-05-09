@@ -218,5 +218,11 @@ describe('Tests for config', () => {
         expect(typeof await serv.getSupportedPrependMimetypes()).toBe('object');
         expect(typeof await serv.getSupportedAppendMimetypes()).toBe('object');
         expect(typeof await serv.getVersionCop()).toBe('string');
+        expect(typeof await serv.verifyTemplateHash('hashcode')).toBe('object');
+        expect(typeof await serv.renewTemplateHash('hashcode')).toBe('object');
+        expect(typeof await serv.invalidateTemplateHash('hashcode')).toBe('object');
+        expect(typeof await serv.getStats()).toBe('object');
+        expect(typeof await serv.getErrors()).toBe('string');
+        expect(typeof await serv.getPrintJobs()).toBe('string');
     });
 });
