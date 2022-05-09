@@ -15,6 +15,7 @@ export class Image extends Element {
     url: string | undefined;
     width: number | string | undefined;
     height: number | string | undefined;
+    maintainAspectRatio: boolean | undefined;
 
     /**
      * @param name The name of the image element.
@@ -34,6 +35,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param maintainAspectRatio if True: maintain the aspect ratio of the image, width should be specified for this option to work.
      */
     constructor(
         name: string,
@@ -47,6 +49,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        maintainAspectRatio?: boolean,
     ) {
         super(name);
         this.source = source;
@@ -59,6 +62,7 @@ export class Image extends Element {
         this.url = url;
         this.width = width;
         this.height = height;
+        this.maintainAspectRatio = maintainAspectRatio;
     }
 
     /**
@@ -75,8 +79,8 @@ export class Image extends Element {
      * @returns the dict representation of the suffixes that need to be appended to the name of
      *  this property in this object's dict representation
      */
-    asDictSuffixes(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {};
+    asDictSuffixes(): {[key: string]: string | number | boolean} {
+        const result: {[key: string]: string | number | boolean} = {};
 
         if (this.maxWidth !== undefined) {
             result._max_width = this.maxWidth;
@@ -105,6 +109,9 @@ export class Image extends Element {
         if (this.height !== undefined) {
             result._height = this.height;
         }
+        if (this.maintainAspectRatio !== undefined) {
+            result._maintain_aspect_ratio = this.maintainAspectRatio;
+        }
 
         return result;
     }
@@ -113,8 +120,8 @@ export class Image extends Element {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {
+    asDict(): {[key: string]: string | number | boolean} {
+        const result: {[key: string]: string | number | boolean} = {
             [this.name]: this.source,
         };
 
@@ -146,6 +153,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param maintainAspectRatio if True: maintain the aspect ratio of the image, width should be specified for this option to work.
      * @returns the generated Image object from a local file
      */
     static fromFile(
@@ -160,6 +168,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        maintainAspectRatio?: boolean,
     ) {
         return new Image(
             name,
@@ -173,6 +182,7 @@ export class Image extends Element {
             url,
             width,
             height,
+            maintainAspectRatio,
         );
     }
 
@@ -195,6 +205,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param maintainAspectRatio if True: maintain the aspect ratio of the image, width should be specified for this option to work.
      * @returns the generated Image object from raw data
      */
     static fromRaw(
@@ -209,6 +220,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        maintainAspectRatio?: boolean,
     ) {
         return new Image(
             name,
@@ -222,6 +234,7 @@ export class Image extends Element {
             url,
             width,
             height,
+            maintainAspectRatio,
         );
     }
 
@@ -244,6 +257,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param maintainAspectRatio if True: maintain the aspect ratio of the image, width should be specified for this option to work.
      * @returns the generated Image object from a base64 string
      */
     static fromBase64(
@@ -258,6 +272,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        maintainAspectRatio?: boolean,
     ) {
         return new Image(
             name,
@@ -271,6 +286,7 @@ export class Image extends Element {
             url,
             width,
             height,
+            maintainAspectRatio,
         );
     }
 
@@ -293,6 +309,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param maintainAspectRatio if True: maintain the aspect ratio of the image, width should be specified for this option to work.
      * @returns the generated Image object from a URL
      */
     static fromUrl(
@@ -307,6 +324,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        maintainAspectRatio?: boolean,
     ) {
         return new Image(
             name,
@@ -320,6 +338,7 @@ export class Image extends Element {
             url,
             width,
             height,
+            maintainAspectRatio,
         );
     }
 }

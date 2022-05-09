@@ -15,6 +15,7 @@ describe('Tests for images', () => {
             'url',
             30,
             25,
+            true,
         );
         const imageExpected = {
             image1: 'url_source',
@@ -27,6 +28,7 @@ describe('Tests for images', () => {
             image1_url: 'url',
             image1_width: 30,
             image1_height: 25,
+            image1_maintain_aspect_ratio: true,
         };
         expect(image.asDict()).toEqual(imageExpected);
     });
