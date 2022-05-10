@@ -1,5 +1,7 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import * as http from 'http';
+import * as cop from '../index';
+import { COPError } from '../exceptions';
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 /**
@@ -540,5 +542,59 @@ export class Server {
         }
         const response = await fetch(new URL('network_logs', this.url).href, { agent: proxy, search: params });
         return response.text();
+    }
+
+    /**
+     * Contact the server to see if the polled print job is processed.
+     * @param id the unique identifier of the polled print job.
+     * @param secretKey the secret key used to encrypt the polled print job.
+     * @returns whether the polled print job with the given id is processed.
+     */
+    async isProcessed(id: string, secretKey?: string): Promise<boolean> {
+        await this.raiseIfUnreachable();
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        let params = new URLSearchParams();
+        if (secretKey !== undefined) {
+            params.set('secretkey', secretKey);
+        }
+        try {
+            return !('message' in await fetch(new URL(`download/${id}`, this.url).href, { agent: proxy, search: params })
+                .then((res: Response) => res.json()));
+        } catch (error) {
+            return true;
+        }
+    }
+
+    /**
+     * raise error if the polled print job is not processed yet.
+     * @param id the unique identifier of the polled print job.
+     * @param secretKey the secret key used to encrypt the polled print job.
+     */
+    async raiseIfNotProcessed(id: string, secretKey?: string) {
+        await this.raiseIfUnreachable();
+        const isProcessed: boolean = await this.isProcessed(id, secretKey);
+        if (!isProcessed) throw new Error(`The polled print job with id ${id} is not processed yet.`);
+    }
+
+    /**
+     * Gets a response of the polled print job.
+     * @param id the unique identifier of the polled print job.
+     * @param secretKey the secret key used to encrypt the polled print job.
+     * @returns the response of the polled print job with the given id.
+     */
+    async download(id: string, secretKey?: string): Promise<cop.Response> {
+        await this.raiseIfNotProcessed(id, secretKey);
+        let proxy;
+        if (this.config && this.config.proxies) {
+            proxy = new HttpsProxyAgent(this.config.proxies);
+        }
+        let params = new URLSearchParams();
+        if (secretKey !== undefined) {
+            params.set('secretkey', secretKey);
+        }
+        return cop.PrintJob.handleResponse(await fetch(new URL(`download/${id}`, this.url).href, { agent: proxy, search: params }));
     }
 }
