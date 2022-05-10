@@ -224,6 +224,7 @@ describe('Tests for config', () => {
         expect(typeof await serv.getStats()).toBe('object');
         expect(typeof await serv.getErrors()).toBe('string');
         expect(typeof await serv.getPrintJobs()).toBe('string');
+        expect(typeof await serv.getNetworkLogs()).toBe('string');
     });
     test ('Test RequestOption', async () => {
         const requestOption = new cop.config.RequestOption(
