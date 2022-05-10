@@ -225,4 +225,74 @@ describe('Tests for pdf elements', () => {
         };
         expect(form.asDict()).toEqual(formExpected);
     });
+    test('Test pdf textbox form element', () => {
+        const textbox = new cop.elements.PDFFormTextBox("first_name", "John", 100, 20);
+        const textboxExpected = {
+            "first_name": {
+                "type": "text",
+                "name": "first_name",
+                "width": 100,
+                "height": 20,
+                "value": "John",
+            }
+        };
+        expect(textbox.asDict()).toEqual(textboxExpected);
+    });
+    test('Test pdf checkbox form element', () => {
+        const checkbox = new cop.elements.PDFFormCheckBox("CHECKBOX", true, "Check?", 50, 51);
+        const checkboxExpected = {
+            "CHECKBOX": {
+                "type": "checkbox",
+                "name": "CHECKBOX",
+                "width": 50,
+                "height": 51,
+                "value": true,
+                "text": "Check?",
+            }
+        };
+        expect(checkbox.asDict()).toEqual(checkboxExpected);
+    });
+    test('Test pdf radio button form element', () => {
+        const radiobutton = new cop.elements.PDFFormRadioButton("RADIO_BUTTON", "RadioList", "1", "Option 1", true, 25, 26);
+        const radiobuttonExpected = {
+            "RADIO_BUTTON": {
+                "type": "radio",
+                "name": "RadioList",
+                "width": 25,
+                "height": 26,
+                "value": "1",
+                "text": "Option 1",
+                "selected": true,
+            }
+        };
+        expect(radiobutton.asDict()).toEqual(radiobuttonExpected);
+    });
+    test('Test pdf unsigned signature field element', () => {
+        const signature = new cop.elements.PDFFormSignatureUnsigned("field1", 100, 50);
+        const signatureExpected = {
+            "field1": {
+                "type": "signaturefieldunsigned",
+                "name": "field1",
+                "width": 100,
+                "height": 50,
+            }
+        };
+        expect(signature.asDict()).toEqual(signatureExpected);
+    });
+    test('Test pdf signed signature field element', () => {
+        const signature = new cop.elements.PDFFormSignatureSigned("field2", "base64 encoded certificate", "certificate password", "md", "base64 encoded image", 50 , 100);
+        const signatureExpected = {
+            "field2": {
+                "type": "signaturefieldsigned",
+                "name": "field2",
+                "width": 50,
+                "height": 100,
+                "size": "md",
+                "value": "base64 encoded certificate",
+                "background_image": "base64 encoded image",
+                "password": "certificate password",
+            }
+        };
+        expect(signature.asDict()).toEqual(signatureExpected);
+    });
 });

@@ -296,3 +296,287 @@ export class PDFFormData extends Element {
         };
     }
 }
+
+/**
+ * Abstract base class for a PDF form element.
+ */
+export abstract class PDFFormElement extends Element {
+    type: string;
+    width: number | undefined;
+    height: number | undefined;
+
+    /**
+     * @param name for this element.
+     * @param type of this PDF form element.
+     * @param width width in px. Optional.
+     * @param height height in px. Optional.
+     */
+    protected constructor(
+        name: string,
+        type: string,
+        width?: number,
+        height?: number,
+    ) {
+        super(name);
+        this.type = type;
+        this.width = width;
+        this.height = height;
+    }
+
+    /**
+     * Dictionary representation of the inner dict of a PDFFormElement.
+     * @returns dictionary inner representation of this PDFFormElement.
+     */
+    protected innerDict(): { [key: string]: unknown } {
+        let result: { [key: string]: unknown } = {
+            "name": this.name,
+            "type": this.type,
+        };
+        if (this.width !== undefined){
+            result.width = this.width;
+        }
+        if (this.height !== undefined){
+            result.height = this.height;
+        }
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{?form ${this.name}}`]);
+    }
+}
+
+/**
+ * Class for a PDF form element of type text box.
+ */
+export class PDFFormTextBox extends PDFFormElement {
+    value: string | undefined;
+
+    /**
+     * @param name for this element.
+     * @param value of the text box. Optional.
+     * @param width width in px. Optional.
+     * @param height height in px. Optional.
+     */
+    constructor(
+        name: string,
+        value?: string,
+        width?: number,
+        height?: number,
+    ) {
+        super(name, "text", width, height);
+        this.value = value;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        let result: { [key: string]: unknown } = super.innerDict();
+        if (this.value !== undefined){
+            result.value = this.value;
+        }
+
+        return { [this.name]: result };
+    }
+}
+
+/**
+ * Class for a PDF form element of type check box.
+ */
+export class PDFFormCheckBox extends PDFFormElement {
+    check: boolean | undefined;
+    text: string | undefined;
+
+    /**
+     * @param name for this element.
+     * @param check whether the check box is checked. Optional.
+     * @param text used as label for the check box. Optional.
+     * @param width width in px. Optional.
+     * @param height height in px. Optional.
+     */
+    constructor(
+        name: string,
+        check?: boolean,
+        text?: string,
+        width?: number,
+        height?: number,
+    ) {
+        super(name, "checkbox", width, height);
+        this.check = check;
+        this.text = text;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        let result: { [key: string]: unknown } = super.innerDict();
+        if (this.check !== undefined){
+            result.value = this.check;
+        }
+        if (this.text !== undefined){
+            result.text = this.text;
+        }
+        return { [this.name]: result };
+    }
+}
+
+/**
+ * Class for a PDF form element of type radio button.
+ */
+export class PDFFormRadioButton extends PDFFormElement {
+    group: string;
+    value: string | undefined;
+    text: string | undefined;
+    selected: boolean | undefined;
+
+    /**
+     * @param name for this element.
+     * @param group name of radio buttons that are interconnected. Optional, defaults to "name".
+     * @param value of the radio button. Optional.
+     * @param text used as label for the radio button. Optional.
+     * @param selected whether the radio button is selected. Optional.
+     * @param width width in px. Optional.
+     * @param height height in px. Optional.
+     */
+    constructor(
+        name: string,
+        group?: string,
+        value?: string,
+        text?: string,
+        selected?: boolean,
+        width?: number,
+        height?: number,
+    ) {
+        super(name, "radio", width, height);
+        this.group = group ?? name;
+        this.value = value;
+        this.text = text;
+        this.selected = selected;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        let result: { [key: string]: unknown } = super.innerDict();
+        result.name = this.group;
+        if (this.value !== undefined){
+            result.value = this.value;
+        }
+        if (this.text !== undefined){
+            result.text = this.text;
+        }
+        if (this.selected !== undefined){
+            result.selected = this.selected;
+        }
+        return { [this.name]: result };
+    }
+}
+
+/**
+ * Class for an unsigned PDF signature field.
+ */
+export class PDFFormSignatureUnsigned extends PDFFormElement {
+
+    /**
+     * @param name for this element.
+     * @param width width in px. Optional.
+     * @param height height in px. Optional.
+     */
+    constructor(
+        name: string,
+        width?: number,
+        height?: number,
+    ) {
+        super(name, "signaturefieldunsigned", width, height);
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        return { [this.name]: super.innerDict() };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{?sign ${this.name}}`]);
+    }
+}
+
+/**
+ * Class for an signed PDF signature field.
+ */
+export class PDFFormSignatureSigned extends PDFFormElement {
+    value: string;
+    password: string | undefined;
+    size: string | undefined;
+    backgroundImage: string | undefined;
+
+    /**
+     * @param name for this element.
+     * @param value signing certificate as a base64 string, URL, FTP location or a server path.
+     * @param password for if the certificate is encrypted. Optional.
+     * @param size must either be "sm" for small, "md" for medium or "lg" for large. Optional.
+     * @param backgroundImage background image as a base64 string, URL, FTP location or a server path. Optional.
+     * @param width width in px. Optional.
+     * @param height height in px. Optional.
+     */
+    constructor(
+        name: string,
+        value: string,
+        password?: string,
+        size?: string,
+        backgroundImage?: string,
+        width?: number,
+        height?: number,
+    ) {
+        super(name, "signaturefieldsigned", width, height);
+        this.value = value;
+        this.password = password;
+        this.size = size;
+        this.backgroundImage = backgroundImage;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        let result: { [key: string]: unknown } = super.innerDict();
+        if (this.value !== undefined){
+            result.value = this.value;
+        }
+        if (this.password !== undefined){
+            result.password = this.password;
+        }
+        if (this.size !== undefined){
+            result.size = this.size;
+        }
+        if (this.backgroundImage !== undefined){
+            result.background_image = this.backgroundImage;
+        }
+        return { [this.name]: result };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{?sign ${this.name}}`]);
+    }
+}
