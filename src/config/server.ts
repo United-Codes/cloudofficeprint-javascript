@@ -467,11 +467,11 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        let params = new URLSearchParams();
+        let url = new URL('stats', this.url);
         if (accessToken !== undefined) {
-            params.set('access_token', accessToken);
+            url.searchParams.append('access_token', accessToken);
         }
-        const response = await fetch(new URL('stats', this.url).href, { agent: proxy, search: params });
+        const response = await fetch(url.href, { agent: proxy });
         return response.json();
     }
 
@@ -487,14 +487,14 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        let params = new URLSearchParams();
+        let url = new URL('server_errors', this.url);
         if (latest !== undefined) {
-            params.set('latest', latest.toString());
+            url.searchParams.append('latest', latest.toString());
         }
         if (accessToken !== undefined) {
-            params.set('access_token', accessToken);
+            url.searchParams.append('access_token', accessToken);
         }
-        const response = await fetch(new URL('server_errors', this.url).href, { agent: proxy, search: params });
+        const response = await fetch(url.href, { agent: proxy });
         return response.text();
     }
 
@@ -510,14 +510,14 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        let params = new URLSearchParams();
+        let url = new URL('server_printjobs', this.url);
         if (date !== undefined) {
-            params.set('date', date);
+            url.searchParams.append('date', date);
         }
         if (accessToken !== undefined) {
-            params.set('access_token', accessToken);
+            url.searchParams.append('access_token', accessToken);
         }
-        const response = await fetch(new URL('server_printjobs', this.url).href, { agent: proxy, search: params });
+        const response = await fetch(url.href, { agent: proxy });
         return response.text();
     }
 
@@ -533,14 +533,14 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        let params = new URLSearchParams();
+        let url = new URL('network_logs', this.url);
         if (date !== undefined) {
-            params.set('date', date);
+            url.searchParams.append('date', date);
         }
         if (accessToken !== undefined) {
-            params.set('access_token', accessToken);
+            url.searchParams.append('access_token', accessToken);
         }
-        const response = await fetch(new URL('network_logs', this.url).href, { agent: proxy, search: params });
+        const response = await fetch(url.href, { agent: proxy });
         return response.text();
     }
 
@@ -556,12 +556,12 @@ export class Server {
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        let params = new URLSearchParams();
+        let url = new URL(`download/${id}`, this.url);
         if (secretKey !== undefined) {
-            params.set('secretkey', secretKey);
+            url.searchParams.append('secretkey', secretKey);
         }
         try {
-            return !('message' in await fetch(new URL(`download/${id}`, this.url).href, { agent: proxy, search: params })
+            return !('message' in await fetch(url.href, { agent: proxy })
                 .then((res: Response) => res.json()));
         } catch (error) {
             return true;
@@ -583,18 +583,22 @@ export class Server {
      * Gets a response of the polled print job.
      * @param id the unique identifier of the polled print job.
      * @param secretKey the secret key used to encrypt the polled print job.
+     * @param deleteAfter whether to delete the polled print job after downloading it.
      * @returns the response of the polled print job with the given id.
      */
-    async download(id: string, secretKey?: string): Promise<cop.Response> {
+    async download(id: string, secretKey?: string, deleteAfter?: boolean): Promise<cop.Response> {
         await this.raiseIfNotProcessed(id, secretKey);
         let proxy;
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
-        let params = new URLSearchParams();
+        let url = new URL(`download/${id}`, this.url);
         if (secretKey !== undefined) {
-            params.set('secretkey', secretKey);
+            url.searchParams.append('secretkey', secretKey);
         }
-        return cop.PrintJob.handleResponse(await fetch(new URL(`download/${id}`, this.url).href, { agent: proxy, search: params }));
+        if (deleteAfter !== undefined) {
+            url.searchParams.append('delete_after_download', deleteAfter.toString());
+        }
+        return cop.PrintJob.handleResponse(await fetch(url.href, { agent: proxy }));
     }
 }
