@@ -255,4 +255,14 @@ describe('Tests for config', () => {
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
+    test ('Test Polling Output Configuration', async () => {
+        const conf = new cop.config.OutputConfig(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, true, "AOPSecretKey");
+        const confExpected = {
+            "output_converter": "libreoffice",
+            "output_encoding": "raw",
+            "output_polling": true,
+            "secret_key": "AOPSecretKey",
+        };
+        expect(conf.asDict()).toEqual(confExpected);
+    });
 });

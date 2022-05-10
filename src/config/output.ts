@@ -16,6 +16,8 @@ export class OutputConfig {
     csvOptions: CsvOptions | undefined;
     outputAppendPerPage: boolean | undefined;
     requestOption: RequestOption | undefined;
+    polling: boolean | undefined;
+    secretKey: string | undefined;
 
     /**
      * @param filetype The file type (as extension) to use for the output.
@@ -33,7 +35,9 @@ export class OutputConfig {
      * @param pdfOptions Optional PDF options. Optional.
      * @param csvOptions Optional CSV options. Optional.
      * @param appendPerPage ability to prepend/append file after each page of output. Optional.
-     * @param requestOption if specified then COP makes a call to the given option with response of the current print job
+     * @param requestOption if specified then COP makes a call to the given option with response of the current print job. Optional.
+     * @param polling if true then a unique link will be created which can be used later to download the output file. Optional.
+     * @param secretKey can be specified to encrypt the file stored on the server, only used for polled print jobs. Optional.
      */
     constructor(
         filetype?: string,
@@ -45,6 +49,8 @@ export class OutputConfig {
         csvOptions?: CsvOptions,
         appendPerPage?: boolean,
         requestOption?: RequestOption,
+        polling?: boolean,
+        secretKey?: string
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -55,6 +61,8 @@ export class OutputConfig {
         this.csvOptions = csvOptions;
         this.outputAppendPerPage = appendPerPage;
         this.requestOption = requestOption;
+        this.polling = polling;
+        this.secretKey = secretKey;
     }
 
     /**
@@ -93,6 +101,12 @@ export class OutputConfig {
         }
         if (this.requestOption !== undefined){
             result.request_option = this.requestOption.asDict();
+        }
+        if (this.polling !== undefined){
+            result.output_polling = this.polling;
+        }
+        if (this.secretKey !== undefined){
+            result.secret_key = this.secretKey;
         }
         return result;
     }
