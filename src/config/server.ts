@@ -458,7 +458,7 @@ export class Server {
 
     /**
      * Sends a GET request to server-url/stats.
-     * @param accessToken the access token.
+     * @param accessToken the access token. Optional.
      * @returns JSON of the current statistics of the Cloud Office Print server.
      */
     async getStats(accessToken?: string): Promise<JSON> {
@@ -477,8 +477,8 @@ export class Server {
 
     /**
      * Sends a GET request to server-url/server_errors.
-     * @param latest amount of the latest lines wanted from the error log file.
-     * @param accessToken the access token.
+     * @param latest amount of the latest lines wanted from the error log file. Optional.
+     * @param accessToken the access token. Optional.
      * @returns the server errors in log file format.
      */
     async getErrors(latest?: number, accessToken?: string): Promise<string> {
@@ -500,8 +500,8 @@ export class Server {
 
     /**
      * Sends a GET request to server-url/server_printjobs.
-     * @param date specified date in the format 'YYYYMMDD'.
-     * @param accessToken the access token.
+     * @param date specified date in the format 'YYYYMMDD'. Optional.
+     * @param accessToken the access token. Optional.
      * @returns the server print jobs in log file format.
      */
     async getPrintJobs(date?: string, accessToken?: string): Promise<string> {
@@ -523,8 +523,8 @@ export class Server {
 
     /**
      * Sends a GET request to server-url/network_logs.
-     * @param date specified date in the format 'YYYYMMDD'.
-     * @param accessToken the access token.
+     * @param date specified date in the format 'YYYYMMDD'. Optional.
+     * @param accessToken the access token. Optional.
      * @returns the network logs in log file format.
      */
     async getNetworkLogs(date?: string, accessToken?: string): Promise<string> {
@@ -547,7 +547,7 @@ export class Server {
     /**
      * Contact the server to see if the polled print job is processed.
      * @param id the unique identifier of the polled print job.
-     * @param secretKey the secret key used to encrypt the polled print job.
+     * @param secretKey the secret key used to encrypt the polled print job. Optional.
      * @returns whether the polled print job with the given id is processed.
      */
     async isProcessed(id: string, secretKey?: string): Promise<boolean> {
@@ -571,7 +571,7 @@ export class Server {
     /**
      * raise error if the polled print job is not processed yet.
      * @param id the unique identifier of the polled print job.
-     * @param secretKey the secret key used to encrypt the polled print job.
+     * @param secretKey the secret key used to encrypt the polled print job. Optional.
      */
     async raiseIfNotProcessed(id: string, secretKey?: string) {
         await this.raiseIfUnreachable();
@@ -582,8 +582,8 @@ export class Server {
     /**
      * Gets a response of the polled print job.
      * @param id the unique identifier of the polled print job.
-     * @param secretKey the secret key used to encrypt the polled print job.
-     * @param deleteAfter whether to delete the polled print job after downloading it.
+     * @param secretKey the secret key used to encrypt the polled print job. Optional.
+     * @param deleteAfter whether to delete the polled print job after downloading it. Optional.
      * @returns the response of the polled print job with the given id.
      */
     async download(id: string, secretKey?: string, deleteAfter?: boolean): Promise<cop.Response> {
