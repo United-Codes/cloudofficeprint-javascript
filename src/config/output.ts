@@ -15,6 +15,7 @@ export class OutputConfig {
     pdfOptions: PDFOptions | undefined;
     csvOptions: CsvOptions | undefined;
     outputAppendPerPage: boolean | undefined;
+    requestOption: RequestOption | undefined;
 
     /**
      * @param filetype The file type (as extension) to use for the output.
@@ -30,7 +31,9 @@ export class OutputConfig {
      *  Can only be used if the server allows to save on disk.
      *  The specific output path for each file is appended to the base path. Optional.
      * @param pdfOptions Optional PDF options. Optional.
+     * @param csvOptions Optional CSV options. Optional.
      * @param appendPerPage ability to prepend/append file after each page of output. Optional.
+     * @param requestOption if specified then COP makes a call to the given option with response of the current print job
      */
     constructor(
         filetype?: string,
@@ -41,6 +44,7 @@ export class OutputConfig {
         pdfOptions?: PDFOptions,
         csvOptions?: CsvOptions,
         appendPerPage?: boolean,
+        requestOption?: RequestOption,
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -50,6 +54,7 @@ export class OutputConfig {
         this.pdfOptions = pdfOptions;
         this.csvOptions = csvOptions;
         this.outputAppendPerPage = appendPerPage;
+        this.requestOption = requestOption;
     }
 
     /**
@@ -58,11 +63,11 @@ export class OutputConfig {
      */
     asDict(): {
         [key: string]: string | number | boolean | { [key: string]: number } |
-        { [key: string]: string | number }
+        { [key: string]: string | number } |  { [key: string]: string | { [key: string]: string } }
         } {
         let result: {
             [key: string]: string | number | boolean | { [key: string]: number } |
-            { [key: string]: string | number }
+            { [key: string]: string | number } |  { [key: string]: string | { [key: string]: string } }
         } = {
             output_encoding: this.encoding,
             output_converter: this.converter,
@@ -85,6 +90,44 @@ export class OutputConfig {
         }
         if (this.outputAppendPerPage !== undefined){
             result.output_append_per_page = this.outputAppendPerPage;
+        }
+        if (this.requestOption !== undefined){
+            result.request_option = this.requestOption.asDict();
+        }
+        return result;
+    }
+}
+
+/**
+ * Class to specify the request option. The COP makes a call to the given option with response
+ * of the current print job.
+ */
+export class RequestOption {
+    url: string;
+    extraHeaders: { [key: string]: string } | undefined;
+
+    /**
+     * @param url valid url to which the output will be posted, it should start with http:// or https://.
+     * @param extraHeaders any additional information to be included for the header, like authentication token, file id , access token etc.
+     */
+    constructor(
+        url: string,
+        extraHeaders?: { [key: string]: string },
+    ) {
+        this.url = url;
+        this.extraHeaders = extraHeaders;
+    }
+
+    /**
+     * The dict representation of this request option.
+     * @returns the dict representation of this request option.
+     */
+    asDict(): { [key: string]: string | { [key: string]: string } } {
+        let result: { [key: string]: string | { [key: string]: string } } = {
+            url: this.url,
+        }
+        if (this.extraHeaders !== undefined){
+            result.extra_headers = this.extraHeaders;
         }
         return result;
     }

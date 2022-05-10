@@ -225,4 +225,34 @@ describe('Tests for config', () => {
         expect(typeof await serv.getErrors()).toBe('string');
         expect(typeof await serv.getPrintJobs()).toBe('string');
     });
+    test ('Test RequestOption', async () => {
+        const requestOption = new cop.config.RequestOption(
+            "https://www.apexofficeprint.com/post/",
+            {
+                "file_id": "Any file id like FILE_123",
+                "access_token": "Access Token for above hostname (if any)",
+            }
+        );
+        const requestOptionExpected = {
+            "url": "https://www.apexofficeprint.com/post/",
+            "extra_headers": {
+                "file_id": "Any file id like FILE_123",
+                "access_token": "Access Token for above hostname (if any)",
+            },
+        };
+        expect(requestOption.asDict()).toEqual(requestOptionExpected);
+        const conf = new cop.config.OutputConfig(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, requestOption);
+        const confExpected = {
+            "output_converter": "libreoffice",
+            "output_encoding": "raw",
+            "request_option": {
+                "url": "https://www.apexofficeprint.com/post/",
+                "extra_headers": {
+                    "file_id" : "Any file id like FILE_123",
+                    "access_token": "Access Token for above hostname (if any)"
+                }
+            }
+        };
+        expect(conf.asDict()).toEqual(confExpected);
+    });
 });
