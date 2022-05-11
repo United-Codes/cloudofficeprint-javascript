@@ -599,6 +599,6 @@ export class Server {
         if (deleteAfter !== undefined) {
             url.searchParams.append('delete_after_download', deleteAfter.toString());
         }
-        return cop.PrintJob.handleResponse(await fetch(url.href, { agent: proxy }));
+        return <cop.Response> await cop.PrintJob.handleResponse(await fetch(url.href, { agent: proxy }));
     }
 }

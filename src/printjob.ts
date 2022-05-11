@@ -4,7 +4,7 @@ import { OutputConfig, Server } from './config';
 import { Element, RESTSource } from './elements';
 import { COPError } from './exceptions';
 import { Resource } from './resource';
-import { Response } from './response';
+import { Response, ResponsePolling } from './response';
 
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
@@ -70,7 +70,7 @@ export class PrintJob {
      * Execute this print job.
      * @returns `Response`-object
      */
-    async execute(): Promise<Response> {
+    async execute(): Promise<Response | ResponsePolling> {
         await this.server.raiseIfUnreachable();
         let proxy;
         if (this.server.config && this.server.config.proxies) {
@@ -86,6 +86,7 @@ export class PrintJob {
                     headers: { 'Content-type': 'application/json' },
                 },
             ),
+            this.outputConfig.polling === true? this.server : undefined
         );
     }
 
@@ -97,7 +98,7 @@ export class PrintJob {
      * @param server `Server`-object
      * @returns `Response`-object
      */
-    static async executeFullJson(jsonData: object, server: Server): Promise<Response> {
+    static async executeFullJson(jsonData: any, server: Server): Promise<Response | ResponsePolling> {
         await server.raiseIfUnreachable();
         let proxy;
         if (server.config && server.config.proxies) {
@@ -113,19 +114,24 @@ export class PrintJob {
                     headers: { 'Content-type': 'application/json' },
                 },
             ),
+            jsonData.output.output_polling === true? server : undefined
         );
     }
 
     /**
      * Converts the HTML response to a `Response`-object
      * @param res HTML response from the Cloud Office Print server
+     * @param server is given when the print job has polling is true.
      * @returns `Response`-object of HTML response
      * @throws COPError when response status is not OK
      */
-    static async handleResponse(res: HTTPReponse): Promise<Response> {
+    static async handleResponse(res: HTTPReponse, server?: Server): Promise<Response | ResponsePolling> {
         if (!(res.ok)) {
             throw new COPError(await res.text());
         } else {
+            if (server !== undefined){
+                return new ResponsePolling(await res.text(), server);
+            }
             return new Response(res);
         }
     }

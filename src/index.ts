@@ -7,4 +7,4 @@ export { PrintJob } from './printjob';
 export * as resource from './resource';
 export { Resource } from './resource';
 export * as response from './response';
-export { Response } from './response';
+export { Response, ResponsePolling } from './response';
