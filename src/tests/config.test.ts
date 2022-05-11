@@ -23,11 +23,13 @@ describe('Tests for config', () => {
             false,
             'test_page_format',
             false,
+            true,
+            true,
             'test_sign_certificate',
             'test_sign_certificate_password',
             true,
-            true,
-            true,
+            "field_name",
+            "base64 encoded image",
         );
         pdfOpts.setPageMarginAt(6, 'top');
         const conf = new cop.config.OutputConfig('pdf', undefined, undefined, undefined, undefined, pdfOpts);
@@ -61,6 +63,8 @@ describe('Tests for config', () => {
             output_merge: false,
             output_sign_certificate: 'test_sign_certificate',
             output_sign_certificate_password: "test_sign_certificate_password",
+            output_sign_certificate_field: "field_name",
+            output_sign_certificate_background_image: "base64 encoded image",
             identify_form_fields: true,
             output_split: true,
             output_remove_last_page : true

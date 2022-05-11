@@ -24,12 +24,13 @@ export class PDFOptions {
     landscape: boolean | undefined;
     pageFormat: string | undefined;
     merge: boolean | undefined;
+    split: boolean | undefined;
+    removeLastPage: boolean | undefined;
     signCertificate: string | undefined;
     signCertificatePassword: string | undefined;
     identifyFormFields: boolean | undefined;
-    split: boolean | undefined;
-    removeLastPage: boolean | undefined;
-
+    signCertificateField: string | undefined;
+    signCertificateBackgroundImage: string | undefined;
     /**
      * @param readPassword The password needed to open the PDF. Optional.
      * @param watermark Setting this generates a diagonal custom watermark on every
@@ -61,6 +62,9 @@ export class PDFOptions {
      *  or 'letter'. Optional.
      * @param merge If True: instead of returning back a zip file for multiple output,
      *  merge it. Optional.
+     *  @param split You can specify to split a PDF in separate files.
+     *  You will get one file per page in a zip file. Optional.
+     * @param removeLastPage You can specify to remove last page from output file. It is useful if ouput last page is blank.
      * @param signCertificate Signing certificate for the output PDF (pkcs #12 .p12/.pfx)
      *  as a base64 string, URL, FTP location or a server path.
      *  The function readFileAsBase64() from file_utils.ts can be used to read local
@@ -68,9 +72,8 @@ export class PDFOptions {
      * @param signCertificatePassword password for certificate.
      * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
      *  of each field into the respective field. Optional.
-     * @param split You can specify to split a PDF in separate files.
-     *  You will get one file per page in a zip file. Optional.
-     * @param removeLastPage You can specify to remove last page from output file. It is useful if ouput last page is blank.
+     * @param signCertificateField name of the already existing certificate field that you want to sign. Optional.
+     * @param signCertificateBackgroundImage certificate background image as a base64 string, URL, FTP location or a server path. Optional.
      */
     constructor(
         readPassword?: string,
@@ -92,11 +95,13 @@ export class PDFOptions {
         landscape?: boolean,
         pageFormat?: string,
         merge?: boolean,
+        split?: boolean,
+        removeLastPage?: boolean,
         signCertificate?: string,
         signCertificatePassword?: string,
         identifyFormFields?: boolean,
-        split?: boolean,
-        removeLastPage?: boolean,
+        signCertificateField?: string,
+        signCertificateBackgroundImage?: string,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
@@ -117,11 +122,13 @@ export class PDFOptions {
         this.landscape = landscape;
         this.pageFormat = pageFormat;
         this.merge = merge;
+        this.split = split;
+        this.removeLastPage = removeLastPage;
         this.signCertificate = signCertificate;
         this.signCertificatePassword = signCertificatePassword;
         this.identifyFormFields = identifyFormFields;
-        this.split = split;
-        this.removeLastPage = removeLastPage;
+        this.signCertificateField = signCertificateField;
+        this.signCertificateBackgroundImage = signCertificateBackgroundImage;
     }
 
     /**
@@ -192,6 +199,12 @@ export class PDFOptions {
         if (this.merge !== undefined) {
             result.output_merge = this.merge;
         }
+        if (this.split !== undefined) {
+            result.output_split = this.split;
+        }
+        if (this.removeLastPage !== undefined) {
+            result.output_remove_last_page = this.removeLastPage;
+        }
         if (this.signCertificate !== undefined) {
             result.output_sign_certificate = this.signCertificate;
         }
@@ -201,11 +214,11 @@ export class PDFOptions {
         if (this.identifyFormFields !== undefined) {
             result.identify_form_fields = this.identifyFormFields;
         }
-        if (this.split !== undefined) {
-            result.output_split = this.split;
+        if (this.signCertificateField !== undefined) {
+            result.output_sign_certificate_field = this.signCertificateField;
         }
-        if (this.removeLastPage !== undefined) {
-            result.output_remove_last_page = this.removeLastPage;
+        if (this.signCertificateBackgroundImage !== undefined) {
+            result.output_sign_certificate_background_image = this.signCertificateBackgroundImage;
         }
         return result;
     }
