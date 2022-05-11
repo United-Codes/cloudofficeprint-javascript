@@ -18,6 +18,7 @@ export class PDFOptions {
     modifyPassword: string | undefined;
     passwordProtectionFlag: number | undefined;
     lockForm: boolean | undefined;
+    lockFormExceptSignatureField: boolean | undefined;
     copies: number | undefined;
     pageMargin: number | { [key: string]: number } | undefined
     landscape: boolean | undefined;
@@ -49,6 +50,7 @@ export class PDFOptions {
      *  section 3.5.2, should be given as an integer.
      *  [More info](https://pdfhummus.com/post/147451287581/hummus-1058-and-pdf-writer-updates-encryption). Optional.
      * @param lockForm Locks / flattens the forms in the PDF. Optional.
+     * @param lockFormExceptSignatureField Locks / flattens the forms in the PDF except signature fields. Optional.
      * @param copies Repeats the output pdf for the given number of times. Optional.
      * @param pageMargin Only for HTML to PDF. Margin in px. Returns either a dict containing:
      *  { 'top': int, 'bottom': int, 'left': int, 'right': int }
@@ -84,6 +86,7 @@ export class PDFOptions {
         modifyPassword?: string,
         passwordProtectionFlag?: number,
         lockForm?: boolean,
+        lockFormExceptSignatureField?: boolean,
         copies?: number,
         pageMargin?: number | { [key: string]: number },
         landscape?: boolean,
@@ -108,6 +111,7 @@ export class PDFOptions {
         this.modifyPassword = modifyPassword;
         this.passwordProtectionFlag = passwordProtectionFlag;
         this.lockForm = lockForm;
+        this.lockFormExceptSignatureField = lockFormExceptSignatureField
         this.copies = copies;
         this.pageMargin = pageMargin;
         this.landscape = landscape;
@@ -165,6 +169,9 @@ export class PDFOptions {
         }
         if (this.lockForm !== undefined) {
             result.lock_form = this.lockForm;
+        }
+        if (this.lockFormExceptSignatureField !== undefined) {
+            result.lock_form_except_signaturefield = this.lockFormExceptSignatureField;
         }
         if (this.copies !== undefined) {
             result.output_copies = this.copies;

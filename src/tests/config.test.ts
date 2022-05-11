@@ -17,6 +17,7 @@ describe('Tests for config', () => {
             'test_modify_password',
             0,
             true,
+            false,
             3,
             5,
             false,
@@ -47,6 +48,7 @@ describe('Tests for config', () => {
             output_modify_password: 'test_modify_password',
             output_password_protection_flag: 0,
             lock_form: true,
+            lock_form_except_signaturefield: false,
             output_copies: 3,
             page_margin: {
                 top: 6,
