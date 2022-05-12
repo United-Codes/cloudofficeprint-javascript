@@ -27,6 +27,8 @@ describe('Tests for class PrintJob', () => {
 
         const outputConf = new cop.config.OutputConfig('pdf');
 
+        const global = new cop.config.Globalization("DD-MON-YYYY", "DD-MON-YYYY HH24:MI", "DD-MON-YYYY", "DD-MON-YYYY", "BINARY", "BINARY", ".,", "$", "AMERICA", "AMERICAN", "ltr", "en");
+
         const printjob = new cop.PrintJob(
             data,
             serv,
@@ -35,6 +37,7 @@ describe('Tests for class PrintJob', () => {
             subtemplates,
             [prependFile],
             [appendFile],
+            global,
         );
         const printjobExpected = {
             append_files: [
@@ -81,6 +84,22 @@ describe('Tests for class PrintJob', () => {
                     mime_type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                     name: 'sub2',
                 },
+            ],
+            globalization: [
+                {
+                    "date_format": "DD-MON-YYYY",
+                    "date_time_format": "DD-MON-YYYY HH24:MI",
+                    "timestamp_format": "DD-MON-YYYY",
+                    "timestamp_tz_format": "DD-MON-YYYY",
+                    "nls_sort": "BINARY",
+                    "nls_comp": "BINARY",
+                    "nls_numeric_characters_dec_grp": ".,",
+                    "nls_currency": "$",
+                    "nls_territory": "AMERICA",
+                    "nls_language": "AMERICAN",
+                    "direction": "ltr",
+                    "application_primary_language": "en"
+                }
             ],
             javascript_sdk_version: cop.printjob.STATIC_OPTS.javascript_sdk_version,
         };

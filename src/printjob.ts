@@ -1,6 +1,6 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { Response as HTTPReponse } from 'node-fetch';
-import { OutputConfig, Server } from './config';
+import { Globalization, OutputConfig, Server } from './config';
 import { Element, RESTSource } from './elements';
 import { COPError } from './exceptions';
 import { Resource } from './resource';
@@ -28,6 +28,7 @@ export class PrintJob {
     subtemplates: { [key: string]: Resource };
     prependFiles: Resource[];
     appendFiles: Resource[];
+    globalization: Globalization | undefined;
     copVerbose: boolean;
 
     /**
@@ -44,6 +45,7 @@ export class PrintJob {
      *  `{?include subtemplate_dict_key}`. Defaults to {}.
      * @param prependFiles Files to prepend to the output file. Defaults to [].
      * @param appendFiles Files to append to the output file. Defaults to [].
+     * @param globalization globalization options to be used for this print job. Optional.
      * @param copVerbose Whether or not verbose mode should be activated. Defaults to False.
      */
     constructor(
@@ -54,6 +56,7 @@ export class PrintJob {
         subtemplates: { [key: string]: Resource } = {},
         prependFiles: Resource[] = [],
         appendFiles: Resource[] = [],
+        globalization?: Globalization,
         copVerbose: boolean = false,
     ) {
         this.data = data;
@@ -63,6 +66,7 @@ export class PrintJob {
         this.subtemplates = subtemplates;
         this.prependFiles = prependFiles;
         this.appendFiles = appendFiles;
+        this.globalization = globalization;
         this.copVerbose = copVerbose;
     }
 
@@ -214,6 +218,10 @@ export class PrintJob {
             );
 
             result.templates = templatesArray;
+        }
+
+        if (this.globalization !== undefined){
+            result.globalization = [this.globalization.asDict()];
         }
 
         // If verbose mode is activated, print the result to the terminal

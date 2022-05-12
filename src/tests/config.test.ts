@@ -272,4 +272,22 @@ describe('Tests for config', () => {
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
+    test ('Test Globalization options', async () => {
+        const global = new cop.config.Globalization("DD-MON-YYYY", "DD-MON-YYYY HH24:MI", "DD-MON-YYYY", "DD-MON-YYYY", "BINARY", "BINARY", ".,", "$", "AMERICA", "AMERICAN", "ltr", "en");
+        const globalExpected = {
+            "date_format": "DD-MON-YYYY",
+            "date_time_format": "DD-MON-YYYY HH24:MI",
+            "timestamp_format": "DD-MON-YYYY",
+            "timestamp_tz_format": "DD-MON-YYYY",
+            "nls_sort": "BINARY",
+            "nls_comp": "BINARY",
+            "nls_numeric_characters_dec_grp": ".,",
+            "nls_currency": "$",
+            "nls_territory": "AMERICA",
+            "nls_language": "AMERICAN",
+            "direction": "ltr",
+            "application_primary_language": "en"
+        };
+        expect(global.asDict()).toEqual(globalExpected);
+    });
 });
