@@ -1,7 +1,7 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import * as http from 'http';
-import * as cop from '../index';
 import { COPError } from '../exceptions';
+import { IResponse, PrintJob } from '../index';
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 /**
@@ -586,7 +586,7 @@ export class Server {
      * @param deleteAfter whether to delete the polled print job after downloading it. Optional.
      * @returns the response of the polled print job with the given id.
      */
-    async download(id: string, secretKey?: string, deleteAfter?: boolean): Promise<cop.Response> {
+    async download(id: string, secretKey?: string, deleteAfter?: boolean): Promise<IResponse> {
         await this.raiseIfNotProcessed(id, secretKey);
         let proxy;
         if (this.config && this.config.proxies) {
@@ -599,6 +599,6 @@ export class Server {
         if (deleteAfter !== undefined) {
             url.searchParams.append('delete_after_download', deleteAfter.toString());
         }
-        return <cop.Response> await cop.PrintJob.handleResponse(await fetch(url.href, { agent: proxy }));
+        return PrintJob.handleResponse(await fetch(url.href, { agent: proxy }));
     }
 }

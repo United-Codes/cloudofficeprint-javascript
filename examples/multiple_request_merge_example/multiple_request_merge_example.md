@@ -51,7 +51,7 @@ NOTE: for JavaScript and TypeScript, the rest of the code needs to be places ins
 
 Let's assume that the Cloud Office Print server can't handle all the data at once, so we need to split our data into multiple requests. Let's use 10 requests with each 10 elements in the data (a total of 100 data elements).
 ```typescript
-const outputFilesProm: Promise<cop.Response>[] = [];
+const outputFilesProm: Promise<cop.IResponse>[] = [];
 for (let i = 0; i < 10; i += 1) {
     // Create print job with 10 data elements
     const d: { [key: string]: cop.elements.Element } = {};
@@ -77,7 +77,7 @@ const outputFiles = await Promise.all(outputFilesProm);
 const buffersProm: Promise<ArrayBuffer>[] = [];
 outputFiles.forEach(
     (res) => {
-        buffersProm.push(res.buffer);
+        buffersProm.push(res.buffer());
     },
 );
 const buffers = await Promise.all(buffersProm);

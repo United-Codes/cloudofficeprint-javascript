@@ -4,14 +4,55 @@ import * as ownUtils from './own_utils';
 import { Server } from './config';
 
 /**
+ * The IResponse interface serves as a interface for the Cloud Office Print server's
+ *  response to a printjob request.
+ * The Cloud Office Print server can also throw an error, in which case you will be dealing with
+ *  a cloudofficeprint.exceptions.COPError instead of this class.
+ */
+export interface IResponse {
+    /**
+     * @returns buffer containing the raw binary data of the response.
+     */
+    buffer(): Promise<ArrayBuffer>;
+
+    /**
+     * @returns mime type of this response
+     */
+    mimetype(): string | Promise<string>;
+
+    /**
+     * @returns file type of this response
+     */
+    filetype(): string | Promise<string>;
+
+    /**
+     * Return the string representation of this buffer.
+     * Useful if the server returns a JSON (e.g. for output_type 'count_tags').
+     * @returns string representation of this buffer
+     */
+    toString(): Promise<string>;
+
+    /**
+     * Write the response to a file at the given path without extension.
+     * If the given file path does not contain an extension,
+     *  the correct path is automatically added from the response data.
+     * That is how this method is intended to be used.
+     * You should only specify the extension in the path if you
+     *  have some reason to specify the extension manually.
+     * @param path path without extension
+     */
+    toFile(path: string): void;
+}
+
+/**
  * The Response class serves as a container for and interface with the Cloud Office Print server's
  *  response to a printjob request.
  * The Cloud Office Print server can also throw an error, in which case you will be dealing with
  *  a cloudofficeprint.exceptions.COPError instead of this class.
  */
-export class Response {
-    mimetype: string;
-    buffer: Promise<ArrayBuffer>;
+export class Response implements IResponse {
+    private readonly _mimetype: string;
+    private readonly _buffer: Promise<ArrayBuffer>;
 
     /**
      * You should never need to construct a Response manually
@@ -23,15 +64,29 @@ export class Response {
         if (mimetype === null) {
             throw new Error('Could not get the mimetype from the response.');
         }
-        this.mimetype = mimetype;
-        this.buffer = buffer;
+        this._mimetype = mimetype;
+        this._buffer = buffer;
+    }
+
+    /**
+     * @returns buffer containing the raw binary data of the response.
+     */
+    buffer(): Promise<ArrayBuffer> {
+        return this._buffer;
+    }
+
+    /**
+     * @returns mime type of this response
+     */
+    mimetype(): string {
+        return this._mimetype;
     }
 
     /**
      * @returns file type of this response
      */
     filetype(): string {
-        return ownUtils.mimetypeToExtension(this.mimetype);
+        return ownUtils.mimetypeToExtension(this._mimetype);
     }
 
     /**
@@ -40,7 +95,7 @@ export class Response {
      * @returns string representation of this buffer
      */
     async toString(): Promise<string> {
-        return Buffer.from(await this.buffer).toString();
+        return Buffer.from(await this._buffer).toString();
     }
 
     /* cop-node-only-start */
@@ -60,7 +115,7 @@ export class Response {
         if (!(fileName.includes('.'))) {
             pathCopy = `${path}.${this.filetype()}`;
         }
-        fs.writeFile(pathCopy, Buffer.from(await this.buffer), (err) => {
+        fs.writeFile(pathCopy, Buffer.from(await this._buffer), (err) => {
             if (err) throw err;
         });
     }
@@ -71,7 +126,7 @@ export class Response {
  * A response class for a polled print job. Calling a function of this class, while the print job has
  * not been processed yet, will result in an error.
  */
-export class ResponsePolling {
+export class ResponsePolling implements IResponse {
     private response: Response | undefined;
     server: Server;
     id: string;
@@ -97,7 +152,7 @@ export class ResponsePolling {
      */
     private async getResponse(): Promise<Response> {
         if (this.response === undefined){
-            this.response = await this.server.download(this.id, this.secretKey);
+            this.response = await this.server.download(this.id, this.secretKey) as Response;
         }
         // This condition will always be false since download will throw an error or it will assign a Response to response field.
         return this.response;
@@ -107,14 +162,14 @@ export class ResponsePolling {
      * @returns buffer containing the raw binary data of the response.
      */
     async buffer(): Promise<ArrayBuffer> {
-        return (await this.getResponse()).buffer;
+        return (await this.getResponse()).buffer();
     }
 
     /**
      * @returns mime type of this response
      */
     async mimetype(): Promise<string> {
-        return (await this.getResponse()).mimetype;
+        return (await this.getResponse()).mimetype();
     }
 
     /**

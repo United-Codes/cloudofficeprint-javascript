@@ -4,7 +4,7 @@ import { Globalization, OutputConfig, Server } from './config';
 import { Element, RESTSource } from './elements';
 import { COPError } from './exceptions';
 import { Resource } from './resource';
-import { Response, ResponsePolling } from './response';
+import { IResponse, Response, ResponsePolling } from './response';
 
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
@@ -74,7 +74,7 @@ export class PrintJob {
      * Execute this print job.
      * @returns `Response`-object
      */
-    async execute(): Promise<Response | ResponsePolling> {
+    async execute(): Promise<IResponse> {
         await this.server.raiseIfUnreachable();
         let proxy;
         if (this.server.config && this.server.config.proxies) {
@@ -102,7 +102,7 @@ export class PrintJob {
      * @param server `Server`-object
      * @returns `Response`-object
      */
-    static async executeFullJson(jsonData: any, server: Server): Promise<Response | ResponsePolling> {
+    static async executeFullJson(jsonData: any, server: Server): Promise<IResponse> {
         await server.raiseIfUnreachable();
         let proxy;
         if (server.config && server.config.proxies) {
@@ -129,7 +129,7 @@ export class PrintJob {
      * @returns `Response`-object of HTML response
      * @throws COPError when response status is not OK
      */
-    static async handleResponse(res: HTTPReponse, server?: Server): Promise<Response | ResponsePolling> {
+    static async handleResponse(res: HTTPReponse, server?: Server): Promise<IResponse> {
         if (!(res.ok)) {
             throw new COPError(await res.text());
         } else {
