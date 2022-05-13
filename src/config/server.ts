@@ -1,7 +1,7 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
-import * as http from 'http';
+import { Response as HTTPResponse } from 'node-fetch';
 import { COPError } from '../exceptions';
-import { IResponse, PrintJob } from '../index';
+import { Response, PrintJob } from '../index';
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 /**
@@ -284,7 +284,7 @@ export class Server {
     async isReachable(): Promise<boolean> {
         try {
             return await fetch(new URL('marco', this.url).href)
-                .then((res: Response) => res.text()) === 'polo';
+                .then((res: HTTPResponse) => res.text()) === 'polo';
         } catch (error) {
             return false;
         }
@@ -296,7 +296,7 @@ export class Server {
     async isIppPrinterReachable() {
         try {
             return await fetch(new URL(`ipp_check?ipp_url=${this.config?.printer?.location}&version=${this.config?.printer?.version}`, this.url).href)
-                .then((res: Response) => res.json().then(jsonBody => jsonBody.statusCode)) === "successful-ok"
+                .then((res: HTTPResponse) => res.json().then(jsonBody => jsonBody.statusCode)) === "successful-ok"
         } catch (error) {
             return false;
         }
@@ -562,7 +562,7 @@ export class Server {
         }
         try {
             return !('message' in await fetch(url.href, { agent: proxy })
-                .then((res: Response) => res.json()));
+                .then((res: HTTPResponse) => res.json()));
         } catch (error) {
             return true;
         }
@@ -586,7 +586,7 @@ export class Server {
      * @param deleteAfter whether to delete the polled print job after downloading it. Optional.
      * @returns the response of the polled print job with the given id.
      */
-    async download(id: string, secretKey?: string, deleteAfter?: boolean): Promise<IResponse> {
+    async download(id: string, secretKey?: string, deleteAfter?: boolean): Promise<Response> {
         await this.raiseIfNotProcessed(id, secretKey);
         let proxy;
         if (this.config && this.config.proxies) {
@@ -599,6 +599,6 @@ export class Server {
         if (deleteAfter !== undefined) {
             url.searchParams.append('delete_after_download', deleteAfter.toString());
         }
-        return PrintJob.handleResponse(await fetch(url.href, { agent: proxy }));
+        return await PrintJob.handleResponse(await fetch(url.href, { agent: proxy }));
     }
 }

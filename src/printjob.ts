@@ -1,5 +1,5 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
-import { Response as HTTPReponse } from 'node-fetch';
+import { Response as HTTPResponse } from 'node-fetch';
 import { Globalization, OutputConfig, Server } from './config';
 import { Element, RESTSource } from './elements';
 import { COPError } from './exceptions';
@@ -72,7 +72,7 @@ export class PrintJob {
 
     /**
      * Execute this print job.
-     * @returns `Response`-object
+     * @returns `IResponse`-object
      */
     async execute(): Promise<IResponse> {
         await this.server.raiseIfUnreachable();
@@ -80,18 +80,19 @@ export class PrintJob {
         if (this.server.config && this.server.config.proxies) {
             proxy = new HttpsProxyAgent(this.server.config.proxies);
         }
-        return PrintJob.handleResponse(
-            await fetch(
-                this.server.url,
-                {
-                    method: 'post',
-                    body: JSON.stringify(this.asDict()),
-                    agent: proxy,
-                    headers: { 'Content-type': 'application/json' },
-                },
-            ),
-            this.outputConfig.polling === true? this.server : undefined
-        );
+        const res: HTTPResponse = await fetch(
+            this.server.url, {
+                method: 'post',
+                body: JSON.stringify(this.asDict()),
+                agent: proxy,
+                headers: { 'Content-type': 'application/json' },
+            },
+        )
+
+        if (this.outputConfig.polling === true){
+            return PrintJob.handleResponsePolling(res, this.server);
+        }
+        return PrintJob.handleResponse(res);
     }
 
     /**
@@ -100,7 +101,7 @@ export class PrintJob {
      *  this package will wrap the request to the server.
      * @param jsonData full JSON data that needs to be sent to a Cloud Office Print server
      * @param server `Server`-object
-     * @returns `Response`-object
+     * @returns `IResponse`-object
      */
     static async executeFullJson(jsonData: any, server: Server): Promise<IResponse> {
         await server.raiseIfUnreachable();
@@ -108,35 +109,48 @@ export class PrintJob {
         if (server.config && server.config.proxies) {
             proxy = new HttpsProxyAgent(server.config.proxies);
         }
-        return PrintJob.handleResponse(
-            await fetch(
-                server.url,
-                {
-                    method: 'post',
-                    body: JSON.stringify(jsonData),
-                    agent: proxy,
-                    headers: { 'Content-type': 'application/json' },
-                },
-            ),
-            jsonData.output.output_polling === true? server : undefined
-        );
+
+        const res: HTTPResponse = await fetch(
+            server.url, {
+                method: 'post',
+                body: JSON.stringify(jsonData),
+                agent: proxy,
+                headers: { 'Content-type': 'application/json' },
+            },
+        )
+
+        if (jsonData.output.output_polling === true){
+            return PrintJob.handleResponsePolling(res, server);
+        }
+        return PrintJob.handleResponse(res);
     }
 
     /**
      * Converts the HTML response to a `Response`-object
      * @param res HTML response from the Cloud Office Print server
-     * @param server is given when the print job has polling is true.
      * @returns `Response`-object of HTML response
      * @throws COPError when response status is not OK
      */
-    static async handleResponse(res: HTTPReponse, server?: Server): Promise<IResponse> {
+    static async handleResponse(res: HTTPResponse): Promise<Response> {
         if (!(res.ok)) {
             throw new COPError(await res.text());
         } else {
-            if (server !== undefined){
-                return new ResponsePolling(await res.text(), server);
-            }
             return new Response(res);
+        }
+    }
+
+    /**
+     * Converts the HTML response to a `ResponsePolling`-object
+     * @param res HTML response from the Cloud Office Print server
+     * @param server to which the request is made.
+     * @returns `Response`-object of HTML response
+     * @throws COPError when response status is not OK
+     */
+    static async handleResponsePolling(res: HTTPResponse, server: Server): Promise<ResponsePolling> {
+        if (!(res.ok)) {
+            throw new COPError(await res.text());
+        } else {
+            return new ResponsePolling(await res.text(), server);
         }
     }
 

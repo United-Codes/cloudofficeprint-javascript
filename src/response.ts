@@ -152,9 +152,8 @@ export class ResponsePolling implements IResponse {
      */
     private async getResponse(): Promise<Response> {
         if (this.response === undefined){
-            this.response = await this.server.download(this.id, this.secretKey) as Response;
+            this.response = await this.server.download(this.id, this.secretKey);
         }
-        // This condition will always be false since download will throw an error or it will assign a Response to response field.
         return this.response;
     }
 
