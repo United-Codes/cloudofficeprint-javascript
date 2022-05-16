@@ -41,7 +41,7 @@ export abstract class Resource {
      * This Resource object as a dict object for use as a template
      * @returns dict representation of this resource as a template
      */
-    templateDict(): {[key: string]: string} {
+    templateDict(): {[key: string]: string | boolean} {
         return {
             template_type: this.filetype,
         };
@@ -66,7 +66,7 @@ export abstract class Resource {
      * @param filetype file type (extension)
      * @returns the created Resource
      */
-    static fromRaw(rawData: Buffer, filetype: string): RawResource {
+    static fromRaw(rawData: Buffer, filetype: string): Resource {
         return new RawResource(rawData, filetype);
     }
 
@@ -76,7 +76,7 @@ export abstract class Resource {
      * @param filetype file type (extension)
      * @returns the created Resource
      */
-    static fromBase64(base64string: string, filetype: string): Base64Resource {
+    static fromBase64(base64string: string, filetype: string): Resource {
         return new Base64Resource(base64string, filetype);
     }
 
@@ -87,7 +87,7 @@ export abstract class Resource {
      * @param localPath path to local file
      * @returns the created Resource
      */
-    static fromLocalFile(localPath: string): Base64Resource {
+    static fromLocalFile(localPath: string): Resource {
         const base64string: string = ownUtils.readFileAsBase64(localPath);
         return new Base64Resource(base64string, ownUtils.pathToExtension(localPath));
     }
@@ -99,7 +99,7 @@ export abstract class Resource {
      * @param serverPath location of target file on the server
      * @returns the created Resource
      */
-    static fromServerPath(serverPath: string): ServerPathResource {
+    static fromServerPath(serverPath: string): Resource {
         return new ServerPathResource(serverPath);
     }
 
@@ -109,7 +109,7 @@ export abstract class Resource {
      * @param filetype file type (extension)
      * @returns the created Resource
      */
-    static fromUrl(url: string, filetype: string): URLResource {
+    static fromUrl(url: string, filetype: string): Resource {
         return new URLResource(url, filetype);
     }
 
@@ -120,7 +120,7 @@ export abstract class Resource {
      * @param landscape Whether or not the orientation needs to be landscape. Defaults to false.
      * @returns the created Resource
      */
-    static fromHtml(htmlstring: string, landscape: boolean = false): HTMLResource {
+    static fromHtml(htmlstring: string, landscape: boolean = false): Resource {
         return new HTMLResource(htmlstring, landscape);
     }
 }

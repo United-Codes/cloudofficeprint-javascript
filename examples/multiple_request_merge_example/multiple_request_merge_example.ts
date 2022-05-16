@@ -70,7 +70,7 @@ const outputFilesProm: Promise<cop.IResponse>[] = [];
 
     // Create the final request to merge all the received (merged) PDFs
     // Create Resource-objects from the Response-objects in output_files
-    const resources: cop.resource.RawResource[] = [];
+    const resources: cop.resource.Resource[] = [];
     buffers.forEach(
         (buff) => {
             resources.push(cop.Resource.fromRaw(
