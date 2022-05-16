@@ -5,6 +5,7 @@ import { Element, RESTSource } from './elements';
 import { COPError } from './exceptions';
 import { Resource } from './resource';
 import { IResponse, Response, ResponsePolling } from './response';
+import { Template } from './template';
 
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
@@ -88,6 +89,12 @@ export class PrintJob {
                 headers: { 'Content-type': 'application/json' },
             },
         )
+        if (this.template instanceof Template && this.template.shouldHash === true){
+            const hash: string | null = res.headers.get("");
+            if (hash !== null){
+                this.template.updateHash(hash);
+            }
+        }
 
         if (this.outputConfig.polling === true){
             return PrintJob.handleResponsePolling(res, this.server);
