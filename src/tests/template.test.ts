@@ -73,4 +73,35 @@ describe('Tests for class Template', () => {
         };
         expect(template.templateDict()).toEqual(templateExpected);
     });
+    test('Test template options', () => {
+        const template = cop.Template.fromBase64('dummy', 'docx','{', '}', true, '1234');
+        const templateExpected1 = {
+            file: 'dummy',
+            template_type: 'docx',
+            start_delimiter: '{',
+            end_delimiter: '}',
+            should_hash: true,
+            template_hash: '1234'
+        };
+        expect(template.templateDict()).toEqual(templateExpected1);
+
+        template.resetHash()
+        const templateExpected2 = {
+            file: 'dummy',
+            template_type: 'docx',
+            start_delimiter: '{',
+            end_delimiter: '}',
+            should_hash: true,
+        };
+        expect(template.templateDict()).toEqual(templateExpected2);
+
+        template.updateHash('4321')
+        const templateExpected3 = {
+            template_type: 'docx',
+            start_delimiter: '{',
+            end_delimiter: '}',
+            template_hash: '4321',
+        };
+        expect(template.templateDict()).toEqual(templateExpected3);
+    });
 });
