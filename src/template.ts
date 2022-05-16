@@ -1,6 +1,10 @@
 import { Base64Resource, HTMLResource, RawResource, Resource, ServerPathResource, URLResource } from './resource';
 import * as ownUtils from './own_utils';
 
+/**
+ * The class for a template with extra optional options. Like delimiters and template hash.
+ * To create a Template object use the static from methods.
+ */
 export class Template extends Resource {
     resource: Resource;
     startDelimiter: string | undefined;
@@ -8,6 +12,13 @@ export class Template extends Resource {
     shouldHash: boolean | undefined;
     hash: string | undefined;
 
+    /**
+     * @param resource of this template
+     * @param startDelimiter the starting delimiter used in the template. Optional.
+     * @param endDelimiter the ending delimiter used in the template. Optional.
+     * @param shouldHash whether the template should be hashed on the Cloud Office Print server. Optional.
+     * @param hash the hash of the template. Optional.
+     */
     constructor(
         resource: Resource,
         startDelimiter?: string,
@@ -23,11 +34,19 @@ export class Template extends Resource {
         this.hash = hash;
     }
 
+    /**
+     * Reset the stored hash of the template.
+     * @param shouldHash whether the template should be hashed on the server. Defaults to true.
+     */
     resetHash(shouldHash: boolean = true) {
         this.hash = undefined;
         this.shouldHash = shouldHash;
     }
 
+    /**
+     * On the next request to the server, the file data will not be sent, only the hash of the template.
+     * @param hash of the template.
+     */
     updateHash(hash: string) {
         this.hash = hash;
         this.shouldHash = false;
