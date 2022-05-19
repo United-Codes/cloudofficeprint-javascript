@@ -29,7 +29,7 @@ export class PrintJob {
     subtemplates: { [key: string]: Resource };
     prependFiles: Resource[];
     appendFiles: Resource[];
-    globalization: Globalization | undefined;
+    globalization: Globalization;
     copVerbose: boolean;
 
     /**
@@ -57,7 +57,7 @@ export class PrintJob {
         subtemplates: { [key: string]: Resource } = {},
         prependFiles: Resource[] = [],
         appendFiles: Resource[] = [],
-        globalization?: Globalization,
+        globalization: Globalization = new Globalization(),
         copVerbose: boolean = false,
     ) {
         this.data = data;
@@ -126,7 +126,7 @@ export class PrintJob {
             },
         )
 
-        if (jsonData.output.output_polling === true){
+        if (jsonData.output?.output_polling === true){
             return PrintJob.handleResponsePolling(res, server);
         }
         return PrintJob.handleResponse(res);
