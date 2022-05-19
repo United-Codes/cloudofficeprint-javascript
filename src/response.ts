@@ -209,3 +209,61 @@ export class ResponsePolling implements IResponse {
         await this.server.download(this.id, this.secretKey, true);
     }
 }
+
+/**
+ * Class for a response of the route paths concerning template hash of the Cloud Office Print server.
+ * The following methods will return this class: VerifyTemplateHash, RenewTemplateHash and InvalidateTemplateHash.
+ */
+export class ResponseTemplateHash {
+    valid: boolean;
+    status: string;
+    hash: string;
+    ExpiryDateTime: string | undefined;
+    ExpiryTimeRemaining: string | undefined;
+    ISOExpiryDateTime: Date | undefined;
+    MSExpiryTimeRemaining: number | undefined;
+
+    /**
+     * @param valid whether the template hash is valid.
+     * @param status of the template hash.
+     * @param hash template hash.
+     * @param ExpiryDateTime expiry date time of the template hash.
+     * @param ExpiryTimeRemaining remaining expiry date time of the template hash.
+     * @param ISOExpiryDateTime expiry date time of the template hash in ISO format.
+     * @param MSExpiryTimeRemaining remaining expiry time in milliseconds.
+     */
+    constructor(
+        valid: boolean,
+        status: string,
+        hash: string,
+        ExpiryDateTime?: string,
+        ExpiryTimeRemaining?: string,
+        ISOExpiryDateTime?: Date,
+        MSExpiryTimeRemaining?: number,
+    ) {
+        this.valid = valid;
+        this.status = status;
+        this.hash = hash;
+        this.ExpiryDateTime = ExpiryDateTime;
+        this.ExpiryTimeRemaining = ExpiryTimeRemaining;
+        this.ISOExpiryDateTime = ISOExpiryDateTime;
+        this.MSExpiryTimeRemaining = MSExpiryTimeRemaining;
+    }
+
+    /**
+     * Static factory function to create a ResponseTemplateHash from the response body.
+     * @param response
+     */
+    static fromResponse(response: string) : ResponseTemplateHash {
+        const json: any = JSON.parse(response);
+        return new ResponseTemplateHash(
+            json.valid,
+            json.status,
+            json.hash,
+            json.expiry_date_time ?? json.new_expiry_date_time,
+            json.expiry_time_remaining,
+            new Date(json.iso_expiry_date_time),
+            json.ms_expiry_time_remaining,
+        );
+    }
+}

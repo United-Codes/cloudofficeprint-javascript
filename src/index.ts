@@ -8,4 +8,4 @@ export * as resource from './resource';
 export { Resource } from './resource';
 export { Template } from './template';
 export * as response from './response';
-export { IResponse, Response, ResponsePolling } from './response';
+export { IResponse, Response, ResponsePolling, ResponseTemplateHash } from './response';

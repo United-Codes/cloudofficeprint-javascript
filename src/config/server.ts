@@ -1,7 +1,7 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { Response as HTTPResponse } from 'node-fetch';
 import { COPError } from '../exceptions';
-import { Response, PrintJob } from '../index';
+import { Response, PrintJob, ResponseTemplateHash } from '../index';
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 /**
@@ -414,46 +414,46 @@ export class Server {
     /**
      * Sends a GET request to server-url/verify_template_hash?hash=hashcode.
      * @param hashcode the hash of the cached template.
-     * @returns JSON of the verify status of the given template hash.
+     * @returns ResponseTemplateHash containing the status of the verified template hash.
      */
-    async verifyTemplateHash(hashcode: string): Promise<JSON> {
+    async verifyTemplateHash(hashcode: string): Promise<ResponseTemplateHash> {
         await this.raiseIfUnreachable();
         let proxy;
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
         const response = await fetch(new URL(`verify_template_hash?hash=${hashcode}`, this.url).href, { agent: proxy });
-        return response.json();
+        return ResponseTemplateHash.fromResponse(await response.text());
     }
 
     /**
      * Sends a GET request to server-url/renew_template_hash?hash=hashcode.
      * @param hashcode the hash of the cached template.
-     * @returns JSON of the renew status of the given template hash.
+     * @returns ResponseTemplateHash containing the status of the renewed template hash.
      */
-    async renewTemplateHash(hashcode: string): Promise<JSON> {
+    async renewTemplateHash(hashcode: string): Promise<ResponseTemplateHash> {
         await this.raiseIfUnreachable();
         let proxy;
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
         const response = await fetch(new URL(`renew_template_hash?hash=${hashcode}`, this.url).href, { agent: proxy });
-        return response.json();
+        return ResponseTemplateHash.fromResponse(await response.text());
     }
 
     /**
      * Sends a GET request to server-url/invalidate_template_hash?hash=hashcode.
      * @param hashcode the hash of the cached template.
-     * @returns JSON of the invalidate status of the given template hash.
+     * @returns ResponseTemplateHash containing the status of the invalid template hash.
      */
-    async invalidateTemplateHash(hashcode: string): Promise<JSON> {
+    async invalidateTemplateHash(hashcode: string): Promise<ResponseTemplateHash> {
         await this.raiseIfUnreachable();
         let proxy;
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
         }
         const response = await fetch(new URL(`invalidate_template_hash?hash=${hashcode}`, this.url).href, { agent: proxy });
-        return response.json();
+        return ResponseTemplateHash.fromResponse(await response.text());
     }
 
     /**
