@@ -213,7 +213,7 @@ describe('Tests for config', () => {
         const printer:cop.config.Printer = new cop.config.Printer("http://localhost:3000","1.1")
         const serv: cop.config.Server = new cop.config.Server(
             'https://api.cloudofficeprint.com/',
-            new cop.config.ServerConfig('YOUR_API_KEY',undefined,printer),
+            new cop.config.ServerConfig('YOUR_API_KEY',undefined, printer),
         );
         expect(await serv.isReachable()).toBeTruthy();
         expect(await serv.isIppPrinterReachable()).toBeTruthy();
@@ -248,7 +248,7 @@ describe('Tests for config', () => {
             },
         };
         expect(requestOption.asDict()).toEqual(requestOptionExpected);
-        const conf = new cop.config.OutputConfig(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, requestOption);
+        const conf = new cop.config.OutputConfig(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, requestOption);
         const confExpected = {
             "output_converter": "libreoffice",
             "output_encoding": "raw",
@@ -263,7 +263,7 @@ describe('Tests for config', () => {
         expect(conf.asDict()).toEqual(confExpected);
     });
     test ('Test Polling Output Configuration', async () => {
-        const conf = new cop.config.OutputConfig(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, true, "AOPSecretKey");
+        const conf = new cop.config.OutputConfig(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, true, "AOPSecretKey");
         const confExpected = {
             "output_converter": "libreoffice",
             "output_encoding": "raw",

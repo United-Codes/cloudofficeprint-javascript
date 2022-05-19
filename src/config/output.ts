@@ -14,6 +14,7 @@ export class OutputConfig {
     serverDirectory: string | undefined;
     pdfOptions: PDFOptions | undefined;
     csvOptions: CsvOptions | undefined;
+    outputPrependPerPage: boolean | undefined;
     outputAppendPerPage: boolean | undefined;
     requestOption: RequestOption | undefined;
     polling: boolean | undefined;
@@ -34,7 +35,8 @@ export class OutputConfig {
      *  The specific output path for each file is appended to the base path. Optional.
      * @param pdfOptions Optional PDF options. Optional.
      * @param csvOptions Optional CSV options. Optional.
-     * @param appendPerPage ability to prepend/append file after each page of output. Optional.
+     * @param prependPerPage ability to prepend file after each page of output. Optional.
+     * @param appendPerPage ability to append file after each page of output. Optional.
      * @param requestOption if specified then COP makes a call to the given option with response of the current print job. Optional.
      * @param polling if true then a unique link will be created which can be used later to download the output file. Optional.
      * @param secretKey can be specified to encrypt the file stored on the server, only used for polled print jobs. Optional.
@@ -47,6 +49,7 @@ export class OutputConfig {
         serverDirectory?: string,
         pdfOptions?: PDFOptions,
         csvOptions?: CsvOptions,
+        prependPerPage?: boolean,
         appendPerPage?: boolean,
         requestOption?: RequestOption,
         polling?: boolean,
@@ -59,6 +62,7 @@ export class OutputConfig {
         this.serverDirectory = serverDirectory;
         this.pdfOptions = pdfOptions;
         this.csvOptions = csvOptions;
+        this.outputPrependPerPage = prependPerPage;
         this.outputAppendPerPage = appendPerPage;
         this.requestOption = requestOption;
         this.polling = polling;
@@ -95,6 +99,9 @@ export class OutputConfig {
         }
         if (this.csvOptions !== undefined) {
             result = { ...result, ...this.csvOptions.asDict() };
+        }
+        if (this.outputPrependPerPage !== undefined){
+            result.output_prepend_per_page = this.outputPrependPerPage;
         }
         if (this.outputAppendPerPage !== undefined){
             result.output_append_per_page = this.outputAppendPerPage;
