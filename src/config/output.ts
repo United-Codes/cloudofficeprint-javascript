@@ -25,7 +25,7 @@ export class OutputConfig {
      *  Optional (set to template-type in printjob.ts).
      * @param encoding Encoding of output file. Either "raw" or "base64". Defaults to "raw".
      * @param converter The pdf converter to use. Can be "libreoffice", "officetopdf"
-     *  or any custom defined converter. Custom converters are configurated in the
+     *  or any custom defined converter. Custom converters are configured in the
      *  Cloud Office Print server's
      *  `aop_config.json` file. Defaults to "libreoffice".
      * @param cloudAccessToken Access token used to access various cloud services
