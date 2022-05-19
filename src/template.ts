@@ -83,6 +83,14 @@ export class Template extends Resource {
     }
 
     /**
+     * Converts to a string.
+     * @returns a string representation of this template.
+     */
+    toString(): string {
+        return this.resource.toString();
+    }
+
+    /**
      * Create a Template from raw file data and a file type (extension)
      * @param rawData raw data as a Buffer object.
      * @param filetype file type (extension).

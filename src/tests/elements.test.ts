@@ -1,5 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import * as cop from '../index';
+import { Resource } from '../index';
 
 describe('Tests for elements', () => {
     test(`Test for Property. Also serves as a test for Html, RightToLeft, FootNote,
@@ -282,9 +283,12 @@ describe('Tests for elements', () => {
         expect(freezeElement.asDict()).toEqual(freezeElementExpected);
     })
     test('Test insert element',()=>{
-        const insertDocument = new cop.elements.Insert('document_to_insert',"base64 encoded document");
+        const insertDocument = new cop.elements.Insert('document_to_insert', Resource.fromBase64("base64 encoded document", ""));
         const insertDocumentExpected = {
-            document_to_insert:"base64 encoded document",
+            document_to_insert: {
+                data: "base64 encoded document",
+                filetype: "",
+            },
         }
         expect(insertDocument.asDict()).toEqual(insertDocumentExpected);
     });

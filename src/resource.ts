@@ -1,4 +1,5 @@
 import * as ownUtils from './own_utils/index';
+import * as Buffer from 'buffer';
 
 /**
  * Module containing the Resource class and its subclasses.
@@ -58,6 +59,15 @@ export abstract class Resource {
             mime_type: this.mimetype(),
             filename: this.data as string,
         };
+    }
+
+    /**
+     * Converts to a string.
+     * @returns a string representation of this resource.
+     */
+    // Override this function if data in subclass is not string.
+    toString(): string{
+        return <string>this.data;
     }
 
     /**
@@ -168,6 +178,14 @@ export class RawResource extends Resource {
             file_source: 'base64',
             file_content: this.base64(),
         };
+    }
+
+    /**
+     * Converts to a string.
+     * @returns a string representation of this resource.
+     */
+    toString(): string{
+        return this.base64();
     }
 }
 

@@ -1,6 +1,8 @@
 /**
  * Abstract base class for a cell style
  */
+import { Resource } from '../resource';
+
 export abstract class CellStyle {
     /**
      * Get the dict representation of this cell style.
@@ -437,7 +439,7 @@ export class FootNote extends Property {
 /**
  * This tag will allow you to insert text into the document detecting links.
  * The value may or may not have any links.
- * 
+ *
  */
 export class AutoLink extends Property {
 
@@ -1326,7 +1328,7 @@ export class ElementCollection extends Element {
 }
 
 /**
- * This tag will allow you to utilize freeze pane property of the excel.Three options are available. 
+ * This tag will allow you to utilize freeze pane property of the excel.Three options are available.
  * First option, we can directly place the pane where the tag located. For this option we should provide true parameter.
  * Second option, we can provide the location where we want to place the pane such as "C5".
  * Finally, the third option is false which doesn't place a pane.
@@ -1350,15 +1352,15 @@ export class Freeze extends Property {
 }
 
 /**
- * Inside Word and PowerPoint documents, the tag {?insert fileToInsert} can be used 
+ * Inside Word and PowerPoint documents, the tag {?insert fileToInsert} can be used
  * to insert files like Word, Excel, Powerpoint and PDF documents.
  */
 export class Insert extends Property {
     /**
-     * @param name Name of the insert tag. 
-     * @param documentToInsert Base64 encoded document. 
+     * @param name Name of the insert tag.
+     * @param documentToInsert document.
      */
-    constructor(name: string, documentToInsert: string) {
+    constructor(name: string, documentToInsert: Resource) {
         super(name, documentToInsert);
     }
     /**
