@@ -66,9 +66,7 @@ export abstract class Resource {
      * @returns a string representation of this resource.
      */
     // Override this function if data in subclass is not string.
-    toString(): string{
-        return <string>this.data;
-    }
+    abstract toString(): string;
 
     /**
      * Create a RawResource from raw file data and a file type (extension)
@@ -225,6 +223,14 @@ export class Base64Resource extends Resource {
             file_content: this.data as string,
         };
     }
+
+    /**
+     * Converts to a string.
+     * @returns a string representation of this resource.
+     */
+    toString(): string{
+        return <string>this.data;
+    }
 }
 
 /**
@@ -261,6 +267,14 @@ export class ServerPathResource extends Resource {
             file_source: 'file',
             filename: this.data as string,
         };
+    }
+
+    /**
+     * Converts to a string.
+     * @returns a string representation of this resource.
+     */
+    toString(): string{
+        return <string>this.data;
     }
 }
 
@@ -299,6 +313,14 @@ export class URLResource extends Resource {
             file_source: 'file',
             file_url: this.data as string,
         };
+    }
+
+    /**
+     * Converts to a string.
+     * @returns a string representation of this resource.
+     */
+    toString(): string{
+        return <string>this.data;
     }
 }
 
@@ -357,5 +379,13 @@ export class HTMLResource extends Resource {
             file_source: 'file',
             file_content: this.data as string,
         };
+    }
+
+    /**
+     * Converts to a string.
+     * @returns a string representation of this resource.
+     */
+    toString(): string{
+        return <string>this.data;
     }
 }
