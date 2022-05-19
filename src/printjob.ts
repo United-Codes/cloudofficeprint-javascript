@@ -90,7 +90,7 @@ export class PrintJob {
             },
         )
         if (this.template instanceof Template && this.template.shouldHash === true){
-            const hash: string | null = res.headers.get("");
+            const hash: string | null = res.headers.get("Template-Hash");
             if (hash !== null){
                 this.template.updateHash(hash);
             }
