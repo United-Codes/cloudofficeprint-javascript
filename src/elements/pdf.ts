@@ -468,7 +468,9 @@ export class PDFFormRadioButton extends PDFFormElement {
      */
     asDict(): { [key: string]: unknown } {
         let result: { [key: string]: unknown } = super.innerDict();
-        result.name = this.group ?? this.name;
+        if (this.group !== undefined){
+            result.name = this.group;
+        }
         if (this.value !== undefined){
             result.value = this.value;
         }
