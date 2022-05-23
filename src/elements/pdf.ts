@@ -432,7 +432,7 @@ export class PDFFormCheckBox extends PDFFormElement {
  * Class for a PDF form element of type radio button.
  */
 export class PDFFormRadioButton extends PDFFormElement {
-    group: string;
+    group: string | undefined;
     value: string | undefined;
     text: string | undefined;
     selected: boolean | undefined;
@@ -456,7 +456,7 @@ export class PDFFormRadioButton extends PDFFormElement {
         height?: number,
     ) {
         super(name, "radio", width, height);
-        this.group = group ?? name;
+        this.group = group;
         this.value = value;
         this.text = text;
         this.selected = selected;
@@ -468,7 +468,7 @@ export class PDFFormRadioButton extends PDFFormElement {
      */
     asDict(): { [key: string]: unknown } {
         let result: { [key: string]: unknown } = super.innerDict();
-        result.name = this.group;
+        result.name = this.group ?? this.name;
         if (this.value !== undefined){
             result.value = this.value;
         }
