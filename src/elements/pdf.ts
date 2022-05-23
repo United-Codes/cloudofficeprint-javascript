@@ -439,7 +439,7 @@ export class PDFFormRadioButton extends PDFFormElement {
 
     /**
      * @param name for this element.
-     * @param group name of radio buttons that are interconnected. Optional, defaults to "name".
+     * @param group name of radio buttons that are interconnected. Optional.
      * @param value of the radio button. Optional.
      * @param text used as label for the radio button. Optional.
      * @param selected whether the radio button is selected. Optional.
