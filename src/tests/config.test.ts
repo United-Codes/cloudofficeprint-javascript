@@ -1,5 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import * as cop from '../index';
+import { NativeLanguageSupport } from '../config';
 
 describe('Tests for config', () => {
     test('Test PDFOptions', () => {
@@ -273,7 +274,7 @@ describe('Tests for config', () => {
         expect(conf.asDict()).toEqual(confExpected);
     });
     test ('Test Globalization options', async () => {
-        const global = new cop.config.Globalization("DD-MON-YYYY", "DD-MON-YYYY HH24:MI", "DD-MON-YYYY", "DD-MON-YYYY", "BINARY", "BINARY", ".,", "$", "AMERICA", "AMERICAN", "ltr", "en");
+        const global = new cop.config.Globalization("DD-MON-YYYY", "DD-MON-YYYY HH24:MI", "DD-MON-YYYY", "DD-MON-YYYY", "ltr", "en", new NativeLanguageSupport("BINARY", "BINARY", ".,", "$", "AMERICA", "AMERICAN"));
         const globalExpected = {
             "date_format": "DD-MON-YYYY",
             "date_time_format": "DD-MON-YYYY HH24:MI",
