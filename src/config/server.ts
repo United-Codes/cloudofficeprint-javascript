@@ -576,7 +576,7 @@ export class Server {
     async raiseIfNotProcessed(id: string, secretKey?: string) {
         await this.raiseIfUnreachable();
         const isProcessed: boolean = await this.isProcessed(id, secretKey);
-        if (!isProcessed) throw new Error(`The polled print job with id ${id} is not processed yet.`);
+        if (!isProcessed) throw new Error(`The polled print job with id ${id} is not processed yet or the given id is wrong.`);
     }
 
     /**
