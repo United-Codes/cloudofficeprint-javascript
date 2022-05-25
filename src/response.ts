@@ -133,16 +133,14 @@ export class ResponsePolling implements IResponse {
     secretKey: string | undefined;
 
     /**
-     * @param response body of the polled print job request. It contains an url with the id and secret key.
      * @param server where the response is located. The response will be downloaded from this server.
+     * @param id the unique identifier of the polled print job.
+     * @param secretKey The secret key used to encrypt the polled print job. Optional.
      */
-    constructor(response: string, server: Server) {
-        const json: {[key: string]: string} = JSON.parse(response);
-        this.id = json.url.match(/\/download\/([A-Za-z0-9]*)/)![1];
-        if (new RegExp(/\/download\/[A-Za-z0-9]*\?secretkey=(.*)/).test(json.url)){
-            this.secretKey = json.url.match(/\/download\/[A-Za-z0-9]*\?secretkey=(.*)/)![1];
-        }
+    constructor(server: Server, id: string, secretKey?: string) {
         this.server = server;
+        this.id = id;
+        this. secretKey = secretKey;
     }
 
     /**

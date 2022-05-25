@@ -157,7 +157,13 @@ export class PrintJob {
         if (!(res.ok)) {
             throw new COPError(await res.text());
         } else {
-            return new ResponsePolling(await res.text(), server);
+            const json: {[key: string]: string} = JSON.parse(await res.text());
+            const id: string = json.url.match(/\/download\/([A-Za-z0-9]*)/)![1];
+            let secretKey: string | undefined = undefined;
+            if (new RegExp(/\/download\/[A-Za-z0-9]*\?secretkey=(.*)/).test(json.url)){
+                secretKey = json.url.match(/\/download\/[A-Za-z0-9]*\?secretkey=(.*)/)![1];
+            }
+            return new ResponsePolling(server, id, secretKey);
         }
     }
 
