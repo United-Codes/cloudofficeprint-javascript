@@ -587,7 +587,7 @@ export class Server {
      * @returns the response of the polled print job with the given id.
      */
     async download(id: string, secretKey?: string, deleteAfter?: boolean): Promise<Response> {
-        await this.raiseIfNotProcessed(id, secretKey);
+        await this.raiseIfUnreachable();
         let proxy;
         if (this.config && this.config.proxies) {
             proxy = new HttpsProxyAgent(this.config.proxies);
@@ -599,6 +599,13 @@ export class Server {
         if (deleteAfter !== undefined) {
             url.searchParams.append('delete_after_download', deleteAfter.toString());
         }
-        return await PrintJob.handleResponse(await fetch(url.href, { agent: proxy }));
+
+        const res = await fetch(url.href, { agent: proxy })
+
+        if ('message' in await res.json()){
+            throw new Error(`The polled print job with id ${id} is not processed yet or the given id is wrong.`);
+        }
+
+        return await PrintJob.handleResponse(res);
     }
 }
