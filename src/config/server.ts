@@ -2,6 +2,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 import { Response as HTTPResponse } from 'node-fetch';
 import { COPError } from '../exceptions';
 import { Response, PrintJob, ResponseTemplateHash } from '../index';
+import * as ownUtils from '../own_utils';
 const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
 
 /**
@@ -560,12 +561,10 @@ export class Server {
         if (secretKey !== undefined) {
             url.searchParams.append('secretkey', secretKey);
         }
-        try {
-            return !('message' in await fetch(url.href, { agent: proxy })
-                .then((res: HTTPResponse) => res.json()));
-        } catch (error) {
-            return true;
-        }
+        const res = await fetch(url.href, { agent: proxy })
+        const mimetype = res.headers.get('Content-Type');
+        const filetype = ownUtils.mimetypeToExtension(mimetype);
+        return filetype !== "json";
     }
 
     /**
@@ -601,11 +600,13 @@ export class Server {
         }
 
         const res = await fetch(url.href, { agent: proxy })
+        const mimetype = res.headers.get('Content-Type');
+        const filetype = ownUtils.mimetypeToExtension(mimetype);
 
-        if ('message' in await res.json()){
-            throw new Error(`The polled print job with id ${id} is not processed yet or the given id is wrong.`);
+        if (filetype === "json"){
+            throw new Error(`The Cloud Office Print server responded with the following json:\n${await res.text()}`);
         }
 
-        return await PrintJob.handleResponse(res);
+        return PrintJob.handleResponse(res);
     }
 }

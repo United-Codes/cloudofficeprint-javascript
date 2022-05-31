@@ -127,7 +127,7 @@ export class Response implements IResponse {
  * not been processed yet, will result in an error.
  */
 export class ResponsePolling implements IResponse {
-    private response: Response | undefined;
+    private response: Promise<Response> | undefined;
     server: Server;
     id: string;
     secretKey: string | undefined;
@@ -150,7 +150,7 @@ export class ResponsePolling implements IResponse {
      */
     private async getResponse(): Promise<Response> {
         if (this.response === undefined){
-            this.response = await this.server.download(this.id, this.secretKey);
+            this.response = this.server.download(this.id, this.secretKey);
         }
         return this.response;
     }
