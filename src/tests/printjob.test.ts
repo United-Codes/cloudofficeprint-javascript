@@ -27,7 +27,7 @@ describe('Tests for class PrintJob', () => {
 
         const outputConf = new cop.config.OutputConfig('pdf');
 
-        const global = new cop.config.Globalization("DD-MON-YYYY", "DD-MON-YYYY HH24:MI", "DD-MON-YYYY", "DD-MON-YYYY", "BINARY", "BINARY", ".,", "$", "AMERICA", "AMERICAN", "ltr", "en");
+        const global = new cop.config.Globalization("DD-MON-YYYY", "DD-MON-YYYY HH24:MI", "DD-MON-YYYY", "DD-MON-YYYY", "ltr", "en", new cop.config.NativeLanguageSupport("BINARY", "BINARY", ".,", "$", "AMERICA", "AMERICAN"));
 
         const printjob = new cop.PrintJob(
             data,
