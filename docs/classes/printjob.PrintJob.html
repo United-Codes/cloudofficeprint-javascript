@@ -102,6 +102,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#appendFiles" class="tsd-kind-icon">append<wbr>Files</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#copVerbose" class="tsd-kind-icon">cop<wbr>Verbose</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#globalization" class="tsd-kind-icon">globalization</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#outputConfig" class="tsd-kind-icon">output<wbr>Config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#prependFiles" class="tsd-kind-icon">prepend<wbr>Files</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#server" class="tsd-kind-icon">server</a></li>
@@ -116,6 +117,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="printjob.PrintJob.html#execute" class="tsd-kind-icon">execute</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="printjob.PrintJob.html#executeFullJson" class="tsd-kind-icon">execute<wbr>Full<wbr>Json</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="printjob.PrintJob.html#handleResponse" class="tsd-kind-icon">handle<wbr>Response</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="printjob.PrintJob.html#handleResponsePolling" class="tsd-kind-icon">handle<wbr>Response<wbr>Polling</a></li>
 							</ul>
 						</section>
 					</div>
@@ -127,13 +129,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Print<wbr>Job<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol"> | </span><a href="elements.RESTSource.html" class="tsd-signature-type" data-tsd-kind="Class">RESTSource</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span>, server<span class="tsd-signature-symbol">: </span><a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a>, template<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a>, outputConfig<span class="tsd-signature-symbol">?: </span><a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a>, subtemplates<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span>, prependFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, appendFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, copVerbose<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="printjob.PrintJob.html" class="tsd-signature-type" data-tsd-kind="Class">PrintJob</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Print<wbr>Job<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol"> | </span><a href="elements.RESTSource.html" class="tsd-signature-type" data-tsd-kind="Class">RESTSource</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span>, server<span class="tsd-signature-symbol">: </span><a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a>, template<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a>, outputConfig<span class="tsd-signature-symbol">?: </span><a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a>, subtemplates<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span>, prependFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, appendFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, globalization<span class="tsd-signature-symbol">?: </span><a href="config.Globalization.html" class="tsd-signature-type" data-tsd-kind="Class">Globalization</a>, copVerbose<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="printjob.PrintJob.html" class="tsd-signature-type" data-tsd-kind="Class">PrintJob</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L49">src/printjob.ts:49</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L52">src/printjob.ts:52</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -206,6 +208,14 @@
 									</div>
 								</li>
 								<li>
+									<h5>globalization: <a href="config.Globalization.html" class="tsd-signature-type" data-tsd-kind="Class">Globalization</a><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>globalization options to be used for this print job. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
 									<h5>copVerbose: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
@@ -227,7 +237,7 @@
 					<div class="tsd-signature tsd-kind-icon">append<wbr>Files<span class="tsd-signature-symbol">:</span> <a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L30">src/printjob.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L31">src/printjob.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -237,7 +247,7 @@
 					<div class="tsd-signature tsd-kind-icon">cop<wbr>Verbose<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L31">src/printjob.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L33">src/printjob.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -247,7 +257,17 @@
 					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol"> | </span><a href="elements.RESTSource.html" class="tsd-signature-type" data-tsd-kind="Class">RESTSource</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L24">src/printjob.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L25">src/printjob.ts:25</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="globalization" class="tsd-anchor"></a>
+					<h3>globalization</h3>
+					<div class="tsd-signature tsd-kind-icon">globalization<span class="tsd-signature-symbol">:</span> <a href="config.Globalization.html" class="tsd-signature-type" data-tsd-kind="Class">Globalization</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L32">src/printjob.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -257,7 +277,7 @@
 					<div class="tsd-signature tsd-kind-icon">output<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L26">src/printjob.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L27">src/printjob.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -267,7 +287,7 @@
 					<div class="tsd-signature tsd-kind-icon">prepend<wbr>Files<span class="tsd-signature-symbol">:</span> <a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L29">src/printjob.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L30">src/printjob.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -277,7 +297,7 @@
 					<div class="tsd-signature tsd-kind-icon">server<span class="tsd-signature-symbol">:</span> <a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L25">src/printjob.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L26">src/printjob.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -287,7 +307,7 @@
 					<div class="tsd-signature tsd-kind-icon">subtemplates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L28">src/printjob.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L29">src/printjob.ts:29</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -305,7 +325,7 @@
 					<div class="tsd-signature tsd-kind-icon">template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L27">src/printjob.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L28">src/printjob.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -322,7 +342,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L137">src/printjob.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L174">src/printjob.ts:174</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -344,13 +364,13 @@
 					<a name="execute" class="tsd-anchor"></a>
 					<h3>execute</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="response.Response.html" class="tsd-signature-type" data-tsd-kind="Class">Response</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/response.IResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L73">src/printjob.ts:73</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L78">src/printjob.ts:78</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -358,8 +378,8 @@
 									<p>Execute this print job.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="response.Response.html" class="tsd-signature-type" data-tsd-kind="Class">Response</a><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p><code>Response</code>-object</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/response.IResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p><code>IResponse</code>-object</p>
 						</li>
 					</ul>
 				</section>
@@ -367,13 +387,13 @@
 					<a name="executeFullJson" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> execute<wbr>Full<wbr>Json</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">execute<wbr>Full<wbr>Json<span class="tsd-signature-symbol">(</span>jsonData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, server<span class="tsd-signature-symbol">: </span><a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="response.Response.html" class="tsd-signature-type" data-tsd-kind="Class">Response</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<wbr>Full<wbr>Json<span class="tsd-signature-symbol">(</span>jsonData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, server<span class="tsd-signature-symbol">: </span><a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/response.IResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L100">src/printjob.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L113">src/printjob.ts:113</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -386,7 +406,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>jsonData: <span class="tsd-signature-type">object</span></h5>
+									<h5>jsonData: <span class="tsd-signature-type">any</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>full JSON data that needs to be sent to a Cloud Office Print server</p>
 									</div>
@@ -398,8 +418,8 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="response.Response.html" class="tsd-signature-type" data-tsd-kind="Class">Response</a><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p><code>Response</code>-object</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/response.IResponse.html" class="tsd-signature-type" data-tsd-kind="Interface">IResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p><code>IResponse</code>-object</p>
 						</li>
 					</ul>
 				</section>
@@ -413,7 +433,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/printjob.ts#L125">src/printjob.ts:125</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L141">src/printjob.ts:141</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -436,6 +456,49 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="response.Response.html" class="tsd-signature-type" data-tsd-kind="Class">Response</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p><code>Response</code>-object of HTML response</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="handleResponsePolling" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> handle<wbr>Response<wbr>Polling</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">handle<wbr>Response<wbr>Polling<span class="tsd-signature-symbol">(</span>res<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span>, server<span class="tsd-signature-symbol">: </span><a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="response.ResponsePolling.html" class="tsd-signature-type" data-tsd-kind="Class">ResponsePolling</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/324650e/src/printjob.ts#L156">src/printjob.ts:156</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Converts the HTML response to a <code>ResponsePolling</code>-object</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>COPError when response status is not OK</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>res: <span class="tsd-signature-type">Response</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>HTML response from the Cloud Office Print server</p>
+									</div>
+								</li>
+								<li>
+									<h5>server: <a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>to which the request is made.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="response.ResponsePolling.html" class="tsd-signature-type" data-tsd-kind="Class">ResponsePolling</a><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p><code>Response</code>-object of HTML response</p>
 						</li>
 					</ul>
@@ -491,6 +554,9 @@
 								<a href="printjob.PrintJob.html#data" class="tsd-kind-icon">data</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="printjob.PrintJob.html#globalization" class="tsd-kind-icon">globalization</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="printjob.PrintJob.html#outputConfig" class="tsd-kind-icon">output<wbr>Config</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -517,6 +583,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="printjob.PrintJob.html#handleResponse" class="tsd-kind-icon">handle<wbr>Response</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="printjob.PrintJob.html#handleResponsePolling" class="tsd-kind-icon">handle<wbr>Response<wbr>Polling</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -537,6 +606,10 @@
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
