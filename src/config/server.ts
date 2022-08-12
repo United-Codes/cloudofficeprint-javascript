@@ -17,7 +17,8 @@ export class Printer {
      * @param version IPP version
      * @param requester the name of the requester; defaults to 'Cloud Office Print'
      * @param jobName the name of the print job; defaults to 'Cloud Office Print'
-     * @param returnOutput You can specify whether to return the response from AOP server or not. default is false.
+     * @param returnOutput You can specify whether to return the response
+     *                      from AOP server or not. default is false.
      */
     constructor(location: string, version: string, requester: string = 'Cloud Office Print', jobName: string = 'Cloud Office Print', returnOutput: boolean = false) {
         this.location = location;
@@ -157,7 +158,7 @@ export class Commands {
             [key: string]: string |
             { [key: string]: string } | boolean | number
         }
-    } {
+        } {
         const result: {
             [key: string]: {
                 [key: string]: string |
@@ -240,7 +241,12 @@ export class ServerConfig {
      * The dict representation of these server configurations.
      * @returns The dict representation of these server configurations.
      */
-    async asDict(): Promise<{ [key: string]: string | { [key: string]: object; } | { location: string; version: string; requester: string; jobName: string; } | { [key: string]: string | number | boolean | { [key: string]: string; }; }; }> {
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: object; } |
+        { location: string; version: string; requester: string; jobName: string; } |
+        { [key: string]: string | number | boolean | { [key: string]: string; }; }
+        } {
         let result: {
             [key: string]: string | { [key: string]: object } |
             { location: string; version: string; requester: string; jobName: string; } |
