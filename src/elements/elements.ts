@@ -1369,3 +1369,142 @@ export class Insert extends Property {
         return new Set([`?insert ${this.name}`]);
     }
 }
+
+/**
+ * This tag is used to make password protected sheets in Excel. 
+ * This tag has the feature of password along with different other features.
+ *     
+ * Note: value is considered password, so try to use only one (either value or passowrd).
+ */
+export class ProtectSheet extends Element {
+    value: string | undefined;
+    autoFilter: string | boolean | undefined;
+    deleteColumns: string | boolean | undefined;
+    deleteRows: string | boolean | undefined;
+    formatCells: string | boolean | undefined;
+    formatColumns: string | boolean | undefined;
+    formatRows: string | boolean | undefined;
+    insertColumns: string | boolean | undefined;
+    insertHyperlinks: string | boolean | undefined;
+    insertRows: string | boolean | undefined;
+    password: string | undefined;
+    pivotTables: string | boolean | undefined;
+    selectLockedCells: string | boolean | undefined;
+    selectUnlockedCells: string | boolean | undefined;
+    sort: string | boolean | undefined;
+    /**
+     * 
+     * @param name Name of the tag
+     * @param value Value for the tag; this is used as password
+     * @param autoFilter lock auto filter in sheet.
+     * @param deleteColumns lock delete columns in sheet.
+     * @param deleteRows lock delete rows in sheet.
+     * @param formatCells lock format cells.
+     * @param formatColumns lock format columns.
+     * @param formatRows lock format rows.
+     * @param insertColumns lock insert columns.
+     * @param insertHyperlinks lock insert hyperlinks.
+     * @param insertRows lock insert rows.
+     * @param password password to lock with.
+     * @param pivotTables lock pivot tables.
+     * @param selectLockedCells lock select locked cells.
+     * @param selectUnlockedCells lock select unlocked cells.
+     * @param sort lock sort.
+     */
+    constructor(
+        name: string,
+        value?: string,
+        autoFilter?: string | boolean,
+        deleteColumns?: string | boolean,
+        deleteRows?: string | boolean,
+        formatCells?: string | boolean,
+        formatColumns?: string | boolean,
+        formatRows?: string | boolean,
+        insertColumns?: string | boolean,
+        insertHyperlinks?: string | boolean,
+        insertRows?: string | boolean,
+        password?: string,
+        pivotTables?: string | boolean,
+        selectLockedCells?: string | boolean,
+        selectUnlockedCells?: string | boolean,
+        sort?: string | boolean
+    ) {
+        super(name);
+        this.value = value;
+        this.autoFilter = autoFilter;
+        this.deleteColumns = deleteColumns;
+        this.deleteRows = deleteRows;
+        this.formatCells = formatCells;
+        this.formatColumns = formatColumns;
+        this.formatRows = formatRows;
+        this.insertColumns = insertColumns;
+        this.insertHyperlinks = insertHyperlinks;
+        this.insertRows = insertRows;
+        this.password = password;
+        this.pivotTables = pivotTables;
+        this.selectLockedCells = selectLockedCells;
+        this.selectUnlockedCells = selectUnlockedCells;
+        this.sort = sort;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {};
+        if (this.value != undefined) {
+            result[this.name] = this.value;
+        }
+        if (this.autoFilter != undefined) {
+            result[this.name + `_auto_filter`] = this.autoFilter;
+        }
+        if (this.deleteColumns != undefined) {
+            result[this.name + `_delete_columns`] = this.deleteColumns;
+        }
+        if (this.deleteRows != undefined) {
+            result[this.name + `_delete_rows`] = this.deleteRows;
+        }
+        if (this.formatCells != undefined) {
+            result[this.name + `_format_cells`] = this.formatCells;
+        }
+        if (this.formatColumns != undefined) {
+            result[this.name + `_format_columns`] = this.formatColumns;
+        }
+        if (this.formatRows != undefined) {
+            result[this.name + `_format_rows`] = this.formatRows;
+        }
+        if (this.insertColumns != undefined) {
+            result[this.name + `_insert_columns`] = this.insertColumns;
+        }
+        if (this.insertHyperlinks != undefined) {
+            result[this.name + `_insert_hyperlinks`] = this.insertHyperlinks;
+        }
+        if (this.insertRows != undefined) {
+            result[this.name + `_insert_rows`] = this.insertRows;
+        }
+        if (this.password != undefined) {
+            result[this.name + `_password`] = this.password;
+        }
+        if (this.pivotTables != undefined) {
+            result[this.name + `_pivot_tables`] = this.pivotTables;
+        }
+        if (this.selectLockedCells != undefined) {
+            result[this.name + `_select_locked_cells`] = this.selectLockedCells;
+        }
+        if (this.selectUnlockedCells != undefined) {
+            result[this.name + `_select_unlocked_cells`] = this.selectUnlockedCells;
+        }
+        if (this.sort != undefined) {
+            result[this.name + `_sort`] = this.sort;
+        }
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{protect ${this.name}}`]);
+    }
+}
