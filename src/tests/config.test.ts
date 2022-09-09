@@ -36,10 +36,10 @@ describe('Tests for config', () => {
             output_converter: 'libreoffice',
             output_read_password: 'test_pw',
             output_watermark: 'test_watermark',
-            output_watermark_opacity:70,
-            output_watermark_color:"blue",
-            output_watermark_font:"Aerial",
-            output_watermark_size:30,
+            output_watermark_opacity: 70,
+            output_watermark_color: "blue",
+            output_watermark_font: "Aerial",
+            output_watermark_size: 30,
             output_page_width: 500,
             output_page_height: 500,
             output_even_page: true,
@@ -61,7 +61,7 @@ describe('Tests for config', () => {
             output_sign_certificate_password: "test_sign_certificate_password",
             identify_form_fields: true,
             output_split: true,
-            output_remove_last_page : true
+            output_remove_last_page: true
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
@@ -223,5 +223,29 @@ describe('Tests for config', () => {
         expect(typeof await serv.getSupportedPrependMimetypes()).toBe('object');
         expect(typeof await serv.getSupportedAppendMimetypes()).toBe('object');
         expect(typeof await serv.getVersionCop()).toBe('string');
+    });
+    test('Test for RequestOptions and output Polling', () => {
+        const extraHeaders = {
+            file_id: "Any file id like FILE_123",
+            access_token: "Access Token for above hostname (if any) "
+        }
+        const requestOptions = new cop.config.RequestOption('https://www.apexofficeprint.com/post/', extraHeaders);
+        console.log(requestOptions);
+        const conf = new cop.config.OutputConfig('pdf', undefined, undefined, undefined, undefined, undefined, undefined, undefined, true, undefined, requestOptions);
+        const configExpected = {
+            output_type: 'pdf',
+            output_encoding: 'raw',
+            output_converter: 'libreoffice',
+            output_polling: true,
+            request_option: {
+                url: "https://www.apexofficeprint.com/post/",
+                extra_headers: {
+                    file_id: "Any file id like FILE_123",
+                    access_token: "Access Token for above hostname (if any) "
+                }
+            }
+        };
+        console.log(conf.asDict());
+        expect(conf.asDict()).toEqual(configExpected);
     });
 });
