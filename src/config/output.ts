@@ -34,8 +34,8 @@ export class OutputConfig {
      *  The specific output path for each file is appended to the base path. Optional.
      * @param pdfOptions Optional PDF options. Optional.
      * @param appendPerPage ability to prepend/append file after each page of output. Optional.
-     * @param outputPolling an unique link for each request which can be used later to download the output file.
-     * @param secretKey a secret key can be specified to encrypt the file stored on the server (ussed with output polling).
+     * @param outputPolling A unique link for each request is sent back, which can be used later to download the output file.
+     * @param secretKey A secret key can be specified to encrypt the file stored on the server (ussed with output polling).
      * @param requestOption  AOP makes a call to the given option with response/output of the current request.
      */
     constructor(
