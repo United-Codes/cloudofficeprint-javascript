@@ -292,20 +292,20 @@ describe('Tests for elements', () => {
         const protectElement = new cop.elements.ProtectSheet('protect_tag_name', 'password', true, false, true, 'YES', false, true, false, true, 'YES', 'other passord', true, false, true, 'YES');
         const protectElementExpected = {
             protect_tag_name: 'password',
-            protect_tag_name_auto_filter: true,
-            protect_tag_name_delete_columns: false,
-            protect_tag_name_delete_rows: true,
-            protect_tag_name_format_cells: 'YES',
-            protect_tag_name_format_columns: false,
-            protect_tag_name_format_rows: true,
-            protect_tag_name_insert_columns: false,
-            protect_tag_name_insert_hyperlinks: true,
-            protect_tag_name_insert_rows: 'YES',
+            protect_tag_name_allow_auto_filter: true,
+            protect_tag_name_allow_delete_columns: false,
+            protect_tag_name_allow_delete_rows: true,
+            protect_tag_name_allow_format_cells: 'YES',
+            protect_tag_name_allow_format_columns: false,
+            protect_tag_name_allow_format_rows: true,
+            protect_tag_name_allow_insert_columns: false,
+            protect_tag_name_allow_insert_hyperlinks: true,
+            protect_tag_name_allow_insert_rows: 'YES',
             protect_tag_name_password: 'other passord',
-            protect_tag_name_pivot_tables: true,
-            protect_tag_name_select_locked_cells: false,
-            protect_tag_name_select_unlocked_cells: true,
-            protect_tag_name_sort: 'YES'
+            protect_tag_name_allow_pivot_tables: true,
+            protect_tag_name_allow_select_locked_cells: false,
+            protect_tag_name_allow_select_unlocked_cells: true,
+            protect_tag_name_allow_sort: 'YES'
         }
         console.log(protectElementExpected);
         expect(protectElement.asDict()).toEqual(protectElementExpected);
