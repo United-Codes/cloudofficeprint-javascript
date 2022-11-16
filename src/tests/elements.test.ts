@@ -288,7 +288,7 @@ describe('Tests for elements', () => {
         }
         expect(insertDocument.asDict()).toEqual(insertDocumentExpected);
     });
-    test('protect sheet element', () => {
+    test('Test protect sheet element', () => {
         const protectElement = new cop.elements.ProtectSheet('protect_tag_name', 'password', true, false, true, 'YES', false, true, false, true, 'YES', 'other passord', true, false, true, 'YES');
         const protectElementExpected = {
             protect_tag_name: 'password',
@@ -310,5 +310,12 @@ describe('Tests for elements', () => {
         console.log(protectElementExpected);
         expect(protectElement.asDict()).toEqual(protectElementExpected);
     });
+    test('Test embed element',()=>{
+        const embedDocument = new cop.elements.Embed('fileToEmbed',"base64 encoded");
+        const embedDocumentExpected = {
+            fileToEmbed:"base64 encoded",
+        }
+        expect(embedDocument.asDict()).toEqual(embedDocumentExpected);
+    })
     // Cloud Office Print charts get tested in charts.test.ts
 });

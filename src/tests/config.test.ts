@@ -29,7 +29,8 @@ describe('Tests for config', () => {
             true,
         );
         pdfOpts.setPageMarginAt(6, 'top');
-        const conf = new cop.config.OutputConfig('pdf', undefined, undefined, undefined, undefined, pdfOpts);
+        const conf = new cop.config.OutputConfig('pdf');
+        conf.pdfOptions = pdfOpts;
         const confExpected = {
             output_type: 'pdf',
             output_encoding: 'raw',
@@ -231,7 +232,8 @@ describe('Tests for config', () => {
         }
         const requestOptions = new cop.config.RequestOption('https://www.apexofficeprint.com/post/', extraHeaders);
         console.log(requestOptions);
-        const conf = new cop.config.OutputConfig('pdf', undefined, undefined, undefined, undefined, undefined, undefined, undefined, true, undefined, requestOptions);
+        const conf = new cop.config.OutputConfig('pdf');
+        conf.requestOption = requestOptions;
         const configExpected = {
             output_type: 'pdf',
             output_encoding: 'raw',
