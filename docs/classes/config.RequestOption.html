@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ChartDateOptions | cloudofficeprint</title>
+	<title>RequestOption | cloudofficeprint</title>
 	<meta name="description" content="Documentation for cloudofficeprint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,13 +55,13 @@
 					<a href="../modules.html">cloudofficeprint</a>
 				</li>
 				<li>
-					<a href="../modules/elements.html">elements</a>
+					<a href="../modules/config.html">config</a>
 				</li>
 				<li>
-					<a href="elements.ChartDateOptions.html">ChartDateOptions</a>
+					<a href="config.RequestOption.html">RequestOption</a>
 				</li>
 			</ul>
-			<h1>Class ChartDateOptions</h1>
+			<h1>Class RequestOption</h1>
 		</div>
 	</div>
 </header>
@@ -71,7 +71,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Class for defining the date options for a chart.</p>
+						<p>Class of optional request option.
+						It holds the information that is used to send request.</p>
 					</div>
 				</div>
 			</section>
@@ -79,7 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ChartDateOptions</span>
+						<span class="target">RequestOption</span>
 					</li>
 				</ul>
 			</section>
@@ -90,22 +91,20 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="elements.ChartDateOptions.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="config.RequestOption.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.ChartDateOptions.html#code" class="tsd-kind-icon">code</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.ChartDateOptions.html#format" class="tsd-kind-icon">format</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.ChartDateOptions.html#step" class="tsd-kind-icon">step</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="elements.ChartDateOptions.html#unit" class="tsd-kind-icon">unit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.RequestOption.html#extraHeaders" class="tsd-kind-icon">extra<wbr>Headers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.RequestOption.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="elements.ChartDateOptions.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="config.RequestOption.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a></li>
 							</ul>
 						</section>
 					</div>
@@ -117,52 +116,40 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Chart<wbr>Date<wbr>Options<span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, code<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, unit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, step<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.ChartDateOptions.html" class="tsd-signature-type" data-tsd-kind="Class">ChartDateOptions</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Request<wbr>Option<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, extraHeaders<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.RequestOption.html" class="tsd-signature-type" data-tsd-kind="Class">RequestOption</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/elements/charts.ts#L65">src/elements/charts.ts:65</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/config/request_option.ts#L13">src/config/request_option.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> format: <span class="tsd-signature-type">string</span></h5>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The format to display the date on the chart&#39;s axis (e.g. unix). Optional.</p>
+											<p>valid url to which the output will be posted. It should start with http:// or https://</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> code: <span class="tsd-signature-type">string</span></h5>
+									<h5>extraHeaders: <span class="tsd-signature-symbol">{}</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The code for the date (e.g. dd/mm/yyyy). Optional.</p>
+											<p>any additional information to be included for the header, like authentication token, file id , access token etc. For this you can create an object array holding information and then assign it to extraHeaders.</p>
 										</div>
 									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> unit: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>The unit to be used for spacing the axis values (e.g. months). Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> step: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>How many of the above unit should be used for spacing the axis values
-											(automatic if undefined). This option is not supported in LibreOffice. Optional.</p>
-										</div>
-									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-index-signature">
+											<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h5>
+										</li>
+									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="elements.ChartDateOptions.html" class="tsd-signature-type" data-tsd-kind="Class">ChartDateOptions</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="config.RequestOption.html" class="tsd-signature-type" data-tsd-kind="Class">RequestOption</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -170,42 +157,30 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="code" class="tsd-anchor"></a>
-					<h3>code</h3>
-					<div class="tsd-signature tsd-kind-icon">code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<a name="extraHeaders" class="tsd-anchor"></a>
+					<h3>extra<wbr>Headers</h3>
+					<div class="tsd-signature tsd-kind-icon">extra<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/elements/charts.ts#L54">src/elements/charts.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/config/request_option.ts#L7">src/config/request_option.ts:7</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="format" class="tsd-anchor"></a>
-					<h3>format</h3>
-					<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/elements/charts.ts#L53">src/elements/charts.ts:53</a></li>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-index-signature">
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+							</li>
 						</ul>
-					</aside>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="step" class="tsd-anchor"></a>
-					<h3>step</h3>
-					<div class="tsd-signature tsd-kind-icon">step<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<a name="url" class="tsd-anchor"></a>
+					<h3>url</h3>
+					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/elements/charts.ts#L56">src/elements/charts.ts:56</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="unit" class="tsd-anchor"></a>
-					<h3>unit</h3>
-					<div class="tsd-signature tsd-kind-icon">unit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/elements/charts.ts#L55">src/elements/charts.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/config/request_option.ts#L6">src/config/request_option.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -222,19 +197,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/elements/charts.ts#L76">src/elements/charts.ts:76</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/df79ceb/src/config/request_option.ts#L24">src/config/request_option.ts:24</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The dict representation of this object</p>
+									<p>The dict representation of this request option.</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
-							<p>dict representation of this object</p>
+							<p>the dict representation of this  request option</p>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter-index-signature">
-									<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></h5>
 								</li>
 							</ul>
 						</li>
@@ -248,10 +223,10 @@
 					<li class=" ">
 						<a href="../modules.html">Exports</a>
 					</li>
-					<li class=" tsd-kind-namespace">
+					<li class="current tsd-kind-namespace">
 						<a href="../modules/config.html">config</a>
 					</li>
-					<li class="current tsd-kind-namespace">
+					<li class=" tsd-kind-namespace">
 						<a href="../modules/elements.html">elements</a>
 					</li>
 					<li class=" tsd-kind-namespace">
@@ -273,33 +248,63 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.AWSToken.html" class="tsd-kind-icon">AWSToken</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.CloudAccessToken.html" class="tsd-kind-icon">Cloud<wbr>Access<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.Command.html" class="tsd-kind-icon">Command</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.Commands.html" class="tsd-kind-icon">Commands</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.CsvOptions.html" class="tsd-kind-icon">Csv<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.FTPToken.html" class="tsd-kind-icon">FTPToken</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.OAuthToken.html" class="tsd-kind-icon">OAuth<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.OutputConfig.html" class="tsd-kind-icon">Output<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.PDFOptions.html" class="tsd-kind-icon">PDFOptions</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.Printer.html" class="tsd-kind-icon">Printer</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-namespace">
-						<a href="elements.ChartDateOptions.html" class="tsd-kind-icon">Chart<wbr>Date<wbr>Options</a>
+						<a href="config.RequestOption.html" class="tsd-kind-icon">Request<wbr>Option</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="elements.ChartDateOptions.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="config.RequestOption.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="elements.ChartDateOptions.html#code" class="tsd-kind-icon">code</a>
+								<a href="config.RequestOption.html#extraHeaders" class="tsd-kind-icon">extra<wbr>Headers</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="elements.ChartDateOptions.html#format" class="tsd-kind-icon">format</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="elements.ChartDateOptions.html#step" class="tsd-kind-icon">step</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="elements.ChartDateOptions.html#unit" class="tsd-kind-icon">unit</a>
+								<a href="config.RequestOption.html#url" class="tsd-kind-icon">url</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="elements.ChartDateOptions.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
+								<a href="config.RequestOption.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.Server.html" class="tsd-kind-icon">Server</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-namespace">
+						<a href="config.ServerConfig.html" class="tsd-kind-icon">Server<wbr>Config</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
