@@ -1468,46 +1468,46 @@ export class ProtectSheet extends Element {
             result[this.name] = this.value;
         }
         if (this.autoFilter != undefined) {
-            result[this.name + `_allow__auto_filter`] = this.autoFilter;
+            result[this.name + `_allow_auto_filter`] = this.autoFilter;
         }
         if (this.deleteColumns != undefined) {
-            result[this.name + `_allow__delete_columns`] = this.deleteColumns;
+            result[this.name + `_allow_delete_columns`] = this.deleteColumns;
         }
         if (this.deleteRows != undefined) {
-            result[this.name + `_allow__delete_rows`] = this.deleteRows;
+            result[this.name + `_allow_delete_rows`] = this.deleteRows;
         }
         if (this.formatCells != undefined) {
-            result[this.name + `_allow__format_cells`] = this.formatCells;
+            result[this.name + `_allow_format_cells`] = this.formatCells;
         }
         if (this.formatColumns != undefined) {
-            result[this.name + `_allow__format_columns`] = this.formatColumns;
+            result[this.name + `_allow_format_columns`] = this.formatColumns;
         }
         if (this.formatRows != undefined) {
-            result[this.name + `_allow__format_rows`] = this.formatRows;
+            result[this.name + `_allow_format_rows`] = this.formatRows;
         }
         if (this.insertColumns != undefined) {
-            result[this.name + `_allow__insert_columns`] = this.insertColumns;
+            result[this.name + `_allow_insert_columns`] = this.insertColumns;
         }
         if (this.insertHyperlinks != undefined) {
-            result[this.name + `_allow__insert_hyperlinks`] = this.insertHyperlinks;
+            result[this.name + `_allow_insert_hyperlinks`] = this.insertHyperlinks;
         }
         if (this.insertRows != undefined) {
-            result[this.name + `_allow__insert_rows`] = this.insertRows;
+            result[this.name + `_allow_insert_rows`] = this.insertRows;
         }
         if (this.password != undefined) {
             result[this.name + `_password`] = this.password;
         }
         if (this.pivotTables != undefined) {
-            result[this.name + `_allow__pivot_tables`] = this.pivotTables;
+            result[this.name + `_allow_pivot_tables`] = this.pivotTables;
         }
         if (this.selectLockedCells != undefined) {
-            result[this.name + `_allow__select_locked_cells`] = this.selectLockedCells;
+            result[this.name + `_allow_select_locked_cells`] = this.selectLockedCells;
         }
         if (this.selectUnlockedCells != undefined) {
-            result[this.name + `_allow__select_unlocked_cells`] = this.selectUnlockedCells;
+            result[this.name + `_allow_select_unlocked_cells`] = this.selectUnlockedCells;
         }
         if (this.sort != undefined) {
-            result[this.name + `_allow__sort`] = this.sort;
+            result[this.name + `_allow_sort`] = this.sort;
         }
         return result;
     }

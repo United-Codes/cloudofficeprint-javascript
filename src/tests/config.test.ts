@@ -231,8 +231,8 @@ describe('Tests for config', () => {
             access_token: "Access Token for above hostname (if any) "
         }
         const requestOptions = new cop.config.RequestOption('https://www.apexofficeprint.com/post/', extraHeaders);
-        console.log(requestOptions);
         const conf = new cop.config.OutputConfig('pdf');
+        conf.outputPolling = true;
         conf.requestOption = requestOptions;
         const configExpected = {
             output_type: 'pdf',
