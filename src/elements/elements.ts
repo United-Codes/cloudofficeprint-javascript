@@ -446,7 +446,7 @@ export class AutoLink extends Property {
      * @param value the value for the AutoLink.
      */
     constructor(name: string, value: string) {
-        super(name,value);
+        super(name, value);
     }
 
     /**
@@ -1354,12 +1354,24 @@ export class Freeze extends Property {
  * to insert files like Word, Excel, Powerpoint and PDF documents.
  */
 export class Insert extends Property {
+    isPreview: boolean | undefined;
     /**
      * @param name Name of the insert tag. 
-     * @param documentToInsert Base64 encoded document. 
+     * @param documentToInsert document to insert which could be url,ftp,sftp or base64 endcoded.
+     * @param isPreview  Only supported in excel. set it to true if you want preview of your document (default is false.).
      */
-    constructor(name: string, documentToInsert: string) {
+    constructor(name: string, documentToInsert: string, isPreview?: boolean) {
         super(name, documentToInsert);
+        this.isPreview = isPreview;
+    }
+    asDict(): { [key: string]: unknown } {
+        const result: { [key: string]: unknown } = {
+            [this.name]: this.value,
+        }
+        if (this.isPreview !== undefined) {
+            result[this.name + '_isPreview'] = this.isPreview;
+        }
+        return result;
     }
     /**
      * A set containing all available template tags this Element reacts to.
@@ -1506,5 +1518,27 @@ export class ProtectSheet extends Element {
      */
     availableTags(): Set<string> {
         return new Set([`{protect ${this.name}}`]);
+    }
+}
+/**
+ * This tag is used to append the content of docx file to the template by using {?embed fileToEmbed}.
+    This is only supported in docx and we can only embed docx file.
+    The content of document are not rendered.
+ */
+export class Embed extends Property{
+    /**
+     * In docx it is possible to copy the content of one docx file to another.
+     * @param name The name of the tag.
+     * @param fileToEmbed The docx file to embed. File source could be base64 encoded, ftp, sftp or url. 
+     */
+    constructor(name:string,fileToEmbed:string){
+        super(name,fileToEmbed);
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`?embed ${this.name}`]);
     }
 }
