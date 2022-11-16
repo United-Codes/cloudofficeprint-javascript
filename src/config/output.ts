@@ -15,6 +15,7 @@ export class OutputConfig {
     pdfOptions: PDFOptions | undefined;
     csvOptions: CsvOptions | undefined;
     outputAppendPerPage: boolean | undefined;
+    outputPrependPerPage: boolean | undefined;
     outputPolling: boolean | undefined;
     secretKey: string | undefined;
     requestOption: RequestOption | undefined;
@@ -33,7 +34,8 @@ export class OutputConfig {
      *  Can only be used if the server allows to save on disk.
      *  The specific output path for each file is appended to the base path. Optional.
      * @param pdfOptions Optional PDF options. Optional.
-     * @param appendPerPage ability to prepend/append file after each page of output. Optional.
+     * @param appendPerPage ability to append file after each page of output. Optional.
+     * @param prependPerPage ability to prepend file after each page of output. Optional.
      * @param outputPolling A unique link for each request is sent back, which can be used later to download the output file.
      * @param secretKey A secret key can be specified to encrypt the file stored on the server (ussed with output polling).
      * @param requestOption  AOP makes a call to the given option with response/output of the current request.
@@ -47,6 +49,7 @@ export class OutputConfig {
         pdfOptions?: PDFOptions,
         csvOptions?: CsvOptions,
         appendPerPage?: boolean,
+        prependPerPage?: boolean,
         outputPolling?: boolean,
         secretKey?: string,
         requestOption?: RequestOption
@@ -59,6 +62,7 @@ export class OutputConfig {
         this.pdfOptions = pdfOptions;
         this.csvOptions = csvOptions;
         this.outputAppendPerPage = appendPerPage;
+        this.outputPrependPerPage = prependPerPage;
         this.outputPolling = outputPolling;
         this.requestOption = requestOption;
         this.secretKey = secretKey;
@@ -105,6 +109,9 @@ export class OutputConfig {
         }
         if (this.outputAppendPerPage !== undefined) {
             result.output_append_per_page = this.outputAppendPerPage;
+        }
+        if(this.outputPrependPerPage !== undefined){
+            result.output_prepend_per_page = this.outputPrependPerPage;
         }
         if (this.outputPolling !== undefined) {
             result.output_polling = this.outputPolling;
