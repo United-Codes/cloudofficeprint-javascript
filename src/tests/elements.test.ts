@@ -310,6 +310,21 @@ describe('Tests for elements', () => {
         console.log(protectElementExpected);
         expect(protectElement.asDict()).toEqual(protectElementExpected);
     });
+    test('Test excel insert element',()=>{
+        const excelInsert = new cop.elements.ExcelInsert('fileToInsert',"base64EncodedFile",true,"base64icon",undefined,3,'2px','3px',undefined,3,'2px','50px');
+        const excelInsert_expected = {
+            "fileToInsert":"base64EncodedFile",
+            "fileToInsert_isPreview": true,
+            "fileToInsert_icon":"base64icon",
+            "fileToInsert_fromCol":3,
+            "fileToInsert_fromRowOff":"2px",
+            "fileToInsert_fromColOff":"3px",
+            "fileToInsert_toCol":3,
+            "fileToInsert_toRowOff":'2px',
+            "fileToInsert_toColOff":"50px"
+        }
+        expect(excelInsert.asDict()).toEqual(excelInsert_expected);
+    })
     test('Test embed element',()=>{
         const embedDocument = new cop.elements.Embed('fileToEmbed',"base64 encoded");
         const embedDocumentExpected = {
