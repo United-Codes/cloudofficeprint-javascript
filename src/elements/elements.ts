@@ -1350,28 +1350,17 @@ export class Freeze extends Property {
 }
 
 /**
- * Inside Word and PowerPoint documents, the tag {?insert fileToInsert} can be used 
+ * Inside Word and PowerPoint and Excel documents, the tag {?insert fileToInsert} can be used 
  * to insert files like Word, Excel, Powerpoint and PDF documents.
+    Please use ExcelInsert element to insert documents in excel, because it has more options available.
  */
 export class Insert extends Property {
-    isPreview: boolean | undefined;
     /**
      * @param name Name of the insert tag. 
      * @param documentToInsert document to insert which could be url,ftp,sftp or base64 endcoded.
-     * @param isPreview  Only supported in excel. set it to true if you want preview of your document (default is false.).
      */
-    constructor(name: string, documentToInsert: string, isPreview?: boolean) {
+    constructor(name: string, documentToInsert: string) {
         super(name, documentToInsert);
-        this.isPreview = isPreview;
-    }
-    asDict(): { [key: string]: unknown } {
-        const result: { [key: string]: unknown } = {
-            [this.name]: this.value,
-        }
-        if (this.isPreview !== undefined) {
-            result[this.name + '_isPreview'] = this.isPreview;
-        }
-        return result;
     }
     /**
      * A set containing all available template tags this Element reacts to.
@@ -1380,6 +1369,116 @@ export class Insert extends Property {
     availableTags(): Set<string> {
         return new Set([`?insert ${this.name}`]);
     }
+}
+
+/**
+ * Inside Excel it is posiible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
+        Options available are:  you can provide dynamic icon and icon position.
+                                you can preview the document in excel.
+ */
+export class ExcelInsert extends Element {
+    value: string;
+    isPreview: boolean | undefined;
+    icon: string | undefined;
+    fromRow: number | undefined
+    fromCol: string | number | undefined;
+    fromRowOff: string | undefined;
+    fromColOff: string | undefined;
+    toRow: number | undefined;
+    toCol: string | number | undefined;
+    toRowOff: string | undefined;
+    toColOff: string | undefined;
+
+    /**
+     * 
+     * @param name  Name of insert tag. Ex(fileToInsert)
+     * @param value File to insert of path to file. (Source can be FTP, SFTP, URL or base64encoded file.)
+     * @param isPreview Set it to true for preview. Defaults to false. Optional.
+     * @param icon Set it to true for preview. Defaults to false. Optional.
+     * @param fromRow position for top of icon. Defaults to row of the tag. Optional.
+     * @param fromCol positon for left of icon. Defaults to column of the tag. Optional.
+     * @param fromRowOff space after the value of from Row. Defaults to 0. Optional.
+     * @param fromColOff space after the value of fromCol. Defaults to 0. Optional.
+     * @param toRow position for bottom of icon. Defaults to row of the tag + 3. Optional.
+     * @param toCol position for right side of icon. Defaults to column of the tag. Optional.
+     * @param toRowOff space after toRow value. Defaults to 20px. Optional.
+     * @param toColOff space after toCol value. Defaults to 50px. Optional.
+     */
+    constructor(
+        name: string,
+        value: string,
+        isPreview?: boolean,
+        icon?: string,
+        fromRow?: number,
+        fromCol?: string | number,
+        fromRowOff?: string,
+        fromColOff?: string,
+        toRow?: number,
+        toCol?: string | number,
+        toRowOff?: string,
+        toColOff?: string
+    ) {
+        super(name);
+        this.value = value;
+        this.isPreview = isPreview;
+        this.icon = icon;
+        this.fromRow = fromRow;
+        this.fromCol = fromCol;
+        this.fromRowOff = fromRowOff;
+        this.fromColOff = fromColOff;
+        this.toRow = toRow;
+        this.toCol = toCol;
+        this.toRowOff = toRowOff;
+        this.toColOff = toColOff;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {
+            [this.name]: this.value,
+        }
+        if (this.isPreview !== undefined) {
+            result[this.name + '_isPreview'] = this.isPreview
+        }
+        if (this.icon !== undefined) {
+            result[this.name + '_icon'] = this.icon
+        }
+        if (this.fromRow !== undefined) {
+            result[this.name + '_fromRow'] = this.fromRow
+        }
+        if (this.fromCol !== undefined) {
+            result[this.name + '_fromCol'] = this.fromCol
+        }
+        if (this.fromRowOff !== undefined) {
+            result[this.name + '_fromRowOff'] = this.fromRowOff
+        }
+        if (this.fromColOff !== undefined) {
+            result[this.name + '_fromColOff'] = this.fromColOff
+        }
+        if (this.toRow !== undefined) {
+            result[this.name + '_toRow'] = this.toRow
+        }
+        if (this.toCol !== undefined) {
+            result[this.name + '_toCol'] = this.toCol
+        }
+        if (this.toRowOff !== undefined) {
+            result[this.name + '_toRowOff'] = this.toRowOff
+        }
+        if (this.toColOff !== undefined) {
+            result[this.name + '_toColOff'] = this.toColOff
+        }
+        return result;
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{?insert ${this.name}}`])
+    }
+
 }
 
 /**
@@ -1525,14 +1624,14 @@ export class ProtectSheet extends Element {
     This is only supported in docx and we can only embed docx file.
     The content of document are not rendered.
  */
-export class Embed extends Property{
+export class Embed extends Property {
     /**
      * In docx it is possible to copy the content of one docx file to another.
      * @param name The name of the tag.
      * @param fileToEmbed The docx file to embed. File source could be base64 encoded, ftp, sftp or url. 
      */
-    constructor(name:string,fileToEmbed:string){
-        super(name,fileToEmbed);
+    constructor(name: string, fileToEmbed: string) {
+        super(name, fileToEmbed);
     }
     /**
      * A set containing all available template tags this Element reacts to.
