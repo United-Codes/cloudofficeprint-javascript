@@ -311,10 +311,9 @@ describe('Tests for elements', () => {
         expect(protectElement.asDict()).toEqual(protectElementExpected);
     });
     test('Test excel insert element',()=>{
-        const excelInsert = new cop.elements.ExcelInsert('fileToInsert',"base64EncodedFile",true,"base64icon",undefined,3,'2px','3px',undefined,3,'2px','50px');
+        const excelInsert = new cop.elements.ExcelInsert('fileToInsert',"base64EncodedFile","base64icon",undefined,3,'2px','3px',undefined,3,'2px','50px');
         const excelInsert_expected = {
             "fileToInsert":"base64EncodedFile",
-            "fileToInsert_isPreview": true,
             "fileToInsert_icon":"base64icon",
             "fileToInsert_fromCol":3,
             "fileToInsert_fromRowOff":"2px",
