@@ -1374,11 +1374,10 @@ export class Insert extends Property {
 /**
  * Inside Excel it is posiible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
         Options available are:  you can provide dynamic icon and icon position.
-                                you can preview the document in excel.
  */
 export class ExcelInsert extends Element {
     value: string;
-    isPreview: boolean | undefined;
+    // isPreview: boolean | undefined;
     icon: string | undefined;
     fromRow: number | undefined
     fromCol: string | number | undefined;
@@ -1393,8 +1392,7 @@ export class ExcelInsert extends Element {
      * 
      * @param name  Name of insert tag. Ex(fileToInsert)
      * @param value File to insert of path to file. (Source can be FTP, SFTP, URL or base64encoded file.)
-     * @param isPreview Set it to true for preview. Defaults to false. Optional.
-     * @param icon Set it to true for preview. Defaults to false. Optional.
+     * @param icon Icon to be showed as the document, when clicked on it, redirects it to file. Default icon is taken if not provided. Optional.
      * @param fromRow position for top of icon. Defaults to row of the tag. Optional.
      * @param fromCol positon for left of icon. Defaults to column of the tag. Optional.
      * @param fromRowOff space after the value of from Row. Defaults to 0. Optional.
@@ -1407,7 +1405,7 @@ export class ExcelInsert extends Element {
     constructor(
         name: string,
         value: string,
-        isPreview?: boolean,
+        // isPreview?: boolean,
         icon?: string,
         fromRow?: number,
         fromCol?: string | number,
@@ -1420,7 +1418,7 @@ export class ExcelInsert extends Element {
     ) {
         super(name);
         this.value = value;
-        this.isPreview = isPreview;
+        // this.isPreview = isPreview;
         this.icon = icon;
         this.fromRow = fromRow;
         this.fromCol = fromCol;
@@ -1439,9 +1437,9 @@ export class ExcelInsert extends Element {
         const result: { [key: string]: string | number | boolean } = {
             [this.name]: this.value,
         }
-        if (this.isPreview !== undefined) {
-            result[this.name + '_isPreview'] = this.isPreview
-        }
+        // if (this.isPreview !== undefined) {
+        //     result[this.name + '_isPreview'] = this.isPreview
+        // }
         if (this.icon !== undefined) {
             result[this.name + '_icon'] = this.icon
         }
