@@ -61,21 +61,25 @@ export class Template {
      * @returns the dictionary representation of this Template.
      */
     templateDict(): { [key: string]: string | boolean | undefined } {
+        var result: { [key: string]: string | boolean | undefined } = {};
         if (this.templateHash && !this.shouldHash) {
-            return {
-                template_type: this.resource.filetype,
-                template_hash: this.templateHash,
-                start_delimiter: this.startDelimiter,
-                end_delimiter: this.endDelimiter,
-            };
+            result.template_type = this.resource.filetype;
+            result.template_hash = this.templateHash;
+        } else {
+            result = {
+                ...this.resource.templateDict()
+            }
         }
-        return {
-            ...this.resource.templateDict(),
-            start_delimiter: this.startDelimiter,
-            end_delimiter: this.endDelimiter,
-            should_hash: this.shouldHash,
-            template_hash: this.templateHash,
-        };
+        if (this.shouldHash) {
+            result.should_hash = this.shouldHash;
+        }
+        if (this.startDelimiter) {
+            result.start_delimiter = this.startDelimiter;
+        }
+        if (this.endDelimiter) {
+            result.end_delimiter = this.endDelimiter;
+        }
+        return result;
     }
 
     /**

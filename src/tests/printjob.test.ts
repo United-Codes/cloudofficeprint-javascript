@@ -38,7 +38,7 @@ describe('Tests for class PrintJob', () => {
         );
 
         const printjobExpected = {
-            api_key: server.config!.apiKey,
+            // api_key: server.config!.apiKey,
             append_files: [
                 {
                     file_content: resourceBase64,
@@ -122,7 +122,7 @@ describe('Tests for class PrintJob', () => {
         const printjob = new cop.PrintJob(data, server, template);
 
         const printjobExpected1 = {
-            api_key: server.config!.apiKey,
+            // api_key: server.config!.apiKey,
             files: [{ data: { textTag1: 'test_text_tag1' } }],
             output: {
                 output_converter: 'libreoffice',
@@ -144,7 +144,7 @@ describe('Tests for class PrintJob', () => {
         template.updateHash('test_hash');
 
         const printjobExpected2 = {
-            api_key: server.config!.apiKey,
+            // api_key: server.config!.apiKey,
             files: [{ data: { textTag1: 'test_text_tag1' } }],
             output: {
                 output_converter: 'libreoffice',
