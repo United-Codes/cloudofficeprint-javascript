@@ -26,15 +26,11 @@ export class ForEach extends Element {
     availableTags(): Set<string> {
         const result: Set<string> = this.tags;
 
-        this.content.forEach(
-            (value) => {
-                value.availableTags().forEach(
-                    (tag) => {
-                        result.add(tag);
-                    },
-                );
-            },
-        );
+        this.content.forEach((value) => {
+            value.availableTags().forEach((tag) => {
+                result.add(tag);
+            });
+        });
 
         return result;
     }
@@ -107,20 +103,22 @@ export class ForEachSheet extends ForEach {
         if (contentCopy.constructor === Object) {
             const newContent: Element[] = [];
 
-            Object.entries(contentCopy).forEach(
-                ([sheetname, sheetcontent]) => {
-                    let sheetcontentCopy = sheetcontent;
-                    // we need to add the additional sheet_name property,
-                    //  so we should convert the Element to an ElementCollection if needed
-                    if (!(sheetcontentCopy instanceof ElementCollection)) {
-                        sheetcontentCopy = ElementCollection
-                            .elementToElementCollection(sheetcontentCopy);
-                    }
-                    // adding the new property containing sheet_name
-                    (sheetcontentCopy as ElementCollection).add(new Property('sheet_name', sheetname));
-                    newContent.push(sheetcontentCopy);
-                },
-            );
+            Object.entries(contentCopy).forEach(([sheetname, sheetcontent]) => {
+                let sheetcontentCopy = sheetcontent;
+                // we need to add the additional sheet_name property,
+                //  so we should convert the Element to an ElementCollection if needed
+                if (!(sheetcontentCopy instanceof ElementCollection)) {
+                    sheetcontentCopy =
+                        ElementCollection.elementToElementCollection(
+                            sheetcontentCopy,
+                        );
+                }
+                // adding the new property containing sheet_name
+                (sheetcontentCopy as ElementCollection).add(
+                    new Property('sheet_name', sheetname),
+                );
+                newContent.push(sheetcontentCopy);
+            });
 
             contentCopy = newContent;
         }
@@ -152,7 +150,7 @@ export class ForEachInline extends ForEach {
  * These are the same, but they may not be forever and
  *  combining them into one class breaks consistency
  */
-export class ForEachHorizontal extends ForEachInline { }
+export class ForEachHorizontal extends ForEachInline {}
 
 /**
  * This tag will merge the cells of the loop defined by the tag over the amount of elements rows.

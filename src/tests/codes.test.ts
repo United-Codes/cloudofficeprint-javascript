@@ -33,11 +33,7 @@ describe('Tests for codes', () => {
         expect(barcode.asDict()).toEqual(barcodeExpected);
     });
     test('Test styling options for qr-code class', () => {
-        const qr = new cop.elements.QRCode(
-            'name',
-            'data',
-            'qrcode',
-        );
+        const qr = new cop.elements.QRCode('name', 'data', 'qrcode');
 
         qr.setDotscale(0.5);
         qr.setLogo('logo');
@@ -144,11 +140,7 @@ describe('Tests for codes', () => {
         expect(email.asDict()).toEqual(emailExpected);
     });
     test('Test qr code sms', () => {
-        const sms = new cop.elements.SMSQRCode(
-            'name',
-            'receiver',
-            'sms_body',
-        );
+        const sms = new cop.elements.SMSQRCode('name', 'receiver', 'sms_body');
         const smsExpected = {
             name: 'receiver',
             name_type: 'qr_sms',
@@ -157,10 +149,7 @@ describe('Tests for codes', () => {
         expect(sms.asDict()).toEqual(smsExpected);
     });
     test('Test qr code url', () => {
-        const url = new cop.elements.URLQRCode(
-            'name',
-            'url',
-        );
+        const url = new cop.elements.URLQRCode('name', 'url');
         const urlExpected = {
             name: 'url',
             name_type: 'qr_url',

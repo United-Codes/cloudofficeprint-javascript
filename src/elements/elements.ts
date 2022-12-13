@@ -9,9 +9,9 @@ export abstract class CellStyle {
      */
     asDict(propertyName: string) {
         const result: { [key: string]: string | number | boolean } = {};
-        Object.entries(this.asDictSuffixes()).forEach(
-            ([key, val]) => { result[`${propertyName}${key}`] = val; },
-        );
+        Object.entries(this.asDictSuffixes()).forEach(([key, val]) => {
+            result[`${propertyName}${key}`] = val;
+        });
         return result;
     }
 
@@ -52,7 +52,8 @@ export class CellStyleDocx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } =
+            super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
             result._cell_background_color = this.cellBackgroundColor;
@@ -193,7 +194,8 @@ export class CellStyleXlsx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } =
+            super.asDictSuffixes();
 
         if (this.cellLocked !== undefined) {
             result._cell_locked = this.cellLocked;
@@ -510,7 +512,12 @@ export class TableOfContents extends Element {
      * @param tabLeader How the space between title and page number should be filled.
      *  Can be "hyphen", "underscore", or "dot" (default). Optional.
      */
-    constructor(name: string, title?: string, depth?: number, tabLeader?: string) {
+    constructor(
+        name: string,
+        title?: string,
+        depth?: number,
+        tabLeader?: string,
+    ) {
         super(name);
         this.title = title;
         this.depth = depth;
@@ -873,7 +880,9 @@ export class COPChartDateOptions {
  */
 export class COPChart extends Element {
     xData: string[];
-    yDatas: { [key: string]: (string | number | { [key: string]: string | number })[] };
+    yDatas: {
+        [key: string]: (string | number | { [key: string]: string | number })[];
+    };
     date: COPChartDateOptions | undefined;
     title: string | undefined;
     xTitle: string | undefined;
@@ -897,8 +906,15 @@ export class COPChart extends Element {
     constructor(
         name: string,
         xData: string[],
-        yDatas: (string | number | { [key: string]: string | number })[][] |
-        { [key: string]: (string | number | { [key: string]: string | number })[] },
+        yDatas:
+            | (string | number | { [key: string]: string | number })[][]
+            | {
+                  [key: string]: (
+                      | string
+                      | number
+                      | { [key: string]: string | number }
+                  )[];
+              },
         date?: COPChartDateOptions,
         title?: string,
         xTitle?: string,
@@ -917,14 +933,14 @@ export class COPChart extends Element {
         this.yDatas = {};
 
         if (yDatas instanceof Array) {
-            yDatas.forEach(
-                (el, index) => {
-                    this.yDatas[`series ${index + 1}`] = el;
-                },
-            );
+            yDatas.forEach((el, index) => {
+                this.yDatas[`series ${index + 1}`] = el;
+            });
         } else if (yDatas.constructor !== Object) {
             // If yDatas is not an array and not a dictionary: throw error
-            throw new Error(`Expected a dictionary or array, but received ${typeof yDatas}`);
+            throw new Error(
+                `Expected a dictionary or array, but received ${typeof yDatas}`,
+            );
         } else {
             this.yDatas = yDatas;
         }
@@ -935,8 +951,7 @@ export class COPChart extends Element {
      * @returns dictionary representation of this Element
      */
     asDict(): {
-        [key: string]:
-        {
+        [key: string]: {
             [key: string]:
             {
                 [key: string]:
@@ -965,41 +980,40 @@ export class COPChart extends Element {
         }
     } {
         const ySeries: {
-            name: string, data: (string | number |
-            { [key: string]: string | number })[]
+            name: string;
+            data: (string | number | { [key: string]: string | number })[];
         }[] = [];
-        Object.entries(this.yDatas).forEach(
-            (e) => {
-                ySeries.push({ name: e[0], data: e[1] });
-            },
-        );
+        Object.entries(this.yDatas).forEach((e) => {
+            ySeries.push({ name: e[0], data: e[1] });
+        });
 
         const result: {
             [key: string]:
-            {
-                [key: string]:
-                string[] |
-                string |
-                {
-                    [key: string]:
-                    string |
-                    number
-                }
-            } |
-            {
-                [key: string]:
-                {
-                    [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            } |
-            string |
-            {
-                [key: string]:
-                string
-            }
+                | {
+                      [key: string]:
+                          | string[]
+                          | string
+                          | {
+                                [key: string]: string | number;
+                            };
+                  }
+                | {
+                      [key: string]:
+                          | {
+                                [key: string]:
+                                    | string
+                                    | (
+                                          | string
+                                          | number
+                                          | { [key: string]: string | number }
+                                      )[];
+                            }[]
+                          | string;
+                  }
+                | string
+                | {
+                      [key: string]: string;
+                  };
         } = {
             xAxis: {
                 data: this.xData,
@@ -1013,39 +1027,45 @@ export class COPChart extends Element {
             result.title = this.title;
         }
         if (this.date !== undefined) {
-            (result.xAxis as {
-                [key: string]:
-                string[] |
-                string |
-                {
+            (
+                result.xAxis as {
                     [key: string]:
-                    string |
-                    number
+                        | string[]
+                        | string
+                        | {
+                              [key: string]: string | number;
+                          };
                 }
-            }).date = this.date.asDict();
+            ).date = this.date.asDict();
         }
         if (this.xTitle !== undefined) {
-            (result.xAxis as {
-                [key: string]:
-                string[] |
-                string |
-                {
+            (
+                result.xAxis as {
                     [key: string]:
-                    string |
-                    number
+                        | string[]
+                        | string
+                        | {
+                              [key: string]: string | number;
+                          };
                 }
-            }).title = this.xTitle;
+            ).title = this.xTitle;
         }
         if (this.yTitle !== undefined) {
-            (result.yAxis as {
-                [key: string]:
-                {
+            (
+                result.yAxis as {
                     [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            }).title = this.yTitle;
+                        | {
+                              [key: string]:
+                                  | string
+                                  | (
+                                        | string
+                                        | number
+                                        | { [key: string]: string | number }
+                                    )[];
+                          }[]
+                        | string;
+                }
+            ).title = this.yTitle;
         }
         if (this.x2Title !== undefined) {
             result.x2Axis = {
@@ -1197,6 +1217,87 @@ export class TextBox extends Element {
 }
 
 /**
+ * Only supported in Excel. Represents an object that indicates to put a freeze
+ * pane in the excel template.
+ */
+export class Freeze extends Property {
+    /**
+     *
+     * @param name The name for this property
+     * @param value Three options are available.
+     *  First option, place the pane where the tag is located, using a value of **true**.
+     *  Second option, provide the location to place the pane, e.g. **"C5"**, in the format of
+     *   excel cell and row.
+     *  Third option, don't place a pane, using a value of **false**.
+     */
+    constructor(name: string, value: string | boolean) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{freeze ${this.name}}`]);
+    }
+}
+
+/**
+ * The class for the link/target tags.
+ * This tags allows you to place a link to a target in the same document.
+ * If the uid is not provided, a new uid will be generated uniquely for every link and target pair.
+ */
+export class Link extends Property {
+    uidName?: string;
+    uidValue?: string;
+
+    /**
+     * Create a new link/target tag pair.
+     * If the uid is not provided, a new uid will be generated uniquely for each link/target pair.
+     * @param name the name of the link/target tags.
+     * @param value the value of the link/target tags.
+     * @param uidName the name of the uid of the link/target pair.
+     * @param uidValue the value of the uid of the link/target pair.
+     */
+    constructor(
+        name: string,
+        value: string,
+        uidName?: string,
+        uidValue?: string,
+    ) {
+        super(name, value);
+        this.uidName = uidName;
+        this.uidValue = uidValue;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        if (this.uidName && this.uidValue) {
+            return { [this.name]: this.value, [this.uidName]: this.uidValue };
+        }
+        return { [this.name]: this.value };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        if (this.uidName && this.uidValue) {
+            return new Set([
+                `{link ${this.name}:${this.uidName}}`,
+                `{target ${this.name}:${this.uidName}}`,
+            ]);
+        }
+        return new Set([`{link ${this.name}}`, `{target ${this.name}}`]);
+    }
+}
+
+/**
  * A collection used to group multiple elements together.
  * It can contain nested `ElementCollection`s and should be used to pass multiple `Element`s
  * as PrintJob data, as well as to allow for nested elements.
@@ -1231,11 +1332,9 @@ export class ElementCollection extends Element {
      *  this element collection object
      */
     addAll(col: ElementCollection) {
-        col.elements.forEach(
-            (el) => {
-                this.add(el);
-            },
-        );
+        col.elements.forEach((el) => {
+            this.add(el);
+        });
     }
 
     /**
@@ -1253,15 +1352,13 @@ export class ElementCollection extends Element {
     asDict() {
         let result: { [key: string]: unknown } = {};
 
-        this.elements.forEach(
-            (el) => {
-                if (el instanceof ElementCollection) {
-                    result[el.name] = el.asDict();
-                } else {
-                    result = { ...result, ...el.asDict() };
-                }
-            },
-        );
+        this.elements.forEach((el) => {
+            if (el instanceof ElementCollection) {
+                result[el.name] = el.asDict();
+            } else {
+                result = { ...result, ...el.asDict() };
+            }
+        });
 
         return result;
     }
@@ -1273,15 +1370,11 @@ export class ElementCollection extends Element {
     availableTags(): Set<string> {
         const result = new Set<string>();
 
-        this.elements.forEach(
-            (el) => {
-                el.availableTags().forEach(
-                    (tag) => {
-                        result.add(tag);
-                    },
-                );
-            },
-        );
+        this.elements.forEach((el) => {
+            el.availableTags().forEach((tag) => {
+                result.add(tag);
+            });
+        });
 
         return result;
     }
@@ -1292,7 +1385,10 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection
      * @returns the generated element collection from an element and a name
      */
-    static elementToElementCollection(element: Element, name: string = ''): ElementCollection {
+    static elementToElementCollection(
+        element: Element,
+        name: string = '',
+    ): ElementCollection {
         return ElementCollection.fromMapping(element.asDict(), name);
     }
 
@@ -1302,14 +1398,15 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection; defaults to ''
      * @returns an element collection generated from the given mapping and name
      */
-    static fromMapping(mapping: { [key: string]: unknown }, name: string = ''): ElementCollection {
+    static fromMapping(
+        mapping: { [key: string]: unknown },
+        name: string = '',
+    ): ElementCollection {
         const resultSet = new Set<Element>();
 
-        Object.entries(mapping).forEach(
-            (e) => {
-                resultSet.add(new Property(e[0], e[1]));
-            },
-        );
+        Object.entries(mapping).forEach((e) => {
+            resultSet.add(new Property(e[0], e[1]));
+        });
 
         return new ElementCollection(name, Array.from(resultSet));
     }
@@ -1325,29 +1422,6 @@ export class ElementCollection extends Element {
     }
 }
 
-/**
- * This tag will allow you to utilize freeze pane property of the excel.Three options are available. 
- * First option, we can directly place the pane where the tag located. For this option we should provide true parameter.
- * Second option, we can provide the location where we want to place the pane such as "C5".
- * Finally, the third option is false which doesn't place a pane.
- */
-export class Freeze extends Property {
-    /**
-     * @param name name of the freeze tag
-     * @param freezeValue value for the freeze tag
-     */
-    constructor(name: string, freezeValue: string | boolean) {
-        super(name, freezeValue);
-    }
-
-    /**
-     * A set containing all available template tags this Element reacts to.
-     * @returns set of tags associated with this Element
-     */
-    availableTags(): Set<string> {
-        return new Set([`{freeze ${this.name}}`]);
-    }
-}
 
 /**
  * Inside Word and PowerPoint and Excel documents, the tag {?insert fileToInsert} can be used 

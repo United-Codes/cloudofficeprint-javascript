@@ -3,14 +3,15 @@
  * The SpaceX example `spacex_example.ts` is a more advanced example using this approach.
  */
 
-import * as cop from '../../src/index';
+// import * as cop from 'cloudofficeprint';
+import * as cop from '../../src';
 
-const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
+import fetch from 'node-fetch';
 
-// Setup Cloud Office Print server
 const SERVER_URL = 'https://api.cloudofficeprint.com/';
 const API_KEY = 'YOUR_API_KEY'; // Replace by your own API key
 
+// Setup Cloud Office Print server
 const server = new cop.config.Server(
     SERVER_URL,
     new cop.config.ServerConfig(API_KEY),
@@ -19,40 +20,30 @@ const server = new cop.config.Server(
 // Create the main element collection that contains all data
 const data = new cop.elements.ElementCollection();
 
-// Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
-const res = fetch('https://api.le-systeme-solaire.net/rest/bodies/')
-    .then((r: Response) => r.json());
-
-// Add the title to the data
-data.add(new cop.elements.Property('main_title', 'The solar system'));
-
-// Add the source for the data
-data.add(new cop.elements.Hyperlink(
-    'data_source',
-    'https://api.le-systeme-solaire.net/rest/bodies/',
-    'Data source',
-));
-
-// Process data: we only want planets
-const planetList: cop.elements.Element[] = [];
 (async () => {
-    await res.then((json: {
-        bodies: {
-            [key: string]: string | number | boolean |
-            { [key: string]: unknown; };
-        }[];
-    }) => {
-        json.bodies.forEach(
-            (body: {
-                [key: string]: string | number | boolean | { [key: string]: unknown }
-            }) => {
-                if (body.isPlanet) {
-                    const collec = cop.elements.ElementCollection.fromMapping(body);
-                    planetList.push(collec);
-                }
-            },
-        );
-    });
+    // Get solar system data from https://api.le-systeme-solaire.net/rest/bodies/
+    const res = await fetch('https://api.le-systeme-solaire.net/rest/bodies/');
+    const json = await res.json();
+
+    // Add the title to the data
+    const mainTitle = new cop.elements.Property(
+        'main_title',
+        'The solar system',
+    );
+    data.add(mainTitle);
+
+    // Add the source for the data
+    const dataSource = new cop.elements.Hyperlink(
+        'data_source',
+        'https://api.le-systeme-solaire.net/rest/bodies/',
+        'Data source',
+    );
+    data.add(dataSource);
+
+    // Process data: we only want planets
+    const planetList: cop.elements.Element[] = json.bodies
+        .filter((body: any) => body.isPlanet)
+        .map((body: any) => cop.elements.ElementCollection.fromMapping(body));
 
     const planets = new cop.elements.ForEach('planets', planetList);
     data.add(planets);
@@ -62,12 +53,8 @@ const planetList: cop.elements.Element[] = [];
     color[0] = '#7298d4'; // Specify the color for the first pie slice
 
     const radiusSeries = new cop.elements.PieSeries(
-        Array.from((planets.asDict().planets as { [key: string]: string | number }[]).map(
-            (planet) => planet.name,
-        )),
-        Array.from((planets.asDict().planets as { [key: string]: string | number }[]).map(
-            (planet) => planet.equaRadius as number,
-        )),
+        planets.asDict().planets.map((planet: any) => planet.name),
+        planets.asDict().planets.map((planet: any) => planet.equaRadius),
         'radius',
         color,
     );
@@ -83,11 +70,7 @@ const planetList: cop.elements.Element[] = [];
 
     radiusChartOptions.setLegend(
         undefined,
-        new cop.elements.ChartTextStyle(
-            undefined,
-            undefined,
-            'black',
-        ),
+        new cop.elements.ChartTextStyle(undefined, undefined, 'black'),
     );
 
     const radiusChart = new cop.elements.Pie3DChart(
@@ -97,18 +80,15 @@ const planetList: cop.elements.Element[] = [];
     );
     data.add(radiusChart);
 
-    // Create printjob
-    const printjob = new cop.PrintJob(
+    // Create printJob
+    const printJob = new cop.PrintJob(
         data,
         server,
-        cop.Resource.fromLocalFile(
-            './examples/solar_system_example/pptx/solar_system_template.pptx',
-        ), // pptx
-        // cop.Resource.fromLocalFile(
-        //     './examples/solar_system_example/docx/solar_system_template.docx',
-        // ), // docx
+        cop.Template.fromLocalFile('solar_system_template.pptx'), // pptx
+        // cop.Resource.fromLocalFile('solar_system_template.docx'), // docx
     );
 
-    await (await printjob.execute()).toFile('./examples/solar_system_example/pptx/output');
-    // await (await printjob.execute()).toFile('./examples/solar_system_example/docx/output');
+    // Send the print job to the server and save the response
+    const response = await printJob.execute();
+    await response.toFile('output');
 })();

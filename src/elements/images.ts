@@ -132,11 +132,9 @@ export class Image extends Element {
             [this.name]: this.source,
         };
 
-        Object.entries(this.asDictSuffixes()).forEach(
-            ([key, value]) => {
-                result[`${this.name}${key}`] = value;
-            },
-        );
+        Object.entries(this.asDictSuffixes()).forEach(([key, value]) => {
+            result[`${this.name}${key}`] = value;
+        });
 
         return result;
     }
