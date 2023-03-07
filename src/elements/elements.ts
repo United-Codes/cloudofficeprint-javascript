@@ -909,12 +909,12 @@ export class COPChart extends Element {
         yDatas:
             | (string | number | { [key: string]: string | number })[][]
             | {
-                  [key: string]: (
-                      | string
-                      | number
-                      | { [key: string]: string | number }
-                  )[];
-              },
+                [key: string]: (
+                    | string
+                    | number
+                    | { [key: string]: string | number }
+                )[];
+            },
         date?: COPChartDateOptions,
         title?: string,
         xTitle?: string,
@@ -989,31 +989,31 @@ export class COPChart extends Element {
 
         const result: {
             [key: string]:
-                | {
-                      [key: string]:
-                          | string[]
-                          | string
-                          | {
-                                [key: string]: string | number;
-                            };
-                  }
-                | {
-                      [key: string]:
-                          | {
-                                [key: string]:
-                                    | string
-                                    | (
-                                          | string
-                                          | number
-                                          | { [key: string]: string | number }
-                                      )[];
-                            }[]
-                          | string;
-                  }
+            | {
+                [key: string]:
+                | string[]
                 | string
                 | {
-                      [key: string]: string;
-                  };
+                    [key: string]: string | number;
+                };
+            }
+            | {
+                [key: string]:
+                | {
+                    [key: string]:
+                    | string
+                    | (
+                        | string
+                        | number
+                        | { [key: string]: string | number }
+                    )[];
+                }[]
+                | string;
+            }
+            | string
+            | {
+                [key: string]: string;
+            };
         } = {
             xAxis: {
                 data: this.xData,
@@ -1030,11 +1030,11 @@ export class COPChart extends Element {
             (
                 result.xAxis as {
                     [key: string]:
-                        | string[]
-                        | string
-                        | {
-                              [key: string]: string | number;
-                          };
+                    | string[]
+                    | string
+                    | {
+                        [key: string]: string | number;
+                    };
                 }
             ).date = this.date.asDict();
         }
@@ -1042,11 +1042,11 @@ export class COPChart extends Element {
             (
                 result.xAxis as {
                     [key: string]:
-                        | string[]
-                        | string
-                        | {
-                              [key: string]: string | number;
-                          };
+                    | string[]
+                    | string
+                    | {
+                        [key: string]: string | number;
+                    };
                 }
             ).title = this.xTitle;
         }
@@ -1054,16 +1054,16 @@ export class COPChart extends Element {
             (
                 result.yAxis as {
                     [key: string]:
-                        | {
-                              [key: string]:
-                                  | string
-                                  | (
-                                        | string
-                                        | number
-                                        | { [key: string]: string | number }
-                                    )[];
-                          }[]
-                        | string;
+                    | {
+                        [key: string]:
+                        | string
+                        | (
+                            | string
+                            | number
+                            | { [key: string]: string | number }
+                        )[];
+                    }[]
+                    | string;
                 }
             ).title = this.yTitle;
         }
@@ -1711,5 +1711,141 @@ export class Embed extends Property {
      */
     availableTags(): Set<string> {
         return new Set([`?embed ${this.name}`]);
+    }
+}
+
+/**
+ * It is possible to insert cell validation in excel using validate tag as {validate validateTag} (validate keyword followed by)
+ */
+export class ValidateCell extends Element {
+    ignoreBlank: boolean | undefined;
+    allow: string | undefined;
+    value1: string | undefined;
+    value2: string | undefined;
+    inCellDropdown: boolean | undefined;
+    data: string | undefined;
+    showInputMessage: boolean | undefined;
+    inputTitle: string | undefined;
+    inputMessage: string | undefined;
+    showErrorAlert: boolean | undefined;
+    errorStyle: string | undefined;
+    errorTitle: string | undefined;
+    errorMessage: string | undefined;
+    /**
+     * 
+     * @param name Name of the validate tag. For {validate tagName}, tagName is name for this element. 
+     * @param ignoreBlank Set it to false for not allowing empty values in cell. The value is true by default.
+     * @param allow Type of data used for validation. Available options are (anyValue, whole, decimal, list, date, time, textLength, custom). Please use camelCase to insert value for allow attribute.
+     * @param value1 Value to compare with.
+     * @param value2 Value to compare with.
+     * Note:
+            These two options (_value1, _value2) can be used for any allow/type of validation that require values for comparison, in such case use "_value1" attribute as the first value to be passed and "_value2" attribute as the 2nd value.
+            Some allow type of validation require only one value to compare; in such case use "_value1" attribute.
+            For ex :
+            If allow type of validation is date and you have to check in between two dates.
+            Then you could use "_value1" attribute as start date and "_value2" attribute as end date.
+            If allow type of validation is whole and you have to check for value less than 100.
+            Then you could use "_value1" for that value and do not use "_value2".
+            While using time and date as allow type validation, please provide date/time with correct formatting.
+            for time: hours:minutes:seconds i.e hours , minutes, seconds separated by colon (:)
+                ex : 14:30:00 for 2:30 pm
+            for date: month/day/year i.e day, month , year separated by forward slash(/)
+                ex : 02/07/2023 for Feb 7 2023.
+            for list: you could use normal string with elements separated by comma(,).
+                ex : "first, second, third" for list of three elements.
+     * @param inCellDropdown Set it to false for not showing dropdown button while validation allow type is list. It is true by default for list allow type.
+     * @param data Type of comparison to be done for the cell value. Available values are (lessThanOrEqual, notBetween, equal, notEqual, greaterThan, greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual). Default value is "between". Please use camelCase for the value as shown in examples.
+     * @param showInputMessage Set it to false to hide message shown when the cell to validate is being selected. The value for it is true by default.
+     * @param inputTitle Title of message to be shown when cell to validate is selected.
+     * @param inputMessage Message to be shown when cell to validate is selected.
+     * @param showErrorAlert Set it to false, if you want to hide error alert once cell validation fails. The value is true by default.
+     * @param errorStyle Type of error style when cell validation fails. The value is stop by default. Available options are(stop,waring, Information).
+     * @param errorTitle Title of error to be shown when cell validation fails.
+     * @param errorMessage Message of error to be shown when cell validation fails.
+     */
+    constructor(
+        name: string,
+        ignoreBlank?: boolean,
+        allow?: string,
+        value1?: string,
+        value2?: string,
+        inCellDropdown?: boolean,
+        data?: string,
+        showInputMessage?: boolean,
+        inputTitle?: string,
+        inputMessage?: string,
+        showErrorAlert?: boolean,
+        errorStyle?: string,
+        errorTitle?: string,
+        errorMessage?: string) {
+        super(name);
+        this.ignoreBlank = ignoreBlank;
+        this.allow = allow;
+        this.value1 = value1;
+        this.value2 = value2;
+        this.inCellDropdown = inCellDropdown;
+        this.data = data;
+        this.showInputMessage = showInputMessage;
+        this.inputTitle = inputTitle;
+        this.inputMessage = inputMessage;
+        this.showErrorAlert = showErrorAlert;
+        this.errorStyle = errorStyle;
+        this.errorTitle = errorTitle;
+        this.errorMessage = errorMessage;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {};
+        if (this.ignoreBlank !== undefined) {
+            result[this.name + '_ignore_blank'] = this.ignoreBlank;
+        }
+        if (this.allow !== undefined) {
+            result[this.name + '_allow'] = this.allow;
+        }
+        if (this.value1 !== undefined) {
+            result[this.name + '_value1'] = this.value1;
+        }
+        if (this.value2 !== undefined) {
+            result[this.name + '_value2'] = this.value2;
+        }
+        if (this.inCellDropdown !== undefined) {
+            result[this.name + '_in_cell_dropdown'] = this.inCellDropdown;
+        }
+        if (this.data !== undefined) {
+            result[this.name + '_data'] = this.data;
+        }
+        if (this.showInputMessage !== undefined) {
+            result[this.name + '_show_input_message'] = this.showInputMessage;
+        }
+        if (this.inputTitle !== undefined) {
+            result[this.name + '_input_title'] = this.inputTitle;
+        }
+        if (this.inputMessage !== undefined) {
+            result[this.name + '_input_message'] = this.inputMessage;
+        }
+        if (this.showErrorAlert !== undefined) {
+            result[this.name + '_show_error_alert'] = this.showErrorAlert;
+        }
+        if (this.errorStyle !== undefined) {
+            result[this.name + '_error_style'] = this.errorStyle;
+        }
+        if (this.errorTitle !== undefined) {
+            result[this.name + '_error_title'] = this.errorTitle;
+        }
+        if (this.errorMessage !== undefined) {
+            result[this.name + '_error_message'] = this.errorMessage;
+        }
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`validate ${this.name}`]);
     }
 }
