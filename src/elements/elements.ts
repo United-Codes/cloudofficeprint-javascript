@@ -281,6 +281,7 @@ export class CellStyleXlsx extends CellStyle {
 }
 
 export abstract class Element {
+    /**Name of the tag being used */
     name: string;
 
     /**
@@ -1718,18 +1719,59 @@ export class Embed extends Property {
  * It is possible to insert cell validation in excel using validate tag as {validate validateTag} (validate keyword followed by tagName)
  */
 export class ValidateCell extends Element {
+    /**Set it to false for not allowing empty values in cell. The value is true by default. */
     ignoreBlank: boolean | undefined;
+    /**Type of data used for validation. Available options are (anyValue, whole, decimal, list, date, time, textLength, custom). Please use camelCase to insert value for allow attribute. */
     allow: string | undefined;
+    /**Value to compare with.  Note:
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br> */
     value1: string | undefined;
+    /**Value to compare with.  Note:
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br> */
     value2: string | undefined;
+    /**Set it to false for not showing dropdown button while validation allow type is list. It is true by default for list allow type. */
     inCellDropdown: boolean | undefined;
+    /**Type of comparison to be done for the cell value. Available values are (lessThanOrEqual, notBetween, equal, notEqual, greaterThan, greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual). Default value is "between". Please use camelCase for the value as shown in examples. */
     data: string | undefined;
+    /**Set it to false to hide message shown when the cell to validate is being selected. The value for it is true by default. */
     showInputMessage: boolean | undefined;
+    /**Title of message to be shown when cell to validate is selected. */
     inputTitle: string | undefined;
+    /**Message to be shown when cell to validate is selected. */
     inputMessage: string | undefined;
+    /**Set it to false, if you want to hide error alert once cell validation fails. The value is true by default. */
     showErrorAlert: boolean | undefined;
+    /**Type of error style when cell validation fails. The value is stop by default. Available options are(stop,waring, Information). */
     errorStyle: string | undefined;
+    /**Title of error to be shown when cell validation fails. */
     errorTitle: string | undefined;
+    /**Message of error to be shown when cell validation fails. */
     errorMessage: string | undefined;
     /**
      * 
@@ -1737,22 +1779,22 @@ export class ValidateCell extends Element {
      * @param ignoreBlank Set it to false for not allowing empty values in cell. The value is true by default.
      * @param allow Type of data used for validation. Available options are (anyValue, whole, decimal, list, date, time, textLength, custom). Please use camelCase to insert value for allow attribute.
      * @param value1 Value to compare with.
-     * @param value2 Value to compare with.
+     * @param value2 Value to compare with.<br><br>
      * Note:
-            These two options (_value1, _value2) can be used for any allow/type of validation that require values for comparison, in such case use "_value1" attribute as the first value to be passed and "_value2" attribute as the 2nd value.
-            Some allow type of validation require only one value to compare; in such case use "_value1" attribute.
-            For ex :
-            If allow type of validation is date and you have to check in between two dates.
-            Then you could use "_value1" attribute as start date and "_value2" attribute as end date.
-            If allow type of validation is whole and you have to check for value less than 100.
-            Then you could use "_value1" for that value and do not use "_value2".
-            While using time and date as allow type validation, please provide date/time with correct formatting.
-            for time: hours:minutes:seconds i.e hours , minutes, seconds separated by colon (:)
-                ex : 14:30:00 for 2:30 pm
-            for date: month/day/year i.e day, month , year separated by forward slash(/)
-                ex : 02/07/2023 for Feb 7 2023.
-            for list: you could use normal string with elements separated by comma(,).
-                ex : "first, second, third" for list of three elements.
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br>
      * @param inCellDropdown Set it to false for not showing dropdown button while validation allow type is list. It is true by default for list allow type.
      * @param data Type of comparison to be done for the cell value. Available values are (lessThanOrEqual, notBetween, equal, notEqual, greaterThan, greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual). Default value is "between". Please use camelCase for the value as shown in examples.
      * @param showInputMessage Set it to false to hide message shown when the cell to validate is being selected. The value for it is true by default.

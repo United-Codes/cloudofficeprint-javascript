@@ -140,7 +140,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1766">src/elements/elements.ts:1766</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1808">src/elements/elements.ts:1808</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -181,22 +181,22 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> value2: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>Value to compare with.
+											<p>Value to compare with.<br><br>
 												Note:
-												These two options (_value1, _value2) can be used for any allow/type of validation that require values for comparison, in such case use &quot;_value1&quot; attribute as the first value to be passed and &quot;_value2&quot; attribute as the 2nd value.
-												Some allow type of validation require only one value to compare; in such case use &quot;_value1&quot; attribute.
-												For ex :
-												If allow type of validation is date and you have to check in between two dates.
-												Then you could use &quot;_value1&quot; attribute as start date and &quot;_value2&quot; attribute as end date.
-												If allow type of validation is whole and you have to check for value less than 100.
-												Then you could use &quot;_value1&quot; for that value and do not use &quot;_value2&quot;.
-												While using time and date as allow type validation, please provide date/time with correct formatting.
-												for time: hours:minutes:seconds i.e hours , minutes, seconds separated by colon (:)
-												ex : 14:30:00 for 2:30 pm
-												for date: month/day/year i.e day, month , year separated by forward slash(/)
-												ex : 02/07/2023 for Feb 7 2023.
-												for list: you could use normal string with elements separated by comma(,).
-											ex : &quot;first, second, third&quot; for list of three elements.</p>
+												These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>&quot;_value1&quot;</strong> attribute as the first value to be passed and <strong>&quot;_value2&quot;</strong> attribute as the 2nd value.<br><br>
+												Some allow type of validation require only one value to compare; in such case use <strong>&quot;_value1&quot;</strong> attribute.<br><br>
+												For ex :<br>
+												If allow type of validation is date and you have to check in between two dates.<br>
+												Then you could use <strong>&quot;_value1&quot;</strong> attribute as start date and <strong>&quot;_value2&quot;</strong> attribute as end date.<br><br>
+												If allow type of validation is whole and you have to check for value less than 100.<br>
+												Then you could use <strong>&quot;_value1&quot;</strong> for that value and do not use &quot;<strong>_value2&quot;.</strong><br><br>
+												While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+												for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+												ex : 14:30:00 for 2:30 pm<br><br>
+												for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+												ex : 02/07/2023 for Feb 7 2023.<br><br>
+												for list: you could use normal string with elements separated by comma(,).<br>
+											ex : &quot;first, second, third&quot; for list of three elements.<br></p>
 										</div>
 									</div>
 								</li>
@@ -286,9 +286,14 @@
 					<div class="tsd-signature tsd-kind-icon">allow<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1722">src/elements/elements.ts:1722</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1725">src/elements/elements.ts:1725</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Type of data used for validation. Available options are (anyValue, whole, decimal, list, date, time, textLength, custom). Please use camelCase to insert value for allow attribute.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="data" class="tsd-anchor"></a>
@@ -296,9 +301,14 @@
 					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1726">src/elements/elements.ts:1726</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1761">src/elements/elements.ts:1761</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Type of comparison to be done for the cell value. Available values are (lessThanOrEqual, notBetween, equal, notEqual, greaterThan, greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual). Default value is &quot;between&quot;. Please use camelCase for the value as shown in examples.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="errorMessage" class="tsd-anchor"></a>
@@ -306,9 +316,14 @@
 					<div class="tsd-signature tsd-kind-icon">error<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1733">src/elements/elements.ts:1733</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1775">src/elements/elements.ts:1775</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Message of error to be shown when cell validation fails.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="errorStyle" class="tsd-anchor"></a>
@@ -316,9 +331,14 @@
 					<div class="tsd-signature tsd-kind-icon">error<wbr>Style<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1731">src/elements/elements.ts:1731</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1771">src/elements/elements.ts:1771</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Type of error style when cell validation fails. The value is stop by default. Available options are(stop,waring, Information).</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="errorTitle" class="tsd-anchor"></a>
@@ -326,9 +346,14 @@
 					<div class="tsd-signature tsd-kind-icon">error<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1732">src/elements/elements.ts:1732</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1773">src/elements/elements.ts:1773</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Title of error to be shown when cell validation fails.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="ignoreBlank" class="tsd-anchor"></a>
@@ -336,9 +361,14 @@
 					<div class="tsd-signature tsd-kind-icon">ignore<wbr>Blank<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1721">src/elements/elements.ts:1721</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1723">src/elements/elements.ts:1723</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Set it to false for not allowing empty values in cell. The value is true by default.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="inCellDropdown" class="tsd-anchor"></a>
@@ -346,9 +376,14 @@
 					<div class="tsd-signature tsd-kind-icon">in<wbr>Cell<wbr>Dropdown<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1725">src/elements/elements.ts:1725</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1759">src/elements/elements.ts:1759</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Set it to false for not showing dropdown button while validation allow type is list. It is true by default for list allow type.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="inputMessage" class="tsd-anchor"></a>
@@ -356,9 +391,14 @@
 					<div class="tsd-signature tsd-kind-icon">input<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1729">src/elements/elements.ts:1729</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1767">src/elements/elements.ts:1767</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Message to be shown when cell to validate is selected.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="inputTitle" class="tsd-anchor"></a>
@@ -366,9 +406,14 @@
 					<div class="tsd-signature tsd-kind-icon">input<wbr>Title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1728">src/elements/elements.ts:1728</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1765">src/elements/elements.ts:1765</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Title of message to be shown when cell to validate is selected.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
@@ -377,9 +422,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L284">src/elements/elements.ts:284</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L285">src/elements/elements.ts:285</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Name of the tag being used</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="showErrorAlert" class="tsd-anchor"></a>
@@ -387,9 +437,14 @@
 					<div class="tsd-signature tsd-kind-icon">show<wbr>Error<wbr>Alert<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1730">src/elements/elements.ts:1730</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1769">src/elements/elements.ts:1769</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Set it to false, if you want to hide error alert once cell validation fails. The value is true by default.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="showInputMessage" class="tsd-anchor"></a>
@@ -397,9 +452,14 @@
 					<div class="tsd-signature tsd-kind-icon">show<wbr>Input<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1727">src/elements/elements.ts:1727</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1763">src/elements/elements.ts:1763</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Set it to false to hide message shown when the cell to validate is being selected. The value for it is true by default.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="value1" class="tsd-anchor"></a>
@@ -407,9 +467,28 @@
 					<div class="tsd-signature tsd-kind-icon">value1<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1723">src/elements/elements.ts:1723</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1741">src/elements/elements.ts:1741</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Value to compare with.  Note:
+								These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>&quot;_value1&quot;</strong> attribute as the first value to be passed and <strong>&quot;_value2&quot;</strong> attribute as the 2nd value.<br><br>
+								Some allow type of validation require only one value to compare; in such case use <strong>&quot;_value1&quot;</strong> attribute.<br><br>
+								For ex :<br>
+								If allow type of validation is date and you have to check in between two dates.<br>
+								Then you could use <strong>&quot;_value1&quot;</strong> attribute as start date and <strong>&quot;_value2&quot;</strong> attribute as end date.<br><br>
+								If allow type of validation is whole and you have to check for value less than 100.<br>
+								Then you could use <strong>&quot;_value1&quot;</strong> for that value and do not use &quot;<strong>_value2&quot;.</strong><br><br>
+								While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+								for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+								ex : 14:30:00 for 2:30 pm<br><br>
+								for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+								ex : 02/07/2023 for Feb 7 2023.<br><br>
+								for list: you could use normal string with elements separated by comma(,).<br>
+							ex : &quot;first, second, third&quot; for list of three elements.<br></p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="value2" class="tsd-anchor"></a>
@@ -417,9 +496,28 @@
 					<div class="tsd-signature tsd-kind-icon">value2<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1724">src/elements/elements.ts:1724</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1757">src/elements/elements.ts:1757</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Value to compare with.  Note:
+								These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>&quot;_value1&quot;</strong> attribute as the first value to be passed and <strong>&quot;_value2&quot;</strong> attribute as the 2nd value.<br><br>
+								Some allow type of validation require only one value to compare; in such case use <strong>&quot;_value1&quot;</strong> attribute.<br><br>
+								For ex :<br>
+								If allow type of validation is date and you have to check in between two dates.<br>
+								Then you could use <strong>&quot;_value1&quot;</strong> attribute as start date and <strong>&quot;_value2&quot;</strong> attribute as end date.<br><br>
+								If allow type of validation is whole and you have to check for value less than 100.<br>
+								Then you could use <strong>&quot;_value1&quot;</strong> for that value and do not use &quot;<strong>_value2&quot;.</strong><br><br>
+								While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+								for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+								ex : 14:30:00 for 2:30 pm<br><br>
+								for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+								ex : 02/07/2023 for Feb 7 2023.<br><br>
+								for list: you could use normal string with elements separated by comma(,).<br>
+							ex : &quot;first, second, third&quot; for list of three elements.<br></p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -435,7 +533,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#asDict">asDict</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1800">src/elements/elements.ts:1800</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1842">src/elements/elements.ts:1842</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -464,7 +562,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#availableTags">availableTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/5e7f439/src/elements/elements.ts#L1848">src/elements/elements.ts:1848</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/elements/elements.ts#L1890">src/elements/elements.ts:1890</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
