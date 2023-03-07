@@ -331,5 +331,23 @@ describe('Tests for elements', () => {
         }
         expect(embedDocument.asDict()).toEqual(embedDocumentExpected);
     })
+    test ('Test cell validation', () => {
+        const validateCell = new cop.elements.ValidateCell("validateTag",false,"whole","0","100",undefined,"between",true,"Instructions","Insert number between 0 and 100",true,"warning","Error","Number out of bound");
+        const expectedValidateCell = {
+            validateTag_ignore_blank : false,
+            validateTag_allow : "whole",
+            validateTag_value1 : "0",
+            validateTag_value2 : "100",
+            validateTag_data : "between",
+            validateTag_show_input_message : true,
+            validateTag_input_title : "Instructions",
+            validateTag_input_message : "Insert number between 0 and 100",
+            validateTag_show_error_alert : true,
+            validateTag_error_style : "warning",
+            validateTag_error_title : "Error",
+            validateTag_error_message : "Number out of bound"
+        }
+        expect(validateCell.asDict()).toEqual(expectedValidateCell);
+    })
     // Cloud Office Print charts get tested in charts.test.ts
 });
