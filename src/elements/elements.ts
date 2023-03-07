@@ -1715,7 +1715,7 @@ export class Embed extends Property {
 }
 
 /**
- * It is possible to insert cell validation in excel using validate tag as {validate validateTag} (validate keyword followed by)
+ * It is possible to insert cell validation in excel using validate tag as {validate validateTag} (validate keyword followed by tagName)
  */
 export class ValidateCell extends Element {
     ignoreBlank: boolean | undefined;
