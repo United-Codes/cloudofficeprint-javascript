@@ -1,51 +1,55 @@
 import { describe, test, expect } from '@jest/globals';
+
 import * as cop from '../index';
 
 describe('Tests for config', () => {
     test('Test PDFOptions', () => {
         const pdfOpts = new cop.config.PDFOptions(
-            'test_pw',
-            'test_watermark',
-            30,
-            70,
-            "blue",
-            'Aerial',
-            500,
-            500,
-            true,
-            false,
-            'test_modify_password',
-            0,
-            true,
-            3,
-            5,
-            false,
-            'test_page_format',
-            false,
-            'test_sign_certificate',
-            'test_sign_certificate_password',
-            true,
-            true,
-            true,
+            true, // evenPage
+            false, // mergeMakingEven
+            false, // removeLastPage
+            'test_modify_password', // modifyPassword
+            'test_pw', // readPassword
+            0, // passwordProtectionFlag
+            'test_watermark', // watermark
+            'black', // watermarkColor
+            'Arial', // watermarkFont
+            50, // watermarkOpacity
+            32, // watermarkSize
+            true, // lockForm
+            3, // copies
+            5, // pageMargin
+            false, // landscape
+            500, // pageWidth
+            500, // pageHeight
+            'test_page_format', // pageFormat
+            false, // merge
+            true, // split
+            true, // identifyFormFields
+            'test_sign_certificate', // signCertificate
+            'test_certificate_password', // signCertificatePassword
         );
+        pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32);
         pdfOpts.setPageMarginAt(6, 'top');
-        const conf = new cop.config.OutputConfig('pdf', undefined, undefined, undefined, undefined, pdfOpts);
+        const conf = new cop.config.OutputConfig('pdf');
+        conf.pdfOptions = pdfOpts;
         const confExpected = {
+            output_even_page: true,
+            output_merge_making_even: false,
+            output_remove_last_page: false,
+            output_modify_password: 'test_modify_password',
+            output_read_password: 'test_pw',
+            output_password_protection_flag: 0,
+            output_watermark: 'new_watermark',
+            output_watermark_color: 'grey',
+            output_watermark_font: 'Arial',
+            output_watermark_opacity: 51,
+            output_watermark_size: 32,
             output_type: 'pdf',
             output_encoding: 'raw',
             output_converter: 'libreoffice',
-            output_read_password: 'test_pw',
-            output_watermark: 'test_watermark',
-            output_watermark_opacity:70,
-            output_watermark_color:"blue",
-            output_watermark_font:"Aerial",
-            output_watermark_size:30,
             output_page_width: 500,
             output_page_height: 500,
-            output_even_page: true,
-            output_merge_making_even: false,
-            output_modify_password: 'test_modify_password',
-            output_password_protection_flag: 0,
             lock_form: true,
             output_copies: 3,
             page_margin: {
@@ -58,10 +62,9 @@ describe('Tests for config', () => {
             output_page_format: 'test_page_format',
             output_merge: false,
             output_sign_certificate: 'test_sign_certificate',
-            output_sign_certificate_password: "test_sign_certificate_password",
+            output_sign_certificate_password: 'test_certificate_password',
             identify_form_fields: true,
             output_split: true,
-            output_remove_last_page : true
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
@@ -97,7 +100,10 @@ describe('Tests for config', () => {
     });
     test('Test cloud access for output file: OAuthToken, AWSToken, FTPToken and SFTPToken', () => {
         // OAuthToken
-        const oAuthToken = cop.config.CloudAccessToken.fromOAuth('dropbox', 'dummy_token');
+        const oAuthToken = cop.config.CloudAccessToken.fromOAuth(
+            'dropbox',
+            'dummy_token',
+        );
         const oAuthTokenExpected = {
             output_location: 'dropbox',
             cloud_access_token: 'dummy_token',
@@ -105,7 +111,10 @@ describe('Tests for config', () => {
         expect(oAuthToken.asDict()).toEqual(oAuthTokenExpected);
 
         // AWSToken
-        const awsToken = cop.config.CloudAccessToken.fromAWS('AWS_access_key_id', 'AWS_secter_access_key');
+        const awsToken = cop.config.CloudAccessToken.fromAWS(
+            'AWS_access_key_id',
+            'AWS_secter_access_key',
+        );
         const awsTokenExpected = {
             output_location: 'aws_s3',
             cloud_access_token: {
@@ -116,7 +125,12 @@ describe('Tests for config', () => {
         expect(awsToken.asDict()).toEqual(awsTokenExpected);
 
         // FTPToken & SFTPToken
-        const ftpToken = cop.config.CloudAccessToken.fromFTP('host_name', 35, 'dummy_user', 'dummy_pw');
+        const ftpToken = cop.config.CloudAccessToken.fromFTP(
+            'host_name',
+            35,
+            'dummy_user',
+            'dummy_pw',
+        );
         const ftpCloudAccessToken = {
             host: 'host_name',
             port: 35,
@@ -127,7 +141,12 @@ describe('Tests for config', () => {
             output_location: 'ftp',
             cloud_access_token: ftpCloudAccessToken,
         };
-        const sftpToken = cop.config.CloudAccessToken.fromSFTP('host_name', 35, 'dummy_user', 'dummy_pw');
+        const sftpToken = cop.config.CloudAccessToken.fromSFTP(
+            'host_name',
+            35,
+            'dummy_user',
+            'dummy_pw',
+        );
         const sftpTokenExpected = {
             output_location: 'sftp',
             cloud_access_token: ftpCloudAccessToken,
@@ -137,10 +156,11 @@ describe('Tests for config', () => {
     });
     test('Test post-process, conversion and merge commands', () => {
         // post-process
-        const postProcessCommand = new cop.config.Command(
-            'echo_post',
-            { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
-        );
+        const postProcessCommand = new cop.config.Command('echo_post', {
+            p1: 'Parameter1',
+            p2: 'Parameter2',
+            p3: 'Parameter3',
+        });
         const postProcessCommands = new cop.config.Commands(
             postProcessCommand,
             false,
@@ -151,20 +171,26 @@ describe('Tests for config', () => {
                 command: 'echo_post',
                 return_output: false,
                 delete_delay: 1500,
-                command_parameters: { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
+                command_parameters: {
+                    p1: 'Parameter1',
+                    p2: 'Parameter2',
+                    p3: 'Parameter3',
+                },
             },
         };
         expect(postProcessCommands.asDict()).toEqual(postProcessExpected);
 
         // conversion
-        const preConversionCommand = new cop.config.Command(
-            'echo_pre',
-            { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
-        );
-        const postConversionCommand = new cop.config.Command(
-            'echo_post',
-            { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
-        );
+        const preConversionCommand = new cop.config.Command('echo_pre', {
+            p1: 'Parameter1',
+            p2: 'Parameter2',
+            p3: 'Parameter3',
+        });
+        const postConversionCommand = new cop.config.Command('echo_post', {
+            p1: 'Parameter1',
+            p2: 'Parameter2',
+            p3: 'Parameter3',
+        });
         const conversionCommands = new cop.config.Commands(
             undefined,
             undefined,
@@ -175,18 +201,27 @@ describe('Tests for config', () => {
         const conversionExpected = {
             conversion: {
                 pre_command: 'echo_pre',
-                pre_command_parameters: { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
+                pre_command_parameters: {
+                    p1: 'Parameter1',
+                    p2: 'Parameter2',
+                    p3: 'Parameter3',
+                },
                 post_command: 'echo_post',
-                post_command_parameters: { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
+                post_command_parameters: {
+                    p1: 'Parameter1',
+                    p2: 'Parameter2',
+                    p3: 'Parameter3',
+                },
             },
         };
         expect(conversionCommands.asDict()).toEqual(conversionExpected);
 
         // merge
-        const postMergeCommand = new cop.config.Command(
-            'echo_post',
-            { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
-        );
+        const postMergeCommand = new cop.config.Command('echo_post', {
+            p1: 'Parameter1',
+            p2: 'Parameter2',
+            p3: 'Parameter3',
+        });
         const postMergeCommands = new cop.config.Commands(
             undefined,
             undefined,
@@ -198,19 +233,28 @@ describe('Tests for config', () => {
         const postMergeExpected = {
             merge: {
                 post_command: 'echo_post',
-                post_command_parameters: { p1: 'Parameter1', p2: 'Parameter2', p3: 'Parameter3' },
+                post_command_parameters: {
+                    p1: 'Parameter1',
+                    p2: 'Parameter2',
+                    p3: 'Parameter3',
+                },
             },
         };
         expect(postMergeCommands.asDict()).toEqual(postMergeExpected);
     });
     test('Test route paths', async () => {
-        const printer:cop.config.Printer = new cop.config.Printer("http://localhost:3000","1.1")
+        //If you are testing for ipp-printer-> enable ipp-printer on port 3000 and test it.
+        // const printer:cop.config.Printer = new cop.config.Printer("http://localhost:3000","1.1")
+        // const serv: cop.config.Server = new cop.config.Server(
+        //     'http://localhost:8010/',
+        //     new cop.config.ServerConfig('YOUR_API_KEY',undefined,printer)
+        // );
         const serv: cop.config.Server = new cop.config.Server(
-            'https://api.cloudofficeprint.com/',
-            new cop.config.ServerConfig('YOUR_API_KEY',undefined,printer),
+            'http://localhost:8010/',
+            new cop.config.ServerConfig('YOUR_API_KEY')
         );
         expect(await serv.isReachable()).toBeTruthy();
-        expect(await serv.isIppPrinterReachable()).toBeTruthy();
+        // expect(await serv.isIppPrinterReachable()).toBeTruthy();
         expect(typeof await serv.getVersionSoffice()).toBe('string');
         expect(typeof await serv.getVersionOfficetopdf()).toBe('string');
         expect(typeof await serv.getSupportedTemplateMimetypes()).toBe('object');
@@ -218,5 +262,30 @@ describe('Tests for config', () => {
         expect(typeof await serv.getSupportedPrependMimetypes()).toBe('object');
         expect(typeof await serv.getSupportedAppendMimetypes()).toBe('object');
         expect(typeof await serv.getVersionCop()).toBe('string');
+    });
+    test('Test for RequestOptions and output Polling', () => {
+        const extraHeaders = {
+            file_id: "Any file id like FILE_123",
+            access_token: "Access Token for above hostname (if any) "
+        }
+        const requestOptions = new cop.config.RequestOption('https://www.apexofficeprint.com/post/', extraHeaders);
+        const conf = new cop.config.OutputConfig('pdf');
+        conf.outputPolling = true;
+        conf.requestOption = requestOptions;
+        const configExpected = {
+            output_type: 'pdf',
+            output_encoding: 'raw',
+            output_converter: 'libreoffice',
+            output_polling: true,
+            request_option: {
+                url: "https://www.apexofficeprint.com/post/",
+                extra_headers: {
+                    file_id: "Any file id like FILE_123",
+                    access_token: "Access Token for above hostname (if any) "
+                }
+            }
+        };
+        console.log(conf.asDict());
+        expect(conf.asDict()).toEqual(configExpected);
     });
 });

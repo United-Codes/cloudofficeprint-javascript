@@ -15,6 +15,8 @@ export class Image extends Element {
     url: string | undefined;
     width: number | string | undefined;
     height: number | string | undefined;
+    maintainAspectRatio: string | boolean | undefined;
+    ignoreError: string | boolean | undefined;
 
     /**
      * @param name The name of the image element.
@@ -47,6 +49,9 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        maintainAspectRatio?: boolean | string,
+        ignoreError?: boolean | string
+
     ) {
         super(name);
         this.source = source;
@@ -59,6 +64,9 @@ export class Image extends Element {
         this.url = url;
         this.width = width;
         this.height = height;
+        this.maintainAspectRatio = maintainAspectRatio;
+        this.ignoreError = ignoreError;
+
     }
 
     /**
@@ -75,8 +83,8 @@ export class Image extends Element {
      * @returns the dict representation of the suffixes that need to be appended to the name of
      *  this property in this object's dict representation
      */
-    asDictSuffixes(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {};
+    asDictSuffixes(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {};
 
         if (this.maxWidth !== undefined) {
             result._max_width = this.maxWidth;
@@ -105,6 +113,12 @@ export class Image extends Element {
         if (this.height !== undefined) {
             result._height = this.height;
         }
+        if (this.maintainAspectRatio !== undefined) {
+            result._maintain_aspect_ratio = this.maintainAspectRatio;
+        }
+        if (this.ignoreError !== undefined) {
+            result._ignore_error = this.ignoreError;
+        }
 
         return result;
     }
@@ -113,16 +127,14 @@ export class Image extends Element {
      * The cloud access token as a dict, for building the JSON.
      * @returns dict representation for this cloud access token
      */
-    asDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {
+    asDict(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {
             [this.name]: this.source,
         };
 
-        Object.entries(this.asDictSuffixes()).forEach(
-            ([key, value]) => {
-                result[`${this.name}${key}`] = value;
-            },
-        );
+        Object.entries(this.asDictSuffixes()).forEach(([key, value]) => {
+            result[`${this.name}${key}`] = value;
+        });
 
         return result;
     }

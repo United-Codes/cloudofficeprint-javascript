@@ -9,9 +9,9 @@ export abstract class CellStyle {
      */
     asDict(propertyName: string) {
         const result: { [key: string]: string | number | boolean } = {};
-        Object.entries(this.asDictSuffixes()).forEach(
-            ([key, val]) => { result[`${propertyName}${key}`] = val; },
-        );
+        Object.entries(this.asDictSuffixes()).forEach(([key, val]) => {
+            result[`${propertyName}${key}`] = val;
+        });
         return result;
     }
 
@@ -52,7 +52,8 @@ export class CellStyleDocx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } =
+            super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
             result._cell_background_color = this.cellBackgroundColor;
@@ -193,7 +194,8 @@ export class CellStyleXlsx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } =
+            super.asDictSuffixes();
 
         if (this.cellLocked !== undefined) {
             result._cell_locked = this.cellLocked;
@@ -279,6 +281,7 @@ export class CellStyleXlsx extends CellStyle {
 }
 
 export abstract class Element {
+    /**Name of the tag being used */
     name: string;
 
     /**
@@ -446,7 +449,7 @@ export class AutoLink extends Property {
      * @param value the value for the AutoLink.
      */
     constructor(name: string, value: string) {
-        super(name,value);
+        super(name, value);
     }
 
     /**
@@ -510,7 +513,12 @@ export class TableOfContents extends Element {
      * @param tabLeader How the space between title and page number should be filled.
      *  Can be "hyphen", "underscore", or "dot" (default). Optional.
      */
-    constructor(name: string, title?: string, depth?: number, tabLeader?: string) {
+    constructor(
+        name: string,
+        title?: string,
+        depth?: number,
+        tabLeader?: string,
+    ) {
         super(name);
         this.title = title;
         this.depth = depth;
@@ -873,7 +881,9 @@ export class COPChartDateOptions {
  */
 export class COPChart extends Element {
     xData: string[];
-    yDatas: { [key: string]: (string | number | { [key: string]: string | number })[] };
+    yDatas: {
+        [key: string]: (string | number | { [key: string]: string | number })[];
+    };
     date: COPChartDateOptions | undefined;
     title: string | undefined;
     xTitle: string | undefined;
@@ -897,8 +907,15 @@ export class COPChart extends Element {
     constructor(
         name: string,
         xData: string[],
-        yDatas: (string | number | { [key: string]: string | number })[][] |
-        { [key: string]: (string | number | { [key: string]: string | number })[] },
+        yDatas:
+            | (string | number | { [key: string]: string | number })[][]
+            | {
+                [key: string]: (
+                    | string
+                    | number
+                    | { [key: string]: string | number }
+                )[];
+            },
         date?: COPChartDateOptions,
         title?: string,
         xTitle?: string,
@@ -917,14 +934,14 @@ export class COPChart extends Element {
         this.yDatas = {};
 
         if (yDatas instanceof Array) {
-            yDatas.forEach(
-                (el, index) => {
-                    this.yDatas[`series ${index + 1}`] = el;
-                },
-            );
+            yDatas.forEach((el, index) => {
+                this.yDatas[`series ${index + 1}`] = el;
+            });
         } else if (yDatas.constructor !== Object) {
             // If yDatas is not an array and not a dictionary: throw error
-            throw new Error(`Expected a dictionary or array, but received ${typeof yDatas}`);
+            throw new Error(
+                `Expected a dictionary or array, but received ${typeof yDatas}`,
+            );
         } else {
             this.yDatas = yDatas;
         }
@@ -935,8 +952,7 @@ export class COPChart extends Element {
      * @returns dictionary representation of this Element
      */
     asDict(): {
-        [key: string]:
-        {
+        [key: string]: {
             [key: string]:
             {
                 [key: string]:
@@ -965,41 +981,40 @@ export class COPChart extends Element {
         }
     } {
         const ySeries: {
-            name: string, data: (string | number |
-            { [key: string]: string | number })[]
+            name: string;
+            data: (string | number | { [key: string]: string | number })[];
         }[] = [];
-        Object.entries(this.yDatas).forEach(
-            (e) => {
-                ySeries.push({ name: e[0], data: e[1] });
-            },
-        );
+        Object.entries(this.yDatas).forEach((e) => {
+            ySeries.push({ name: e[0], data: e[1] });
+        });
 
         const result: {
             [key: string]:
-            {
+            | {
                 [key: string]:
-                string[] |
-                string |
-                {
-                    [key: string]:
-                    string |
-                    number
-                }
-            } |
-            {
-                [key: string]:
-                {
-                    [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            } |
-            string |
-            {
-                [key: string]:
-                string
+                | string[]
+                | string
+                | {
+                    [key: string]: string | number;
+                };
             }
+            | {
+                [key: string]:
+                | {
+                    [key: string]:
+                    | string
+                    | (
+                        | string
+                        | number
+                        | { [key: string]: string | number }
+                    )[];
+                }[]
+                | string;
+            }
+            | string
+            | {
+                [key: string]: string;
+            };
         } = {
             xAxis: {
                 data: this.xData,
@@ -1013,39 +1028,45 @@ export class COPChart extends Element {
             result.title = this.title;
         }
         if (this.date !== undefined) {
-            (result.xAxis as {
-                [key: string]:
-                string[] |
-                string |
-                {
+            (
+                result.xAxis as {
                     [key: string]:
-                    string |
-                    number
+                    | string[]
+                    | string
+                    | {
+                        [key: string]: string | number;
+                    };
                 }
-            }).date = this.date.asDict();
+            ).date = this.date.asDict();
         }
         if (this.xTitle !== undefined) {
-            (result.xAxis as {
-                [key: string]:
-                string[] |
-                string |
-                {
+            (
+                result.xAxis as {
                     [key: string]:
-                    string |
-                    number
+                    | string[]
+                    | string
+                    | {
+                        [key: string]: string | number;
+                    };
                 }
-            }).title = this.xTitle;
+            ).title = this.xTitle;
         }
         if (this.yTitle !== undefined) {
-            (result.yAxis as {
-                [key: string]:
-                {
+            (
+                result.yAxis as {
                     [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            }).title = this.yTitle;
+                    | {
+                        [key: string]:
+                        | string
+                        | (
+                            | string
+                            | number
+                            | { [key: string]: string | number }
+                        )[];
+                    }[]
+                    | string;
+                }
+            ).title = this.yTitle;
         }
         if (this.x2Title !== undefined) {
             result.x2Axis = {
@@ -1197,6 +1218,87 @@ export class TextBox extends Element {
 }
 
 /**
+ * Only supported in Excel. Represents an object that indicates to put a freeze
+ * pane in the excel template.
+ */
+export class Freeze extends Property {
+    /**
+     *
+     * @param name The name for this property
+     * @param value Three options are available.
+     *  First option, place the pane where the tag is located, using a value of **true**.
+     *  Second option, provide the location to place the pane, e.g. **"C5"**, in the format of
+     *   excel cell and row.
+     *  Third option, don't place a pane, using a value of **false**.
+     */
+    constructor(name: string, value: string | boolean) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{freeze ${this.name}}`]);
+    }
+}
+
+/**
+ * The class for the link/target tags.
+ * This tags allows you to place a link to a target in the same document.
+ * If the uid is not provided, a new uid will be generated uniquely for every link and target pair.
+ */
+export class Link extends Property {
+    uidName?: string;
+    uidValue?: string;
+
+    /**
+     * Create a new link/target tag pair.
+     * If the uid is not provided, a new uid will be generated uniquely for each link/target pair.
+     * @param name the name of the link/target tags.
+     * @param value the value of the link/target tags.
+     * @param uidName the name of the uid of the link/target pair.
+     * @param uidValue the value of the uid of the link/target pair.
+     */
+    constructor(
+        name: string,
+        value: string,
+        uidName?: string,
+        uidValue?: string,
+    ) {
+        super(name, value);
+        this.uidName = uidName;
+        this.uidValue = uidValue;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        if (this.uidName && this.uidValue) {
+            return { [this.name]: this.value, [this.uidName]: this.uidValue };
+        }
+        return { [this.name]: this.value };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        if (this.uidName && this.uidValue) {
+            return new Set([
+                `{link ${this.name}:${this.uidName}}`,
+                `{target ${this.name}:${this.uidName}}`,
+            ]);
+        }
+        return new Set([`{link ${this.name}}`, `{target ${this.name}}`]);
+    }
+}
+
+/**
  * A collection used to group multiple elements together.
  * It can contain nested `ElementCollection`s and should be used to pass multiple `Element`s
  * as PrintJob data, as well as to allow for nested elements.
@@ -1231,11 +1333,9 @@ export class ElementCollection extends Element {
      *  this element collection object
      */
     addAll(col: ElementCollection) {
-        col.elements.forEach(
-            (el) => {
-                this.add(el);
-            },
-        );
+        col.elements.forEach((el) => {
+            this.add(el);
+        });
     }
 
     /**
@@ -1253,15 +1353,13 @@ export class ElementCollection extends Element {
     asDict() {
         let result: { [key: string]: unknown } = {};
 
-        this.elements.forEach(
-            (el) => {
-                if (el instanceof ElementCollection) {
-                    result[el.name] = el.asDict();
-                } else {
-                    result = { ...result, ...el.asDict() };
-                }
-            },
-        );
+        this.elements.forEach((el) => {
+            if (el instanceof ElementCollection) {
+                result[el.name] = el.asDict();
+            } else {
+                result = { ...result, ...el.asDict() };
+            }
+        });
 
         return result;
     }
@@ -1273,15 +1371,11 @@ export class ElementCollection extends Element {
     availableTags(): Set<string> {
         const result = new Set<string>();
 
-        this.elements.forEach(
-            (el) => {
-                el.availableTags().forEach(
-                    (tag) => {
-                        result.add(tag);
-                    },
-                );
-            },
-        );
+        this.elements.forEach((el) => {
+            el.availableTags().forEach((tag) => {
+                result.add(tag);
+            });
+        });
 
         return result;
     }
@@ -1292,7 +1386,10 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection
      * @returns the generated element collection from an element and a name
      */
-    static elementToElementCollection(element: Element, name: string = ''): ElementCollection {
+    static elementToElementCollection(
+        element: Element,
+        name: string = '',
+    ): ElementCollection {
         return ElementCollection.fromMapping(element.asDict(), name);
     }
 
@@ -1302,14 +1399,15 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection; defaults to ''
      * @returns an element collection generated from the given mapping and name
      */
-    static fromMapping(mapping: { [key: string]: unknown }, name: string = ''): ElementCollection {
+    static fromMapping(
+        mapping: { [key: string]: unknown },
+        name: string = '',
+    ): ElementCollection {
         const resultSet = new Set<Element>();
 
-        Object.entries(mapping).forEach(
-            (e) => {
-                resultSet.add(new Property(e[0], e[1]));
-            },
-        );
+        Object.entries(mapping).forEach((e) => {
+            resultSet.add(new Property(e[0], e[1]));
+        });
 
         return new ElementCollection(name, Array.from(resultSet));
     }
@@ -1325,38 +1423,16 @@ export class ElementCollection extends Element {
     }
 }
 
-/**
- * This tag will allow you to utilize freeze pane property of the excel.Three options are available. 
- * First option, we can directly place the pane where the tag located. For this option we should provide true parameter.
- * Second option, we can provide the location where we want to place the pane such as "C5".
- * Finally, the third option is false which doesn't place a pane.
- */
-export class Freeze extends Property {
-    /**
-     * @param name name of the freeze tag
-     * @param freezeValue value for the freeze tag
-     */
-    constructor(name: string, freezeValue: string | boolean) {
-        super(name, freezeValue);
-    }
-
-    /**
-     * A set containing all available template tags this Element reacts to.
-     * @returns set of tags associated with this Element
-     */
-    availableTags(): Set<string> {
-        return new Set([`{freeze ${this.name}}`]);
-    }
-}
 
 /**
- * Inside Word and PowerPoint documents, the tag {?insert fileToInsert} can be used 
+ * Inside Word and PowerPoint and Excel documents, the tag {?insert fileToInsert} can be used 
  * to insert files like Word, Excel, Powerpoint and PDF documents.
+    Please use ExcelInsert element to insert documents in excel, because it has more options available.
  */
 export class Insert extends Property {
     /**
      * @param name Name of the insert tag. 
-     * @param documentToInsert Base64 encoded document. 
+     * @param documentToInsert document to insert which could be url,ftp,sftp or base64 endcoded.
      */
     constructor(name: string, documentToInsert: string) {
         super(name, documentToInsert);
@@ -1367,5 +1443,451 @@ export class Insert extends Property {
      */
     availableTags(): Set<string> {
         return new Set([`?insert ${this.name}`]);
+    }
+}
+
+/**
+ * Inside Excel it is posiible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
+        Options available are:  you can provide dynamic icon and icon position.
+ */
+export class ExcelInsert extends Element {
+    value: string;
+    // isPreview: boolean | undefined;
+    icon: string | undefined;
+    fromRow: number | undefined
+    fromCol: string | number | undefined;
+    fromRowOff: string | undefined;
+    fromColOff: string | undefined;
+    toRow: number | undefined;
+    toCol: string | number | undefined;
+    toRowOff: string | undefined;
+    toColOff: string | undefined;
+
+    /**
+     * 
+     * @param name  Name of insert tag. Ex(fileToInsert)
+     * @param value File to insert of path to file. (Source can be FTP, SFTP, URL or base64encoded file.)
+     * @param icon Icon to be showed as the document, when clicked on it, redirects it to file. Default icon is taken if not provided. Optional.
+     * @param fromRow position for top of icon. Defaults to row of the tag. Optional.
+     * @param fromCol positon for left of icon. Defaults to column of the tag. Optional.
+     * @param fromRowOff space after the value of from Row. Defaults to 0. Optional.
+     * @param fromColOff space after the value of fromCol. Defaults to 0. Optional.
+     * @param toRow position for bottom of icon. Defaults to row of the tag + 3. Optional.
+     * @param toCol position for right side of icon. Defaults to column of the tag. Optional.
+     * @param toRowOff space after toRow value. Defaults to 20px. Optional.
+     * @param toColOff space after toCol value. Defaults to 50px. Optional.
+     */
+    constructor(
+        name: string,
+        value: string,
+        // isPreview?: boolean,
+        icon?: string,
+        fromRow?: number,
+        fromCol?: string | number,
+        fromRowOff?: string,
+        fromColOff?: string,
+        toRow?: number,
+        toCol?: string | number,
+        toRowOff?: string,
+        toColOff?: string
+    ) {
+        super(name);
+        this.value = value;
+        // this.isPreview = isPreview;
+        this.icon = icon;
+        this.fromRow = fromRow;
+        this.fromCol = fromCol;
+        this.fromRowOff = fromRowOff;
+        this.fromColOff = fromColOff;
+        this.toRow = toRow;
+        this.toCol = toCol;
+        this.toRowOff = toRowOff;
+        this.toColOff = toColOff;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {
+            [this.name]: this.value,
+        }
+        // if (this.isPreview !== undefined) {
+        //     result[this.name + '_isPreview'] = this.isPreview
+        // }
+        if (this.icon !== undefined) {
+            result[this.name + '_icon'] = this.icon
+        }
+        if (this.fromRow !== undefined) {
+            result[this.name + '_fromRow'] = this.fromRow
+        }
+        if (this.fromCol !== undefined) {
+            result[this.name + '_fromCol'] = this.fromCol
+        }
+        if (this.fromRowOff !== undefined) {
+            result[this.name + '_fromRowOff'] = this.fromRowOff
+        }
+        if (this.fromColOff !== undefined) {
+            result[this.name + '_fromColOff'] = this.fromColOff
+        }
+        if (this.toRow !== undefined) {
+            result[this.name + '_toRow'] = this.toRow
+        }
+        if (this.toCol !== undefined) {
+            result[this.name + '_toCol'] = this.toCol
+        }
+        if (this.toRowOff !== undefined) {
+            result[this.name + '_toRowOff'] = this.toRowOff
+        }
+        if (this.toColOff !== undefined) {
+            result[this.name + '_toColOff'] = this.toColOff
+        }
+        return result;
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{?insert ${this.name}}`])
+    }
+
+}
+
+/**
+ * This tag is used to make password protected sheets in Excel. 
+ * This tag has the feature of password along with different other features.
+ *     
+ * Note: value is considered password, so try to use only one (either value or passowrd).
+ */
+export class ProtectSheet extends Element {
+    value: string | undefined;
+    autoFilter: string | boolean | undefined;
+    deleteColumns: string | boolean | undefined;
+    deleteRows: string | boolean | undefined;
+    formatCells: string | boolean | undefined;
+    formatColumns: string | boolean | undefined;
+    formatRows: string | boolean | undefined;
+    insertColumns: string | boolean | undefined;
+    insertHyperlinks: string | boolean | undefined;
+    insertRows: string | boolean | undefined;
+    password: string | undefined;
+    pivotTables: string | boolean | undefined;
+    selectLockedCells: string | boolean | undefined;
+    selectUnlockedCells: string | boolean | undefined;
+    sort: string | boolean | undefined;
+    /**
+     * 
+     * @param name Name of the tag
+     * @param value Value for the tag; this is used as password
+     * @param autoFilter lock auto filter in sheet.
+     * @param deleteColumns lock delete columns in sheet.
+     * @param deleteRows lock delete rows in sheet.
+     * @param formatCells lock format cells.
+     * @param formatColumns lock format columns.
+     * @param formatRows lock format rows.
+     * @param insertColumns lock insert columns.
+     * @param insertHyperlinks lock insert hyperlinks.
+     * @param insertRows lock insert rows.
+     * @param password password to lock with.
+     * @param pivotTables lock pivot tables.
+     * @param selectLockedCells lock select locked cells.
+     * @param selectUnlockedCells lock select unlocked cells.
+     * @param sort lock sort.
+     */
+    constructor(
+        name: string,
+        value?: string,
+        autoFilter?: string | boolean,
+        deleteColumns?: string | boolean,
+        deleteRows?: string | boolean,
+        formatCells?: string | boolean,
+        formatColumns?: string | boolean,
+        formatRows?: string | boolean,
+        insertColumns?: string | boolean,
+        insertHyperlinks?: string | boolean,
+        insertRows?: string | boolean,
+        password?: string,
+        pivotTables?: string | boolean,
+        selectLockedCells?: string | boolean,
+        selectUnlockedCells?: string | boolean,
+        sort?: string | boolean
+    ) {
+        super(name);
+        this.value = value;
+        this.autoFilter = autoFilter;
+        this.deleteColumns = deleteColumns;
+        this.deleteRows = deleteRows;
+        this.formatCells = formatCells;
+        this.formatColumns = formatColumns;
+        this.formatRows = formatRows;
+        this.insertColumns = insertColumns;
+        this.insertHyperlinks = insertHyperlinks;
+        this.insertRows = insertRows;
+        this.password = password;
+        this.pivotTables = pivotTables;
+        this.selectLockedCells = selectLockedCells;
+        this.selectUnlockedCells = selectUnlockedCells;
+        this.sort = sort;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {};
+        if (this.value != undefined) {
+            result[this.name] = this.value;
+        }
+        if (this.autoFilter != undefined) {
+            result[this.name + `_allow_auto_filter`] = this.autoFilter;
+        }
+        if (this.deleteColumns != undefined) {
+            result[this.name + `_allow_delete_columns`] = this.deleteColumns;
+        }
+        if (this.deleteRows != undefined) {
+            result[this.name + `_allow_delete_rows`] = this.deleteRows;
+        }
+        if (this.formatCells != undefined) {
+            result[this.name + `_allow_format_cells`] = this.formatCells;
+        }
+        if (this.formatColumns != undefined) {
+            result[this.name + `_allow_format_columns`] = this.formatColumns;
+        }
+        if (this.formatRows != undefined) {
+            result[this.name + `_allow_format_rows`] = this.formatRows;
+        }
+        if (this.insertColumns != undefined) {
+            result[this.name + `_allow_insert_columns`] = this.insertColumns;
+        }
+        if (this.insertHyperlinks != undefined) {
+            result[this.name + `_allow_insert_hyperlinks`] = this.insertHyperlinks;
+        }
+        if (this.insertRows != undefined) {
+            result[this.name + `_allow_insert_rows`] = this.insertRows;
+        }
+        if (this.password != undefined) {
+            result[this.name + `_password`] = this.password;
+        }
+        if (this.pivotTables != undefined) {
+            result[this.name + `_allow_pivot_tables`] = this.pivotTables;
+        }
+        if (this.selectLockedCells != undefined) {
+            result[this.name + `_allow_select_locked_cells`] = this.selectLockedCells;
+        }
+        if (this.selectUnlockedCells != undefined) {
+            result[this.name + `_allow_select_unlocked_cells`] = this.selectUnlockedCells;
+        }
+        if (this.sort != undefined) {
+            result[this.name + `_allow_sort`] = this.sort;
+        }
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{protect ${this.name}}`]);
+    }
+}
+/**
+ * This tag is used to append the content of docx file to the template by using {?embed fileToEmbed}.
+    This is only supported in docx and we can only embed docx file.
+    The content of document are not rendered.
+ */
+export class Embed extends Property {
+    /**
+     * In docx it is possible to copy the content of one docx file to another.
+     * @param name The name of the tag.
+     * @param fileToEmbed The docx file to embed. File source could be base64 encoded, ftp, sftp or url. 
+     */
+    constructor(name: string, fileToEmbed: string) {
+        super(name, fileToEmbed);
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`?embed ${this.name}`]);
+    }
+}
+
+/**
+ * It is possible to insert cell validation in excel using validate tag as {validate validateTag} (validate keyword followed by tagName)
+ */
+export class ValidateCell extends Element {
+    /**Set it to false for not allowing empty values in cell. The value is true by default. */
+    ignoreBlank: boolean | undefined;
+    /**Type of data used for validation. Available options are (anyValue, whole, decimal, list, date, time, textLength, custom). Please use camelCase to insert value for allow attribute. */
+    allow: string | undefined;
+    /**Value to compare with.  Note:
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br> */
+    value1: string | undefined;
+    /**Value to compare with.  Note:
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br> */
+    value2: string | undefined;
+    /**Set it to false for not showing dropdown button while validation allow type is list. It is true by default for list allow type. */
+    inCellDropdown: boolean | undefined;
+    /**Type of comparison to be done for the cell value. Available values are (lessThanOrEqual, notBetween, equal, notEqual, greaterThan, greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual). Default value is "between". Please use camelCase for the value as shown in examples. */
+    data: string | undefined;
+    /**Set it to false to hide message shown when the cell to validate is being selected. The value for it is true by default. */
+    showInputMessage: boolean | undefined;
+    /**Title of message to be shown when cell to validate is selected. */
+    inputTitle: string | undefined;
+    /**Message to be shown when cell to validate is selected. */
+    inputMessage: string | undefined;
+    /**Set it to false, if you want to hide error alert once cell validation fails. The value is true by default. */
+    showErrorAlert: boolean | undefined;
+    /**Type of error style when cell validation fails. The value is stop by default. Available options are(stop,waring, Information). */
+    errorStyle: string | undefined;
+    /**Title of error to be shown when cell validation fails. */
+    errorTitle: string | undefined;
+    /**Message of error to be shown when cell validation fails. */
+    errorMessage: string | undefined;
+    /**
+     * 
+     * @param name Name of the validate tag. For {validate tagName}, tagName is name for this element. 
+     * @param ignoreBlank Set it to false for not allowing empty values in cell. The value is true by default.
+     * @param allow Type of data used for validation. Available options are (anyValue, whole, decimal, list, date, time, textLength, custom). Please use camelCase to insert value for allow attribute.
+     * @param value1 Value to compare with.
+     * @param value2 Value to compare with.<br><br>
+     * Note:
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br>
+     * @param inCellDropdown Set it to false for not showing dropdown button while validation allow type is list. It is true by default for list allow type.
+     * @param data Type of comparison to be done for the cell value. Available values are (lessThanOrEqual, notBetween, equal, notEqual, greaterThan, greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual). Default value is "between". Please use camelCase for the value as shown in examples.
+     * @param showInputMessage Set it to false to hide message shown when the cell to validate is being selected. The value for it is true by default.
+     * @param inputTitle Title of message to be shown when cell to validate is selected.
+     * @param inputMessage Message to be shown when cell to validate is selected.
+     * @param showErrorAlert Set it to false, if you want to hide error alert once cell validation fails. The value is true by default.
+     * @param errorStyle Type of error style when cell validation fails. The value is stop by default. Available options are(stop,waring, Information).
+     * @param errorTitle Title of error to be shown when cell validation fails.
+     * @param errorMessage Message of error to be shown when cell validation fails.
+     */
+    constructor(
+        name: string,
+        ignoreBlank?: boolean,
+        allow?: string,
+        value1?: string,
+        value2?: string,
+        inCellDropdown?: boolean,
+        data?: string,
+        showInputMessage?: boolean,
+        inputTitle?: string,
+        inputMessage?: string,
+        showErrorAlert?: boolean,
+        errorStyle?: string,
+        errorTitle?: string,
+        errorMessage?: string) {
+        super(name);
+        this.ignoreBlank = ignoreBlank;
+        this.allow = allow;
+        this.value1 = value1;
+        this.value2 = value2;
+        this.inCellDropdown = inCellDropdown;
+        this.data = data;
+        this.showInputMessage = showInputMessage;
+        this.inputTitle = inputTitle;
+        this.inputMessage = inputMessage;
+        this.showErrorAlert = showErrorAlert;
+        this.errorStyle = errorStyle;
+        this.errorTitle = errorTitle;
+        this.errorMessage = errorMessage;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {};
+        if (this.ignoreBlank !== undefined) {
+            result[this.name + '_ignore_blank'] = this.ignoreBlank;
+        }
+        if (this.allow !== undefined) {
+            result[this.name + '_allow'] = this.allow;
+        }
+        if (this.value1 !== undefined) {
+            result[this.name + '_value1'] = this.value1;
+        }
+        if (this.value2 !== undefined) {
+            result[this.name + '_value2'] = this.value2;
+        }
+        if (this.inCellDropdown !== undefined) {
+            result[this.name + '_in_cell_dropdown'] = this.inCellDropdown;
+        }
+        if (this.data !== undefined) {
+            result[this.name + '_data'] = this.data;
+        }
+        if (this.showInputMessage !== undefined) {
+            result[this.name + '_show_input_message'] = this.showInputMessage;
+        }
+        if (this.inputTitle !== undefined) {
+            result[this.name + '_input_title'] = this.inputTitle;
+        }
+        if (this.inputMessage !== undefined) {
+            result[this.name + '_input_message'] = this.inputMessage;
+        }
+        if (this.showErrorAlert !== undefined) {
+            result[this.name + '_show_error_alert'] = this.showErrorAlert;
+        }
+        if (this.errorStyle !== undefined) {
+            result[this.name + '_error_style'] = this.errorStyle;
+        }
+        if (this.errorTitle !== undefined) {
+            result[this.name + '_error_title'] = this.errorTitle;
+        }
+        if (this.errorMessage !== undefined) {
+            result[this.name + '_error_message'] = this.errorMessage;
+        }
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`validate ${this.name}`]);
     }
 }

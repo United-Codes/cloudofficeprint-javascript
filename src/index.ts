@@ -6,5 +6,7 @@ export * as printjob from './printjob';
 export { PrintJob } from './printjob';
 export * as resource from './resource';
 export { Resource } from './resource';
+export * as template from './template';
+export { Template } from './template';
 export * as response from './response';
 export { Response } from './response';

@@ -96,14 +96,14 @@ describe('Tests for elements', () => {
         expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
     });
     test('Test AutoLink', () => {
-        const hyperlink = new cop.elements.Hyperlink(
+        const autoLink = new cop.elements.Hyperlink(
             'AutoLink',
             'AutoLink including hyperlinks and text combined',
         );
-        const hyperlinkExpected = {
+        const autoLinkExpected = {
             AutoLink:'AutoLink including hyperlinks and text combined'
         };
-        expect(hyperlink.asDict()).toEqual(hyperlinkExpected);
+        expect(autoLink.asDict()).toEqual(autoLinkExpected);
     });
     test('Test hyperlink', () => {
         const hyperlink = new cop.elements.Hyperlink(
@@ -288,5 +288,66 @@ describe('Tests for elements', () => {
         }
         expect(insertDocument.asDict()).toEqual(insertDocumentExpected);
     });
+    test('Test protect sheet element', () => {
+        const protectElement = new cop.elements.ProtectSheet('protect_tag_name', 'password', true, false, true, 'YES', false, true, false, true, 'YES', 'other passord', true, false, true, 'YES');
+        const protectElementExpected = {
+            protect_tag_name: 'password',
+            protect_tag_name_allow_auto_filter: true,
+            protect_tag_name_allow_delete_columns: false,
+            protect_tag_name_allow_delete_rows: true,
+            protect_tag_name_allow_format_cells: 'YES',
+            protect_tag_name_allow_format_columns: false,
+            protect_tag_name_allow_format_rows: true,
+            protect_tag_name_allow_insert_columns: false,
+            protect_tag_name_allow_insert_hyperlinks: true,
+            protect_tag_name_allow_insert_rows: 'YES',
+            protect_tag_name_password: 'other passord',
+            protect_tag_name_allow_pivot_tables: true,
+            protect_tag_name_allow_select_locked_cells: false,
+            protect_tag_name_allow_select_unlocked_cells: true,
+            protect_tag_name_allow_sort: 'YES'
+        }
+        console.log(protectElementExpected);
+        expect(protectElement.asDict()).toEqual(protectElementExpected);
+    });
+    test('Test excel insert element',()=>{
+        const excelInsert = new cop.elements.ExcelInsert('fileToInsert',"base64EncodedFile","base64icon",undefined,3,'2px','3px',undefined,3,'2px','50px');
+        const excelInsert_expected = {
+            "fileToInsert":"base64EncodedFile",
+            "fileToInsert_icon":"base64icon",
+            "fileToInsert_fromCol":3,
+            "fileToInsert_fromRowOff":"2px",
+            "fileToInsert_fromColOff":"3px",
+            "fileToInsert_toCol":3,
+            "fileToInsert_toRowOff":'2px',
+            "fileToInsert_toColOff":"50px"
+        }
+        expect(excelInsert.asDict()).toEqual(excelInsert_expected);
+    })
+    test('Test embed element',()=>{
+        const embedDocument = new cop.elements.Embed('fileToEmbed',"base64 encoded");
+        const embedDocumentExpected = {
+            fileToEmbed:"base64 encoded",
+        }
+        expect(embedDocument.asDict()).toEqual(embedDocumentExpected);
+    })
+    test ('Test cell validation', () => {
+        const validateCell = new cop.elements.ValidateCell("validateTag",false,"whole","0","100",undefined,"between",true,"Instructions","Insert number between 0 and 100",true,"warning","Error","Number out of bound");
+        const expectedValidateCell = {
+            validateTag_ignore_blank : false,
+            validateTag_allow : "whole",
+            validateTag_value1 : "0",
+            validateTag_value2 : "100",
+            validateTag_data : "between",
+            validateTag_show_input_message : true,
+            validateTag_input_title : "Instructions",
+            validateTag_input_message : "Insert number between 0 and 100",
+            validateTag_show_error_alert : true,
+            validateTag_error_style : "warning",
+            validateTag_error_title : "Error",
+            validateTag_error_message : "Number out of bound"
+        }
+        expect(validateCell.asDict()).toEqual(expectedValidateCell);
+    })
     // Cloud Office Print charts get tested in charts.test.ts
 });
