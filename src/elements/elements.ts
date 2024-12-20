@@ -34,15 +34,140 @@ export abstract class CellStyle {
 export class CellStyleDocx extends CellStyle {
     cellBackgroundColor: string | undefined;
     width: string | number | undefined;
+    preserveTotalWidthOfTable: boolean | undefined;
+    border?: string | undefined;
+    borderTop?: string | undefined;
+    borderBottom?: string | undefined;
+    borderLeft?: string | undefined;
+    borderRight?: string | undefined;
+    borderDiagonalDown?: string | undefined;
+    borderDiagonalUp?: string | undefined;
+    borderColor?: string | undefined;
+    borderTopColor?: string | undefined;
+    borderBottomColor?: string | undefined;
+    borderLeftColor?: string | undefined;
+    borderRightColor?: string | undefined;
+    borderDiagonalUpColor?: string | undefined;
+    borderDiagonalDownColor?: string | undefined;
+    borderSize?: string | number | undefined;
+    borderTopSize?: string | number | undefined;
+    borderBottomSize?: string | number | undefined;
+    borderLeftSize?: string | number | undefined;
+    borderRightSize?: string | number | undefined;
+    borderDiagonalUpSize?: string | number | undefined;
+    borderDiagonalDownSize?: string | number | undefined;
+    borderSpace?: string | number | undefined;
+    borderTopSpace?: string | number | undefined;
+    borderBottomSpace?: string | number | undefined;
+    borderLeftSpace?: string | number | undefined;
+    borderRightSpace?: string | number | undefined;
+    borderDiagonalUpSpace?: string | number | undefined;
+    borderDiagonalDownSpace?: string | number | undefined;
 
     /**
+     *
      * @param cellBackgroundColor The background color of the cell. Optional.
      * @param width The width of the cell. Optional.
+     * @param preserveTotalWidthOfTable c.
+     * @param border The border style applied to all edges of the table. Optional.
+     * @param borderTop The border style applied to the top edge of the table. Optional.
+     * @param borderBottom The border style applied to the bottom edge of the table. Optional.
+     * @param borderLeft The border style applied to the left edge of the table. Optional.
+     * @param borderRight The border style applied to the right edge of the table. Optional.
+     // eslint-disable-next-line max-len
+     * @param borderDiagonalDown The border style applied to the diagonal from the top-left to the bottom-right corner. Optional.
+     // eslint-disable-next-line max-len
+     * @param borderDiagonalUp  The border style applied to the diagonal from the bottom-left to the top-right corner. Optional.
+     * @param borderColor The color of the borders (top, bottom, left, right). Optional.
+     * @param borderTopColor  The color of the top border. Optional.
+     * @param borderBottomColor  The color of the bottom border. Optional.
+     * @param borderLeftColor  The color of the left border. Optional.
+     * @param borderRightColor  The color of the right border. Optional.
+     * @param borderDiagonalUpColor  The color of the diagonal up border. Optional.
+     * @param borderDiagonalDownColor The color of the diagonal down border. Optional.
+     * @param borderSize The width of the borders (top, bottom, left, right) in points. Optional.
+     * @param borderTopSize  The width of the top border in points. Optional.
+     * @param borderBottomSize  The width of the bottom border in points. Optional.
+     * @param borderLeftSize  The width of the left border in points. Optional.
+     * @param borderRightSize  The width of the right border in points. Optional.
+     * @param borderDiagonalUpSize  The width of the diagonal up border in points. Optional.
+     * @param borderDiagonalDownSize  The width of the diagonal down border in points. Optional.
+     * @param borderSpace The spacing between the content and borders in points. Optional.
+     * @param borderTopSpace  The spacing between the content and the top border. Optional.
+     * @param borderBottomSpace The spacing between the content and the bottom border. Optional.
+     * @param borderLeftSpace The spacing between the content and the left border. Optional.
+     * @param borderRightSpace The spacing between the content and the right border. Optional.
+    // eslint-disable-next-line max-len
+     * @param borderDiagonalUpSpace The spacing between the content and the diagonal up border. Optional.
+     // eslint-disable-next-line max-len, max-len
+     * @param borderDiagonalDownSpace The spacing between the content and the diagonal down border. Optional.
      */
-    constructor(cellBackgroundColor?: string, width?: string | number) {
+    constructor(
+        cellBackgroundColor?: string,
+        width?: string | number,
+        preserveTotalWidthOfTable?: boolean | undefined,
+        border?: string | undefined,
+        borderTop?: string | undefined,
+        borderBottom?: string | undefined,
+        borderLeft?: string | undefined,
+        borderRight?: string | undefined,
+        borderDiagonalDown?: string | undefined,
+        borderDiagonalUp?: string | undefined,
+        borderColor?: string | undefined,
+        borderTopColor?: string | undefined,
+        borderBottomColor?: string | undefined,
+        borderLeftColor?: string | undefined,
+        borderRightColor?: string | undefined,
+        borderDiagonalUpColor?: string | undefined,
+        borderDiagonalDownColor?: string | undefined,
+        borderSize?: string | number | undefined,
+        borderTopSize?: string | number | undefined,
+        borderBottomSize?: string | number | undefined,
+        borderLeftSize?: string | number | undefined,
+        borderRightSize?: string | number | undefined,
+        borderDiagonalUpSize?: string | number | undefined,
+        borderDiagonalDownSize?: string | number | undefined,
+        borderSpace?: string | number | undefined,
+        borderTopSpace?: string | number | undefined,
+        borderBottomSpace?: string | number | undefined,
+        borderLeftSpace?: string | number | undefined,
+        borderRightSpace?: string | number | undefined,
+        borderDiagonalUpSpace?: string | number | undefined,
+        borderDiagonalDownSpace?: string | number | undefined,
+
+    ) {
         super();
         this.cellBackgroundColor = cellBackgroundColor;
         this.width = width;
+        this.preserveTotalWidthOfTable = preserveTotalWidthOfTable;
+        this.border = border;
+        this.borderTop = borderTop;
+        this.borderBottom = borderBottom;
+        this.borderLeft = borderLeft;
+        this.borderRight = borderRight;
+        this.borderDiagonalDown = borderDiagonalDown;
+        this.borderDiagonalUp = borderDiagonalUp;
+        this.borderColor = borderColor;
+        this.borderTopColor = borderTopColor;
+        this.borderBottomColor = borderBottomColor;
+        this.borderLeftColor = borderLeftColor;
+        this.borderRightColor = borderRightColor;
+        this.borderDiagonalUpColor = borderDiagonalUpColor;
+        this.borderDiagonalDownColor = borderDiagonalDownColor;
+        this.borderSize = borderSize;
+        this.borderTopSize = borderTopSize;
+        this.borderBottomSize = borderBottomSize;
+        this.borderLeftSize = borderLeftSize;
+        this.borderRightSize = borderRightSize;
+        this.borderDiagonalUpSize = borderDiagonalUpSize;
+        this.borderDiagonalDownSize = borderDiagonalDownSize;
+        this.borderSpace = borderSpace;
+        this.borderTopSpace = borderTopSpace;
+        this.borderBottomSpace = borderBottomSpace;
+        this.borderLeftSpace = borderLeftSpace;
+        this.borderRightSpace = borderRightSpace;
+        this.borderDiagonalUpSpace = borderDiagonalUpSpace;
+        this.borderDiagonalDownSpace = borderDiagonalDownSpace;
     }
 
     /**
@@ -52,8 +177,7 @@ export class CellStyleDocx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } =
-            super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
             result._cell_background_color = this.cellBackgroundColor;
@@ -61,7 +185,93 @@ export class CellStyleDocx extends CellStyle {
         if (this.width !== undefined) {
             result._width = this.width;
         }
-
+        if (this.preserveTotalWidthOfTable !== undefined) {
+            result._preserve_total_width_of_table = this.preserveTotalWidthOfTable;
+        }
+        if (this.border !== undefined) {
+            result._border = this.border;
+        }
+        if (this.borderTop !== undefined) {
+            result._border_top = this.borderTop;
+        }
+        if (this.borderBottom !== undefined) {
+            result._border_bottom = this.borderBottom;
+        }
+        if (this.borderLeft !== undefined) {
+            result._border_left = this.borderLeft;
+        }
+        if (this.borderRight !== undefined) {
+            result._border_right = this.borderRight;
+        }
+        if (this.borderDiagonalDown !== undefined) {
+            result._border_diagonal_down = this.borderDiagonalDown;
+        }
+        if (this.borderDiagonalUp !== undefined) {
+            result._border_diagonal_up = this.borderDiagonalUp;
+        }
+        if (this.borderColor !== undefined) {
+            result._border_color = this.borderColor;
+        }
+        if (this.borderTopColor !== undefined) {
+            result._border_top_color = this.borderTopColor;
+        }
+        if (this.borderBottomColor !== undefined) {
+            result._border_bottom_color = this.borderBottomColor;
+        }
+        if (this.borderLeftColor !== undefined) {
+            result._border_left_color = this.borderLeftColor;
+        }
+        if (this.borderRightColor !== undefined) {
+            result._border_right_color = this.borderRightColor;
+        }
+        if (this.borderDiagonalUpColor !== undefined) {
+            result._border_diagonal_up_color = this.borderDiagonalUpColor;
+        }
+        if (this.borderDiagonalDownColor !== undefined) {
+            result._border_diagonal_down_color = this.borderDiagonalDownColor;
+        }
+        if (this.borderSize !== undefined) {
+            result._border_size = this.borderSize;
+        }
+        if (this.borderTopSize !== undefined) {
+            result._border_top_size = this.borderTopSize;
+        }
+        if (this.borderBottomSize !== undefined) {
+            result._border_bottom_size = this.borderBottomSize;
+        }
+        if (this.borderLeftSize !== undefined) {
+            result._border_left_size = this.borderLeftSize;
+        }
+        if (this.borderRightSize !== undefined) {
+            result._border_right_size = this.borderRightSize;
+        }
+        if (this.borderDiagonalUpSize !== undefined) {
+            result._border_diagonal_up_size = this.borderDiagonalUpSize;
+        }
+        if (this.borderDiagonalDownSize !== undefined) {
+            result._border_diagonal_down_size = this.borderDiagonalDownSize;
+        }
+        if (this.borderSpace !== undefined) {
+            result._border_space = this.borderSpace;
+        }
+        if (this.borderTopSpace !== undefined) {
+            result._border_top_space = this.borderTopSpace;
+        }
+        if (this.borderBottomSpace !== undefined) {
+            result._border_bottom_space = this.borderBottomSpace;
+        }
+        if (this.borderLeftSpace !== undefined) {
+            result._border_left_space = this.borderLeftSpace;
+        }
+        if (this.borderRightSpace !== undefined) {
+            result._border_right_space = this.borderRightSpace;
+        }
+        if (this.borderDiagonalUpSpace !== undefined) {
+            result._border_diagonal_up_space = this.borderDiagonalUpSpace;
+        }
+        if (this.borderDiagonalDownSpace !== undefined) {
+            result._border_diagonal_down_space = this.borderDiagonalDownSpace;
+        }
         return result;
     }
 }
