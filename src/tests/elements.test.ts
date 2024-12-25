@@ -346,6 +346,13 @@ describe('Tests for elements', () => {
         }
         expect(insertDocument.asDict()).toEqual(insertDocumentExpected);
     });
+    test('Test remove tag', () => {
+        const remove = new cop.elements.Remove('remove', true);
+        const removeExpected = {
+           remove:true,
+        }
+        expect(remove.asDict()).toEqual(removeExpected);
+    });
     test('Test protect sheet element', () => {
         const protectElement = new cop.elements.ProtectSheet('protect_tag_name', 'password', true, false, true, 'YES', false, true, false, true, 'YES', 'other passord', true, false, true, 'YES');
         const protectElementExpected = {

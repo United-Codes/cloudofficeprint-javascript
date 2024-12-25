@@ -1657,7 +1657,30 @@ export class Insert extends Property {
 }
 
 /**
- * Inside Excel it is posiible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
+ * Inside PowerPoint, the tag {name?} can be used 
+ * to remove an entire shape if the associated tag evaluates to false.
+    For example, if a template slide includes a text box with the tag {toShow?}
+    and the value of toShow is false or undefined, the entire shape will be removed from the slide.
+ */
+export class Remove extends Property {
+    /**
+     * @param name Name of the remove tag. 
+     * @param value .
+     */
+    constructor(name: string, value: string | boolean) {
+        super(name, value);
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`${this.name}?`]);
+    }
+}
+
+/**
+ * Inside Excel it is possible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
         Options available are:  you can provide dynamic icon and icon position.
  */
 export class ExcelInsert extends Element {
@@ -1679,7 +1702,7 @@ export class ExcelInsert extends Element {
      * @param value File to insert of path to file. (Source can be FTP, SFTP, URL or base64encoded file.)
      * @param icon Icon to be showed as the document, when clicked on it, redirects it to file. Default icon is taken if not provided. Optional.
      * @param fromRow position for top of icon. Defaults to row of the tag. Optional.
-     * @param fromCol positon for left of icon. Defaults to column of the tag. Optional.
+     * @param fromCol position for left of icon. Defaults to column of the tag. Optional.
      * @param fromRowOff space after the value of from Row. Defaults to 0. Optional.
      * @param fromColOff space after the value of fromCol. Defaults to 0. Optional.
      * @param toRow position for bottom of icon. Defaults to row of the tag + 3. Optional.
