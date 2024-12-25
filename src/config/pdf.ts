@@ -30,6 +30,7 @@ export class PDFOptions {
     identifyFormFields: boolean | undefined;
     split: boolean | undefined;
     removeLastPage: boolean | undefined;
+    convertToPdfa: string | undefined;
 
     /**
      * @param evenPage If you want your output to have even pages, for example
@@ -75,6 +76,7 @@ export class PDFOptions {
      *  The function readFileAsBase64() from file_utils.ts can be used to read local
      *  .p12 or .pfx file as base64. Optional.
      * @param signCertificatePassword password for certificate.
+     * @param convertToPdfa convert to PDF/A format.
      */
     constructor(
         evenPage?: boolean,
@@ -100,6 +102,7 @@ export class PDFOptions {
         identifyFormFields?: boolean,
         signCertificate?: string,
         signCertificatePassword?: string,
+        convertToPdfa?: string,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
@@ -124,6 +127,7 @@ export class PDFOptions {
         this.identifyFormFields = identifyFormFields;
         this.split = split;
         this.removeLastPage = removeLastPage;
+        this.convertToPdfa = convertToPdfa;
     }
 
     /**
@@ -213,6 +217,9 @@ export class PDFOptions {
         }
         if (this.removeLastPage !== undefined) {
             result.output_remove_last_page = this.removeLastPage;
+        }
+        if (this.convertToPdfa !== undefined) {
+            result.output_convert_to_pdfa = this.convertToPdfa;
         }
         return result;
     }

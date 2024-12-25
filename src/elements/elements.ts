@@ -1665,7 +1665,7 @@ export class Insert extends Property {
 export class Remove extends Property {
     /**
      * @param name Name of the remove tag. 
-     * @param value .
+     * @param value (boolean or string): False (to remove the shape / text-box) or string/True.
      */
     constructor(name: string, value: string | boolean) {
         super(name, value);

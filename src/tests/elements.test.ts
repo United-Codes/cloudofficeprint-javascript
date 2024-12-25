@@ -347,9 +347,9 @@ describe('Tests for elements', () => {
         expect(insertDocument.asDict()).toEqual(insertDocumentExpected);
     });
     test('Test remove tag', () => {
-        const remove = new cop.elements.Remove('remove', true);
+        const remove = new cop.elements.Remove('remove', false);
         const removeExpected = {
-           remove:true,
+           remove:false,
         }
         expect(remove.asDict()).toEqual(removeExpected);
     });

@@ -28,6 +28,7 @@ describe('Tests for config', () => {
             true, // identifyFormFields
             'test_sign_certificate', // signCertificate
             'test_certificate_password', // signCertificatePassword
+            '1b', // convertToPdfa
         );
         pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32);
         pdfOpts.setPageMarginAt(6, 'top');
@@ -65,6 +66,7 @@ describe('Tests for config', () => {
             output_sign_certificate_password: 'test_certificate_password',
             identify_form_fields: true,
             output_split: true,
+            output_convert_to_pdfa: '1b',
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
