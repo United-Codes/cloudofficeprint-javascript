@@ -27,6 +27,7 @@ export class PDFOptions {
     merge: boolean | undefined;
     signCertificate: string | undefined;
     signCertificatePassword: string | undefined;
+    signCertificateTxt: string | undefined;
     identifyFormFields: boolean | undefined;
     split: boolean | undefined;
     removeLastPage: boolean | undefined;
@@ -76,6 +77,7 @@ export class PDFOptions {
      *  The function readFileAsBase64() from file_utils.ts can be used to read local
      *  .p12 or .pfx file as base64. Optional.
      * @param signCertificatePassword password for certificate.
+     * @param signCertificateTxt custom text in any language for the signature field
      * @param convertToPdfa convert to PDF/A format.
      */
     constructor(
@@ -102,6 +104,7 @@ export class PDFOptions {
         identifyFormFields?: boolean,
         signCertificate?: string,
         signCertificatePassword?: string,
+        signCertificateTxt?: string,
         convertToPdfa?: string,
     ) {
         this.readPassword = readPassword;
@@ -124,6 +127,7 @@ export class PDFOptions {
         this.merge = merge;
         this.signCertificate = signCertificate;
         this.signCertificatePassword = signCertificatePassword;
+        this.signCertificateTxt = signCertificateTxt;
         this.identifyFormFields = identifyFormFields;
         this.split = split;
         this.removeLastPage = removeLastPage;
@@ -214,6 +218,10 @@ export class PDFOptions {
         if (this.signCertificatePassword !== undefined) {
             result.output_sign_certificate_password =
                 this.signCertificatePassword;
+        }
+        if (this.signCertificateTxt !== undefined) {
+            result.output_sign_certificate_txt =
+                this.signCertificateTxt;
         }
         if (this.removeLastPage !== undefined) {
             result.output_remove_last_page = this.removeLastPage;
