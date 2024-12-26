@@ -16,6 +16,7 @@ describe('Tests for config', () => {
             'Arial', // watermarkFont
             50, // watermarkOpacity
             32, // watermarkSize
+            45, // watermarkRotation
             true, // lockForm
             3, // copies
             5, // pageMargin
@@ -31,7 +32,7 @@ describe('Tests for config', () => {
             'text in english', // signCertificateTxt
             '1b', // convertToPdfa
         );
-        pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32);
+        pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32, 45);
         pdfOpts.setPageMarginAt(6, 'top');
         const conf = new cop.config.OutputConfig('pdf');
         conf.pdfOptions = pdfOpts;
@@ -47,6 +48,7 @@ describe('Tests for config', () => {
             output_watermark_font: 'Arial',
             output_watermark_opacity: 51,
             output_watermark_size: 32,
+            output_watermark_rotation: 45,
             output_type: 'pdf',
             output_encoding: 'raw',
             output_converter: 'libreoffice',

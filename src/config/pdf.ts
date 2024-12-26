@@ -13,6 +13,7 @@ export class PDFOptions {
     watermarkOpacity: number | undefined;
     watermarkColor: string | undefined;
     watermarkFont: string | undefined;
+    watermarkRotation: number | undefined;
     pageWidth: string | number | undefined;
     pageHeight: string | number | undefined;
     evenPage: boolean | undefined;
@@ -53,6 +54,8 @@ export class PDFOptions {
      *  specified, should be as a percentage, i.e. 45. Optional.
      * @param watermarkSize Requires PDF output, specifies the size of watermark text specified,
      *  should be a number in px, i.e. 45. Optional.
+     * @param watermarkRotation Requires PDF output, specifies the angle to rotate the watermark text specified,
+     *  should be a number in px, i.e. 45. Optional.
      * @param lockForm Locks / flattens the forms in the PDF. Optional.
      * @param copies Repeats the output pdf for the given number of times. Optional.
      * @param pageMargin Only for HTML to PDF. Margin in px. Returns either a dict containing:
@@ -92,6 +95,7 @@ export class PDFOptions {
         watermarkFont?: string,
         watermarkOpacity?: number,
         watermarkSize?: number,
+        watermarkRotation?: number,
         lockForm?: boolean,
         copies?: number,
         pageMargin?: number | { [key: string]: number },
@@ -112,7 +116,8 @@ export class PDFOptions {
         this.watermarkColor = watermarkColor;
         this.watermarkFont = watermarkFont;
         this.watermarkOpacity = watermarkOpacity;
-        this.watermarkSize = watermarkSize
+        this.watermarkSize = watermarkSize;
+        this.watermarkRotation = watermarkRotation;
         this.pageWidth = pageWidth;
         this.pageHeight = pageHeight;
         this.evenPage = evenPage;
@@ -174,6 +179,9 @@ export class PDFOptions {
         }
         if (this.watermarkSize !== undefined) {
             result.output_watermark_size = this.watermarkSize;
+        }
+        if (this.watermarkRotation !== undefined) {
+            result.output_watermark_rotation = this.watermarkRotation;
         }
         if (this.lockForm !== undefined) {
             result.lock_form = this.lockForm;
@@ -249,12 +257,14 @@ export class PDFOptions {
         font?: string,
         opacity?: number,
         size?: number,
+        rotation?: number,
     ) {
         this.watermark = text;
         this.watermarkColor = color;
         this.watermarkFont = font;
         this.watermarkOpacity = opacity;
         this.watermarkSize = size;
+        this.watermarkRotation = rotation;
     }
 
     /**
