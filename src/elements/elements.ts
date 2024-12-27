@@ -1678,6 +1678,27 @@ export class Remove extends Property {
         return new Set([`${this.name}?`]);
     }
 }
+/**
+ * To hide a slide in powerpoint
+ * Append "_hide" to the key of the corresponding data field and set its value to "true"
+ */
+export class HideSlide extends Property {
+    /**
+     * @param name The name of slide to hide. 
+     * @param value (boolean): True (to hide) or False
+     */
+    constructor(name: string, value: boolean) {
+        super(name, value);
+    }
+    
+    asDict(): { [key: string]: boolean } {
+        const result: { [key: string]: boolean } = {
+            [`${this.name}_hide`]: this.value as boolean,
+        };
+        return result;
+    }
+    
+}
 
 /**
  * Inside Excel it is possible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
