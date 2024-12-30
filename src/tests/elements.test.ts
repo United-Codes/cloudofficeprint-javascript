@@ -1,5 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import * as cop from '../index';
+import { AutoLink } from '../elements';
 
 describe('Tests for elements', () => {
     test(`Test for Property. Also serves as a test for Html, RightToLeft, FootNote,
@@ -154,13 +155,18 @@ describe('Tests for elements', () => {
         expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
     });
     test('Test AutoLink', () => {
-        const autoLink = new cop.elements.Hyperlink(
+        const autoLink = new cop.elements.AutoLink(
             'AutoLink',
             'AutoLink including hyperlinks and text combined',
+            'red',
+            '#ffffff'
         );
         const autoLinkExpected = {
-            AutoLink: 'AutoLink including hyperlinks and text combined'
+            AutoLink: 'AutoLink including hyperlinks and text combined',
+            AutoLink_font_color: 'red',
+            AutoLink_underline_color: '#ffffff',
         };
+        console.log(autoLink.asDict())
         expect(autoLink.asDict()).toEqual(autoLinkExpected);
     });
     test('Test hyperlink', () => {
@@ -168,10 +174,14 @@ describe('Tests for elements', () => {
             'hyperlink',
             'url',
             'hyperlink_text',
+            'red',
+            '#ffffff',
         );
         const hyperlinkExpected = {
             hyperlink: 'url',
             hyperlink_text: 'hyperlink_text',
+            hyperlink_text_font_color: 'red',
+            hyperlink_text_underline_color: '#ffffff'
         };
         expect(hyperlink.asDict()).toEqual(hyperlinkExpected);
     });

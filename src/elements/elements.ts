@@ -652,14 +652,38 @@ export class FootNote extends Property {
  * The value may or may not have any links.
  * 
  */
-export class AutoLink extends Property {
-
+export class AutoLink extends Property  {
+    fontColor?: string;
+    underlineColor?: string;
     /**
      * @param name the name for this element
      * @param value the value for the AutoLink.
+     * @param fontColor the font color of AutoLink; optional
+     * @param underlineColor  the underline color of AutoLink; optional
      */
-    constructor(name: string, value: string) {
+    constructor(name: string, value: string, fontColor?: string, underlineColor?: string) {
         super(name, value);
+        this.fontColor = fontColor;
+        this.underlineColor = underlineColor;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string } {
+        const result: { [key: string]: string } = {
+            [this.name]: this.value as string,
+        };
+
+        if (this.fontColor !== undefined) {
+            result[`${this.name}_font_color`] = this.fontColor;
+        }
+        if (this.underlineColor !== undefined) {
+            result[`${this.name}_underline_color`] = this.underlineColor;
+        }
+
+        return result;
     }
 
     /**
@@ -674,16 +698,22 @@ export class AutoLink extends Property {
 export class Hyperlink extends Element {
     url: string;
     text: string | undefined;
+    fontColor?: string;
+    underlineColor?: string;
 
     /**
      * @param name the name for this element
      * @param url the URL for the hyperlink
      * @param text the text for the hyperlink; optional
+     * @param fontColor the font color for the text of hyperlink; optional
+     * @param underlineColor  the underline color for the text of hyperlink; optional
      */
-    constructor(name: string, url: string, text?: string) {
+    constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string) {
         super(name);
         this.url = url;
         this.text = text;
+        this.fontColor = fontColor;
+        this.underlineColor = underlineColor
     }
 
     /**
@@ -697,6 +727,12 @@ export class Hyperlink extends Element {
 
         if (this.text !== undefined) {
             result[`${this.name}_text`] = this.text;
+        }
+        if (this.text !== undefined && this.fontColor !== undefined) {
+            result[`${this.text}_font_color`] = this.fontColor;
+        }
+        if (this.text !== undefined  && this.underlineColor !== undefined) {
+            result[`${this.text}_underline_color`] = this.underlineColor;
         }
 
         return result;
