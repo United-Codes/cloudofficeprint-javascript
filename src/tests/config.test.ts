@@ -30,7 +30,9 @@ describe('Tests for config', () => {
             'test_sign_certificate', // signCertificate
             'test_certificate_password', // signCertificatePassword
             'text in english', // signCertificateTxt
-            '1b', // convertToPdfa
+            '1b', // convertToPdfa,
+            'sample_attachment_file.pdf', // attachmentName
+            true // convertAttachmentToJson
         );
         pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32, 45);
         pdfOpts.setPageMarginAt(6, 'top');
@@ -73,6 +75,8 @@ describe('Tests for config', () => {
             identify_form_fields: true,
             output_split: true,
             output_convert_to_pdfa: '1b',
+            output_attachment_name: 'sample_attachment_file.pdf',
+            output_convert_attachment_to_json: true,
         };
         expect(conf.asDict()).toEqual(confExpected);
     });

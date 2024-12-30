@@ -30,6 +30,7 @@ export class PrintJob {
     subtemplates: { [key: string]: Resource };
     prependFiles: Resource[];
     appendFiles: Resource[];
+    attachments: Resource[];
     copVerbose: boolean;
 
     /**
@@ -46,6 +47,7 @@ export class PrintJob {
      *  `{?include subtemplate_dict_key}`. Defaults to {}.
      * @param prependFiles Files to prepend to the output file. Defaults to [].
      * @param appendFiles Files to append to the output file. Defaults to [].
+     * @param attachments Files to attach to the PDF file. Defaults to [].
      * @param copVerbose Whether or not verbose mode should be activated. Defaults to False.
      */
     constructor(
@@ -56,6 +58,7 @@ export class PrintJob {
         subtemplates: { [key: string]: Resource } = {},
         prependFiles: Resource[] = [],
         appendFiles: Resource[] = [],
+        attachments: Resource[] = [],
         copVerbose: boolean = false,
     ) {
         this.data = data;
@@ -65,6 +68,7 @@ export class PrintJob {
         this.subtemplates = subtemplates;
         this.prependFiles = prependFiles;
         this.appendFiles = appendFiles;
+        this.attachments = attachments;
         this.copVerbose = copVerbose;
     }
 
@@ -184,6 +188,12 @@ export class PrintJob {
 
         if (this.appendFiles.length > 0) {
             result.append_files = this.appendFiles.map((file) =>
+                file.secondaryFileDict(),
+            );
+        }
+
+        if (this.attachments.length > 0) {
+            result.attachments = this.attachments.map((file) =>
                 file.secondaryFileDict(),
             );
         }

@@ -166,7 +166,6 @@ describe('Tests for elements', () => {
             AutoLink_font_color: 'red',
             AutoLink_underline_color: '#ffffff',
         };
-        console.log(autoLink.asDict())
         expect(autoLink.asDict()).toEqual(autoLinkExpected);
     });
     test('Test hyperlink', () => {

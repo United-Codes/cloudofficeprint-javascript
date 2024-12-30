@@ -33,6 +33,8 @@ export class PDFOptions {
     split: boolean | undefined;
     removeLastPage: boolean | undefined;
     convertToPdfa: string | undefined;
+    attachmentName: string | undefined;
+    convertAttachmentToJson: boolean | undefined;
 
     /**
      * @param evenPage If you want your output to have even pages, for example
@@ -82,6 +84,8 @@ export class PDFOptions {
      * @param signCertificatePassword password for certificate.
      * @param signCertificateTxt custom text in any language for the signature field
      * @param convertToPdfa convert to PDF/A format.
+     * @param attachmentName retrieve attached file from PDF. output_type must be 'get_attachments'
+     * @param convertAttachmentToJson retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
      */
     constructor(
         evenPage?: boolean,
@@ -110,6 +114,8 @@ export class PDFOptions {
         signCertificatePassword?: string,
         signCertificateTxt?: string,
         convertToPdfa?: string,
+        attachmentName?: string,
+        convertAttachmentToJson?: boolean,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
@@ -137,6 +143,8 @@ export class PDFOptions {
         this.split = split;
         this.removeLastPage = removeLastPage;
         this.convertToPdfa = convertToPdfa;
+        this.attachmentName = attachmentName;
+        this.convertAttachmentToJson = convertAttachmentToJson;
     }
 
     /**
@@ -236,6 +244,12 @@ export class PDFOptions {
         }
         if (this.convertToPdfa !== undefined) {
             result.output_convert_to_pdfa = this.convertToPdfa;
+        }
+        if (this.attachmentName !== undefined) {
+            result.output_attachment_name = this.attachmentName;
+        }
+        if (this.convertAttachmentToJson !== undefined) {
+            result.output_convert_attachment_to_json = this.convertAttachmentToJson;
         }
         return result;
     }
