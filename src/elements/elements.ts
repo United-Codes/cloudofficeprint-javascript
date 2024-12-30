@@ -1735,6 +1735,26 @@ export class HideSlide extends Property {
     }
     
 }
+/**
+ * "Allows to distribute the data evenly among the columns in horizontal loop"
+ */
+export class Distribute extends Property {
+    /**
+     * @param name The name of data. 
+     * @param value (boolean): True or False
+     */
+    constructor(name: string, value: boolean) {
+        super(name, value);
+    }
+    
+    asDict(): { [key: string]: boolean } {
+        const result: { [key: string]: boolean } = {
+            [`${this.name}_distribute`]: this.value as boolean,
+        };
+        return result;
+    }
+    
+}
 
 /**
  * Inside Excel it is possible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.

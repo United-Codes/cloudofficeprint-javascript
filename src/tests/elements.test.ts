@@ -370,6 +370,14 @@ describe('Tests for elements', () => {
         expect(hide.asDict()).toEqual(hideExpected);
 
     })
+    test('test distribute option for docx', () => {
+        const distribute = new cop.elements.Distribute('product_b', true);
+        const distributeExpected = {
+            product_b_distribute:true
+        }
+        expect(distribute.asDict()).toEqual(distributeExpected);
+
+    })
     test('Test protect sheet element', () => {
         const protectElement = new cop.elements.ProtectSheet('protect_tag_name', 'password', true, false, true, 'YES', false, true, false, true, 'YES', 'other passord', true, false, true, 'YES');
         const protectElementExpected = {
