@@ -630,12 +630,33 @@ export class CellStyleProperty extends Property {
 }
 
 export class Html extends Property {
+    customTableStyle?: string;
+    unorderedListStyle?: string | number;
+    orderedListStyle?: string | number;
+    useTagStyle?: boolean;
+    ignoreCellMargin?: boolean;
+    ignoreEmptyP?: boolean;
+    
     /**
-     * @param name the name for this property
-     * @param value the value for this property
+     * 
+     * @param name The name for this property.
+     * @param value  The value for this property.
+     * @param customTableStyle  Specify custom table style
+     * @param unorderedListStyle create and customize ordered list
+     * @param orderedListStyle  create and customize unordered list
+     * @param useTagStyle use the styling from the template instead of default Word styling
+     * @param ignoreCellMargin ignore empty paragraphs within HTML content
+     * @param ignoreEmptyP ignore the cell margins in an HTML table cell when the text content is large
      */
-    constructor(name: string, value: string) {
+    constructor(name: string, value: string, customTableStyle?: string, unorderedListStyle?: string | number, orderedListStyle?: string | number, useTagStyle?: boolean, ignoreCellMargin?: boolean, ignoreEmptyP?: boolean) {
         super(name, value);
+        this.customTableStyle = customTableStyle;
+        this.unorderedListStyle = unorderedListStyle;
+        this.orderedListStyle = orderedListStyle;
+        this.useTagStyle = useTagStyle;
+        this.ignoreCellMargin = ignoreCellMargin;
+        this.ignoreEmptyP = ignoreEmptyP;
+        
     }
 
     /**
@@ -645,6 +666,38 @@ export class Html extends Property {
     availableTags(): Set<string> {
         return new Set([`{_${this.name}}`]);
     }
+
+      /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+      asDict(): { [key: string]: string | boolean | number } {
+        const result: { [key: string]: string | boolean | number } = {
+            [this.name]: this.value as string,
+        };
+
+        if (this.customTableStyle !== undefined) {
+            result[`${this.name}_custom_table_style`] = this.customTableStyle;
+        }
+        if (this.unorderedListStyle !== undefined) {
+            result[`${this.name}_unordered_list_style`] = this.unorderedListStyle;
+        }
+        if (this.orderedListStyle !== undefined) {
+            result[`${this.name}_ordered_list_style`] = this.orderedListStyle;
+        }
+        if (this.useTagStyle !== undefined) {
+            result[`${this.name}_use_tag_style`] = this.useTagStyle;
+        }
+        if (this.ignoreCellMargin !== undefined) {
+            result[`${this.name}_ignore_cell_margin`] = this.ignoreCellMargin;
+        }
+        if (this.ignoreEmptyP !== undefined) {
+            result[`${this.name}_ignore_empty_p`] = this.ignoreEmptyP;
+        }
+
+        return result;
+    }
+
 }
 
 export class RightToLeft extends Property {
