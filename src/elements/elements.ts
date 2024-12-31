@@ -655,24 +655,28 @@ export class FootNote extends Property {
 export class AutoLink extends Property  {
     fontColor?: string;
     underlineColor?: string;
+    preserveTagStyle?: string | boolean;
+    
     /**
      * @param name the name for this element
      * @param value the value for the AutoLink.
      * @param fontColor the font color of AutoLink; optional
      * @param underlineColor  the underline color of AutoLink; optional
+     * @param preserveTagStyle take the styling of hyperlink text defined in the template (blue and underlined by default); optional;
      */
-    constructor(name: string, value: string, fontColor?: string, underlineColor?: string) {
+    constructor(name: string, value: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
         super(name, value);
         this.fontColor = fontColor;
-        this.underlineColor = underlineColor;
+        this.underlineColor = underlineColor;        
+        this.preserveTagStyle = preserveTagStyle;        
     }
 
     /**
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): { [key: string]: string } {
-        const result: { [key: string]: string } = {
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {
             [this.name]: this.value as string,
         };
 
@@ -681,6 +685,9 @@ export class AutoLink extends Property  {
         }
         if (this.underlineColor !== undefined) {
             result[`${this.name}_underline_color`] = this.underlineColor;
+        }
+        if (this.preserveTagStyle !== undefined) {
+            result[`${this.name}_preserve_tag_style`] = this.preserveTagStyle;
         }
 
         return result;
@@ -700,6 +707,8 @@ export class Hyperlink extends Element {
     text: string | undefined;
     fontColor?: string;
     underlineColor?: string;
+    preserveTagStyle?: string | boolean;
+    
 
     /**
      * @param name the name for this element
@@ -707,21 +716,23 @@ export class Hyperlink extends Element {
      * @param text the text for the hyperlink; optional
      * @param fontColor the font color for the text of hyperlink; optional
      * @param underlineColor  the underline color for the text of hyperlink; optional
+     * @param preserveTagStyle  the underline color for the text of hyperlink; optional
      */
-    constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string) {
+    constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
         super(name);
         this.url = url;
         this.text = text;
         this.fontColor = fontColor;
         this.underlineColor = underlineColor
+        this.preserveTagStyle = preserveTagStyle
     }
 
     /**
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): { [key: string]: string } {
-        const result: { [key: string]: string } = {
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {
             [this.name]: this.url,
         };
 
@@ -733,6 +744,9 @@ export class Hyperlink extends Element {
         }
         if (this.text !== undefined  && this.underlineColor !== undefined) {
             result[`${this.text}_underline_color`] = this.underlineColor;
+        }
+        if (this.preserveTagStyle !== undefined) {
+            result[`${this.name}_preserve_tag_style`] = this.preserveTagStyle;
         }
 
         return result;

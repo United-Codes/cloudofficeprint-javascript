@@ -159,12 +159,14 @@ describe('Tests for elements', () => {
             'AutoLink',
             'AutoLink including hyperlinks and text combined',
             'red',
-            '#ffffff'
+            '#ffffff',
+            true,
         );
         const autoLinkExpected = {
             AutoLink: 'AutoLink including hyperlinks and text combined',
             AutoLink_font_color: 'red',
             AutoLink_underline_color: '#ffffff',
+            AutoLink_preserve_tag_style: true,
         };
         expect(autoLink.asDict()).toEqual(autoLinkExpected);
     });
@@ -175,12 +177,14 @@ describe('Tests for elements', () => {
             'hyperlink_text',
             'red',
             '#ffffff',
+            'yes',
         );
         const hyperlinkExpected = {
             hyperlink: 'url',
             hyperlink_text: 'hyperlink_text',
             hyperlink_text_font_color: 'red',
-            hyperlink_text_underline_color: '#ffffff'
+            hyperlink_text_underline_color: '#ffffff',
+            hyperlink_preserve_tag_style: 'yes'
         };
         expect(hyperlink.asDict()).toEqual(hyperlinkExpected);
     });
