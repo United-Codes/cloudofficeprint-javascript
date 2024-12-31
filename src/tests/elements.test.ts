@@ -117,6 +117,11 @@ describe('Tests for elements', () => {
             'center',
             'justify',
             45,
+            true,
+            'auto',
+            40,
+            60,
+            0.75,
         );
         const styleProperty = new cop.elements.CellStyleProperty(
             'name',
@@ -151,6 +156,11 @@ describe('Tests for elements', () => {
             name_text_h_alignment: 'center',
             name_text_v_alignment: 'justify',
             name_text_rotation: 45,
+            name_wrap_text: true,
+            name_width: 'auto',
+            name_height: 40,
+            name_max_characters: 60,
+            name_height_scaling: 0.75,
         };
         expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
     });

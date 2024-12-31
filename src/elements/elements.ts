@@ -306,6 +306,11 @@ export class CellStyleXlsx extends CellStyle {
     textHAlignment: string | undefined;
     textVAlignment: string | undefined;
     textRotation: string | number | undefined;
+    wrapText: boolean | undefined;
+    width: string | number | undefined;
+    height: string | number | undefined;
+    maxCharacters: string | number | undefined;
+    heightScaling: string | number | undefined;
 
     /**
      * @param cellLocked Whether or not the cell is locked. Optional.
@@ -339,6 +344,11 @@ export class CellStyleXlsx extends CellStyle {
      * @param textHAlignment [top|bottom|center|justify]. Optional.
      * @param textVAlignment [top|bottom|center|justify]. Optional.
      * @param textRotation rotation of text value from 0-90 degrees. Optional.
+     * @param wrapText set to true for wrap text. Optional.
+     * @param width  provide a custom width to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
+     * @param height provide custom height to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
+     * @param maxCharacters provide width for the cell. Optional.
+     * @param heightScaling  adjusts cell height for consistent rendering. Optional.
      */
     constructor(
         cellLocked?: boolean,
@@ -367,6 +377,11 @@ export class CellStyleXlsx extends CellStyle {
         textHAlignment?: string,
         textVAlignment?: string,
         textRotation?: string | number,
+        wrapText?: boolean,
+        width?: string | number,
+        height?: string | number,
+        maxCharacters?: string | number,
+        heightScaling?: string | number,
     ) {
         super();
         this.cellLocked = cellLocked;
@@ -395,6 +410,11 @@ export class CellStyleXlsx extends CellStyle {
         this.textHAlignment = textHAlignment;
         this.textVAlignment = textVAlignment;
         this.textRotation = textRotation;
+        this.wrapText = wrapText;
+        this.width = width;
+        this.height = height;
+        this.maxCharacters = maxCharacters;
+        this.heightScaling = heightScaling;
     }
 
     /**
@@ -484,6 +504,21 @@ export class CellStyleXlsx extends CellStyle {
         }
         if (this.textRotation !== undefined) {
             result._text_rotation = this.textRotation;
+        }
+        if (this.wrapText !== undefined) {
+            result._wrap_text = this.wrapText;
+        }
+        if (this.width !== undefined) {
+            result._width = this.width;
+        }
+        if (this.height !== undefined) {
+            result._height = this.height;
+        }
+        if (this.maxCharacters !== undefined) {
+            result._max_characters = this.maxCharacters;
+        }
+        if (this.heightScaling !== undefined) {
+            result._height_scaling = this.heightScaling;
         }
 
         return result;
