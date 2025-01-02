@@ -19,6 +19,7 @@ export class OutputConfig {
     outputPolling: boolean | undefined;
     secretKey: string | undefined;
     pageNumberStartAt: string | undefined;
+    updateToc: boolean | undefined;
     requestOption: RequestOption | undefined;
 
     /**
@@ -40,6 +41,7 @@ export class OutputConfig {
      * @param outputPolling A unique link for each request is sent back, which can be used later to download the output file.
      * @param secretKey A secret key can be specified to encrypt the file stored on the server (ussed with output polling).
      * @param pageNumberStartAt Specify the start of the page number.
+     * @param updateToc Update table of contents of Word document.
      * @param requestOption  AOP makes a call to the given option with response/output of the current request.
      */
     constructor(
@@ -55,6 +57,7 @@ export class OutputConfig {
         outputPolling?: boolean,
         secretKey?: string,
         pageNumberStartAt?: string,
+        updateToc?: boolean,
         requestOption?: RequestOption
     ) {
         this.filetype = filetype;
@@ -70,6 +73,7 @@ export class OutputConfig {
         this.requestOption = requestOption;
         this.secretKey = secretKey;
         this.pageNumberStartAt = pageNumberStartAt;
+        this.updateToc = updateToc;
     }
 
     /**
@@ -125,6 +129,9 @@ export class OutputConfig {
         }
         if (this.pageNumberStartAt !== undefined) {
             result.output_page_number_start_at = this.pageNumberStartAt;
+        }
+        if (this.updateToc !== undefined) {
+            result.update_toc = this.updateToc;
         }
         if (this.requestOption !== undefined) {
             result.request_option = this.requestOption.asDict();

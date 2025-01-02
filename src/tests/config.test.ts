@@ -38,6 +38,7 @@ describe('Tests for config', () => {
         pdfOpts.setPageMarginAt(6, 'top');
         const conf = new cop.config.OutputConfig('pdf');
         conf.pageNumberStartAt = '5';
+        conf.updateToc = true;
         conf.pdfOptions = pdfOpts;
         const confExpected = {
             output_even_page: true,
@@ -56,6 +57,7 @@ describe('Tests for config', () => {
             output_encoding: 'raw',
             output_converter: 'libreoffice',
             output_page_number_start_at: '5',
+            update_toc: true,
             output_page_width: 500,
             output_page_height: 500,
             lock_form: true,
