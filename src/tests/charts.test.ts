@@ -81,6 +81,7 @@ describe('Tests for charts', () => {
             true,
             45,
             50,
+            true,
         );
         options.setLegend(
             'l',
@@ -201,6 +202,7 @@ describe('Tests for charts', () => {
             grid: true,
             firstSliceAngle: 45,
             holeSize: 50,
+            enableAreaTransparency: true,
             legend: {
                 showLegend: true,
                 position: 'l',

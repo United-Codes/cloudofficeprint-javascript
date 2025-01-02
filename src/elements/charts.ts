@@ -240,6 +240,7 @@ export class ChartOptions {
     grid: boolean | undefined;
     firstSliceAngle: number | undefined;
     holeSize: number | undefined;
+    enableAreaTransparency: boolean | undefined;
 
     /**
      * @param xAxis The options for the x-axis. Optional.
@@ -262,6 +263,7 @@ export class ChartOptions {
      * @param grid Whether or not the chart should have a grid. Optional.
      * @param firstSliceAngle Provide angle of first slice for Doughnut Chart (0 - 360). Optional.
      * @param holeSize Provide hole size for Doughnut Chart (0 - 100). Optional.
+     * @param enableAreaTransparency Whether to make Area Chart transparent. Optional.
      */
     constructor(
         xAxis?: ChartAxisOptions,
@@ -278,6 +280,7 @@ export class ChartOptions {
         grid?: boolean,
         firstSliceAngle?: number,
         holeSize?: number,
+        enableAreaTransparency?: boolean,
     ) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
@@ -293,7 +296,7 @@ export class ChartOptions {
         this.grid = grid;
         this.firstSliceAngle = firstSliceAngle;
         this.holeSize = holeSize;
-
+        this.enableAreaTransparency = enableAreaTransparency
     }
 
     /**
@@ -473,6 +476,9 @@ export class ChartOptions {
         }
         if (this.holeSize !== undefined) {
             result.holeSize = this.holeSize;
+        }
+        if (this.enableAreaTransparency !== undefined) {
+            result.enableAreaTransparency = this.enableAreaTransparency;
         }
 
         return result;
