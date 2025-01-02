@@ -886,6 +886,7 @@ export class ColumnStackedSeries extends XYSeries { }
 export class ColumnStackedPercentSeries extends XYSeries { }
 export class ScatterSeries extends XYSeries { }
 export class RadarSeries extends LineSeries { }
+export class LineStackedSeries extends LineSeries { }
 
 /**
  * The abstract base class for a chart.
@@ -957,6 +958,37 @@ export class LineChart extends Chart {
         return this.getDict({
             lines: Array.from(this.lines.map((line) => line.asDict())),
             type: 'line',
+        });
+    }
+}
+
+/**
+ * Class for a line stacked chart
+ */
+export class LineStackedChart extends Chart {
+    lines: (LineStackedSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param lines Iterable of line series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, lines: (LineStackedSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.lines = lines;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+        } {
+        return this.getDict({
+            lines: Array.from(this.lines.map((line) => line.asDict())),
+            type: 'lineStacked',
         });
     }
 }
@@ -1300,6 +1332,37 @@ export class AreaChart extends Chart {
         return this.getDict({
             areas: Array.from(this.areas.map((ar) => ar.asDict())),
             type: 'area',
+        });
+    }
+}
+
+/**
+ * Class for a area stacked chart
+ */
+export class AreaStackedChart extends Chart {
+    areas: (AreaSeries | XYSeries)[];
+
+    /**
+     * @param name The name of the chart.
+     * @param pies Iterable of area series.
+     * @param options The options for the chart. Optional.
+     */
+    constructor(name: string, areas: (AreaSeries | XYSeries)[], options?: ChartOptions) {
+        super(name, options);
+        this.areas = areas;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {
+        [key: string]: string |
+        { [key: string]: string | number | boolean | { [key: string]: string | number }[] }
+        } {
+        return this.getDict({
+            areas: Array.from(this.areas.map((ar) => ar.asDict())),
+            type: 'areaStacked',
         });
     }
 }
