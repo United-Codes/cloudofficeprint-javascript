@@ -238,6 +238,8 @@ export class ChartOptions {
     title: string | undefined;
     titleStyle: ChartTextStyle | undefined;
     grid: boolean | undefined;
+    firstSliceAngle: number | undefined;
+    holeSize: number | undefined;
 
     /**
      * @param xAxis The options for the x-axis. Optional.
@@ -258,6 +260,8 @@ export class ChartOptions {
      * @param title The title of the chart. Optional.
      * @param titleStyle The styling for the title of the chart. Optional.
      * @param grid Whether or not the chart should have a grid. Optional.
+     * @param firstSliceAngle Provide angle of first slice for Doughnut Chart (0 - 360). Optional.
+     * @param holeSize Provide hole size for Doughnut Chart (0 - 100). Optional.
      */
     constructor(
         xAxis?: ChartAxisOptions,
@@ -272,6 +276,8 @@ export class ChartOptions {
         title?: string,
         titleStyle?: ChartTextStyle,
         grid?: boolean,
+        firstSliceAngle?: number,
+        holeSize?: number,
     ) {
         this.xAxis = xAxis;
         this.yAxis = yAxis;
@@ -285,6 +291,9 @@ export class ChartOptions {
         this.title = title;
         this.titleStyle = titleStyle;
         this.grid = grid;
+        this.firstSliceAngle = firstSliceAngle;
+        this.holeSize = holeSize;
+
     }
 
     /**
@@ -458,6 +467,12 @@ export class ChartOptions {
         }
         if (this.grid !== undefined) {
             result.grid = this.grid;
+        }
+        if (this.firstSliceAngle !== undefined) {
+            result.firstSliceAngle = this.firstSliceAngle;
+        }
+        if (this.holeSize !== undefined) {
+            result.holeSize = this.holeSize;
         }
 
         return result;

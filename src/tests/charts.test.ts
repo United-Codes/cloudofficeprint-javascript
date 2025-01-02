@@ -79,6 +79,8 @@ describe('Tests for charts', () => {
                 'Arial',
             ),
             true,
+            45,
+            50,
         );
         options.setLegend(
             'l',
@@ -197,6 +199,8 @@ describe('Tests for charts', () => {
                 font: 'Arial',
             },
             grid: true,
+            firstSliceAngle: 45,
+            holeSize: 50,
             legend: {
                 showLegend: true,
                 position: 'l',
