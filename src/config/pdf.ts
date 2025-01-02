@@ -35,6 +35,7 @@ export class PDFOptions {
     convertToPdfa: string | undefined;
     attachmentName: string | undefined;
     convertAttachmentToJson: boolean | undefined;
+    insertBarcode: boolean | undefined;
 
     /**
      * @param evenPage If you want your output to have even pages, for example
@@ -86,6 +87,7 @@ export class PDFOptions {
      * @param convertToPdfa convert to PDF/A format.
      * @param attachmentName retrieve attached file from PDF. output_type must be 'get_attachments'
      * @param convertAttachmentToJson retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
+     * @param insertBarcode insert barcode in pdf.
      */
     constructor(
         evenPage?: boolean,
@@ -116,6 +118,7 @@ export class PDFOptions {
         convertToPdfa?: string,
         attachmentName?: string,
         convertAttachmentToJson?: boolean,
+        insertBarcode?: boolean,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
@@ -145,6 +148,7 @@ export class PDFOptions {
         this.convertToPdfa = convertToPdfa;
         this.attachmentName = attachmentName;
         this.convertAttachmentToJson = convertAttachmentToJson;
+        this.insertBarcode = insertBarcode;
     }
 
     /**
@@ -250,6 +254,9 @@ export class PDFOptions {
         }
         if (this.convertAttachmentToJson !== undefined) {
             result.output_convert_attachment_to_json = this.convertAttachmentToJson;
+        }
+        if (this.insertBarcode !== undefined) {
+            result.output_insert_barcode = this.insertBarcode;
         }
         return result;
     }
