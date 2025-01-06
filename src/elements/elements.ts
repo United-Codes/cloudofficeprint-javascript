@@ -68,16 +68,14 @@ export class CellStyleDocx extends CellStyle {
      *
      * @param cellBackgroundColor The background color of the cell. Optional.
      * @param width The width of the cell. Optional.
-     * @param preserveTotalWidthOfTable c.
-     * @param border The border style applied to all edges of the table. Optional.
+     * @param preserveTotalWidthOfTable Keeps table width constant by redistributing removed column's width to others..
+     * @param border The border style applied to all edges (top, bottom, left, right) of the table. Optional.
      * @param borderTop The border style applied to the top edge of the table. Optional.
      * @param borderBottom The border style applied to the bottom edge of the table. Optional.
      * @param borderLeft The border style applied to the left edge of the table. Optional.
      * @param borderRight The border style applied to the right edge of the table. Optional.
-     // eslint-disable-next-line max-len
-     * @param borderDiagonalDown The border style applied to the diagonal from the top-left to the bottom-right corner. Optional.
-     // eslint-disable-next-line max-len
-     * @param borderDiagonalUp  The border style applied to the diagonal from the bottom-left to the top-right corner. Optional.
+     * @param borderDiagonalDown Applies the specified border style to the diagonal line going from the top-left to the bottom-right corner. Optional.
+     * @param borderDiagonalUp  Applies the specified border style to the diagonal line going from the bottom-left to the top-right corner. Optional.
      * @param borderColor The color of the borders (top, bottom, left, right). Optional.
      * @param borderTopColor  The color of the top border. Optional.
      * @param borderBottomColor  The color of the bottom border. Optional.
@@ -96,11 +94,9 @@ export class CellStyleDocx extends CellStyle {
      * @param borderTopSpace  The spacing between the content and the top border. Optional.
      * @param borderBottomSpace The spacing between the content and the bottom border. Optional.
      * @param borderLeftSpace The spacing between the content and the left border. Optional.
-     * @param borderRightSpace The spacing between the content and the right border. Optional.
-    // eslint-disable-next-line max-len
-     * @param borderDiagonalUpSpace The spacing between the content and the diagonal up border. Optional.
-     // eslint-disable-next-line max-len, max-len
-     * @param borderDiagonalDownSpace The spacing between the content and the diagonal down border. Optional.
+     * @param borderRightSpace The spacing between the content and the right border in points Optional.
+     * @param borderDiagonalUpSpace The spacing between the content and the diagonal up border in points. Optional.
+     * @param borderDiagonalDownSpace The spacing between the content and the diagonal down border in points. Optional.
      */
     constructor(
         cellBackgroundColor?: string,
@@ -343,12 +339,12 @@ export class CellStyleXlsx extends CellStyle {
      * @param borderDiagonalColor hex color e.g: #000000. Optional.
      * @param textHAlignment [top|bottom|center|justify]. Optional.
      * @param textVAlignment [top|bottom|center|justify]. Optional.
-     * @param textRotation rotation of text value from 0-90 degrees. Optional.
-     * @param wrapText set to true for wrap text. Optional.
-     * @param width  provide a custom width to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
-     * @param height provide custom height to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
-     * @param maxCharacters provide width for the cell. Optional.
-     * @param heightScaling  adjusts cell height for consistent rendering. Optional.
+     * @param textRotation Rotation of text value from 0-90 degrees. Optional.
+     * @param wrapText Set to true for wrap text. Optional.
+     * @param width  Provide a custom width to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
+     * @param height Provide custom height to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
+     * @param maxCharacters Provide width for the cell. Optional.
+     * @param heightScaling Adjusts cell height for consistent rendering. Optional.
      */
     constructor(
         cellLocked?: boolean,
@@ -642,11 +638,11 @@ export class Html extends Property {
      * @param name The name for this property.
      * @param value  The value for this property.
      * @param customTableStyle  Specify custom table style
-     * @param unorderedListStyle create and customize ordered list
-     * @param orderedListStyle  create and customize unordered list
-     * @param useTagStyle use the styling from the template instead of default Word styling
-     * @param ignoreCellMargin ignore empty paragraphs within HTML content
-     * @param ignoreEmptyP ignore the cell margins in an HTML table cell when the text content is large
+     * @param unorderedListStyle Create and customize ordered list
+     * @param orderedListStyle  Create and customize unordered list
+     * @param useTagStyle Use the styling from the template instead of default Word styling
+     * @param ignoreCellMargin Ignore empty paragraphs within HTML content
+     * @param ignoreEmptyP Ignore the cell margins in an HTML table cell when the text content is large
      */
     constructor(name: string, value: string, customTableStyle?: string, unorderedListStyle?: string | number, orderedListStyle?: string | number, useTagStyle?: boolean, ignoreCellMargin?: boolean, ignoreEmptyP?: boolean) {
         super(name, value);
@@ -746,11 +742,11 @@ export class AutoLink extends Property  {
     preserveTagStyle?: string | boolean;
     
     /**
-     * @param name the name for this element
-     * @param value the value for the AutoLink.
-     * @param fontColor the font color of AutoLink; optional
-     * @param underlineColor  the underline color of AutoLink; optional
-     * @param preserveTagStyle take the styling of hyperlink text defined in the template (blue and underlined by default); optional;
+     * @param name The name for this element
+     * @param value The value for the AutoLink.
+     * @param fontColor The font color of AutoLink; optional
+     * @param underlineColor The underline color of AutoLink; optional
+     * @param preserveTagStyle Take the styling of hyperlink text defined in the template (blue and underlined by default); optional;
      */
     constructor(name: string, value: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
         super(name, value);
@@ -799,12 +795,12 @@ export class Hyperlink extends Element {
     
 
     /**
-     * @param name the name for this element
-     * @param url the URL for the hyperlink
-     * @param text the text for the hyperlink; optional
-     * @param fontColor the font color for the text of hyperlink; optional
-     * @param underlineColor  the underline color for the text of hyperlink; optional
-     * @param preserveTagStyle  the underline color for the text of hyperlink; optional
+     * @param name The name for this element
+     * @param url The URL for the hyperlink
+     * @param text The text for the hyperlink; optional
+     * @param fontColor The font color for the text of hyperlink; optional
+     * @param underlineColor The underline color for the text of hyperlink; optional
+     * @param preserveTagStyle The underline color for the text of hyperlink; optional
      */
     constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
         super(name);
@@ -1796,7 +1792,7 @@ export class Insert extends Property {
 
 /**
  * Inside PowerPoint, the tag {name?} can be used 
- * to remove an entire shape if the associated tag evaluates to false.
+ * To remove an entire shape if the associated tag evaluates to false.
     For example, if a template slide includes a text box with the tag {toShow?}
     and the value of toShow is false or undefined, the entire shape will be removed from the slide.
  */

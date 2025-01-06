@@ -17,6 +17,8 @@ const area2 = new cop.elements.AreaSeries(
     'blue',
     80,
 );
+
+// Use cop.elements.AreaStackedChart instead to generate area stacked chart
 const areaChart = new cop.elements.AreaChart(
     'area_chart',
     [area1, area2],

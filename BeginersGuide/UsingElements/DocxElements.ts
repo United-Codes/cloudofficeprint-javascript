@@ -1,7 +1,7 @@
 // Install cloudofficeprint using npm install cloudofficeprint 
 import * as cop from 'cloudofficeprint';
 // import local cop
-// import * as cop from 'YOUR_PATH';
+// import * as cop from 'PATH_TO_COP_DIR';
 import * as fs from "fs";
 
 // Main object that holds the data
@@ -14,33 +14,16 @@ const style = new cop.elements.CellStyleDocx(
     10,
     true,
     'double',
-    'double',
-    'dotted',
-    'triple',
-    'wave',
-    'single',
-    'thick',
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
     'red',
-    '#0000ff',
-    '00ff00',
-    '#ffff00',
-    '#800080',
-    '#ffa500',
-    '#ffc0cb',
-    10,
-    4,
-    4,
-    '20',
-    '38',
-    '15',
-    18,
-    3,
-    4,
-    10,
-    '10',
-    '8',
-    '15',
-    3,
+    undefined,
+    undefined,
+    undefined,
 );
 const styleProperty = new cop.elements.CellStyleProperty(
     'testProperty',

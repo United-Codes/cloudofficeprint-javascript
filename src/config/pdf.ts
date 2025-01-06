@@ -82,12 +82,12 @@ export class PDFOptions {
      *  as a base64 string, URL, FTP location or a server path.
      *  The function readFileAsBase64() from file_utils.ts can be used to read local
      *  .p12 or .pfx file as base64. Optional.
-     * @param signCertificatePassword password for certificate.
-     * @param signCertificateTxt custom text in any language for the signature field
-     * @param convertToPdfa convert to PDF/A format.
-     * @param attachmentName retrieve attached file from PDF. output_type must be 'get_attachments'
-     * @param convertAttachmentToJson retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
-     * @param insertBarcode insert barcode in pdf.
+     * @param signCertificatePassword Password for certificate.
+     * @param signCertificateTxt Custom text in any language for the signature field
+     * @param convertToPdfa Convert to PDF/A format.
+     * @param attachmentName Retrieve attached file from PDF. output_type must be 'get_attachments'
+     * @param convertAttachmentToJson Retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
+     * @param insertBarcode Insert barcode in pdf.
      */
     constructor(
         evenPage?: boolean,
@@ -271,6 +271,7 @@ export class PDFOptions {
      * @param opacity Specifies the opacity of the watermark, should be as a percentage, i.e. 45.
      *  Optional.
      * @param size Specifies the size of the watermark, should be a number in px, i.e. 45. Optional.
+     * @param rotation Specifies the angle of watermark text specified, should be a number in px, i.e. 45. Optional.
      */
     setWatermark(
         text?: string,
