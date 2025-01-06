@@ -1,6 +1,5 @@
 import { describe, test, expect } from '@jest/globals';
 import * as cop from '../index';
-import { AutoLink } from '../elements';
 
 describe('Tests for elements', () => {
     test(`Test for Property. Also serves as a test for Html, RightToLeft, FootNote,
@@ -187,8 +186,8 @@ describe('Tests for elements', () => {
         };
         expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
     });
-    test('Test AutoLink', () => {
-        const autoLink = new cop.elements.AutoLink(
+    test('Test PPTX AutoLink', () => {
+        const autoLink = new cop.elements.PptxAutoLink(
             'AutoLink',
             'AutoLink including hyperlinks and text combined',
             'red',
@@ -203,8 +202,8 @@ describe('Tests for elements', () => {
         };
         expect(autoLink.asDict()).toEqual(autoLinkExpected);
     });
-    test('Test hyperlink', () => {
-        const hyperlink = new cop.elements.Hyperlink(
+    test('Test PPTX hyperlink', () => {
+        const hyperlink = new cop.elements.PptxHyperlink(
             'hyperlink',
             'url',
             'hyperlink_text',

@@ -737,6 +737,28 @@ export class FootNote extends Property {
  * 
  */
 export class AutoLink extends Property  {
+    
+    /**
+     * @param name The name for this element
+     * @param value The value for the AutoLink.
+     */
+    constructor(name: string, value: string) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{*auto ${this.name}}`]);
+    }
+}
+/**
+ * Inside PPTX it is possible to specify font color underline color for AutoLinks.
+ * This class offers additional options specifically designed for use in PPTX files compared to standard AutoLink class
+ */
+export class PptxAutoLink extends Property  {
     fontColor?: string;
     underlineColor?: string;
     preserveTagStyle?: string | boolean;
@@ -787,6 +809,51 @@ export class AutoLink extends Property  {
 }
 
 export class Hyperlink extends Element {
+    url: string;
+    text: string | undefined;
+    
+    /**
+     * @param name The name for this element
+     * @param url The URL for the hyperlink
+     * @param text The text for the hyperlink; optional
+     */
+    constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
+        super(name);
+        this.url = url;
+        this.text = text;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string } {
+        const result: { [key: string]: string } = {
+            [this.name]: this.url,
+        };
+
+        if (this.text !== undefined) {
+            result[`${this.name}_text`] = this.text;
+        }
+
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{*${this.name}}`]);
+    }
+}
+
+/**
+ * Inside PPTX it is possible to specify font color underline color for HyperLinks.
+ * This class offers additional options specifically designed for use in PPTX files compared to standard HyperLink class
+ * 
+ */
+export class PptxHyperlink extends Element {
     url: string;
     text: string | undefined;
     fontColor?: string;
