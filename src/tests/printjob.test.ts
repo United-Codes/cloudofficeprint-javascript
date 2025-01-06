@@ -35,6 +35,7 @@ describe('Tests for class PrintJob', () => {
             { sub1: resource, sub2: resource },
             [resource],
             [resource],
+            undefined,
             [resource],
         );
 

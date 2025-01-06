@@ -16,7 +16,6 @@ describe('Tests for config', () => {
             'Arial', // watermarkFont
             50, // watermarkOpacity
             32, // watermarkSize
-            45, // watermarkRotation
             true, // lockForm
             3, // copies
             5, // pageMargin
@@ -30,6 +29,7 @@ describe('Tests for config', () => {
             'test_sign_certificate', // signCertificate
             'test_certificate_password', // signCertificatePassword
             'text in english', // signCertificateTxt
+             45, // watermarkRotation
             '1b', // convertToPdfa,
             'sample_attachment_file.pdf', // attachmentName
             true, // convertAttachmentToJson
@@ -38,7 +38,6 @@ describe('Tests for config', () => {
         pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32, 45);
         pdfOpts.setPageMarginAt(6, 'top');
         const conf = new cop.config.OutputConfig('pdf');
-        conf.pageNumberStartAt = '5';
         conf.updateToc = true;
         conf.pdfOptions = pdfOpts;
         const confExpected = {
@@ -57,7 +56,6 @@ describe('Tests for config', () => {
             output_type: 'pdf',
             output_encoding: 'raw',
             output_converter: 'libreoffice',
-            output_page_number_start_at: '5',
             update_toc: true,
             output_page_width: 500,
             output_page_height: 500,

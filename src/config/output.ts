@@ -18,7 +18,7 @@ export class OutputConfig {
     outputPrependPerPage: boolean | undefined;
     outputPolling: boolean | undefined;
     secretKey: string | undefined;
-    pageNumberStartAt: string | undefined;
+    
     updateToc: boolean | undefined;
     requestOption: RequestOption | undefined;
 
@@ -40,9 +40,8 @@ export class OutputConfig {
      * @param prependPerPage ability to prepend file after each page of output. Optional.
      * @param outputPolling A unique link for each request is sent back, which can be used later to download the output file.
      * @param secretKey A secret key can be specified to encrypt the file stored on the server (ussed with output polling).
-     * @param pageNumberStartAt Specify the start of the page number.
-     * @param updateToc Update table of contents of Word document.
      * @param requestOption  AOP makes a call to the given option with response/output of the current request.
+     * @param updateToc Update table of contents of Word document.
      */
     constructor(
         filetype?: string,
@@ -56,9 +55,8 @@ export class OutputConfig {
         prependPerPage?: boolean,
         outputPolling?: boolean,
         secretKey?: string,
-        pageNumberStartAt?: string,
-        updateToc?: boolean,
-        requestOption?: RequestOption
+        requestOption?: RequestOption,
+        updateToc?: boolean
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -72,7 +70,6 @@ export class OutputConfig {
         this.outputPolling = outputPolling;
         this.requestOption = requestOption;
         this.secretKey = secretKey;
-        this.pageNumberStartAt = pageNumberStartAt;
         this.updateToc = updateToc;
     }
 
@@ -126,9 +123,6 @@ export class OutputConfig {
         }
         if (this.secretKey !== undefined) {
             result.secret_key = this.secretKey;
-        }
-        if (this.pageNumberStartAt !== undefined) {
-            result.output_page_number_start_at = this.pageNumberStartAt;
         }
         if (this.updateToc !== undefined) {
             result.update_toc = this.updateToc;

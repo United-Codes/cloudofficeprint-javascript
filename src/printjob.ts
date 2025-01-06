@@ -30,8 +30,8 @@ export class PrintJob {
     subtemplates: { [key: string]: Resource };
     prependFiles: Resource[];
     appendFiles: Resource[];
-    attachments: Resource[];
     copVerbose: boolean;
+    attachments: Resource[];
 
     /**
      * @param data This is either: An `Element` (e.g. an `ElementCollection`);
@@ -47,8 +47,8 @@ export class PrintJob {
      *  `{?include subtemplate_dict_key}`. Defaults to {}.
      * @param prependFiles Files to prepend to the output file. Defaults to [].
      * @param appendFiles Files to append to the output file. Defaults to [].
-     * @param attachments Files to attach to the PDF file. Defaults to [].
      * @param copVerbose Whether or not verbose mode should be activated. Defaults to False.
+     * @param attachments Files to attach to the PDF file. Defaults to [].
      */
     constructor(
         data: Element | RESTSource | { [key: string]: Element },
@@ -58,8 +58,8 @@ export class PrintJob {
         subtemplates: { [key: string]: Resource } = {},
         prependFiles: Resource[] = [],
         appendFiles: Resource[] = [],
-        attachments: Resource[] = [],
         copVerbose: boolean = false,
+        attachments: Resource[] = [],
     ) {
         this.data = data;
         this.server = server;
@@ -68,8 +68,8 @@ export class PrintJob {
         this.subtemplates = subtemplates;
         this.prependFiles = prependFiles;
         this.appendFiles = appendFiles;
-        this.attachments = attachments;
         this.copVerbose = copVerbose;
+        this.attachments = attachments;
     }
 
     /**

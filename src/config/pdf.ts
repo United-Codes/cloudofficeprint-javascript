@@ -28,14 +28,15 @@ export class PDFOptions {
     merge: boolean | undefined;
     signCertificate: string | undefined;
     signCertificatePassword: string | undefined;
-    signCertificateTxt: string | undefined;
     identifyFormFields: boolean | undefined;
     split: boolean | undefined;
     removeLastPage: boolean | undefined;
+    signCertificateTxt: string | undefined;
     convertToPdfa: string | undefined;
     attachmentName: string | undefined;
     convertAttachmentToJson: boolean | undefined;
     insertBarcode: boolean | undefined;
+    pageNumberStartAt: string | undefined;
 
     /**
      * @param evenPage If you want your output to have even pages, for example
@@ -57,37 +58,38 @@ export class PDFOptions {
      *  specified, should be as a percentage, i.e. 45. Optional.
      * @param watermarkSize Requires PDF output, specifies the size of watermark text specified,
      *  should be a number in px, i.e. 45. Optional.
-     * @param watermarkRotation Requires PDF output, specifies the angle to rotate the watermark text specified,
-     *  should be a number in px, i.e. 45. Optional.
-     * @param lockForm Locks / flattens the forms in the PDF. Optional.
-     * @param copies Repeats the output pdf for the given number of times. Optional.
-     * @param pageMargin Only for HTML to PDF. Margin in px. Returns either a dict containing:
-     *  { 'top': int, 'bottom': int, 'left': int, 'right': int }
-     *  or just an int to be used on all sides. Optional.
-     * @param landscape Only for HTML to PDF. If True: the orientation of the output file
-     *  is landscape; else portrait (default). Optional.
-     * @param pageWidth Only for HTML to PDF. Page width in px, mm, cm, in.
-     *  No unit means px. Optional.
-     * @param pageHeight Only for HTML to PDF. Page height in px, mm, cm, in.
-     *  No unit means px. Optional.
-     * @param pageFormat Only for HTML to PDF. The page format: 'a4' (default)
-     *  or 'letter'. Optional.
-     * @param merge If True: instead of returning back a zip file for multiple output,
-     *  merge it. Optional.
-     * @param split You can specify to split a PDF in separate files.
-     *  You will get one file per page in a zip file. Optional.
-     * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
-     *  of each field into the respective field. Optional.
-     * @param signCertificate Signing certificate for the output PDF (pkcs #12 .p12/.pfx)
-     *  as a base64 string, URL, FTP location or a server path.
-     *  The function readFileAsBase64() from file_utils.ts can be used to read local
-     *  .p12 or .pfx file as base64. Optional.
-     * @param signCertificatePassword Password for certificate.
-     * @param signCertificateTxt Custom text in any language for the signature field
-     * @param convertToPdfa Convert to PDF/A format.
-     * @param attachmentName Retrieve attached file from PDF. output_type must be 'get_attachments'
-     * @param convertAttachmentToJson Retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
-     * @param insertBarcode Insert barcode in pdf.
+    * @param lockForm Locks / flattens the forms in the PDF. Optional.
+    * @param copies Repeats the output pdf for the given number of times. Optional.
+    * @param pageMargin Only for HTML to PDF. Margin in px. Returns either a dict containing:
+    *  { 'top': int, 'bottom': int, 'left': int, 'right': int }
+    *  or just an int to be used on all sides. Optional.
+    * @param landscape Only for HTML to PDF. If True: the orientation of the output file
+    *  is landscape; else portrait (default). Optional.
+    * @param pageWidth Only for HTML to PDF. Page width in px, mm, cm, in.
+    *  No unit means px. Optional.
+    * @param pageHeight Only for HTML to PDF. Page height in px, mm, cm, in.
+    *  No unit means px. Optional.
+    * @param pageFormat Only for HTML to PDF. The page format: 'a4' (default)
+    *  or 'letter'. Optional.
+    * @param merge If True: instead of returning back a zip file for multiple output,
+    *  merge it. Optional.
+    * @param split You can specify to split a PDF in separate files.
+    *  You will get one file per page in a zip file. Optional.
+    * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
+    *  of each field into the respective field. Optional.
+    * @param signCertificate Signing certificate for the output PDF (pkcs #12 .p12/.pfx)
+    *  as a base64 string, URL, FTP location or a server path.
+    *  The function readFileAsBase64() from file_utils.ts can be used to read local
+    *  .p12 or .pfx file as base64. Optional.
+    * @param signCertificatePassword Password for certificate.
+    * @param signCertificateTxt Custom text in any language for the signature field
+    * @param watermarkRotation Requires PDF output, specifies the angle to rotate the watermark text specified,
+    *  should be a number in px, i.e. 45. Optional.
+    * @param convertToPdfa Convert to PDF/A format.
+    * @param attachmentName Retrieve attached file from PDF. output_type must be 'get_attachments'
+    * @param convertAttachmentToJson Retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
+    * @param insertBarcode Insert barcode in pdf.
+    * @param pageNumberStartAt Specify the start of the page number.
      */
     constructor(
         evenPage?: boolean,
@@ -101,7 +103,6 @@ export class PDFOptions {
         watermarkFont?: string,
         watermarkOpacity?: number,
         watermarkSize?: number,
-        watermarkRotation?: number,
         lockForm?: boolean,
         copies?: number,
         pageMargin?: number | { [key: string]: number },
@@ -115,10 +116,12 @@ export class PDFOptions {
         signCertificate?: string,
         signCertificatePassword?: string,
         signCertificateTxt?: string,
+        watermarkRotation?: number,
         convertToPdfa?: string,
         attachmentName?: string,
         convertAttachmentToJson?: boolean,
         insertBarcode?: boolean,
+        pageNumberStartAt?: string,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
@@ -126,7 +129,6 @@ export class PDFOptions {
         this.watermarkFont = watermarkFont;
         this.watermarkOpacity = watermarkOpacity;
         this.watermarkSize = watermarkSize;
-        this.watermarkRotation = watermarkRotation;
         this.pageWidth = pageWidth;
         this.pageHeight = pageHeight;
         this.evenPage = evenPage;
@@ -145,10 +147,12 @@ export class PDFOptions {
         this.identifyFormFields = identifyFormFields;
         this.split = split;
         this.removeLastPage = removeLastPage;
+        this.watermarkRotation = watermarkRotation;
         this.convertToPdfa = convertToPdfa;
         this.attachmentName = attachmentName;
         this.convertAttachmentToJson = convertAttachmentToJson;
         this.insertBarcode = insertBarcode;
+        this.pageNumberStartAt = pageNumberStartAt;
     }
 
     /**
@@ -257,6 +261,9 @@ export class PDFOptions {
         }
         if (this.insertBarcode !== undefined) {
             result.output_insert_barcode = this.insertBarcode;
+        }
+        if (this.pageNumberStartAt !== undefined) {
+            result.output_page_number_start_at = this.pageNumberStartAt;
         }
         return result;
     }
