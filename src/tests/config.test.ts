@@ -5,29 +5,29 @@ import * as cop from '../index';
 describe('Tests for config', () => {
     test('Test PDFOptions', () => {
         const pdfOpts = new cop.config.PDFOptions(
-            true, // evenPage
-            false, // mergeMakingEven
-            false, // removeLastPage
-            'test_modify_password', // modifyPassword
             'test_pw', // readPassword
-            0, // passwordProtectionFlag
             'test_watermark', // watermark
+            32, // watermarkFontSize
+            50, // watermarkOpacity
             'black', // watermarkColor
             'Arial', // watermarkFont
-            50, // watermarkOpacity
-            32, // watermarkSize
+            500, // pageWidth
+            500, // pageHeight
+            true, // evenPage
+            false, // mergeMakingEven
+            'test_modify_password', // modifyPassword
+            0, // passwordProtectionFlag
             true, // lockForm
             3, // copies
             5, // pageMargin
             false, // landscape
-            500, // pageWidth
-            500, // pageHeight
             'test_page_format', // pageFormat
             false, // merge
-            true, // split
-            true, // identifyFormFields
             'test_sign_certificate', // signCertificate
             'test_certificate_password', // signCertificatePassword
+            true, // identifyFormFields
+            true, // split
+            false, // removeLastPage
             'text in english', // signCertificateTxt
              45, // watermarkRotation
             '1b', // convertToPdfa,

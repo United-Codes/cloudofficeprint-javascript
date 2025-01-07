@@ -126,9 +126,9 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.PDFOptions.html#watermark" class="tsd-kind-icon">watermark</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.PDFOptions.html#watermarkColor" class="tsd-kind-icon">watermark<wbr>Color</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.PDFOptions.html#watermarkFont" class="tsd-kind-icon">watermark<wbr>Font</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.PDFOptions.html#watermarkFontSize" class="tsd-kind-icon">watermark<wbr>Font<wbr>Size</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.PDFOptions.html#watermarkOpacity" class="tsd-kind-icon">watermark<wbr>Opacity</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.PDFOptions.html#watermarkRotation" class="tsd-kind-icon">watermark<wbr>Rotation</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="config.PDFOptions.html#watermarkSize" class="tsd-kind-icon">watermark<wbr>Size</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -151,17 +151,88 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new PDFOptions<span class="tsd-signature-symbol">(</span>evenPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, mergeMakingEven<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, removeLastPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, modifyPassword<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, readPassword<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, passwordProtectionFlag<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, watermark<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, watermarkColor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, watermarkFont<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, watermarkOpacity<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, watermarkSize<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, lockForm<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, copies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, pageMargin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span>, landscape<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, pageWidth<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, pageHeight<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, pageFormat<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, merge<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, split<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, identifyFormFields<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, signCertificate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, signCertificatePassword<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, signCertificateTxt<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, watermarkRotation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, convertToPdfa<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, attachmentName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, convertAttachmentToJson<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, insertBarcode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, pageNumberStartAt<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.PDFOptions.html" class="tsd-signature-type" data-tsd-kind="Class">PDFOptions</a></li>
+						<li class="tsd-signature tsd-kind-icon">new PDFOptions<span class="tsd-signature-symbol">(</span>readPassword<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, watermark<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, watermarkFontSize<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, watermarkOpacity<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, watermarkColor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, watermarkFont<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, pageWidth<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, pageHeight<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span>, evenPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, mergeMakingEven<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, modifyPassword<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, passwordProtectionFlag<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, lockForm<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, copies<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, pageMargin<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span>, landscape<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, pageFormat<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, merge<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, signCertificate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, signCertificatePassword<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, identifyFormFields<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, split<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, removeLastPage<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, signCertificateTxt<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, watermarkRotation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, convertToPdfa<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, attachmentName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, convertAttachmentToJson<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, insertBarcode<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, pageNumberStartAt<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="config.PDFOptions.html" class="tsd-signature-type" data-tsd-kind="Class">PDFOptions</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L94">src/config/pdf.ts:94</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L94">src/config/pdf.ts:94</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> readPassword: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The password needed to open the PDF. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermark: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Requires PDF output, generates a diagonal custom watermark on every page of</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermarkFontSize: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Requires PDF output, specifies the size of watermark text specified,
+											should be a number in px, i.e. 45. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermarkOpacity: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Requires PDF output, specifies the opacity of the watermark text
+											specified, should be as a percentage, i.e. 45. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermarkColor: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Requires PDF output, specifies the font of the watermark text
+											specified, with a default of &quot;black&quot;. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermarkFont: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Requires PDF output, specifies the font of the watermark text
+												specified, with a default of &quot;Arial&quot;. Optional.
+											the PDF file. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> pageWidth: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Only for HTML to PDF. Page width in px, mm, cm, in.
+											No unit means px. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> pageHeight: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Only for HTML to PDF. Page height in px, mm, cm, in.
+											No unit means px. Optional.</p>
+										</div>
+									</div>
+								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> evenPage: <span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
@@ -180,26 +251,10 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> removeLastPage: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Remove the last page from the given PDF document. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> modifyPassword: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>The password needed to modify the PDF. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> readPassword: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>The password needed to open the PDF. Optional.</p>
 										</div>
 									</div>
 								</li>
@@ -210,51 +265,6 @@
 											<p>Bit field explained in the PDF specs in table 3.20 in
 												section 3.5.2, should be given as an integer.
 											<a href="https://pdfhummus.com/post/147451287581/hummus-1058-and-pdf-writer-updates-encryption">More info</a>. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermark: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Requires PDF output, generates a diagonal custom watermark on every page of
-											the PDF file. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermarkColor: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Requires PDF output, specifies the font of the watermark text
-											specified, with a default of &quot;black&quot;. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermarkFont: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Requires PDF output, specifies the font of the watermark text
-											specified, with a default of &quot;Arial&quot;. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermarkOpacity: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Requires PDF output, specifies the opacity of the watermark text
-											specified, should be as a percentage, i.e. 45. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> watermarkSize: <span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Requires PDF output, specifies the size of watermark text specified,
-											should be a number in px, i.e. 45. Optional.</p>
 										</div>
 									</div>
 								</li>
@@ -288,26 +298,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> landscape: <span class="tsd-signature-type">boolean</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>Only for HTML to PDF. If True: the orientation of the output file
-											is landscape; else portrait (default). Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> pageWidth: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Only for HTML to PDF. Page width in px, mm, cm, in.
-											No unit means px. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> pageHeight: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Only for HTML to PDF. Page height in px, mm, cm, in.
-											No unit means px. Optional.</p>
+											<p>Only for HTML to PDF. If True: the orientation of the output file</p>
 										</div>
 									</div>
 								</li>
@@ -330,24 +321,6 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> split: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>You can specify to split a PDF in separate files.
-											You will get one file per page in a zip file. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> identifyFormFields: <span class="tsd-signature-type">boolean</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>Identify the form fields in a PDF-form by filling the name
-											of each field into the respective field. Optional.</p>
-										</div>
-									</div>
-								</li>
-								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> signCertificate: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
@@ -363,6 +336,33 @@
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>Password for certificate.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> identifyFormFields: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Identify the form fields in a PDF-form by filling the name
+											of each field into the respective field. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> split: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>You can specify to split a PDF in separate files.
+											You will get one file per page in a zip file. Optional.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> removeLastPage: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Remove the last page from the given PDF document. Optional.
+											is landscape; else portrait (default). Optional.</p>
 										</div>
 									</div>
 								</li>
@@ -437,7 +437,7 @@
 					<div class="tsd-signature tsd-kind-icon">attachment<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L36">src/config/pdf.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L36">src/config/pdf.ts:36</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -447,7 +447,7 @@
 					<div class="tsd-signature tsd-kind-icon">convert<wbr>Attachment<wbr>ToJson<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L37">src/config/pdf.ts:37</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L37">src/config/pdf.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -457,7 +457,7 @@
 					<div class="tsd-signature tsd-kind-icon">convert<wbr>ToPdfa<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L35">src/config/pdf.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L35">src/config/pdf.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -467,7 +467,7 @@
 					<div class="tsd-signature tsd-kind-icon">copies<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L24">src/config/pdf.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L23">src/config/pdf.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -477,7 +477,7 @@
 					<div class="tsd-signature tsd-kind-icon">even<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L19">src/config/pdf.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L18">src/config/pdf.ts:18</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -487,7 +487,7 @@
 					<div class="tsd-signature tsd-kind-icon">identify<wbr>Form<wbr>Fields<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L31">src/config/pdf.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L30">src/config/pdf.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -497,7 +497,7 @@
 					<div class="tsd-signature tsd-kind-icon">insert<wbr>Barcode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L38">src/config/pdf.ts:38</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L38">src/config/pdf.ts:38</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -507,7 +507,7 @@
 					<div class="tsd-signature tsd-kind-icon">landscape<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L26">src/config/pdf.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L25">src/config/pdf.ts:25</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -517,7 +517,7 @@
 					<div class="tsd-signature tsd-kind-icon">lock<wbr>Form<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L23">src/config/pdf.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L22">src/config/pdf.ts:22</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -527,7 +527,7 @@
 					<div class="tsd-signature tsd-kind-icon">merge<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L28">src/config/pdf.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L27">src/config/pdf.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -537,7 +537,7 @@
 					<div class="tsd-signature tsd-kind-icon">merge<wbr>Making<wbr>Even<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L20">src/config/pdf.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L19">src/config/pdf.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -547,7 +547,7 @@
 					<div class="tsd-signature tsd-kind-icon">modify<wbr>Password<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L21">src/config/pdf.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L20">src/config/pdf.ts:20</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -557,7 +557,7 @@
 					<div class="tsd-signature tsd-kind-icon">page<wbr>Format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L27">src/config/pdf.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L26">src/config/pdf.ts:26</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -567,7 +567,7 @@
 					<div class="tsd-signature tsd-kind-icon">page<wbr>Height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L18">src/config/pdf.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L17">src/config/pdf.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -577,7 +577,7 @@
 					<div class="tsd-signature tsd-kind-icon">page<wbr>Margin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L25">src/config/pdf.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L24">src/config/pdf.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -587,7 +587,7 @@
 					<div class="tsd-signature tsd-kind-icon">page<wbr>Number<wbr>Start<wbr>At<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L39">src/config/pdf.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L39">src/config/pdf.ts:39</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -597,7 +597,7 @@
 					<div class="tsd-signature tsd-kind-icon">page<wbr>Width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L17">src/config/pdf.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L16">src/config/pdf.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -607,7 +607,7 @@
 					<div class="tsd-signature tsd-kind-icon">password<wbr>Protection<wbr>Flag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L22">src/config/pdf.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L21">src/config/pdf.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -617,7 +617,7 @@
 					<div class="tsd-signature tsd-kind-icon">read<wbr>Password<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L10">src/config/pdf.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L10">src/config/pdf.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -627,7 +627,7 @@
 					<div class="tsd-signature tsd-kind-icon">remove<wbr>Last<wbr>Page<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L33">src/config/pdf.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L32">src/config/pdf.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -637,7 +637,7 @@
 					<div class="tsd-signature tsd-kind-icon">sign<wbr>Certificate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L29">src/config/pdf.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L28">src/config/pdf.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -647,7 +647,7 @@
 					<div class="tsd-signature tsd-kind-icon">sign<wbr>Certificate<wbr>Password<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L30">src/config/pdf.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L29">src/config/pdf.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -657,7 +657,7 @@
 					<div class="tsd-signature tsd-kind-icon">sign<wbr>Certificate<wbr>Txt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L34">src/config/pdf.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L33">src/config/pdf.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -667,7 +667,7 @@
 					<div class="tsd-signature tsd-kind-icon">split<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L32">src/config/pdf.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L31">src/config/pdf.ts:31</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -677,7 +677,7 @@
 					<div class="tsd-signature tsd-kind-icon">watermark<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L11">src/config/pdf.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L11">src/config/pdf.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -687,7 +687,7 @@
 					<div class="tsd-signature tsd-kind-icon">watermark<wbr>Color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L14">src/config/pdf.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L14">src/config/pdf.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -697,7 +697,17 @@
 					<div class="tsd-signature tsd-kind-icon">watermark<wbr>Font<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L15">src/config/pdf.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L15">src/config/pdf.ts:15</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="watermarkFontSize" class="tsd-anchor"></a>
+					<h3>watermark<wbr>Font<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">watermark<wbr>Font<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L12">src/config/pdf.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -707,7 +717,7 @@
 					<div class="tsd-signature tsd-kind-icon">watermark<wbr>Opacity<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L13">src/config/pdf.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L13">src/config/pdf.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -717,17 +727,7 @@
 					<div class="tsd-signature tsd-kind-icon">watermark<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L16">src/config/pdf.ts:16</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="watermarkSize" class="tsd-anchor"></a>
-					<h3>watermark<wbr>Size</h3>
-					<div class="tsd-signature tsd-kind-icon">watermark<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L12">src/config/pdf.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L34">src/config/pdf.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -744,7 +744,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L162">src/config/pdf.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L162">src/config/pdf.ts:162</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -772,7 +772,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L334">src/config/pdf.ts:334</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L334">src/config/pdf.ts:334</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -795,7 +795,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L305">src/config/pdf.ts:305</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L305">src/config/pdf.ts:305</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -833,7 +833,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L342">src/config/pdf.ts:342</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L342">src/config/pdf.ts:342</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -864,7 +864,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L283">src/config/pdf.ts:283</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L283">src/config/pdf.ts:283</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -928,7 +928,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/74de81a/src/config/pdf.ts#L351">src/config/pdf.ts:351</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/d9bb021/src/config/pdf.ts#L351">src/config/pdf.ts:351</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1105,13 +1105,13 @@
 								<a href="config.PDFOptions.html#watermarkFont" class="tsd-kind-icon">watermark<wbr>Font</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="config.PDFOptions.html#watermarkFontSize" class="tsd-kind-icon">watermark<wbr>Font<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="config.PDFOptions.html#watermarkOpacity" class="tsd-kind-icon">watermark<wbr>Opacity</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="config.PDFOptions.html#watermarkRotation" class="tsd-kind-icon">watermark<wbr>Rotation</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="config.PDFOptions.html#watermarkSize" class="tsd-kind-icon">watermark<wbr>Size</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="config.PDFOptions.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>
