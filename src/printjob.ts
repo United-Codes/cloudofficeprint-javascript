@@ -32,7 +32,8 @@ export class PrintJob {
     appendFiles: Resource[];
     copVerbose: boolean;
     attachments: Resource[];
-
+    compareFiles: Resource[];
+    
     /**
      * @param data This is either: An `Element` (e.g. an `ElementCollection`);
      *  A mapping, containing file names as keys and an `Element` as data.
@@ -49,6 +50,8 @@ export class PrintJob {
      * @param appendFiles Files to append to the output file. Defaults to [].
      * @param copVerbose Whether or not verbose mode should be activated. Defaults to False.
      * @param attachments Files to attach to the PDF file. Defaults to [].
+     * @param _compareFiles to compare to the output file. Defaults to [].
+
      */
     constructor(
         data: Element | RESTSource | { [key: string]: Element },
@@ -60,6 +63,7 @@ export class PrintJob {
         appendFiles: Resource[] = [],
         copVerbose: boolean = false,
         attachments: Resource[] = [],
+        compareFiles: Resource[] = [],
     ) {
         this.data = data;
         this.server = server;
@@ -70,6 +74,7 @@ export class PrintJob {
         this.appendFiles = appendFiles;
         this.copVerbose = copVerbose;
         this.attachments = attachments;
+        this.compareFiles = compareFiles;
     }
 
     /**
@@ -195,6 +200,11 @@ export class PrintJob {
         if (this.attachments.length > 0) {
             result.attachments = this.attachments.map((file) =>
                 file.secondaryFileDict(),
+            );
+        }
+        if (this.compareFiles.length > 0) {
+            result.compare_files = this.compareFiles.map((file) =>
+                file.secondaryFileDict()
             );
         }
 

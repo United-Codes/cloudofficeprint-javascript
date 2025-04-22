@@ -37,6 +37,7 @@ describe('Tests for class PrintJob', () => {
             [resource],
             undefined,
             [resource],
+            [resource, resource]
         );
 
         const printjobExpected = {
@@ -48,6 +49,20 @@ describe('Tests for class PrintJob', () => {
                     mime_type:
                         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 },
+            ],
+            compare_files: [
+                {
+                    file_content: resourceBase64,
+                    file_source: 'base64',
+                    mime_type:
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                },
+                {
+                    file_content: resourceBase64,
+                    file_source: 'base64',
+                    mime_type:
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                }
             ],
             attachments: [
                 {
