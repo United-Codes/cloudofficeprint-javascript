@@ -39,6 +39,7 @@ describe('Tests for config', () => {
         pdfOpts.setPageMarginAt(6, 'top');
         const conf = new cop.config.OutputConfig('pdf');
         conf.updateToc = true;
+        conf.outputLocale = 'nepali';
         conf.pdfOptions = pdfOpts;
         const confExpected = {
             output_even_page: true,
@@ -57,6 +58,7 @@ describe('Tests for config', () => {
             output_encoding: 'raw',
             output_converter: 'libreoffice',
             update_toc: true,
+            output_locale: 'nepali',
             output_page_width: 500,
             output_page_height: 500,
             lock_form: true,

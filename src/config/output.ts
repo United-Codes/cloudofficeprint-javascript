@@ -18,8 +18,8 @@ export class OutputConfig {
     outputPrependPerPage: boolean | undefined;
     outputPolling: boolean | undefined;
     secretKey: string | undefined;
-    
     updateToc: boolean | undefined;
+    outputLocale: string | undefined;
     requestOption: RequestOption | undefined;
 
     /**
@@ -42,6 +42,7 @@ export class OutputConfig {
      * @param secretKey A secret key can be specified to encrypt the file stored on the server (ussed with output polling).
      * @param requestOption  AOP makes a call to the given option with response/output of the current request.
      * @param updateToc Update table of contents of Word document.
+     * @param outputLocale Locale of the output file. Optional.
      */
     constructor(
         filetype?: string,
@@ -56,7 +57,8 @@ export class OutputConfig {
         outputPolling?: boolean,
         secretKey?: string,
         requestOption?: RequestOption,
-        updateToc?: boolean
+        updateToc?: boolean,
+        outputLocale?: string
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -71,6 +73,7 @@ export class OutputConfig {
         this.requestOption = requestOption;
         this.secretKey = secretKey;
         this.updateToc = updateToc;
+        this.outputLocale = outputLocale;
     }
 
     /**
@@ -126,6 +129,9 @@ export class OutputConfig {
         }
         if (this.updateToc !== undefined) {
             result.update_toc = this.updateToc;
+        }
+        if (this.outputLocale !== undefined) {
+            result.output_locale = this.outputLocale;
         }
         if (this.requestOption !== undefined) {
             result.request_option = this.requestOption.asDict();
