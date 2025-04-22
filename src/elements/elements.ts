@@ -1925,6 +1925,29 @@ export class Distribute extends Property {
  * Inside Excel it is possible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
         Options available are:  you can provide dynamic icon and icon position.
  */
+        export class PdfInclude extends Property {
+            /**
+             * Inside Word, PowerPoint, and Excel documents, the tag {?include pdf } can be used to include files like Word, Excel, PowerPoint, and PDF documents.
+             * You should use the `ExcelInsert` element for more flexibility when inserting into Excel.
+             *
+             * @param name Name of the insert tag.
+             * @param value Base64 encoded document that needs to be inserted in output docx, pptx, or pdf.
+             */
+            constructor(name: string, value: string) {
+                super(name, value);
+            }
+        
+            /**
+             * A method for the available template tags this element reacts to.
+             * This returns a Set containing the tag `{?pdfinclude {name}}` associated with this element.
+             * 
+             * @returns A set of tags associated with this element.
+             */
+            availableTags(): Set<string> {
+                return new Set([`{?pdfinclude ${this.name}}`]);
+            }
+        }
+        
 export class ExcelInsert extends Element {
     value: string;
     // isPreview: boolean | undefined;

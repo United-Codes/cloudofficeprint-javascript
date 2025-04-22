@@ -220,6 +220,19 @@ describe('Tests for elements', () => {
         };
         expect(hyperlink.asDict()).toEqual(hyperlinkExpected);
     });
+    test('Test PdfInclude Element', () => {
+        const pdfInclude = new cop.elements.PdfInclude(
+            'fileToInclude',
+            'base64EncodedValue'
+        );
+    
+        const expected = {
+            fileToInclude: 'base64EncodedValue',
+        };
+    
+        expect(pdfInclude.asDict()).toEqual(expected);
+    });
+    
     test('Test table of content', () => {
         const toc = new cop.elements.TableOfContents(
             'table',
