@@ -1,5 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import * as cop from '../index';
+import { PDFComments } from '../elements';
 
 describe('Tests for pdf elements', () => {
     test('Test cop_pdf_texts element', () => {
@@ -212,6 +213,7 @@ describe('Tests for pdf elements', () => {
         };
         expect(pdfImages.asDict()).toEqual(pdfImagesExpected);
     });
+
     test('Test cop_pdf_forms element', () => {
         const form = new cop.elements.PDFFormData({
             f_1: 5,
@@ -229,4 +231,109 @@ describe('Tests for pdf elements', () => {
         };
         expect(form.asDict()).toEqual(formExpected);
     });
+});
+test('Test cop_pdf_comments element', () => {
+    const pdfComment11 = new cop.elements.PDFComment(
+        'test1_1',
+        50,
+        60,
+        3,
+        false,
+        true,
+        'Arial',
+        'blue',
+        12,
+    );
+    const pdfComment12 = new cop.elements.PDFComment(
+        'test1_2',
+        20,
+        30,
+        3,
+        false,
+        false,
+        'Arial',
+        'red',
+        10,
+    );
+    const pdfComment2 = new cop.elements.PDFComment(
+        'test2',
+        60,
+        70,
+        5,
+        true,
+        true,
+        'Times new roman',
+        '#FF00FF',
+        15,
+    );
+    const pdfCommentAll = new cop.elements.PDFComment(
+        'test_all',
+        20,
+        30,
+        undefined,
+        true,
+        false,
+        'Arial',
+        'red',
+        20,
+    );
+    const pdfComments = new cop.elements.PDFComments([
+        pdfComment11,
+        pdfComment12,
+        pdfComment2,
+        pdfCommentAll,
+    ]);
+    const pdfCommentsExpected = {
+        AOP_PDF_COMMENTS: [
+            {
+                3: [
+                    {
+                        text: 'test1_1',
+                        x: 50,
+                        y: 60,
+                        bold: false,
+                        italic: true,
+                        font: 'Arial',
+                        font_color: 'blue',
+                        font_size: 12,
+                    },
+                    {
+                        text: 'test1_2',
+                        x: 20,
+                        y: 30,
+                        bold: false,
+                        italic: false,
+                        font: 'Arial',
+                        font_color: 'red',
+                        font_size: 10,
+                    },
+                ],
+                5: [
+                    {
+                        text: 'test2',
+                        x: 60,
+                        y: 70,
+                        bold: true,
+                        italic: true,
+                        font: 'Times new roman',
+                        font_color: '#FF00FF',
+                        font_size: 15,
+                    },
+                ],
+                all: [
+                    {
+                        text: 'test_all',
+                        x: 20,
+                        y: 30,
+                        bold: true,
+                        italic: false,
+                        font: 'Arial',
+                        font_color: 'red',
+                        font_size: 20,
+                    },
+                ],
+            },
+        ],
+    };
+    expect(pdfComments.asDict()).toEqual(pdfCommentsExpected);
 });
