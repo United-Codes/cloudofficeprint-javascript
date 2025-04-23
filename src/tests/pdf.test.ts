@@ -336,4 +336,4 @@ test('Test cop_pdf_comments element', () => {
         ],
     };
     expect(pdfComments.asDict()).toEqual(pdfCommentsExpected);
-}); 
+});
