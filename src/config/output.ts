@@ -20,6 +20,7 @@ export class OutputConfig {
     secretKey: string | undefined;
     updateToc: boolean | undefined;
     outputLocale: string | undefined;
+    outputReadPassword: string | undefined;
     requestOption: RequestOption | undefined;
 
     /**
@@ -43,6 +44,7 @@ export class OutputConfig {
      * @param requestOption  AOP makes a call to the given option with response/output of the current request.
      * @param updateToc Update table of contents of Word document.
      * @param outputLocale Locale of the output file. Optional.
+     * @param outputReadPassword Password to open the output file. Optional.
      */
     constructor(
         filetype?: string,
@@ -58,7 +60,8 @@ export class OutputConfig {
         secretKey?: string,
         requestOption?: RequestOption,
         updateToc?: boolean,
-        outputLocale?: string
+        outputLocale?: string,
+        outputReadPassword?: string,
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -74,7 +77,7 @@ export class OutputConfig {
         this.secretKey = secretKey;
         this.updateToc = updateToc;
         this.outputLocale = outputLocale;
-    }
+        this.outputReadPassword = outputReadPassword;}
 
     /**
      * The dict representation of this output config.
@@ -132,6 +135,9 @@ export class OutputConfig {
         }
         if (this.outputLocale !== undefined) {
             result.output_locale = this.outputLocale;
+        }
+        if (this.outputReadPassword !== undefined) {
+            result.output_read_password = this.outputReadPassword;
         }
         if (this.requestOption !== undefined) {
             result.request_option = this.requestOption.asDict();

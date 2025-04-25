@@ -266,8 +266,8 @@ describe('Tests for config', () => {
         //     new cop.config.ServerConfig('YOUR_API_KEY',undefined,printer)
         // );
         const serv: cop.config.Server = new cop.config.Server(
-            'http://localhost:8010/',
-            new cop.config.ServerConfig('YOUR_API_KEY')
+            'https://api.apexofficeprint.com/',
+            new cop.config.ServerConfig('2E1425896A27255E0637203000A5138')
         );
         expect(await serv.isReachable()).toBeTruthy();
         // expect(await serv.isIppPrinterReachable()).toBeTruthy();
@@ -304,4 +304,13 @@ describe('Tests for config', () => {
         console.log(conf.asDict());
         expect(conf.asDict()).toEqual(configExpected);
     });
+   
+test('Test for output_read_password', () => {
+    const conf = new cop.config.OutputConfig();
+    conf.outputReadPassword = 'aop_pass';
+    const dict = conf.asDict();
+        expect(dict).toHaveProperty('output_read_password', 'aop_pass');
+        
+});
+
 });
