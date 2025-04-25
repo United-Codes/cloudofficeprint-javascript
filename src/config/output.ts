@@ -77,7 +77,7 @@ export class OutputConfig {
         this.secretKey = secretKey;
         this.updateToc = updateToc;
         this.outputLocale = outputLocale;
-        this.outputReadPassword = outputReadPassword;}
+    }
 
     /**
      * The dict representation of this output config.
