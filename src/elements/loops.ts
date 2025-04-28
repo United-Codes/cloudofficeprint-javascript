@@ -133,6 +133,23 @@ export class ForEachSheet extends ForEach {
  * In Excel this works like a normal loop tag and repeats the cells defined by the rectangular
  * boundary of the starting and closing tag.
  */
+export class ForEachMergeCells extends ForEach {
+    tags: Set<string>;
+
+    /**
+     * @param name The name for this element (Cloud Office Print tag with merge cells).
+     * @param content An iterable containing the elements for this loop element.
+     */
+    constructor(name: string, content: Element[]) {
+        super(name, content);
+        this.tags = new Set([`{##${name}}`, `{/${name}}`]);
+    }
+}
+/**
+ * Loop where table cells are vertically merged across rows during looping.
+ * Only supported in Word templates with {##...} {/...} syntax.
+ */
+
 export class ForEachInline extends ForEach {
     tags: Set<string>;
 

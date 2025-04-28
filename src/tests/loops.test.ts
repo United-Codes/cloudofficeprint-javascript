@@ -261,4 +261,88 @@ describe('Test for loops', () => {
         expect(loop1.asDict()).toEqual(loopExpected);
         expect(loop2.asDict()).toEqual(loopExpected);
     });
+    test('Test ForEachMergeCells', () => {
+        const departments = [
+            cop.elements.ElementCollection.fromMapping({
+                department: 'Engineering',
+                employees: [
+                    {
+                        name: 'John Smith',
+                        project: 'Website Redesign',
+                        status: 'In Progress',
+                    },
+                    {
+                        name: 'Emily Johnson',
+                        project: 'API Development',
+                        status: 'Completed',
+                    },
+                    {
+                        name: 'Michael Brown',
+                        project: 'Mobile App',
+                        status: 'Planning',
+                    },
+                ],
+            }),
+            cop.elements.ElementCollection.fromMapping({
+                department: 'Marketing',
+                employees: [
+                    {
+                        name: 'Sarah Wilson',
+                        project: 'Brand Campaign',
+                        status: 'In Progress',
+                    },
+                    {
+                        name: 'David Thompson',
+                        project: 'Market Research',
+                        status: 'Not Started',
+                    },
+                ],
+            }),
+        ];
+    
+        const loop = new cop.elements.ForEachMergeCells('departments', departments);
+    
+        const loopExpected = {
+            departments: [
+                {
+                    department: 'Engineering',
+                    employees: [
+                        {
+                            name: 'John Smith',
+                            project: 'Website Redesign',
+                            status: 'In Progress',
+                        },
+                        {
+                            name: 'Emily Johnson',
+                            project: 'API Development',
+                            status: 'Completed',
+                        },
+                        {
+                            name: 'Michael Brown',
+                            project: 'Mobile App',
+                            status: 'Planning',
+                        },
+                    ],
+                },
+                {
+                    department: 'Marketing',
+                    employees: [
+                        {
+                            name: 'Sarah Wilson',
+                            project: 'Brand Campaign',
+                            status: 'In Progress',
+                        },
+                        {
+                            name: 'David Thompson',
+                            project: 'Market Research',
+                            status: 'Not Started',
+                        },
+                    ],
+                },
+            ],
+        };
+    
+        expect(loop.asDict()).toEqual(loopExpected);
+    });
+    
 });
