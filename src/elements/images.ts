@@ -15,6 +15,7 @@ export class Image extends Element {
     url: string | undefined;
     width: number | string | undefined;
     height: number | string | undefined;
+    density: number | undefined;
     maintainAspectRatio: string | boolean | undefined;
     ignoreError: string | boolean | undefined;
 
@@ -36,6 +37,10 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param density The density of the image in DPI.
+     * @param maintainAspectRatio Whether to maintain the aspect ratio of the image.
+     * @param ignoreError Whether to ignore errors when loading the image.
+
      */
     constructor(
         name: string,
@@ -49,6 +54,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        density?: number,
         maintainAspectRatio?: boolean | string,
         ignoreError?: boolean | string
 
@@ -64,6 +70,11 @@ export class Image extends Element {
         this.url = url;
         this.width = width;
         this.height = height;
+        if (typeof density === 'number' && density > 1200) {
+            this.density = 1200;
+        } else {
+            this.density = density;
+        }
         this.maintainAspectRatio = maintainAspectRatio;
         this.ignoreError = ignoreError;
 
@@ -113,6 +124,9 @@ export class Image extends Element {
         if (this.height !== undefined) {
             result._height = this.height;
         }
+        if (this.density !== undefined) {
+            result._density = this.density;
+        }
         if (this.maintainAspectRatio !== undefined) {
             result._maintain_aspect_ratio = this.maintainAspectRatio;
         }
@@ -158,6 +172,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param density The density of the image in DPI.
      * @returns the generated Image object from a local file
      */
     static fromFile(
@@ -172,6 +187,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        density?: number,
     ) {
         return new Image(
             name,
@@ -185,6 +201,7 @@ export class Image extends Element {
             url,
             width,
             height,
+            density,
         );
     }
 
@@ -207,6 +224,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param density The density of the image in DPI.
      * @returns the generated Image object from raw data
      */
     static fromRaw(
@@ -221,6 +239,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        density?: number,
     ) {
         return new Image(
             name,
@@ -234,6 +253,7 @@ export class Image extends Element {
             url,
             width,
             height,
+            density,
         );
     }
 
@@ -256,6 +276,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param density The density of the image in DPI.
      * @returns the generated Image object from a base64 string
      */
     static fromBase64(
@@ -270,6 +291,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        density?: number,
     ) {
         return new Image(
             name,
@@ -283,6 +305,7 @@ export class Image extends Element {
             url,
             width,
             height,
+            density,
         );
     }
 
@@ -305,6 +328,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
+     * @param density The density of the image in DPI.
      * @returns the generated Image object from a URL
      */
     static fromUrl(
@@ -319,6 +343,7 @@ export class Image extends Element {
         url?: string,
         width?: number | string,
         height?: number | string,
+        density?: number,
     ) {
         return new Image(
             name,
@@ -332,6 +357,7 @@ export class Image extends Element {
             url,
             width,
             height,
+            density,
         );
     }
 }
