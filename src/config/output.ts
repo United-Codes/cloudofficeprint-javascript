@@ -22,6 +22,7 @@ export class OutputConfig {
     outputLocale: string | undefined;
     outputReadPassword: string | undefined;
     requestOption: RequestOption | undefined;
+    return_output: boolean | undefined;
 
     /**
      * @param filetype The file type (as extension) to use for the output.
@@ -45,6 +46,7 @@ export class OutputConfig {
      * @param updateToc Update table of contents of Word document.
      * @param outputLocale Locale of the output file. Optional.
      * @param outputReadPassword Password to open the output file. Optional.
+     * @param return_output When true, both saves files to server directory and returns the output. 
      */
     constructor(
         filetype?: string,
@@ -62,6 +64,7 @@ export class OutputConfig {
         updateToc?: boolean,
         outputLocale?: string,
         outputReadPassword?: string,
+        return_output?: boolean,
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -78,6 +81,7 @@ export class OutputConfig {
         this.updateToc = updateToc;
         this.outputLocale = outputLocale;
         this.outputReadPassword = outputReadPassword;
+        this.return_output = return_output;
     }
 
     /**
@@ -142,6 +146,9 @@ export class OutputConfig {
         }
         if (this.requestOption !== undefined) {
             result.request_option = this.requestOption.asDict();
+        }
+        if ( this.return_output !== undefined){
+            result.return_output = this.return_output;
         }
         return result;
     }
