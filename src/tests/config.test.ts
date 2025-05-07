@@ -1,3 +1,4 @@
+import { ForEachMergeCells } from './../elements/loops';
 import { describe, test, expect } from '@jest/globals';
 
 import * as cop from '../index';
@@ -316,3 +317,28 @@ test('Test for output_read_password', () => {
 });
 
 });
+describe('cop_pdf_batching', () => {
+    test('test pdf batching', () => {
+      const pdfOpts = new cop.config.PDFOptions()
+      pdfOpts.merge = true;
+      pdfOpts.batch_selector = 'orders:products';
+      pdfOpts.batch_size = 3;
+      pdfOpts.batch_condition = 'unit_price > 110 ? "Expensive" : unit_price < 80 ? "Cheap" : "Medium"'
+      
+      const conf = new cop.config.OutputConfig('pdf');
+      conf.pdfOptions = pdfOpts;
+  
+      const confExpected = {
+        output_encoding: 'raw',
+        output_converter:  'libreoffice',
+        output_type:        'pdf',
+        output_merge:           true,
+        batch_selector:  'orders:products',
+        batch_size:      3,
+        batch_condition: 'unit_price > 110 ? "Expensive" : unit_price < 80 ? "Cheap" : "Medium"'
+      };
+        
+      expect(conf.asDict()).toEqual(confExpected);
+    });
+  });
+  

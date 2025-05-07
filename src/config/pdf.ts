@@ -37,6 +37,9 @@ export class PDFOptions {
     convertAttachmentToJson: boolean | undefined;
     insertBarcode: boolean | undefined;
     pageNumberStartAt: string | undefined;
+    batch_selector : string  | undefined;
+    batch_size : number | undefined;
+    batch_condition : string | undefined;
 
     /**
     * @param readPassword The password needed to open the PDF. Optional.
@@ -90,6 +93,9 @@ export class PDFOptions {
     * @param convertAttachmentToJson Retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
     * @param insertBarcode Insert barcode in pdf.
     * @param pageNumberStartAt Specify the start of the page number.
+    * @param  batch_selector
+    * @param  batch_size 
+    * @param  batch_condition
      */
     constructor(
         readPassword?: string,
@@ -122,6 +128,9 @@ export class PDFOptions {
         convertAttachmentToJson?: boolean,
         insertBarcode?: boolean,
         pageNumberStartAt?: string,
+        batch_selector?: string,
+        batch_size?:number,
+        batch_condtion?:string,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
@@ -153,6 +162,9 @@ export class PDFOptions {
         this.convertAttachmentToJson = convertAttachmentToJson;
         this.insertBarcode = insertBarcode;
         this.pageNumberStartAt = pageNumberStartAt;
+        this.batch_selector= batch_selector;
+        this.batch_size= batch_size;
+        this.batch_condition= batch_condtion;
     }
 
     /**
@@ -264,6 +276,15 @@ export class PDFOptions {
         }
         if (this.pageNumberStartAt !== undefined) {
             result.output_page_number_start_at = this.pageNumberStartAt;
+        }
+        if (this.batch_selector !== undefined){
+            result.batch_selector = this.batch_selector;
+        }
+        if (this.batch_size !== undefined){
+            result.batch_size = this.batch_size;
+        }
+        if (this.batch_condition !== undefined){
+            result.batch_condition  = this.batch_condition;
         }
         return result;
     }
