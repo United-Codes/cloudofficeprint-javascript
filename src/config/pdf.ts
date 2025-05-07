@@ -93,9 +93,9 @@ export class PDFOptions {
     * @param convertAttachmentToJson Retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
     * @param insertBarcode Insert barcode in pdf.
     * @param pageNumberStartAt Specify the start of the page number.
-    * @param  batch_selector
-    * @param  batch_size 
-    * @param  batch_condition
+    * @param batch_selector Specifies which part of the data should be used for batching. Format: "parent:child" e.g. "orders:products"
+    * @param batch_size Number of items per batch. Each batch will contain this many items from the data specified by batch_selector
+    * @param batch_condition Expression to evaluate for each item in the batch. Can be used to categorize items. 
      */
     constructor(
         readPassword?: string,
