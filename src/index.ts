@@ -10,3 +10,5 @@ export * as template from './template';
 export { Template } from './template';
 export * as response from './response';
 export { Response } from './response';
+export * as transformation from './transformation';
+export { TransformationFunction } from './transformation';
