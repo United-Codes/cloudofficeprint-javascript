@@ -37,7 +37,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
-     * @param density The density of the image in DPI.
+     * @param density The density to use for svg to png conversion.
      * @param maintainAspectRatio Whether to maintain the aspect ratio of the image.
      * @param ignoreError Whether to ignore errors when loading the image.
 
@@ -172,7 +172,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
-     * @param density The density of the image in DPI.
+     * @param density The density to use for svg to png conversion.
      * @returns the generated Image object from a local file
      */
     static fromFile(
@@ -224,7 +224,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
-     * @param density The density of the image in DPI.
+     * @param density The density to use for svg to png conversion.
      * @returns the generated Image object from raw data
      */
     static fromRaw(
@@ -276,7 +276,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
-     * @param density The density of the image in DPI.
+     * @param density The density to use for svg to png conversion.
      * @returns the generated Image object from a base64 string
      */
     static fromBase64(
@@ -328,7 +328,7 @@ export class Image extends Element {
      * @param url The URL to load when the image is clicked.
      * @param width The width of the image (for non-proportional scaling).
      * @param height The height of the image (for non-proportional scaling).
-     * @param density The density of the image in DPI.
+     * @param density The density to use for svg to png conversion.
      * @returns the generated Image object from a URL
      */
     static fromUrl(
