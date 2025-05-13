@@ -1863,7 +1863,7 @@ export class Insert extends Property {
     For example, if a template slide includes a text box with the tag {toShow?}
     and the value of toShow is false or undefined, the entire shape will be removed from the slide.
  */
-export class Remove extends Property {
+export class PptxShapeRemove extends Property {
     /**
      * @param name Name of the remove tag. 
      * @param value (boolean or string): False (to remove the shape / text-box) or string/True.

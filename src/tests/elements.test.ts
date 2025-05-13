@@ -405,7 +405,7 @@ describe('Tests for elements', () => {
         expect(insertDocument.asDict()).toEqual(insertDocumentExpected);
     });
     test('Test remove tag', () => {
-        const remove = new cop.elements.Remove('remove', false);
+        const remove = new cop.elements.PptxShapeRemove('remove', false);
         const removeExpected = {
            remove:false,
         }
