@@ -152,14 +152,24 @@ export class ForEachMergeCells extends ForEach {
 
 export class ForEachInline extends ForEach {
     tags: Set<string>;
+    distribute: boolean;
 
     /**
      * @param name The name for this element (Cloud Office Print tag).
      * @param content An iterable containing the elements for this loop element.
+     * @param distribute Whether to distribute the data across rows/columns.
      */
-    constructor(name: string, content: Element[]) {
+    constructor(name: string, content: Element[],distribute: boolean = false) {
         super(name, content);
+        this.distribute = distribute;
         this.tags = new Set([`{:${name}}`, `/${name}`]);
+    }
+    asDict(): Record<string, any> {
+        const parentData = super.asDict();
+        return {
+            ...parentData,
+            [`${this.name}_distribute`]: this.distribute
+        };
     }
 }
 

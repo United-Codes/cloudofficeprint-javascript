@@ -344,5 +344,14 @@ describe('Test for loops', () => {
     
         expect(loop.asDict()).toEqual(loopExpected);
     });
+     test('test distribute option for docx', () => {
+            const distribute = new cop.elements.ForEachInline('product_b',[], true);
+            const distributeExpected = {
+                product_b: [], 
+                product_b_distribute:true
+            }
+            expect(distribute.asDict()).toEqual(distributeExpected);
+    
+        })
     
 });

@@ -2,7 +2,6 @@
 // It creates a collection of employees in different departments and merges the cells in the table for each department. 
 import * as cop from 'cloudofficeprint';
 import { ForEachMergeCells } from '../../src/elements/loops'; 
-import * as fs from 'fs';
 
 // Main object
 const collection = new cop.elements.ElementCollection();
@@ -38,7 +37,7 @@ const departmentsLoop = new ForEachMergeCells('departments', [
 
 collection.add(departmentsLoop);
 
-// Server configuration (unchanged)
+// Server configuration
 const server = new cop.config.Server(
     "http://localhost:8010/",
     new cop.config.ServerConfig("YOUR_API_KEY"),
@@ -50,7 +49,7 @@ const printJob = new cop.PrintJob(
     server,
     cop.Resource.fromLocalFile('C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingMergeLoop/data/template.docx')
 );
-// Set the output configuration to PDF
+//output configuration
 (async () => {
     try {
         const response = await printJob.execute();

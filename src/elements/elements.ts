@@ -1863,7 +1863,7 @@ export class Insert extends Property {
     For example, if a template slide includes a text box with the tag {toShow?}
     and the value of toShow is false or undefined, the entire shape will be removed from the slide.
  */
-export class Remove extends Property {
+export class PptxShapeRemove extends Property {
     /**
      * @param name Name of the remove tag. 
      * @param value (boolean or string): False (to remove the shape / text-box) or string/True.
@@ -1900,26 +1900,7 @@ export class HideSlide extends Property {
     }
     
 }
-/**
- * "Allows to distribute the data evenly among the columns in horizontal loop"
- */
-export class Distribute extends Property {
-    /**
-     * @param name The name of data. 
-     * @param value (boolean): True or False
-     */
-    constructor(name: string, value: boolean) {
-        super(name, value);
-    }
-    
-    asDict(): { [key: string]: boolean } {
-        const result: { [key: string]: boolean } = {
-            [`${this.name}_distribute`]: this.value as boolean,
-        };
-        return result;
-    }
-    
-}
+
 
 /**
  * Inside Excel it is possible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.

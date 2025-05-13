@@ -405,7 +405,7 @@ describe('Tests for elements', () => {
         expect(insertDocument.asDict()).toEqual(insertDocumentExpected);
     });
     test('Test remove tag', () => {
-        const remove = new cop.elements.Remove('remove', false);
+        const remove = new cop.elements.PptxShapeRemove('remove', false);
         const removeExpected = {
            remove:false,
         }
@@ -417,14 +417,6 @@ describe('Tests for elements', () => {
             product_hide:true
         }
         expect(hide.asDict()).toEqual(hideExpected);
-
-    })
-    test('test distribute option for docx', () => {
-        const distribute = new cop.elements.Distribute('product_b', true);
-        const distributeExpected = {
-            product_b_distribute:true
-        }
-        expect(distribute.asDict()).toEqual(distributeExpected);
 
     })
     test('Test protect sheet element', () => {
