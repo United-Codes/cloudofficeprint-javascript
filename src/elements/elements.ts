@@ -737,53 +737,41 @@ export class FootNote extends Property {
  * 
  */
 export class AutoLink extends Property  {
-    
-    /**
-     * @param name The name for this element
-     * @param value The value for the AutoLink.
-     */
-    constructor(name: string, value: string) {
-        super(name, value);
-    }
-
-    /**
-     * A set containing all available template tags this Element reacts to.
-     * @returns set of tags associated with this Element
-     */
-    availableTags(): Set<string> {
-        return new Set([`{*auto ${this.name}}`]);
-    }
-}
-/**
- * Inside PPTX it is possible to specify font color underline color for AutoLinks.
- * This class offers additional options specifically designed for use in PPTX files compared to standard AutoLink class
- */
-export class PptxAutoLink extends Property  {
     fontColor?: string;
     underlineColor?: string;
     preserveTagStyle?: string | boolean;
     
     /**
+    * PPTX-specific styling options are available for font and underline colors.
+    *
      * @param name The name for this element
      * @param value The value for the AutoLink.
-     * @param fontColor The font color of AutoLink; optional
-     * @param underlineColor The underline color of AutoLink; optional
-     * @param preserveTagStyle Take the styling of hyperlink text defined in the template (blue and underlined by default); optional;
+     * @param fontColor -(pptx only ) Font color for Autolink as hex code ( #RRGGBB)
+     * @param underlineColor - ( pptx only ) Underline color  for Autolink 
+     * @param preserveTagStyle - (pptx only) Maintain template's original text styling (default: false)
      */
-    constructor(name: string, value: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
+    constructor(
+        name: string,
+        value: string,
+        fontColor?: string,
+        underlineColor?: string,
+        preserveTagStyle?: string | boolean
+         
+        ) {
         super(name, value);
-        this.fontColor = fontColor;
-        this.underlineColor = underlineColor;        
-        this.preserveTagStyle = preserveTagStyle;        
+        this.fontColor= fontColor;
+        this.underlineColor = underlineColor;
+        this.preserveTagStyle = preserveTagStyle;
+    
     }
 
     /**
-     * Dictionary representation of this Element.
+     * Returns dictionary representation including PPTX-specific properties when set.
      * @returns dictionary representation of this Element
      */
     asDict(): { [key: string]: string | boolean } {
         const result: { [key: string]: string | boolean } = {
-            [this.name]: this.value as string,
+            [this.name]: this.value as string
         };
 
         if (this.fontColor !== undefined) {
@@ -798,7 +786,6 @@ export class PptxAutoLink extends Property  {
 
         return result;
     }
-
     /**
      * A set containing all available template tags this Element reacts to.
      * @returns set of tags associated with this Element

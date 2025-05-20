@@ -187,7 +187,7 @@ describe('Tests for elements', () => {
         expect(styleProperty.asDict()).toEqual(stylePropertyExpected);
     });
     test('Test PPTX AutoLink', () => {
-        const autoLink = new cop.elements.PptxAutoLink(
+        const autoLink = new cop.elements.AutoLink(
             'AutoLink',
             'AutoLink including hyperlinks and text combined',
             'red',
