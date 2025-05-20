@@ -203,7 +203,7 @@ describe('Tests for elements', () => {
         expect(autoLink.asDict()).toEqual(autoLinkExpected);
     });
     test('Test PPTX hyperlink', () => {
-        const hyperlink = new cop.elements.PptxHyperlink(
+        const hyperlink = new cop.elements.Hyperlink(
             'hyperlink',
             'url',
             'hyperlink_text',

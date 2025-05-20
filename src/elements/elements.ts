@@ -798,78 +798,32 @@ export class AutoLink extends Property  {
 export class Hyperlink extends Element {
     url: string;
     text: string | undefined;
-    
-    /**
-     * @param name The name for this element
-     * @param url The URL for the hyperlink
-     * @param text The text for the hyperlink; optional
-     */
-    constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
-        super(name);
-        this.url = url;
-        this.text = text;
-    }
-
-    /**
-     * Dictionary representation of this Element.
-     * @returns dictionary representation of this Element
-     */
-    asDict(): { [key: string]: string } {
-        const result: { [key: string]: string } = {
-            [this.name]: this.url,
-        };
-
-        if (this.text !== undefined) {
-            result[`${this.name}_text`] = this.text;
-        }
-
-        return result;
-    }
-
-    /**
-     * A set containing all available template tags this Element reacts to.
-     * @returns set of tags associated with this Element
-     */
-    availableTags(): Set<string> {
-        return new Set([`{*${this.name}}`]);
-    }
-}
-
-/**
- * Inside PPTX it is possible to specify font color underline color for HyperLinks.
- * This class offers additional options specifically designed for use in PPTX files compared to standard HyperLink class
- * 
- */
-export class PptxHyperlink extends Element {
-    url: string;
-    text: string | undefined;
     fontColor?: string;
     underlineColor?: string;
     preserveTagStyle?: string | boolean;
     
-
     /**
      * @param name The name for this element
      * @param url The URL for the hyperlink
-     * @param text The text for the hyperlink; optional
-     * @param fontColor The font color for the text of hyperlink; optional
-     * @param underlineColor The underline color for the text of hyperlink; optional
-     * @param preserveTagStyle The underline color for the text of hyperlink; optional
+     * @param text  PPTX only - The text for the hyperlink; optional
+     * @param fontColor PPTX pnly - The font color for the text of hyperlink; optional
+     * @param underlineColor PPTX only - The underline color for the text of hyperlink; optional
+     * @param preserveTagStyle PPtx only - The underline color for the text of hyperlink; optional
      */
     constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
         super(name);
         this.url = url;
         this.text = text;
-        this.fontColor = fontColor;
-        this.underlineColor = underlineColor
-        this.preserveTagStyle = preserveTagStyle
+        this.fontColor =fontColor;
+        this.underlineColor = underlineColor;
+        this.preserveTagStyle = preserveTagStyle;
     }
 
     /**
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): { [key: string]: string | boolean } {
+      asDict(): { [key: string]: string | boolean } {
         const result: { [key: string]: string | boolean } = {
             [this.name]: this.url,
         };
