@@ -166,10 +166,10 @@ export class ForEachInline extends ForEach {
     }
     asDict(): Record<string, any> {
         const parentData = super.asDict();
-        return {
+        return this.distribute ? {
             ...parentData,
-            [`${this.name}_distribute`]: this.distribute
-        };
+            [`${this.name}_distribute`]: true
+        } : parentData;
     }
 }
 
