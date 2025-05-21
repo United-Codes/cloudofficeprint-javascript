@@ -162,7 +162,7 @@ export class ForEachInline extends ForEach {
     constructor(name: string, content: Element[],distribute: boolean = false) {
         super(name, content);
         this.distribute = distribute;
-        this.tags = new Set([`{:${name}}`, `/${name}`]);
+        this.tags = new Set([`{:${name}}`, `{/${name}}`]);
     }
     asDict(): Record<string, any> {
         const parentData = super.asDict();
