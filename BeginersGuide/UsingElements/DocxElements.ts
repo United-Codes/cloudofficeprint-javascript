@@ -1,7 +1,7 @@
 // Install cloudofficeprint using npm install cloudofficeprint 
 // import * as cop from 'cloudofficeprint';
 // import local cop
-import * as cop from 'D:\\UC\\cloudofficeprint-javascript\\';
+import * as cop from 'cloudofficeprint';
 import * as fs from "fs";
 
 // Main object that holds the data
