@@ -108,7 +108,7 @@ const outputConf = new OutputConfig('pdf');
 const printJob = new PrintJob(
   dataRoot,
   server,
-  cop.Resource.fromLocalFile("C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingTransformation/data/template.docx"),
+  cop.Resource.fromLocalFile("./data/template.docx"),
   outputConf,
   undefined, undefined, undefined, undefined, undefined, undefined,
   transformationFunction
@@ -117,7 +117,7 @@ const printJob = new PrintJob(
 (async () => {
   try {
     const resp = await printJob.execute();
-    await resp.toFile("C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingTransformation/output/output.pdf");
+    await resp.toFile("./output/output.pdf");
     console.log('PDF generated successfully!');
   } catch (err) {
     console.error('Error:', err);

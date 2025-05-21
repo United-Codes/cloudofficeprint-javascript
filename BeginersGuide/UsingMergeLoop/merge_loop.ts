@@ -47,13 +47,13 @@ const server = new cop.config.Server(
 const printJob = new cop.PrintJob(
     collection,
     server,
-    cop.Resource.fromLocalFile('C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingMergeLoop/data/template.docx')
+    cop.Resource.fromLocalFile('./data/template.docx')
 );
 //output configuration
 (async () => {
     try {
         const response = await printJob.execute();
-        await response.toFile('C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingMergeLoop/output/output.docx');
+        await response.toFile('./output/output.docx');
     } catch (err) {
         console.log('Error during print job execution:', err);
     }

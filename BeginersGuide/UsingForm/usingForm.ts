@@ -63,12 +63,12 @@ const output_conf = new cop.config.OutputConfig("pdf");
 const printjob = new cop.PrintJob(
   collection,
   server,
-  cop.Resource.fromLocalFile("C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingForm/data/template.docx"),
+  cop.Resource.fromLocalFile("./data/template.docx"),
   output_conf
 );
 
 // Output path
-const outputPath =  "C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingForm/output/output.pdf";
+const outputPath =  "./output/output.pdf";
 
 // Execute and save
 (async () => {

@@ -84,13 +84,13 @@ const server = new cop.config.Server(
 const printJob = new cop.PrintJob(
     collection,
     server,
-    cop.Resource.fromLocalFile('C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingDistribute/data/template.docx')
+    cop.Resource.fromLocalFile('./data/template.docx')
 );
 
 (async () => {
     try {
         const response = await printJob.execute();
-        await response.toFile('C:/Users/em8ee/cloudofficeprint-javascript/BeginersGuide/UsingDistribute/output/output');
+        await response.toFile('./output/output');
     } catch (err) {
         console.error('Error:', err);
     }
