@@ -1826,18 +1826,20 @@ export class PptxShapeRemove extends Property {
  */
 export class HideSlide extends Property {
     /**
-     * @param name The name of slide to hide. 
-     * @param value (boolean): True (to hide) or False
+     * @param name Name/identifier for this hide condition
+     * @param condition The condition to determine when to hide the slide
+     * The document should be pptx.
      */
-    constructor(name: string, value: boolean) {
-        super(name, value);
+    constructor(name: string, condition: string) {
+        super(name, condition);
     }
-    
-    asDict(): { [key: string]: boolean } {
-        const result: { [key: string]: boolean } = {
-            [`${this.name}_hide`]: this.value as boolean,
-        };
-        return result;
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{hide ${this.name}}`]);
     }
     
 }

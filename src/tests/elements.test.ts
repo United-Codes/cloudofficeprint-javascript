@@ -411,14 +411,13 @@ describe('Tests for elements', () => {
         }
         expect(remove.asDict()).toEqual(removeExpected);
     });
-    test('test hide option for pptx', () => {
-        const hide = new cop.elements.HideSlide('product', true);
-        const hideExpected = {
-            product_hide:true
-        }
-        expect(hide.asDict()).toEqual(hideExpected);
-
-    })
+    test('Test HideSlide element with string condition', () => {
+        const hideSlide = new cop.elements.HideSlide('slide1', 'someCondition');
+        const expected = {
+            slide1: 'someCondition',
+        };
+        expect(hideSlide.asDict()).toEqual(expected);
+    });
     test('Test protect sheet element', () => {
         const protectElement = new cop.elements.ProtectSheet('protect_tag_name', 'password', true, false, true, 'YES', false, true, false, true, 'YES', 'other passord', true, false, true, 'YES');
         const protectElementExpected = {
