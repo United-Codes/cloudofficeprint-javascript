@@ -748,7 +748,7 @@ export class AutoLink extends Property  {
      * @param value The value for the AutoLink.
      * @param fontColor -(pptx only ) Font color for Autolink as hex code ( #RRGGBB)
      * @param underlineColor - ( pptx only ) Underline color  for Autolink 
-     * @param preserveTagStyle - (pptx only) Maintain template's original text styling (default: false)
+     * @param preserveTagStyle - (pptx and word ) Maintain template's original text styling (default: false)
      */
     constructor(
         name: string,
@@ -805,10 +805,10 @@ export class Hyperlink extends Element {
     /**
      * @param name The name for this element
      * @param url The URL for the hyperlink
-     * @param text  PPTX only - The text for the hyperlink; optional
-     * @param fontColor PPTX pnly - The font color for the text of hyperlink; optional
-     * @param underlineColor PPTX only - The underline color for the text of hyperlink; optional
-     * @param preserveTagStyle PPtx only - The underline color for the text of hyperlink; optional
+     * @param text  (PPTX only) - The text for the hyperlink; optional
+     * @param fontColor (PPTX only) - The font color for the text of hyperlink; optional
+     * @param underlineColor (PPTX only) - The underline color for the text of hyperlink; optional
+     * @param preserveTagStyle (PPTX and Word )-  Maintain template's original text styling 
      */
     constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
         super(name);
