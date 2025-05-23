@@ -9,7 +9,7 @@ import { Base64Resource, ServerPathResource, URLResource } from '../resource';
 export class PDFOptions {
     readPassword: string | undefined;
     watermark: string | undefined;
-    watermarkFontSize: number | undefined;
+    watermarkSize: number | undefined;
     watermarkOpacity: number | undefined;
     watermarkColor: string | undefined;
     watermarkFont: string | undefined;
@@ -44,7 +44,7 @@ export class PDFOptions {
     /**
     * @param readPassword The password needed to open the PDF. Optional.
     * @param watermark Requires PDF output, generates a diagonal custom watermark on every page of
-    * @param watermarkFontSize Requires PDF output, specifies the size of watermark text specified,
+    * @param watermarkSize Requires PDF output, specifies the size of watermark text specified,
     *  should be a number in px, i.e. 45. Optional.
     * @param watermarkOpacity Requires PDF output, specifies the opacity of the watermark text
     *  specified, should be as a percentage, i.e. 45. Optional.
@@ -100,7 +100,7 @@ export class PDFOptions {
     constructor(
         readPassword?: string,
         watermark?: string,
-        watermarkFontSize?: number,
+        watermarkSize?: number,
         watermarkOpacity?: number,
         watermarkColor?: string,
         watermarkFont?: string,
@@ -137,7 +137,7 @@ export class PDFOptions {
         this.watermarkColor = watermarkColor;
         this.watermarkFont = watermarkFont;
         this.watermarkOpacity = watermarkOpacity;
-        this.watermarkFontSize = watermarkFontSize;
+        this.watermarkSize = watermarkSize;
         this.pageWidth = pageWidth;
         this.pageHeight = pageHeight;
         this.evenPage = evenPage;
@@ -205,8 +205,8 @@ export class PDFOptions {
         if (this.watermarkOpacity !== undefined) {
             result.output_watermark_opacity = this.watermarkOpacity;
         }
-        if (this.watermarkFontSize !== undefined) {
-            result.output_watermark_size = this.watermarkFontSize;
+        if (this.watermarkSize !== undefined) {
+            result.output_watermark_size = this.watermarkSize;
         }
         if (this.watermarkRotation !== undefined) {
             result.output_watermark_rotation = this.watermarkRotation;
@@ -313,7 +313,7 @@ export class PDFOptions {
         this.watermarkColor = color;
         this.watermarkFont = font;
         this.watermarkOpacity = opacity;
-        this.watermarkFontSize = size;
+        this.watermarkSize = size;
         this.watermarkRotation = rotation;
     }
 

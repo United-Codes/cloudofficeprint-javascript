@@ -8,7 +8,7 @@ describe('Tests for config', () => {
         const pdfOpts = new cop.config.PDFOptions(
             'test_pw', // readPassword
             'test_watermark', // watermark
-            32, // watermarkFontSize
+            32, // watermarkSize
             50, // watermarkOpacity
             'black', // watermarkColor
             'Arial', // watermarkFont
