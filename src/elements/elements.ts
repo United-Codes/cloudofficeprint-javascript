@@ -1843,6 +1843,24 @@ export class HideSlide extends Property {
     }
     
 }
+export class HideSheets extends Property {
+    /**
+     * Used to hide sheets in Excel based on a condition.
+     * @param name Name/identifier for this hide condition 
+     * @param condition The condition to determine when to hide the sheet.
+     */
+    constructor(name: string, condition: string) {
+        super(name, condition);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{hide ${this.name}}`]);
+    }
+}
 
 
 /**

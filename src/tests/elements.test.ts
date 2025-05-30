@@ -1,3 +1,4 @@
+import { HideSheets } from './../elements/elements';
 import { describe, test, expect } from '@jest/globals';
 import * as cop from '../index';
 
@@ -417,6 +418,13 @@ describe('Tests for elements', () => {
             slide1: 'someCondition',
         };
         expect(hideSlide.asDict()).toEqual(expected);
+    });
+    test('Test HideSheet element with string condition', () => {
+        const hideSheet = new cop.elements.HideSheets('sheet1', 'someCondition');
+        const expected = {
+            sheet1: 'someCondition',
+        };
+        expect(hideSheet.asDict()).toEqual(expected);
     });
     test('Test protect sheet element', () => {
         const protectElement = new cop.elements.ProtectSheet('protect_tag_name', 'password', true, false, true, 'YES', false, true, false, true, 'YES', 'other passord', true, false, true, 'YES');
