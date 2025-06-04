@@ -223,14 +223,22 @@ describe('Tests for elements', () => {
     });
     test('Test PdfInclude Element', () => {
         const pdfInclude = new cop.elements.PdfInclude(
-            'fileToInclude',
-            'base64EncodedValue'
+            "view",
+            "",
+            "view.png",
+            "image/png",
+            "base64EncodedValue",
+            "base64"
         );
-    
+
         const expected = {
-            fileToInclude: 'base64EncodedValue',
+            view : {
+                name: "view.png",
+                mime_type: "image/png",
+                file_content: "base64EncodedValue",
+                file_source: "base64"
+            },
         };
-    
         expect(pdfInclude.asDict()).toEqual(expected);
     });
     

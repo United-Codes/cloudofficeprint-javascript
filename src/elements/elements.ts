@@ -1867,18 +1867,38 @@ export class HideSheets extends Property {
  * Inside Excel it is possible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
         Options available are:  you can provide dynamic icon and icon position.
  */
-        export class PdfInclude extends Property {
+        export class PdfInclude extends Element {
+            value?: string;
+            filename?: string;
+            mimeType?: string;
+            fileContent?: string;
+            fileSource?: string;
             /**
              * Inside Word, PowerPoint, and Excel documents, the tag {?include pdf } can be used to include files like Word, Excel, PowerPoint, and PDF documents.
              * You should use the `ExcelInsert` element for more flexibility when inserting into Excel.
              *
              * @param name Name of the insert tag.
-             * @param value Base64 encoded document that needs to be inserted in output docx, pptx, or pdf.
+             * @param value optional.
+             * @param filename Name of the file to be inserted. Optional.
+             * @param mimeType MIME type of the file to be inserted. Optional.
+             * @param fileContent Content of the file to be inserted. Optional.
+             * @param fileSource Source of the file to be inserted. Optional.
              */
-            constructor(name: string, value: string) {
-                super(name, value);
+            constructor(
+               name: string,
+               value?: string,
+               filename?: string,
+               mimeType?: string,
+               fileContent?: string,
+               fileSource?: string
+            ) {
+                super(name);
+                this.value = value;
+                this.filename = filename;
+                this.mimeType = mimeType;
+                this.fileContent = fileContent;
+                this.fileSource = fileSource;
             }
-        
             /**
              * A method for the available template tags this element reacts to.
              * This returns a Set containing the tag `{?pdfinclude {name}}` associated with this element.
@@ -1888,8 +1908,32 @@ export class HideSheets extends Property {
             availableTags(): Set<string> {
                 return new Set([`{?pdfinclude ${this.name}}`]);
             }
-        }
-        
+            /**
+             * Dictionary representation of this Element.
+             * @returns dictionary representation of this Element
+             */
+            asDict(): { [key: string]: any } {
+                const result: { [key: string]: any } = {};
+                result[this.name] = {};
+                
+                if (this.filename !== undefined) {
+                    result[this.name]["name"] = this.filename;
+
+                }
+                if (this.mimeType !== undefined) {
+                    result[this.name]["mime_type"] = this.mimeType;
+                }
+                if (this.fileContent !== undefined) {
+                    result[this.name]["file_content"] = this.fileContent;
+                }
+                if (this.fileSource !== undefined) {
+                    result[this.name]["file_source"] = this.fileSource;
+                }
+                return result;
+
+            }
+
+}
 export class ExcelInsert extends Element {
     value: string;
     // isPreview: boolean | undefined;
