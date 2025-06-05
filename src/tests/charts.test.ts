@@ -79,6 +79,9 @@ describe('Tests for charts', () => {
                 'Arial',
             ),
             true,
+            45,
+            50,
+            true,
         );
         options.setLegend(
             'l',
@@ -197,6 +200,9 @@ describe('Tests for charts', () => {
                 font: 'Arial',
             },
             grid: true,
+            firstSliceAngle: 45,
+            holeSize: 50,
+            enableAreaTransparency: true,
             legend: {
                 showLegend: true,
                 position: 'l',
@@ -220,7 +226,7 @@ describe('Tests for charts', () => {
         };
         expect(options.asDict()).toEqual(optionsExpected);
     });
-    test('Test for LineChart. Also serves as a test for RadarChart (RadarSeries is equivalent to LineSeries)', () => {
+    test('Test for LineChart. Also serves as a test for RadarChart and LineStackedChart (RadarSeries and LineStackedChart are equivalent to LineSeries)', () => {
         const line1 = new cop.elements.LineSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],
@@ -431,7 +437,7 @@ describe('Tests for charts', () => {
         };
         expect(piesChart.asDict()).toEqual(piesChartExpected);
     });
-    test('Test for AreaChart', () => {
+    test('Test for AreaChart. Also serves as a test for AreaStackedChart', () => {
         const area1 = new cop.elements.AreaSeries(
             ['a', 'b', 'c'],
             [1, 2, 3],

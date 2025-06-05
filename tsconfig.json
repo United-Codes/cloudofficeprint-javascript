@@ -71,6 +71,7 @@
   },
   "include": [
     "src",
-    "examples"
+    "examples",
+    "BeginersGuide",
   ]
 }

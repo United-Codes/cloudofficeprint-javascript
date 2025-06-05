@@ -1,4 +1,6 @@
 // Install cloudofficeprint using npm install cloudofficeprint 
+// import * as cop from 'cloudofficeprint';
+// import local cop
 import * as cop from 'cloudofficeprint';
 import * as fs from "fs";
 
@@ -91,7 +93,12 @@ const base64EncodedDoc = "UEsDBBQABgAIAAAAIQDfpNJsWgEAACAFAAATAAgCW0NvbnRlbnRfVH
 
 const insertDocument = new cop.elements.Insert('document_to_insert',base64EncodedDoc);
 collection.add(insertDocument);
-
+// raw Tag
+const RawTag = new cop.elements.Raw(
+    "bold",
+    '<w:p><w:pPr><w:pStyle w:val="NormalWeb"/><w:spacing w:before="120" w:after="120"/></w:pPr><w:r><w:rPr><w:b/><w:i/></w:rPr><w:t>John</w:t></w:r></w:p>'
+);
+collection.add(RawTag);
 //----------------------------------------------//
 
 // Add server

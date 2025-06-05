@@ -15,10 +15,13 @@ const bars2 = new cop.elements.BarSeries(
     'bars2',
     'blue',
 );
+
+// Use cop.elements.BarStackedChart instead to generate bar stacked chart
 const barChart = new cop.elements.BarChart(
     'bar_chart',
     [bars1, bars2],
 );
+
 collection.add(barChart);
 // Add server
 // If you are using onpremise-version do not need to specify YOUR_API_KEY else replace it with your api key.

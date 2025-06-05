@@ -1,3 +1,4 @@
+import { ForEachMergeCells } from './../elements/loops';
 import { describe, test, expect } from '@jest/globals';
 
 import * as cop from '../index';
@@ -5,33 +6,42 @@ import * as cop from '../index';
 describe('Tests for config', () => {
     test('Test PDFOptions', () => {
         const pdfOpts = new cop.config.PDFOptions(
-            true, // evenPage
-            false, // mergeMakingEven
-            false, // removeLastPage
-            'test_modify_password', // modifyPassword
             'test_pw', // readPassword
-            0, // passwordProtectionFlag
             'test_watermark', // watermark
+            32, // watermarkSize
+            50, // watermarkOpacity
             'black', // watermarkColor
             'Arial', // watermarkFont
-            50, // watermarkOpacity
-            32, // watermarkSize
+            500, // pageWidth
+            500, // pageHeight
+            true, // evenPage
+            false, // mergeMakingEven
+            'test_modify_password', // modifyPassword
+            0, // passwordProtectionFlag
             true, // lockForm
             3, // copies
             5, // pageMargin
             false, // landscape
-            500, // pageWidth
-            500, // pageHeight
             'test_page_format', // pageFormat
             false, // merge
-            true, // split
-            true, // identifyFormFields
             'test_sign_certificate', // signCertificate
             'test_certificate_password', // signCertificatePassword
+            true, // identifyFormFields
+            true, // split
+            false, // removeLastPage
+            'text in english', // signCertificateTxt
+             45, // watermarkRotation
+            '1b', // convertToPdfa,
+            'sample_attachment_file.pdf', // attachmentName
+            true, // convertAttachmentToJson
+            true // insertBarcode
         );
-        pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32);
+        pdfOpts.setWatermark('new_watermark', 'grey', 'Arial', 51, 32, 45);
         pdfOpts.setPageMarginAt(6, 'top');
         const conf = new cop.config.OutputConfig('pdf');
+        conf.updateToc = true;
+        conf.return_output = true;
+        conf.outputLocale = 'nepali';
         conf.pdfOptions = pdfOpts;
         const confExpected = {
             output_even_page: true,
@@ -45,9 +55,13 @@ describe('Tests for config', () => {
             output_watermark_font: 'Arial',
             output_watermark_opacity: 51,
             output_watermark_size: 32,
+            output_watermark_rotation: 45,
             output_type: 'pdf',
             output_encoding: 'raw',
             output_converter: 'libreoffice',
+            update_toc: true,
+            return_output : true,
+            output_locale: 'nepali',
             output_page_width: 500,
             output_page_height: 500,
             lock_form: true,
@@ -63,8 +77,13 @@ describe('Tests for config', () => {
             output_merge: false,
             output_sign_certificate: 'test_sign_certificate',
             output_sign_certificate_password: 'test_certificate_password',
+            output_sign_certificate_txt: 'text in english',
             identify_form_fields: true,
             output_split: true,
+            output_convert_to_pdfa: '1b',
+            output_attachment_name: 'sample_attachment_file.pdf',
+            output_convert_attachment_to_json: true,
+            output_insert_barcode: true,
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
@@ -288,4 +307,38 @@ describe('Tests for config', () => {
         console.log(conf.asDict());
         expect(conf.asDict()).toEqual(configExpected);
     });
+   
+test('Test for output_read_password', () => {
+    const conf = new cop.config.OutputConfig();
+    conf.outputReadPassword = 'aop_pass';
+    const dict = conf.asDict();
+        expect(dict).toHaveProperty('output_read_password', 'aop_pass');
+        
 });
+
+});
+describe('cop_pdf_batching', () => {
+    test('test pdf batching', () => {
+      const pdfOpts = new cop.config.PDFOptions()
+      pdfOpts.merge = true;
+      pdfOpts.batch_selector = 'orders:products';
+      pdfOpts.batch_size = 3;
+      pdfOpts.batch_condition = 'unit_price > 110 ? "Expensive" : unit_price < 80 ? "Cheap" : "Medium"'
+      
+      const conf = new cop.config.OutputConfig('pdf');
+      conf.pdfOptions = pdfOpts;
+  
+      const confExpected = {
+        output_encoding: 'raw',
+        output_converter:  'libreoffice',
+        output_type:        'pdf',
+        output_merge:           true,
+        batch_selector:  'orders:products',
+        batch_size:      3,
+        batch_condition: 'unit_price > 110 ? "Expensive" : unit_price < 80 ? "Cheap" : "Medium"'
+      };
+        
+      expect(conf.asDict()).toEqual(confExpected);
+    });
+  });
+  

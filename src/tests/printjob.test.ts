@@ -35,11 +35,36 @@ describe('Tests for class PrintJob', () => {
             { sub1: resource, sub2: resource },
             [resource],
             [resource],
+            undefined,
+            [resource],
+            [resource, resource]
         );
 
         const printjobExpected = {
             // api_key: server.config!.apiKey,
             append_files: [
+                {
+                    file_content: resourceBase64,
+                    file_source: 'base64',
+                    mime_type:
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                },
+            ],
+            compare_files: [
+                {
+                    file_content: resourceBase64,
+                    file_source: 'base64',
+                    mime_type:
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                },
+                {
+                    file_content: resourceBase64,
+                    file_source: 'base64',
+                    mime_type:
+                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                }
+            ],
+            attachments: [
                 {
                     file_content: resourceBase64,
                     file_source: 'base64',
@@ -93,7 +118,6 @@ describe('Tests for class PrintJob', () => {
         };
 
         expect(printjob.asDict()).toEqual(printjobExpected);
-
         // Commented out because you need an API key, but the saving to a file works as expected
         // await (await printjob.execute()).toFile('./data/tests/prepend_append_subtemplate_test');
     });

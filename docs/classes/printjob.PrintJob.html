@@ -100,6 +100,8 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#appendFiles" class="tsd-kind-icon">append<wbr>Files</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#attachments" class="tsd-kind-icon">attachments</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#compareFiles" class="tsd-kind-icon">compare<wbr>Files</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#copVerbose" class="tsd-kind-icon">cop<wbr>Verbose</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#data" class="tsd-kind-icon">data</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#outputConfig" class="tsd-kind-icon">output<wbr>Config</a></li>
@@ -107,6 +109,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#server" class="tsd-kind-icon">server</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#subtemplates" class="tsd-kind-icon">subtemplates</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#template" class="tsd-kind-icon">template</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="printjob.PrintJob.html#transformationFunction" class="tsd-kind-icon">transformation<wbr>Function</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -127,13 +130,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Print<wbr>Job<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol"> | </span><a href="elements.RESTSource.html" class="tsd-signature-type" data-tsd-kind="Class">RESTSource</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span>, server<span class="tsd-signature-symbol">: </span><a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a>, template<span class="tsd-signature-symbol">?: </span><a href="template.Template.html" class="tsd-signature-type" data-tsd-kind="Class">Template</a><span class="tsd-signature-symbol"> | </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a>, outputConfig<span class="tsd-signature-symbol">?: </span><a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a>, subtemplates<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span>, prependFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, appendFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, copVerbose<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="printjob.PrintJob.html" class="tsd-signature-type" data-tsd-kind="Class">PrintJob</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Print<wbr>Job<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol"> | </span><a href="elements.RESTSource.html" class="tsd-signature-type" data-tsd-kind="Class">RESTSource</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span>, server<span class="tsd-signature-symbol">: </span><a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a>, template<span class="tsd-signature-symbol">?: </span><a href="template.Template.html" class="tsd-signature-type" data-tsd-kind="Class">Template</a><span class="tsd-signature-symbol"> | </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a>, outputConfig<span class="tsd-signature-symbol">?: </span><a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a>, subtemplates<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{}</span>, prependFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, appendFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, copVerbose<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, attachments<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, compareFiles<span class="tsd-signature-symbol">?: </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span>, transformationFunction<span class="tsd-signature-symbol">?: </span><a href="transformation.TransformationFunction.html" class="tsd-signature-type" data-tsd-kind="Class">TransformationFunction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="printjob.PrintJob.html" class="tsd-signature-type" data-tsd-kind="Class">PrintJob</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L51">src/printjob.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L59">src/printjob.ts:59</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -213,6 +216,25 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<h5>attachments: <a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Files to attach to the PDF file. Defaults to [].</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>compareFiles: <a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> transformationFunction: <a href="transformation.TransformationFunction.html" class="tsd-signature-type" data-tsd-kind="Class">TransformationFunction</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>A JavaScript function that transforms the input data before processing.</p>
+										</div>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="printjob.PrintJob.html" class="tsd-signature-type" data-tsd-kind="Class">PrintJob</a></h4>
 						</li>
@@ -227,7 +249,27 @@
 					<div class="tsd-signature tsd-kind-icon">append<wbr>Files<span class="tsd-signature-symbol">:</span> <a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L32">src/printjob.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L33">src/printjob.ts:33</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="attachments" class="tsd-anchor"></a>
+					<h3>attachments</h3>
+					<div class="tsd-signature tsd-kind-icon">attachments<span class="tsd-signature-symbol">:</span> <a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L35">src/printjob.ts:35</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="compareFiles" class="tsd-anchor"></a>
+					<h3>compare<wbr>Files</h3>
+					<div class="tsd-signature tsd-kind-icon">compare<wbr>Files<span class="tsd-signature-symbol">:</span> <a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L36">src/printjob.ts:36</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -237,7 +279,7 @@
 					<div class="tsd-signature tsd-kind-icon">cop<wbr>Verbose<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L33">src/printjob.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L34">src/printjob.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -247,7 +289,7 @@
 					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol"> | </span><a href="elements.RESTSource.html" class="tsd-signature-type" data-tsd-kind="Class">RESTSource</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L26">src/printjob.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L27">src/printjob.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -257,7 +299,7 @@
 					<div class="tsd-signature tsd-kind-icon">output<wbr>Config<span class="tsd-signature-symbol">:</span> <a href="config.OutputConfig.html" class="tsd-signature-type" data-tsd-kind="Class">OutputConfig</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L29">src/printjob.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L30">src/printjob.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -267,7 +309,7 @@
 					<div class="tsd-signature tsd-kind-icon">prepend<wbr>Files<span class="tsd-signature-symbol">:</span> <a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L31">src/printjob.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L32">src/printjob.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -277,7 +319,7 @@
 					<div class="tsd-signature tsd-kind-icon">server<span class="tsd-signature-symbol">:</span> <a href="config.Server.html" class="tsd-signature-type" data-tsd-kind="Class">Server</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L27">src/printjob.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L28">src/printjob.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -287,7 +329,7 @@
 					<div class="tsd-signature tsd-kind-icon">subtemplates<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L30">src/printjob.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L31">src/printjob.ts:31</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -305,7 +347,17 @@
 					<div class="tsd-signature tsd-kind-icon">template<span class="tsd-signature-symbol">:</span> <a href="template.Template.html" class="tsd-signature-type" data-tsd-kind="Class">Template</a><span class="tsd-signature-symbol"> | </span><a href="resource.Resource.html" class="tsd-signature-type" data-tsd-kind="Class">Resource</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L28">src/printjob.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L29">src/printjob.ts:29</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="transformationFunction" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> transformation<wbr>Function</h3>
+					<div class="tsd-signature tsd-kind-icon">transformation<wbr>Function<span class="tsd-signature-symbol">:</span> <a href="transformation.TransformationFunction.html" class="tsd-signature-type" data-tsd-kind="Class">TransformationFunction</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L37">src/printjob.ts:37</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -322,7 +374,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L138">src/printjob.ts:138</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L152">src/printjob.ts:152</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -345,7 +397,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L75">src/printjob.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L89">src/printjob.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -368,7 +420,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L102">src/printjob.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L116">src/printjob.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -408,7 +460,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/7d2e761/src/printjob.ts#L126">src/printjob.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/printjob.ts#L140">src/printjob.ts:140</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -467,6 +519,9 @@
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/template.html">template</a>
 					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/transformation.html">transformation</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -481,6 +536,12 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="printjob.PrintJob.html#appendFiles" class="tsd-kind-icon">append<wbr>Files</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="printjob.PrintJob.html#attachments" class="tsd-kind-icon">attachments</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="printjob.PrintJob.html#compareFiles" class="tsd-kind-icon">compare<wbr>Files</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="printjob.PrintJob.html#copVerbose" class="tsd-kind-icon">cop<wbr>Verbose</a>
@@ -502,6 +563,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="printjob.PrintJob.html#template" class="tsd-kind-icon">template</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="printjob.PrintJob.html#transformationFunction" class="tsd-kind-icon">transformation<wbr>Function</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="printjob.PrintJob.html#asDict" class="tsd-kind-icon">as<wbr>Dict</a>

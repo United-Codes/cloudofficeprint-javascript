@@ -30,83 +30,114 @@ export class PDFOptions {
     identifyFormFields: boolean | undefined;
     split: boolean | undefined;
     removeLastPage: boolean | undefined;
+    signCertificateTxt: string | undefined;
+    watermarkRotation: number | undefined;
+    convertToPdfa: string | undefined;
+    attachmentName: string | undefined;
+    convertAttachmentToJson: boolean | undefined;
+    insertBarcode: boolean | undefined;
+    pageNumberStartAt: string | undefined;
+    batch_selector : string  | undefined;
+    batch_size : number | undefined;
+    batch_condition : string | undefined;
 
     /**
-     * @param evenPage If you want your output to have even pages, for example
-     *  printing on both sides after merging, you can set this to be true. Optional.
-     * @param mergeMakingEven Merge each given document making even paged. Optional.
-     * @param removeLastPage Remove the last page from the given PDF document. Optional.
-     * @param modifyPassword The password needed to modify the PDF. Optional.
-     * @param readPassword The password needed to open the PDF. Optional.
-     * @param passwordProtectionFlag Bit field explained in the PDF specs in table 3.20 in
-     *  section 3.5.2, should be given as an integer.
-     *  [More info](https://pdfhummus.com/post/147451287581/hummus-1058-and-pdf-writer-updates-encryption). Optional.
-     * @param watermark Requires PDF output, generates a diagonal custom watermark on every page of
-     *  the PDF file. Optional.
-     * @param watermarkColor Requires PDF output, specifies the font of the watermark text
-     *  specified, with a default of "black". Optional.
-     * @param watermarkFont Requires PDF output, specifies the font of the watermark text
-     *  specified, with a default of "Arial". Optional.
-     * @param watermarkOpacity Requires PDF output, specifies the opacity of the watermark text
-     *  specified, should be as a percentage, i.e. 45. Optional.
-     * @param watermarkSize Requires PDF output, specifies the size of watermark text specified,
-     *  should be a number in px, i.e. 45. Optional.
-     * @param lockForm Locks / flattens the forms in the PDF. Optional.
-     * @param copies Repeats the output pdf for the given number of times. Optional.
-     * @param pageMargin Only for HTML to PDF. Margin in px. Returns either a dict containing:
-     *  { 'top': int, 'bottom': int, 'left': int, 'right': int }
-     *  or just an int to be used on all sides. Optional.
-     * @param landscape Only for HTML to PDF. If True: the orientation of the output file
-     *  is landscape; else portrait (default). Optional.
-     * @param pageWidth Only for HTML to PDF. Page width in px, mm, cm, in.
-     *  No unit means px. Optional.
-     * @param pageHeight Only for HTML to PDF. Page height in px, mm, cm, in.
-     *  No unit means px. Optional.
-     * @param pageFormat Only for HTML to PDF. The page format: 'a4' (default)
-     *  or 'letter'. Optional.
-     * @param merge If True: instead of returning back a zip file for multiple output,
-     *  merge it. Optional.
-     * @param split You can specify to split a PDF in separate files.
-     *  You will get one file per page in a zip file. Optional.
-     * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
-     *  of each field into the respective field. Optional.
-     * @param signCertificate Signing certificate for the output PDF (pkcs #12 .p12/.pfx)
-     *  as a base64 string, URL, FTP location or a server path.
-     *  The function readFileAsBase64() from file_utils.ts can be used to read local
-     *  .p12 or .pfx file as base64. Optional.
-     * @param signCertificatePassword password for certificate.
+    * @param readPassword The password needed to open the PDF. Optional.
+    * @param watermark Requires PDF output, generates a diagonal custom watermark on every page of
+    * @param watermarkSize Requires PDF output, specifies the size of watermark text specified,
+    *  should be a number in px, i.e. 45. Optional.
+    * @param watermarkOpacity Requires PDF output, specifies the opacity of the watermark text
+    *  specified, should be as a percentage, i.e. 45. Optional.
+    * @param watermarkColor Requires PDF output, specifies the font of the watermark text
+    *  specified, with a default of "black". Optional.
+    * @param watermarkFont Requires PDF output, specifies the font of the watermark text
+    *  specified, with a default of "Arial". Optional.
+    *  the PDF file. Optional.
+    * @param pageWidth Only for HTML to PDF. Page width in px, mm, cm, in.
+    *  No unit means px. Optional.
+    * @param pageHeight Only for HTML to PDF. Page height in px, mm, cm, in.
+    *  No unit means px. Optional.
+    * @param evenPage If you want your output to have even pages, for example
+    *  printing on both sides after merging, you can set this to be true. Optional.
+    * @param mergeMakingEven Merge each given document making even paged. Optional.
+    * @param modifyPassword The password needed to modify the PDF. Optional.
+    * @param passwordProtectionFlag Bit field explained in the PDF specs in table 3.20 in
+    *  section 3.5.2, should be given as an integer.
+    *  [More info](https://pdfhummus.com/post/147451287581/hummus-1058-and-pdf-writer-updates-encryption). Optional.
+    * @param lockForm Locks / flattens the forms in the PDF. Optional.
+    * @param copies Repeats the output pdf for the given number of times. Optional.
+    * @param pageMargin Only for HTML to PDF. Margin in px. Returns either a dict containing:
+    *  { 'top': int, 'bottom': int, 'left': int, 'right': int }
+    *  or just an int to be used on all sides. Optional.
+    * @param landscape Only for HTML to PDF. If True: the orientation of the output file
+    * @param pageFormat Only for HTML to PDF. The page format: 'a4' (default)
+    *  or 'letter'. Optional.
+    * @param merge If True: instead of returning back a zip file for multiple output,
+    *  merge it. Optional.
+    * @param signCertificate Signing certificate for the output PDF (pkcs #12 .p12/.pfx)
+    *  as a base64 string, URL, FTP location or a server path.
+    *  The function readFileAsBase64() from file_utils.ts can be used to read local
+    *  .p12 or .pfx file as base64. Optional.
+    * @param signCertificatePassword Password for certificate.
+    * @param identifyFormFields Identify the form fields in a PDF-form by filling the name
+    *  of each field into the respective field. Optional.
+    * @param split You can specify to split a PDF in separate files.
+    *  You will get one file per page in a zip file. Optional.
+    * @param removeLastPage Remove the last page from the given PDF document. Optional.
+    *  is landscape; else portrait (default). Optional.
+    * @param signCertificateTxt Custom text in any language for the signature field
+    * @param watermarkRotation Requires PDF output, specifies the angle to rotate the watermark text specified,
+    *  should be a number in px, i.e. 45. Optional.
+    * @param convertToPdfa Convert to PDF/A format.
+    * @param attachmentName Retrieve attached file from PDF. output_type must be 'get_attachments'
+    * @param convertAttachmentToJson Retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
+    * @param insertBarcode Insert barcode in pdf.
+    * @param pageNumberStartAt Specify the start of the page number.
+    * @param batch_selector Specifies which part of the data should be used for batching. Format: "parent:child" e.g. "orders:products"
+    * @param batch_size Number of items per batch. Each batch will contain this many items from the data specified by batch_selector
+    * @param batch_condition Expression to evaluate for each item in the batch. Can be used to categorize items. 
      */
     constructor(
-        evenPage?: boolean,
-        mergeMakingEven?: boolean,
-        removeLastPage?: boolean,
-        modifyPassword?: string,
         readPassword?: string,
-        passwordProtectionFlag?: number,
         watermark?: string,
+        watermarkSize?: number,
+        watermarkOpacity?: number,
         watermarkColor?: string,
         watermarkFont?: string,
-        watermarkOpacity?: number,
-        watermarkSize?: number,
+        pageWidth?: string | number,
+        pageHeight?: string | number,
+        evenPage?: boolean,
+        mergeMakingEven?: boolean,
+        modifyPassword?: string,
+        passwordProtectionFlag?: number,
         lockForm?: boolean,
         copies?: number,
         pageMargin?: number | { [key: string]: number },
         landscape?: boolean,
-        pageWidth?: string | number,
-        pageHeight?: string | number,
         pageFormat?: string,
         merge?: boolean,
-        split?: boolean,
-        identifyFormFields?: boolean,
         signCertificate?: string,
         signCertificatePassword?: string,
+        identifyFormFields?: boolean,
+        split?: boolean,
+        removeLastPage?: boolean,
+        signCertificateTxt?: string,
+        watermarkRotation?: number,
+        convertToPdfa?: string,
+        attachmentName?: string,
+        convertAttachmentToJson?: boolean,
+        insertBarcode?: boolean,
+        pageNumberStartAt?: string,
+        batch_selector?: string,
+        batch_size?:number,
+        batch_condtion?:string,
     ) {
         this.readPassword = readPassword;
         this.watermark = watermark;
         this.watermarkColor = watermarkColor;
         this.watermarkFont = watermarkFont;
         this.watermarkOpacity = watermarkOpacity;
-        this.watermarkSize = watermarkSize
+        this.watermarkSize = watermarkSize;
         this.pageWidth = pageWidth;
         this.pageHeight = pageHeight;
         this.evenPage = evenPage;
@@ -121,9 +152,19 @@ export class PDFOptions {
         this.merge = merge;
         this.signCertificate = signCertificate;
         this.signCertificatePassword = signCertificatePassword;
+        this.signCertificateTxt = signCertificateTxt;
         this.identifyFormFields = identifyFormFields;
         this.split = split;
         this.removeLastPage = removeLastPage;
+        this.watermarkRotation = watermarkRotation;
+        this.convertToPdfa = convertToPdfa;
+        this.attachmentName = attachmentName;
+        this.convertAttachmentToJson = convertAttachmentToJson;
+        this.insertBarcode = insertBarcode;
+        this.pageNumberStartAt = pageNumberStartAt;
+        this.batch_selector= batch_selector;
+        this.batch_size= batch_size;
+        this.batch_condition= batch_condtion;
     }
 
     /**
@@ -166,6 +207,9 @@ export class PDFOptions {
         }
         if (this.watermarkSize !== undefined) {
             result.output_watermark_size = this.watermarkSize;
+        }
+        if (this.watermarkRotation !== undefined) {
+            result.output_watermark_rotation = this.watermarkRotation;
         }
         if (this.lockForm !== undefined) {
             result.lock_form = this.lockForm;
@@ -211,8 +255,36 @@ export class PDFOptions {
             result.output_sign_certificate_password =
                 this.signCertificatePassword;
         }
+        if (this.signCertificateTxt !== undefined) {
+            result.output_sign_certificate_txt =
+                this.signCertificateTxt;
+        }
         if (this.removeLastPage !== undefined) {
             result.output_remove_last_page = this.removeLastPage;
+        }
+        if (this.convertToPdfa !== undefined) {
+            result.output_convert_to_pdfa = this.convertToPdfa;
+        }
+        if (this.attachmentName !== undefined) {
+            result.output_attachment_name = this.attachmentName;
+        }
+        if (this.convertAttachmentToJson !== undefined) {
+            result.output_convert_attachment_to_json = this.convertAttachmentToJson;
+        }
+        if (this.insertBarcode !== undefined) {
+            result.output_insert_barcode = this.insertBarcode;
+        }
+        if (this.pageNumberStartAt !== undefined) {
+            result.output_page_number_start_at = this.pageNumberStartAt;
+        }
+        if (this.batch_selector !== undefined){
+            result.batch_selector = this.batch_selector;
+        }
+        if (this.batch_size !== undefined){
+            result.batch_size = this.batch_size;
+        }
+        if (this.batch_condition !== undefined){
+            result.batch_condition  = this.batch_condition;
         }
         return result;
     }
@@ -227,6 +299,7 @@ export class PDFOptions {
      * @param opacity Specifies the opacity of the watermark, should be as a percentage, i.e. 45.
      *  Optional.
      * @param size Specifies the size of the watermark, should be a number in px, i.e. 45. Optional.
+     * @param rotation Specifies the angle of watermark text specified, should be a number in px, i.e. 45. Optional.
      */
     setWatermark(
         text?: string,
@@ -234,12 +307,14 @@ export class PDFOptions {
         font?: string,
         opacity?: number,
         size?: number,
+        rotation?: number,
     ) {
         this.watermark = text;
         this.watermarkColor = color;
         this.watermarkFont = font;
         this.watermarkOpacity = opacity;
         this.watermarkSize = size;
+        this.watermarkRotation = rotation;
     }
 
     /**

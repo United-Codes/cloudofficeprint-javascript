@@ -133,16 +133,43 @@ export class ForEachSheet extends ForEach {
  * In Excel this works like a normal loop tag and repeats the cells defined by the rectangular
  * boundary of the starting and closing tag.
  */
-export class ForEachInline extends ForEach {
+export class ForEachMergeCells extends ForEach {
     tags: Set<string>;
 
     /**
-     * @param name The name for this element (Cloud Office Print tag).
+     * @param name The name for this element (Cloud Office Print tag with merge cells).
      * @param content An iterable containing the elements for this loop element.
      */
     constructor(name: string, content: Element[]) {
         super(name, content);
-        this.tags = new Set([`{:${name}}`, `/${name}`]);
+        this.tags = new Set([`{##${name}}`, `{/${name}}`]);
+    }
+}
+/**
+ * Loop where table cells are vertically merged across rows during looping.
+ * Only supported in Word templates with {##...} {/...} syntax.
+ */
+
+export class ForEachInline extends ForEach {
+    tags: Set<string>;
+    distribute: boolean;
+
+    /**
+     * @param name The name for this element (Cloud Office Print tag).
+     * @param content An iterable containing the elements for this loop element.
+     * @param distribute Whether to distribute the data across rows/columns.
+     */
+    constructor(name: string, content: Element[],distribute: boolean = false) {
+        super(name, content);
+        this.distribute = distribute;
+        this.tags = new Set([`{:${name}}`, `{/${name}}`]);
+    }
+    asDict(): Record<string, any> {
+        const parentData = super.asDict();
+        return this.distribute ? {
+            ...parentData,
+            [`${this.name}_distribute`]: true
+        } : parentData;
     }
 }
 

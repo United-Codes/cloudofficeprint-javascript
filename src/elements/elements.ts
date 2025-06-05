@@ -34,15 +34,136 @@ export abstract class CellStyle {
 export class CellStyleDocx extends CellStyle {
     cellBackgroundColor: string | undefined;
     width: string | number | undefined;
+    preserveTotalWidthOfTable: boolean | undefined;
+    border?: string | undefined;
+    borderTop?: string | undefined;
+    borderBottom?: string | undefined;
+    borderLeft?: string | undefined;
+    borderRight?: string | undefined;
+    borderDiagonalDown?: string | undefined;
+    borderDiagonalUp?: string | undefined;
+    borderColor?: string | undefined;
+    borderTopColor?: string | undefined;
+    borderBottomColor?: string | undefined;
+    borderLeftColor?: string | undefined;
+    borderRightColor?: string | undefined;
+    borderDiagonalUpColor?: string | undefined;
+    borderDiagonalDownColor?: string | undefined;
+    borderSize?: string | number | undefined;
+    borderTopSize?: string | number | undefined;
+    borderBottomSize?: string | number | undefined;
+    borderLeftSize?: string | number | undefined;
+    borderRightSize?: string | number | undefined;
+    borderDiagonalUpSize?: string | number | undefined;
+    borderDiagonalDownSize?: string | number | undefined;
+    borderSpace?: string | number | undefined;
+    borderTopSpace?: string | number | undefined;
+    borderBottomSpace?: string | number | undefined;
+    borderLeftSpace?: string | number | undefined;
+    borderRightSpace?: string | number | undefined;
+    borderDiagonalUpSpace?: string | number | undefined;
+    borderDiagonalDownSpace?: string | number | undefined;
 
     /**
+     *
      * @param cellBackgroundColor The background color of the cell. Optional.
      * @param width The width of the cell. Optional.
+     * @param preserveTotalWidthOfTable Keeps table width constant by redistributing removed column's width to others..
+     * @param border The border style applied to all edges (top, bottom, left, right) of the table. Optional.
+     * @param borderTop The border style applied to the top edge of the table. Optional.
+     * @param borderBottom The border style applied to the bottom edge of the table. Optional.
+     * @param borderLeft The border style applied to the left edge of the table. Optional.
+     * @param borderRight The border style applied to the right edge of the table. Optional.
+     * @param borderDiagonalDown Applies the specified border style to the diagonal line going from the top-left to the bottom-right corner. Optional.
+     * @param borderDiagonalUp  Applies the specified border style to the diagonal line going from the bottom-left to the top-right corner. Optional.
+     * @param borderColor The color of the borders (top, bottom, left, right). Optional.
+     * @param borderTopColor  The color of the top border. Optional.
+     * @param borderBottomColor  The color of the bottom border. Optional.
+     * @param borderLeftColor  The color of the left border. Optional.
+     * @param borderRightColor  The color of the right border. Optional.
+     * @param borderDiagonalUpColor  The color of the diagonal up border. Optional.
+     * @param borderDiagonalDownColor The color of the diagonal down border. Optional.
+     * @param borderSize The width of the borders (top, bottom, left, right) in points. Optional.
+     * @param borderTopSize  The width of the top border in points. Optional.
+     * @param borderBottomSize  The width of the bottom border in points. Optional.
+     * @param borderLeftSize  The width of the left border in points. Optional.
+     * @param borderRightSize  The width of the right border in points. Optional.
+     * @param borderDiagonalUpSize  The width of the diagonal up border in points. Optional.
+     * @param borderDiagonalDownSize  The width of the diagonal down border in points. Optional.
+     * @param borderSpace The spacing between the content and borders in points. Optional.
+     * @param borderTopSpace  The spacing between the content and the top border. Optional.
+     * @param borderBottomSpace The spacing between the content and the bottom border. Optional.
+     * @param borderLeftSpace The spacing between the content and the left border. Optional.
+     * @param borderRightSpace The spacing between the content and the right border in points Optional.
+     * @param borderDiagonalUpSpace The spacing between the content and the diagonal up border in points. Optional.
+     * @param borderDiagonalDownSpace The spacing between the content and the diagonal down border in points. Optional.
      */
-    constructor(cellBackgroundColor?: string, width?: string | number) {
+    constructor(
+        cellBackgroundColor?: string,
+        width?: string | number,
+        preserveTotalWidthOfTable?: boolean | undefined,
+        border?: string | undefined,
+        borderTop?: string | undefined,
+        borderBottom?: string | undefined,
+        borderLeft?: string | undefined,
+        borderRight?: string | undefined,
+        borderDiagonalDown?: string | undefined,
+        borderDiagonalUp?: string | undefined,
+        borderColor?: string | undefined,
+        borderTopColor?: string | undefined,
+        borderBottomColor?: string | undefined,
+        borderLeftColor?: string | undefined,
+        borderRightColor?: string | undefined,
+        borderDiagonalUpColor?: string | undefined,
+        borderDiagonalDownColor?: string | undefined,
+        borderSize?: string | number | undefined,
+        borderTopSize?: string | number | undefined,
+        borderBottomSize?: string | number | undefined,
+        borderLeftSize?: string | number | undefined,
+        borderRightSize?: string | number | undefined,
+        borderDiagonalUpSize?: string | number | undefined,
+        borderDiagonalDownSize?: string | number | undefined,
+        borderSpace?: string | number | undefined,
+        borderTopSpace?: string | number | undefined,
+        borderBottomSpace?: string | number | undefined,
+        borderLeftSpace?: string | number | undefined,
+        borderRightSpace?: string | number | undefined,
+        borderDiagonalUpSpace?: string | number | undefined,
+        borderDiagonalDownSpace?: string | number | undefined,
+
+    ) {
         super();
         this.cellBackgroundColor = cellBackgroundColor;
         this.width = width;
+        this.preserveTotalWidthOfTable = preserveTotalWidthOfTable;
+        this.border = border;
+        this.borderTop = borderTop;
+        this.borderBottom = borderBottom;
+        this.borderLeft = borderLeft;
+        this.borderRight = borderRight;
+        this.borderDiagonalDown = borderDiagonalDown;
+        this.borderDiagonalUp = borderDiagonalUp;
+        this.borderColor = borderColor;
+        this.borderTopColor = borderTopColor;
+        this.borderBottomColor = borderBottomColor;
+        this.borderLeftColor = borderLeftColor;
+        this.borderRightColor = borderRightColor;
+        this.borderDiagonalUpColor = borderDiagonalUpColor;
+        this.borderDiagonalDownColor = borderDiagonalDownColor;
+        this.borderSize = borderSize;
+        this.borderTopSize = borderTopSize;
+        this.borderBottomSize = borderBottomSize;
+        this.borderLeftSize = borderLeftSize;
+        this.borderRightSize = borderRightSize;
+        this.borderDiagonalUpSize = borderDiagonalUpSize;
+        this.borderDiagonalDownSize = borderDiagonalDownSize;
+        this.borderSpace = borderSpace;
+        this.borderTopSpace = borderTopSpace;
+        this.borderBottomSpace = borderBottomSpace;
+        this.borderLeftSpace = borderLeftSpace;
+        this.borderRightSpace = borderRightSpace;
+        this.borderDiagonalUpSpace = borderDiagonalUpSpace;
+        this.borderDiagonalDownSpace = borderDiagonalDownSpace;
     }
 
     /**
@@ -52,8 +173,7 @@ export class CellStyleDocx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } =
-            super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
 
         if (this.cellBackgroundColor !== undefined) {
             result._cell_background_color = this.cellBackgroundColor;
@@ -61,7 +181,93 @@ export class CellStyleDocx extends CellStyle {
         if (this.width !== undefined) {
             result._width = this.width;
         }
-
+        if (this.preserveTotalWidthOfTable !== undefined) {
+            result._preserve_total_width_of_table = this.preserveTotalWidthOfTable;
+        }
+        if (this.border !== undefined) {
+            result._border = this.border;
+        }
+        if (this.borderTop !== undefined) {
+            result._border_top = this.borderTop;
+        }
+        if (this.borderBottom !== undefined) {
+            result._border_bottom = this.borderBottom;
+        }
+        if (this.borderLeft !== undefined) {
+            result._border_left = this.borderLeft;
+        }
+        if (this.borderRight !== undefined) {
+            result._border_right = this.borderRight;
+        }
+        if (this.borderDiagonalDown !== undefined) {
+            result._border_diagonal_down = this.borderDiagonalDown;
+        }
+        if (this.borderDiagonalUp !== undefined) {
+            result._border_diagonal_up = this.borderDiagonalUp;
+        }
+        if (this.borderColor !== undefined) {
+            result._border_color = this.borderColor;
+        }
+        if (this.borderTopColor !== undefined) {
+            result._border_top_color = this.borderTopColor;
+        }
+        if (this.borderBottomColor !== undefined) {
+            result._border_bottom_color = this.borderBottomColor;
+        }
+        if (this.borderLeftColor !== undefined) {
+            result._border_left_color = this.borderLeftColor;
+        }
+        if (this.borderRightColor !== undefined) {
+            result._border_right_color = this.borderRightColor;
+        }
+        if (this.borderDiagonalUpColor !== undefined) {
+            result._border_diagonal_up_color = this.borderDiagonalUpColor;
+        }
+        if (this.borderDiagonalDownColor !== undefined) {
+            result._border_diagonal_down_color = this.borderDiagonalDownColor;
+        }
+        if (this.borderSize !== undefined) {
+            result._border_size = this.borderSize;
+        }
+        if (this.borderTopSize !== undefined) {
+            result._border_top_size = this.borderTopSize;
+        }
+        if (this.borderBottomSize !== undefined) {
+            result._border_bottom_size = this.borderBottomSize;
+        }
+        if (this.borderLeftSize !== undefined) {
+            result._border_left_size = this.borderLeftSize;
+        }
+        if (this.borderRightSize !== undefined) {
+            result._border_right_size = this.borderRightSize;
+        }
+        if (this.borderDiagonalUpSize !== undefined) {
+            result._border_diagonal_up_size = this.borderDiagonalUpSize;
+        }
+        if (this.borderDiagonalDownSize !== undefined) {
+            result._border_diagonal_down_size = this.borderDiagonalDownSize;
+        }
+        if (this.borderSpace !== undefined) {
+            result._border_space = this.borderSpace;
+        }
+        if (this.borderTopSpace !== undefined) {
+            result._border_top_space = this.borderTopSpace;
+        }
+        if (this.borderBottomSpace !== undefined) {
+            result._border_bottom_space = this.borderBottomSpace;
+        }
+        if (this.borderLeftSpace !== undefined) {
+            result._border_left_space = this.borderLeftSpace;
+        }
+        if (this.borderRightSpace !== undefined) {
+            result._border_right_space = this.borderRightSpace;
+        }
+        if (this.borderDiagonalUpSpace !== undefined) {
+            result._border_diagonal_up_space = this.borderDiagonalUpSpace;
+        }
+        if (this.borderDiagonalDownSpace !== undefined) {
+            result._border_diagonal_down_space = this.borderDiagonalDownSpace;
+        }
         return result;
     }
 }
@@ -96,6 +302,11 @@ export class CellStyleXlsx extends CellStyle {
     textHAlignment: string | undefined;
     textVAlignment: string | undefined;
     textRotation: string | number | undefined;
+    wrapText: boolean | undefined;
+    width: string | number | undefined;
+    height: string | number | undefined;
+    maxCharacters: string | number | undefined;
+    heightScaling: string | number | undefined;
 
     /**
      * @param cellLocked Whether or not the cell is locked. Optional.
@@ -128,7 +339,12 @@ export class CellStyleXlsx extends CellStyle {
      * @param borderDiagonalColor hex color e.g: #000000. Optional.
      * @param textHAlignment [top|bottom|center|justify]. Optional.
      * @param textVAlignment [top|bottom|center|justify]. Optional.
-     * @param textRotation rotation of text value from 0-90 degrees. Optional.
+     * @param textRotation Rotation of text value from 0-90 degrees. Optional.
+     * @param wrapText Set to true for wrap text. Optional.
+     * @param width  Provide a custom width to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
+     * @param height Provide custom height to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
+     * @param maxCharacters Provide width for the cell. Optional.
+     * @param heightScaling Adjusts cell height for consistent rendering. Optional.
      */
     constructor(
         cellLocked?: boolean,
@@ -157,6 +373,11 @@ export class CellStyleXlsx extends CellStyle {
         textHAlignment?: string,
         textVAlignment?: string,
         textRotation?: string | number,
+        wrapText?: boolean,
+        width?: string | number,
+        height?: string | number,
+        maxCharacters?: string | number,
+        heightScaling?: string | number,
     ) {
         super();
         this.cellLocked = cellLocked;
@@ -185,6 +406,11 @@ export class CellStyleXlsx extends CellStyle {
         this.textHAlignment = textHAlignment;
         this.textVAlignment = textVAlignment;
         this.textRotation = textRotation;
+        this.wrapText = wrapText;
+        this.width = width;
+        this.height = height;
+        this.maxCharacters = maxCharacters;
+        this.heightScaling = heightScaling;
     }
 
     /**
@@ -274,6 +500,21 @@ export class CellStyleXlsx extends CellStyle {
         }
         if (this.textRotation !== undefined) {
             result._text_rotation = this.textRotation;
+        }
+        if (this.wrapText !== undefined) {
+            result._wrap_text = this.wrapText;
+        }
+        if (this.width !== undefined) {
+            result._width = this.width;
+        }
+        if (this.height !== undefined) {
+            result._height = this.height;
+        }
+        if (this.maxCharacters !== undefined) {
+            result._max_characters = this.maxCharacters;
+        }
+        if (this.heightScaling !== undefined) {
+            result._height_scaling = this.heightScaling;
         }
 
         return result;
@@ -385,12 +626,33 @@ export class CellStyleProperty extends Property {
 }
 
 export class Html extends Property {
+    customTableStyle?: string;
+    unorderedListStyle?: string | number;
+    orderedListStyle?: string | number;
+    useTagStyle?: boolean;
+    ignoreCellMargin?: boolean;
+    ignoreEmptyP?: boolean;
+    
     /**
-     * @param name the name for this property
-     * @param value the value for this property
+     * 
+     * @param name The name for this property.
+     * @param value  The value for this property.
+     * @param customTableStyle  Specify custom table style
+     * @param unorderedListStyle Create and customize ordered list
+     * @param orderedListStyle  Create and customize unordered list
+     * @param useTagStyle Use the styling from the template instead of default Word styling
+     * @param ignoreCellMargin Ignore empty paragraphs within HTML content
+     * @param ignoreEmptyP Ignore the cell margins in an HTML table cell when the text content is large
      */
-    constructor(name: string, value: string) {
+    constructor(name: string, value: string, customTableStyle?: string, unorderedListStyle?: string | number, orderedListStyle?: string | number, useTagStyle?: boolean, ignoreCellMargin?: boolean, ignoreEmptyP?: boolean) {
         super(name, value);
+        this.customTableStyle = customTableStyle;
+        this.unorderedListStyle = unorderedListStyle;
+        this.orderedListStyle = orderedListStyle;
+        this.useTagStyle = useTagStyle;
+        this.ignoreCellMargin = ignoreCellMargin;
+        this.ignoreEmptyP = ignoreEmptyP;
+        
     }
 
     /**
@@ -400,6 +662,38 @@ export class Html extends Property {
     availableTags(): Set<string> {
         return new Set([`{_${this.name}}`]);
     }
+
+      /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+      asDict(): { [key: string]: string | boolean | number } {
+        const result: { [key: string]: string | boolean | number } = {
+            [this.name]: this.value as string,
+        };
+
+        if (this.customTableStyle !== undefined) {
+            result[`${this.name}_custom_table_style`] = this.customTableStyle;
+        }
+        if (this.unorderedListStyle !== undefined) {
+            result[`${this.name}_unordered_list_style`] = this.unorderedListStyle;
+        }
+        if (this.orderedListStyle !== undefined) {
+            result[`${this.name}_ordered_list_style`] = this.orderedListStyle;
+        }
+        if (this.useTagStyle !== undefined) {
+            result[`${this.name}_use_tag_style`] = this.useTagStyle;
+        }
+        if (this.ignoreCellMargin !== undefined) {
+            result[`${this.name}_ignore_cell_margin`] = this.ignoreCellMargin;
+        }
+        if (this.ignoreEmptyP !== undefined) {
+            result[`${this.name}_ignore_empty_p`] = this.ignoreEmptyP;
+        }
+
+        return result;
+    }
+
 }
 
 export class RightToLeft extends Property {
@@ -442,16 +736,56 @@ export class FootNote extends Property {
  * The value may or may not have any links.
  * 
  */
-export class AutoLink extends Property {
-
+export class AutoLink extends Property  {
+    fontColor?: string;
+    underlineColor?: string;
+    preserveTagStyle?: string | boolean;
+    
     /**
-     * @param name the name for this element
-     * @param value the value for the AutoLink.
+    * PPTX-specific styling options are available for font and underline colors.
+    *
+     * @param name The name for this element
+     * @param value The value for the AutoLink.
+     * @param fontColor -(pptx only ) Font color for Autolink as hex code ( #RRGGBB)
+     * @param underlineColor - ( pptx only ) Underline color  for Autolink 
+     * @param preserveTagStyle - (pptx and word ) Maintain template's original text styling (default: false)
      */
-    constructor(name: string, value: string) {
+    constructor(
+        name: string,
+        value: string,
+        fontColor?: string,
+        underlineColor?: string,
+        preserveTagStyle?: string | boolean
+         
+        ) {
         super(name, value);
+        this.fontColor= fontColor;
+        this.underlineColor = underlineColor;
+        this.preserveTagStyle = preserveTagStyle;
+    
     }
 
+    /**
+     * Returns dictionary representation including PPTX-specific properties when set.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {
+            [this.name]: this.value as string
+        };
+
+        if (this.fontColor !== undefined) {
+            result[`${this.name}_font_color`] = this.fontColor;
+        }
+        if (this.underlineColor !== undefined) {
+            result[`${this.name}_underline_color`] = this.underlineColor;
+        }
+        if (this.preserveTagStyle !== undefined) {
+            result[`${this.name}_preserve_tag_style`] = this.preserveTagStyle;
+        }
+
+        return result;
+    }
     /**
      * A set containing all available template tags this Element reacts to.
      * @returns set of tags associated with this Element
@@ -464,29 +798,47 @@ export class AutoLink extends Property {
 export class Hyperlink extends Element {
     url: string;
     text: string | undefined;
-
+    fontColor?: string;
+    underlineColor?: string;
+    preserveTagStyle?: string | boolean;
+    
     /**
-     * @param name the name for this element
-     * @param url the URL for the hyperlink
-     * @param text the text for the hyperlink; optional
+     * @param name The name for this element
+     * @param url The URL for the hyperlink
+     * @param text  (PPTX only) - The text for the hyperlink; optional
+     * @param fontColor (PPTX only) - The font color for the text of hyperlink; optional
+     * @param underlineColor (PPTX only) - The underline color for the text of hyperlink; optional
+     * @param preserveTagStyle (PPTX and Word )-  Maintain template's original text styling 
      */
-    constructor(name: string, url: string, text?: string) {
+    constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
         super(name);
         this.url = url;
         this.text = text;
+        this.fontColor =fontColor;
+        this.underlineColor = underlineColor;
+        this.preserveTagStyle = preserveTagStyle;
     }
 
     /**
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): { [key: string]: string } {
-        const result: { [key: string]: string } = {
+      asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {
             [this.name]: this.url,
         };
 
         if (this.text !== undefined) {
             result[`${this.name}_text`] = this.text;
+        }
+        if (this.text !== undefined && this.fontColor !== undefined) {
+            result[`${this.text}_font_color`] = this.fontColor;
+        }
+        if (this.text !== undefined  && this.underlineColor !== undefined) {
+            result[`${this.text}_underline_color`] = this.underlineColor;
+        }
+        if (this.preserveTagStyle !== undefined) {
+            result[`${this.name}_preserve_tag_style`] = this.preserveTagStyle;
         }
 
         return result;
@@ -1447,9 +1799,141 @@ export class Insert extends Property {
 }
 
 /**
- * Inside Excel it is posiible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
+ * Inside PowerPoint, the tag {name?} can be used 
+ * To remove an entire shape if the associated tag evaluates to false.
+    For example, if a template slide includes a text box with the tag {toShow?}
+    and the value of toShow is false or undefined, the entire shape will be removed from the slide.
+ */
+export class PptxShapeRemove extends Property {
+    /**
+     * @param name Name of the remove tag. 
+     * @param value (boolean or string): False (to remove the shape / text-box) or string/True.
+     */
+    constructor(name: string, value: string | boolean) {
+        super(name, value);
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`${this.name}?`]);
+    }
+}
+/**
+ * To hide a slide in powerpoint
+ * Append "_hide" to the key of the corresponding data field and set its value to "true"
+ */
+export class HideSlide extends Property {
+    /**
+     * @param name Name/identifier for this hide condition
+     * @param condition The condition to determine when to hide the slide
+     * The document should be pptx.
+     */
+    constructor(name: string, condition: string) {
+        super(name, condition);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{hide ${this.name}}`]);
+    }
+    
+}
+export class HideSheets extends Property {
+    /**
+     * Used to hide sheets in Excel based on a condition.
+     * @param name Name/identifier for this hide condition 
+     * @param condition The condition to determine when to hide the sheet.
+     */
+    constructor(name: string, condition: string) {
+        super(name, condition);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{hide ${this.name}}`]);
+    }
+}
+
+
+/**
+ * Inside Excel it is possible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
         Options available are:  you can provide dynamic icon and icon position.
  */
+        export class PdfInclude extends Element {
+            value?: string;
+            filename?: string;
+            mimeType?: string;
+            fileContent?: string;
+            fileSource?: string;
+            /**
+             * Inside Word, PowerPoint, and Excel documents, the tag {?include pdf } can be used to include files like Word, Excel, PowerPoint, and PDF documents.
+             * You should use the `ExcelInsert` element for more flexibility when inserting into Excel.
+             *
+             * @param name Name of the insert tag.
+             * @param value optional.
+             * @param filename Name of the file to be inserted. Optional.
+             * @param mimeType MIME type of the file to be inserted. Optional.
+             * @param fileContent Content of the file to be inserted. Optional.
+             * @param fileSource Source of the file to be inserted. Optional.
+             */
+            constructor(
+               name: string,
+               value?: string,
+               filename?: string,
+               mimeType?: string,
+               fileContent?: string,
+               fileSource?: string
+            ) {
+                super(name);
+                this.value = value;
+                this.filename = filename;
+                this.mimeType = mimeType;
+                this.fileContent = fileContent;
+                this.fileSource = fileSource;
+            }
+            /**
+             * A method for the available template tags this element reacts to.
+             * This returns a Set containing the tag `{?pdfinclude {name}}` associated with this element.
+             * 
+             * @returns A set of tags associated with this element.
+             */
+            availableTags(): Set<string> {
+                return new Set([`{?pdfinclude ${this.name}}`]);
+            }
+            /**
+             * Dictionary representation of this Element.
+             * @returns dictionary representation of this Element
+             */
+            asDict(): { [key: string]: any } {
+                const result: { [key: string]: any } = {};
+                result[this.name] = {};
+                
+                if (this.filename !== undefined) {
+                    result[this.name]["name"] = this.filename;
+
+                }
+                if (this.mimeType !== undefined) {
+                    result[this.name]["mime_type"] = this.mimeType;
+                }
+                if (this.fileContent !== undefined) {
+                    result[this.name]["file_content"] = this.fileContent;
+                }
+                if (this.fileSource !== undefined) {
+                    result[this.name]["file_source"] = this.fileSource;
+                }
+                return result;
+
+            }
+
+}
 export class ExcelInsert extends Element {
     value: string;
     // isPreview: boolean | undefined;
@@ -1469,7 +1953,7 @@ export class ExcelInsert extends Element {
      * @param value File to insert of path to file. (Source can be FTP, SFTP, URL or base64encoded file.)
      * @param icon Icon to be showed as the document, when clicked on it, redirects it to file. Default icon is taken if not provided. Optional.
      * @param fromRow position for top of icon. Defaults to row of the tag. Optional.
-     * @param fromCol positon for left of icon. Defaults to column of the tag. Optional.
+     * @param fromCol position for left of icon. Defaults to column of the tag. Optional.
      * @param fromRowOff space after the value of from Row. Defaults to 0. Optional.
      * @param fromColOff space after the value of fromCol. Defaults to 0. Optional.
      * @param toRow position for bottom of icon. Defaults to row of the tag + 3. Optional.
