@@ -103,6 +103,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.ForEachHorizontal.html#content" class="tsd-kind-icon">content</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.ForEachHorizontal.html#distribute" class="tsd-kind-icon">distribute</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.ForEachHorizontal.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="elements.ForEachHorizontal.html#tags" class="tsd-kind-icon">tags</a></li>
 							</ul>
@@ -123,14 +124,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>For<wbr>Each<wbr>Horizontal<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, content<span class="tsd-signature-symbol">: </span><a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.ForEachHorizontal.html" class="tsd-signature-type" data-tsd-kind="Class">ForEachHorizontal</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>For<wbr>Each<wbr>Horizontal<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, content<span class="tsd-signature-symbol">: </span><a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol">[]</span>, distribute<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.ForEachHorizontal.html" class="tsd-signature-type" data-tsd-kind="Class">ForEachHorizontal</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="elements.ForEachInline.html">ForEachInline</a>.<a href="elements.ForEachInline.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/loops.ts#L145">src/elements/loops.ts:145</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/loops.ts#L162">src/elements/loops.ts:162</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -145,6 +146,12 @@
 									<h5>content: <a href="elements.Element.html" class="tsd-signature-type" data-tsd-kind="Class">Element</a><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>An iterable containing the elements for this loop element.</p>
+									</div>
+								</li>
+								<li>
+									<h5>distribute: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Whether to distribute the data across rows/columns.</p>
 									</div>
 								</li>
 							</ul>
@@ -162,7 +169,18 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="elements.ForEachInline.html">ForEachInline</a>.<a href="elements.ForEachInline.html#content">content</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/loops.ts#L7">src/elements/loops.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/loops.ts#L7">src/elements/loops.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="distribute" class="tsd-anchor"></a>
+					<h3>distribute</h3>
+					<div class="tsd-signature tsd-kind-icon">distribute<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="elements.ForEachInline.html">ForEachInline</a>.<a href="elements.ForEachInline.html#distribute">distribute</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/loops.ts#L155">src/elements/loops.ts:155</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -173,9 +191,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="elements.ForEachInline.html">ForEachInline</a>.<a href="elements.ForEachInline.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/elements.ts#L282">src/elements/elements.ts:282</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/elements.ts#L526">src/elements/elements.ts:526</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Name of the tag being used</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="tags" class="tsd-anchor"></a>
@@ -184,7 +207,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="elements.ForEachInline.html">ForEachInline</a>.<a href="elements.ForEachInline.html#tags">tags</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/loops.ts#L139">src/elements/loops.ts:139</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/loops.ts#L154">src/elements/loops.ts:154</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -195,14 +218,14 @@
 					<a name="asDict" class="tsd-anchor"></a>
 					<h3>as<wbr>Dict</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">as<wbr>Dict<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></li>
+						<li class="tsd-signature tsd-kind-icon">as<wbr>Dict<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="elements.ForEachInline.html">ForEachInline</a>.<a href="elements.ForEachInline.html#asDict">asDict</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/loops.ts#L46">src/elements/loops.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/loops.ts#L167">src/elements/loops.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -210,10 +233,8 @@
 									<p>The dict representation of this object</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{}</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>dict representation of this object</p>
-							<ul class="tsd-parameters">
-							</ul>
 						</li>
 					</ul>
 				</section>
@@ -228,7 +249,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="elements.ForEachInline.html">ForEachInline</a>.<a href="elements.ForEachInline.html#availableTags">availableTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/loops.ts#L26">src/elements/loops.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/loops.ts#L26">src/elements/loops.ts:26</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -270,6 +291,12 @@
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/response.html">response</a>
 					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/template.html">template</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/transformation.html">transformation</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -284,6 +311,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="elements.ForEachHorizontal.html#content" class="tsd-kind-icon">content</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="elements.ForEachHorizontal.html#distribute" class="tsd-kind-icon">distribute</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="elements.ForEachHorizontal.html#name" class="tsd-kind-icon">name</a>

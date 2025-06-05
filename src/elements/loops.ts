@@ -26,15 +26,11 @@ export class ForEach extends Element {
     availableTags(): Set<string> {
         const result: Set<string> = this.tags;
 
-        this.content.forEach(
-            (value) => {
-                value.availableTags().forEach(
-                    (tag) => {
-                        result.add(tag);
-                    },
-                );
-            },
-        );
+        this.content.forEach((value) => {
+            value.availableTags().forEach((tag) => {
+                result.add(tag);
+            });
+        });
 
         return result;
     }
@@ -107,20 +103,22 @@ export class ForEachSheet extends ForEach {
         if (contentCopy.constructor === Object) {
             const newContent: Element[] = [];
 
-            Object.entries(contentCopy).forEach(
-                ([sheetname, sheetcontent]) => {
-                    let sheetcontentCopy = sheetcontent;
-                    // we need to add the additional sheet_name property,
-                    //  so we should convert the Element to an ElementCollection if needed
-                    if (!(sheetcontentCopy instanceof ElementCollection)) {
-                        sheetcontentCopy = ElementCollection
-                            .elementToElementCollection(sheetcontentCopy);
-                    }
-                    // adding the new property containing sheet_name
-                    (sheetcontentCopy as ElementCollection).add(new Property('sheet_name', sheetname));
-                    newContent.push(sheetcontentCopy);
-                },
-            );
+            Object.entries(contentCopy).forEach(([sheetname, sheetcontent]) => {
+                let sheetcontentCopy = sheetcontent;
+                // we need to add the additional sheet_name property,
+                //  so we should convert the Element to an ElementCollection if needed
+                if (!(sheetcontentCopy instanceof ElementCollection)) {
+                    sheetcontentCopy =
+                        ElementCollection.elementToElementCollection(
+                            sheetcontentCopy,
+                        );
+                }
+                // adding the new property containing sheet_name
+                (sheetcontentCopy as ElementCollection).add(
+                    new Property('sheet_name', sheetname),
+                );
+                newContent.push(sheetcontentCopy);
+            });
 
             contentCopy = newContent;
         }
@@ -135,16 +133,43 @@ export class ForEachSheet extends ForEach {
  * In Excel this works like a normal loop tag and repeats the cells defined by the rectangular
  * boundary of the starting and closing tag.
  */
-export class ForEachInline extends ForEach {
+export class ForEachMergeCells extends ForEach {
     tags: Set<string>;
 
     /**
-     * @param name The name for this element (Cloud Office Print tag).
+     * @param name The name for this element (Cloud Office Print tag with merge cells).
      * @param content An iterable containing the elements for this loop element.
      */
     constructor(name: string, content: Element[]) {
         super(name, content);
-        this.tags = new Set([`{:${name}}`, `/${name}`]);
+        this.tags = new Set([`{##${name}}`, `{/${name}}`]);
+    }
+}
+/**
+ * Loop where table cells are vertically merged across rows during looping.
+ * Only supported in Word templates with {##...} {/...} syntax.
+ */
+
+export class ForEachInline extends ForEach {
+    tags: Set<string>;
+    distribute: boolean;
+
+    /**
+     * @param name The name for this element (Cloud Office Print tag).
+     * @param content An iterable containing the elements for this loop element.
+     * @param distribute Whether to distribute the data across rows/columns.
+     */
+    constructor(name: string, content: Element[],distribute: boolean = false) {
+        super(name, content);
+        this.distribute = distribute;
+        this.tags = new Set([`{:${name}}`, `{/${name}}`]);
+    }
+    asDict(): Record<string, any> {
+        const parentData = super.asDict();
+        return this.distribute ? {
+            ...parentData,
+            [`${this.name}_distribute`]: true
+        } : parentData;
     }
 }
 
@@ -152,7 +177,7 @@ export class ForEachInline extends ForEach {
  * These are the same, but they may not be forever and
  *  combining them into one class breaks consistency
  */
-export class ForEachHorizontal extends ForEachInline { }
+export class ForEachHorizontal extends ForEachInline {}
 
 /**
  * This tag will merge the cells of the loop defined by the tag over the amount of elements rows.

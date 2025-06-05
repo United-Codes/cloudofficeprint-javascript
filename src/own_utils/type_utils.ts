@@ -1,4 +1,4 @@
-import * as mime from 'mime-types';
+import mime from 'mime-types';
 
 /**
  * Cut off the extension from a file path

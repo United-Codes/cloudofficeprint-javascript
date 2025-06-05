@@ -5,7 +5,7 @@ export abstract class RESTSource {
     datasource: string;
     endpoint: string;
     filename: string | undefined;
-    headers: {[key: string]: string}[] | undefined;
+    headers: { [key: string]: string }[] | undefined;
     auth: string | undefined;
 
     /**
@@ -21,7 +21,7 @@ export abstract class RESTSource {
         datasource: string,
         endpoint: string,
         filename?: string,
-        headers?: {[key: string]: string}[],
+        headers?: { [key: string]: string }[],
         auth?: string,
     ) {
         this.datasource = datasource;
@@ -35,11 +35,12 @@ export abstract class RESTSource {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | {[key: string]: string}[]} {
-        const result: {[key: string]: string | {[key: string]: string}[]} = {
-            datasource: this.datasource,
-            endpoint: this.endpoint,
-        };
+    asDict(): { [key: string]: string | { [key: string]: string }[] } {
+        const result: { [key: string]: string | { [key: string]: string }[] } =
+            {
+                datasource: this.datasource,
+                endpoint: this.endpoint,
+            };
 
         if (this.filename !== undefined) {
             result.filename = this.filename;
@@ -77,7 +78,7 @@ export class RESTSourceREST extends RESTSource {
         method: string = 'GET',
         body: string = '',
         filename?: string,
-        headers?: {[key: string]: string}[],
+        headers?: { [key: string]: string }[],
         auth?: string,
     ) {
         super('rest', endpoint, filename, headers, auth);
@@ -89,8 +90,9 @@ export class RESTSourceREST extends RESTSource {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | {[key: string]: string}[]} {
-        const result: {[key: string]: string | {[key: string]: string}[]} = super.asDict();
+    asDict(): { [key: string]: string | { [key: string]: string }[] } {
+        const result: { [key: string]: string | { [key: string]: string }[] } =
+            super.asDict();
 
         result.method = this.method;
         result.body = this.body;
@@ -118,7 +120,7 @@ export class RESTSourceGraphQL extends RESTSource {
         endpoint: string,
         query: string,
         filename?: string,
-        headers?: {[key: string]: string}[],
+        headers?: { [key: string]: string }[],
         auth?: string,
     ) {
         super('graphql', endpoint, filename, headers, auth);
@@ -129,8 +131,9 @@ export class RESTSourceGraphQL extends RESTSource {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: string | {[key: string]: string}[]} {
-        const result: {[key: string]: string | {[key: string]: string}[]} = super.asDict();
+    asDict(): { [key: string]: string | { [key: string]: string }[] } {
+        const result: { [key: string]: string | { [key: string]: string }[] } =
+            super.asDict();
 
         result.query = this.query;
 

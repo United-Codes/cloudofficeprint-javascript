@@ -19,9 +19,8 @@ export class COPError extends Error {
     constructor(fullMessage: string) {
         const split = COPError.splitMessage(fullMessage);
         super(split[0]);
-        [this.userMessage,
-            this.contactSupportMessage,
-            this.encodedMessage] = COPError.splitMessage(fullMessage);
+        [this.userMessage, this.contactSupportMessage, this.encodedMessage] =
+            COPError.splitMessage(fullMessage);
     }
 
     /**
@@ -32,7 +31,9 @@ export class COPError extends Error {
      */
     static splitMessage(message: string): string[] {
         const separated: string[] = message.split('\n');
-        const userMessage: string = separated.slice(0, separated.length - 2).join('\n');
+        const userMessage: string = separated
+            .slice(0, separated.length - 2)
+            .join('\n');
         const contactSupportMessage: string = separated[separated.length - 2];
         const encodedMessage: string = separated[separated.length - 1];
         return [userMessage, contactSupportMessage, encodedMessage];

@@ -76,8 +76,8 @@ export class PDFText extends PDFInsertObject {
     /**
      * @returns dict representation of this PDFInsertObject
      */
-    asInnerDict(): {[key: string]: string | number | boolean} {
-        const result: {[key: string]: string | number | boolean} = {
+    asInnerDict(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {
             text: this.text,
             x: this.x,
             y: this.y,
@@ -154,8 +154,8 @@ export class PDFImage extends PDFInsertObject {
     /**
      * @returns dict representation of this PDFInsertObject
      */
-    asInnerDict(): {[key: string]: string | number} {
-        const result: {[key: string]: string | number} = {
+    asInnerDict(): { [key: string]: string | number } {
+        const result: { [key: string]: string | number } = {
             image: this.image,
             x: this.x,
             y: this.y,
@@ -178,6 +178,88 @@ export class PDFImage extends PDFInsertObject {
     }
 }
 
+export class PDFComment extends PDFInsertObject {
+    text: string;
+    rotation: number | undefined;
+    bold: boolean | undefined;
+    italic: boolean | undefined;
+    font: string | undefined;
+    fontColor: string | undefined;
+    fontSize: number | undefined;
+
+    /**
+     * @param text Text to insert.
+     * @param x  X component of this object's position.
+     * @param y Y component of this object's position.
+     * @param page Page to include this object on. Either "all" or an integer. Defaults to "all".
+     * @param rotation Text rotation in degrees. Optional.
+     * @param bold Whether or not the text should be in bold. Optional.
+     * @param italic Whether or not the text should be in italic. Optional.
+     * @param font The text font name. Optional.
+     * @param fontColor The text font color, CSS notation. Optional.
+     * @param fontSize The text font size. Optional.
+     */
+    constructor(
+        text: string,
+        x: number,
+        y: number,
+        page: number | string = 'all',
+        // rotation?: number,
+        bold?: boolean,
+        italic?: boolean,
+        font?: string,
+        fontColor?: string,
+        fontSize?: number,
+    ) {
+        super(x, y, page);
+        this.text = text;
+        // this.rotation = rotation;
+        this.bold = bold;
+        this.italic = italic;
+        this.font = font;
+        this.fontColor = fontColor;
+        this.fontSize = fontSize;
+    }
+
+    /**
+     * @returns identifier for this PDFInsertObject
+     */
+    static identifier(): string {
+        return 'AOP_PDF_COMMENTS';
+    }
+
+    /**
+     * @returns dict representation of this PDFInsertObject
+     */
+    asInnerDict(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {
+            text: this.text,
+            x: this.x,
+            y: this.y,
+        };
+
+        // if (this.rotation !== undefined) {
+        //     result.rotation = this.rotation;
+        // }
+        if (this.bold !== undefined) {
+            result.bold = this.bold;
+        }
+        if (this.italic !== undefined) {
+            result.italic = this.italic;
+        }
+        if (this.font !== undefined) {
+            result.font = this.font;
+        }
+        if (this.fontColor !== undefined) {
+            result.font_color = this.fontColor;
+        }
+        if (this.fontSize !== undefined) {
+            result.font_size = this.fontSize;
+        }
+
+        return result;
+    }
+}
 /**
  * Group of PDF texts as an `Element`.
  * There can only be one of this `Element`.
@@ -198,21 +280,25 @@ export class PDFTexts extends Element {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: {[key: string]: {[key: string]: string | number | boolean}[]}[]} {
-        const result: {[key: string]: {[key: string]: string | number | boolean}[]} = {};
+    asDict(): {
+        [key: string]: {
+            [key: string]: { [key: string]: string | number | boolean }[];
+        }[];
+    } {
+        const result: {
+            [key: string]: { [key: string]: string | number | boolean }[];
+        } = {};
 
-        this.texts.forEach(
-            (txt) => {
-                // If there already is text for this page -> update entry in dictionary
-                //  else -> create new entry in dictionary
-                const pageString: string = txt.page.toString();
-                if (Object.prototype.hasOwnProperty.call(result, pageString)) {
-                    result[pageString].push(txt.asInnerDict());
-                } else {
-                    result[pageString] = [txt.asInnerDict()];
-                }
-            },
-        );
+        this.texts.forEach((txt) => {
+            // If there already is text for this page -> update entry in dictionary
+            //  else -> create new entry in dictionary
+            const pageString: string = txt.page.toString();
+            if (Object.prototype.hasOwnProperty.call(result, pageString)) {
+                result[pageString].push(txt.asInnerDict());
+            } else {
+                result[pageString] = [txt.asInnerDict()];
+            }
+        });
 
         return {
             [this.name]: [result],
@@ -240,21 +326,25 @@ export class PDFImages extends Element {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: {[key: string]: {[key: string]: string | number | boolean}[]}[]} {
-        const result: {[key: string]: {[key: string]: string | number | boolean}[]} = {};
+    asDict(): {
+        [key: string]: {
+            [key: string]: { [key: string]: string | number | boolean }[];
+        }[];
+    } {
+        const result: {
+            [key: string]: { [key: string]: string | number | boolean }[];
+        } = {};
 
-        this.images.forEach(
-            (img) => {
-                // If there already is image for this page -> update entry in dictionary
-                //  else -> create new entry in dictionary
-                const pageString: string = img.page.toString();
-                if (Object.prototype.hasOwnProperty.call(result, pageString)) {
-                    result[pageString].push(img.asInnerDict());
-                } else {
-                    result[pageString] = [img.asInnerDict()];
-                }
-            },
-        );
+        this.images.forEach((img) => {
+            // If there already is image for this page -> update entry in dictionary
+            //  else -> create new entry in dictionary
+            const pageString: string = img.page.toString();
+            if (Object.prototype.hasOwnProperty.call(result, pageString)) {
+                result[pageString].push(img.asInnerDict());
+            } else {
+                result[pageString] = [img.asInnerDict()];
+            }
+        });
 
         return {
             [this.name]: [result],
@@ -268,13 +358,13 @@ export class PDFImages extends Element {
  * Element name is fixed and important to the server, so multiple will just overwrite.
  */
 export class PDFFormData extends Element {
-    formData: {[key: string]: string | boolean | number};
+    formData: { [key: string]: string | boolean | number };
 
     /**
      * @param formData a dict containing the keys and values of the fields
      *  that need to be entered in the PDF form
      */
-    constructor(formData: {[key: string]: string | boolean | number}) {
+    constructor(formData: { [key: string]: string | boolean | number }) {
         super(PDFFormData.identifier());
         this.formData = formData;
     }
@@ -290,9 +380,49 @@ export class PDFFormData extends Element {
      * The dict representation of this object
      * @returns dict representation of this object
      */
-    asDict(): {[key: string]: {[key: string]: string | boolean | number}} {
+    asDict(): { [key: string]: { [key: string]: string | boolean | number } } {
         return {
             [this.name]: this.formData,
+        };
+    }
+}
+export class PDFComments extends Element {
+    texts: PDFComment[];
+
+    /**
+     * @param texts An iterable consisting of `PDFComment`-objects.
+     */
+    constructor(texts: PDFComment[]) {
+        super(PDFComment.identifier());
+        this.texts = texts;
+    }
+
+    /**
+     * The dict representation of this object
+     * @returns dict representation of this object
+     */
+    asDict(): {
+        [key: string]: {
+            [key: string]: { [key: string]: string | number | boolean }[];
+        }[];
+    } {
+        const result: {
+            [key: string]: { [key: string]: string | number | boolean }[];
+        } = {};
+
+        this.texts.forEach((txt) => {
+            // If there already is text for this page -> update entry in dictionary
+            //  else -> create new entry in dictionary
+            const pageString: string = txt.page.toString();
+            if (Object.prototype.hasOwnProperty.call(result, pageString)) {
+                result[pageString].push(txt.asInnerDict());
+            } else {
+                result[pageString] = [txt.asInnerDict()];
+            }
+        });
+
+        return {
+            [this.name]: [result],
         };
     }
 }

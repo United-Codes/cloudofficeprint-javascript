@@ -115,14 +115,14 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Hyperlink<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.Hyperlink.html" class="tsd-signature-type" data-tsd-kind="Class">Hyperlink</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Hyperlink<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, fontColor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, underlineColor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, preserveTagStyle<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="elements.Hyperlink.html" class="tsd-signature-type" data-tsd-kind="Class">Hyperlink</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/elements.ts#L470">src/elements/elements.ts:470</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/elements.ts#L820">src/elements/elements.ts:820</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -131,7 +131,7 @@
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the name for this element</p>
+											<p>The name for this element</p>
 										</div>
 									</div>
 								</li>
@@ -139,7 +139,7 @@
 									<h5>url: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the URL for the hyperlink</p>
+											<p>The URL for the hyperlink</p>
 										</div>
 									</div>
 								</li>
@@ -147,9 +147,18 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> text: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>the text for the hyperlink; optional</p>
+											<p>The text for the hyperlink; optional</p>
 										</div>
 									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> fontColor: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> underlineColor: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> preserveTagStyle: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="elements.Hyperlink.html" class="tsd-signature-type" data-tsd-kind="Class">Hyperlink</a></h4>
@@ -166,9 +175,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/elements.ts#L282">src/elements/elements.ts:282</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/elements.ts#L526">src/elements/elements.ts:526</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Name of the tag being used</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="text" class="tsd-anchor"></a>
@@ -176,7 +190,7 @@
 					<div class="tsd-signature tsd-kind-icon">text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/elements.ts#L463">src/elements/elements.ts:463</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/elements.ts#L813">src/elements/elements.ts:813</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -186,7 +200,7 @@
 					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/elements.ts#L462">src/elements/elements.ts:462</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/elements.ts#L812">src/elements/elements.ts:812</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +218,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#asDict">asDict</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/elements.ts#L480">src/elements/elements.ts:480</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/elements.ts#L830">src/elements/elements.ts:830</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -233,7 +247,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="elements.Element.html">Element</a>.<a href="elements.Element.html#availableTags">availableTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/United-Codes/apexofficeprint-javascript/blob/f8e719b/src/elements/elements.ts#L496">src/elements/elements.ts:496</a></li>
+									<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/1d22f0b/src/elements/elements.ts#L846">src/elements/elements.ts:846</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -274,6 +288,12 @@
 					</li>
 					<li class=" tsd-kind-namespace">
 						<a href="../modules/response.html">response</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/template.html">template</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/transformation.html">transformation</a>
 					</li>
 				</ul>
 			</nav>

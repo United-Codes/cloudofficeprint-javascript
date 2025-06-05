@@ -9,9 +9,9 @@ export abstract class CellStyle {
      */
     asDict(propertyName: string) {
         const result: { [key: string]: string | number | boolean } = {};
-        Object.entries(this.asDictSuffixes()).forEach(
-            ([key, val]) => { result[`${propertyName}${key}`] = val; },
-        );
+        Object.entries(this.asDictSuffixes()).forEach(([key, val]) => {
+            result[`${propertyName}${key}`] = val;
+        });
         return result;
     }
 
@@ -34,15 +34,136 @@ export abstract class CellStyle {
 export class CellStyleDocx extends CellStyle {
     cellBackgroundColor: string | undefined;
     width: string | number | undefined;
+    preserveTotalWidthOfTable: boolean | undefined;
+    border?: string | undefined;
+    borderTop?: string | undefined;
+    borderBottom?: string | undefined;
+    borderLeft?: string | undefined;
+    borderRight?: string | undefined;
+    borderDiagonalDown?: string | undefined;
+    borderDiagonalUp?: string | undefined;
+    borderColor?: string | undefined;
+    borderTopColor?: string | undefined;
+    borderBottomColor?: string | undefined;
+    borderLeftColor?: string | undefined;
+    borderRightColor?: string | undefined;
+    borderDiagonalUpColor?: string | undefined;
+    borderDiagonalDownColor?: string | undefined;
+    borderSize?: string | number | undefined;
+    borderTopSize?: string | number | undefined;
+    borderBottomSize?: string | number | undefined;
+    borderLeftSize?: string | number | undefined;
+    borderRightSize?: string | number | undefined;
+    borderDiagonalUpSize?: string | number | undefined;
+    borderDiagonalDownSize?: string | number | undefined;
+    borderSpace?: string | number | undefined;
+    borderTopSpace?: string | number | undefined;
+    borderBottomSpace?: string | number | undefined;
+    borderLeftSpace?: string | number | undefined;
+    borderRightSpace?: string | number | undefined;
+    borderDiagonalUpSpace?: string | number | undefined;
+    borderDiagonalDownSpace?: string | number | undefined;
 
     /**
+     *
      * @param cellBackgroundColor The background color of the cell. Optional.
      * @param width The width of the cell. Optional.
+     * @param preserveTotalWidthOfTable Keeps table width constant by redistributing removed column's width to others..
+     * @param border The border style applied to all edges (top, bottom, left, right) of the table. Optional.
+     * @param borderTop The border style applied to the top edge of the table. Optional.
+     * @param borderBottom The border style applied to the bottom edge of the table. Optional.
+     * @param borderLeft The border style applied to the left edge of the table. Optional.
+     * @param borderRight The border style applied to the right edge of the table. Optional.
+     * @param borderDiagonalDown Applies the specified border style to the diagonal line going from the top-left to the bottom-right corner. Optional.
+     * @param borderDiagonalUp  Applies the specified border style to the diagonal line going from the bottom-left to the top-right corner. Optional.
+     * @param borderColor The color of the borders (top, bottom, left, right). Optional.
+     * @param borderTopColor  The color of the top border. Optional.
+     * @param borderBottomColor  The color of the bottom border. Optional.
+     * @param borderLeftColor  The color of the left border. Optional.
+     * @param borderRightColor  The color of the right border. Optional.
+     * @param borderDiagonalUpColor  The color of the diagonal up border. Optional.
+     * @param borderDiagonalDownColor The color of the diagonal down border. Optional.
+     * @param borderSize The width of the borders (top, bottom, left, right) in points. Optional.
+     * @param borderTopSize  The width of the top border in points. Optional.
+     * @param borderBottomSize  The width of the bottom border in points. Optional.
+     * @param borderLeftSize  The width of the left border in points. Optional.
+     * @param borderRightSize  The width of the right border in points. Optional.
+     * @param borderDiagonalUpSize  The width of the diagonal up border in points. Optional.
+     * @param borderDiagonalDownSize  The width of the diagonal down border in points. Optional.
+     * @param borderSpace The spacing between the content and borders in points. Optional.
+     * @param borderTopSpace  The spacing between the content and the top border. Optional.
+     * @param borderBottomSpace The spacing between the content and the bottom border. Optional.
+     * @param borderLeftSpace The spacing between the content and the left border. Optional.
+     * @param borderRightSpace The spacing between the content and the right border in points Optional.
+     * @param borderDiagonalUpSpace The spacing between the content and the diagonal up border in points. Optional.
+     * @param borderDiagonalDownSpace The spacing between the content and the diagonal down border in points. Optional.
      */
-    constructor(cellBackgroundColor?: string, width?: string | number) {
+    constructor(
+        cellBackgroundColor?: string,
+        width?: string | number,
+        preserveTotalWidthOfTable?: boolean | undefined,
+        border?: string | undefined,
+        borderTop?: string | undefined,
+        borderBottom?: string | undefined,
+        borderLeft?: string | undefined,
+        borderRight?: string | undefined,
+        borderDiagonalDown?: string | undefined,
+        borderDiagonalUp?: string | undefined,
+        borderColor?: string | undefined,
+        borderTopColor?: string | undefined,
+        borderBottomColor?: string | undefined,
+        borderLeftColor?: string | undefined,
+        borderRightColor?: string | undefined,
+        borderDiagonalUpColor?: string | undefined,
+        borderDiagonalDownColor?: string | undefined,
+        borderSize?: string | number | undefined,
+        borderTopSize?: string | number | undefined,
+        borderBottomSize?: string | number | undefined,
+        borderLeftSize?: string | number | undefined,
+        borderRightSize?: string | number | undefined,
+        borderDiagonalUpSize?: string | number | undefined,
+        borderDiagonalDownSize?: string | number | undefined,
+        borderSpace?: string | number | undefined,
+        borderTopSpace?: string | number | undefined,
+        borderBottomSpace?: string | number | undefined,
+        borderLeftSpace?: string | number | undefined,
+        borderRightSpace?: string | number | undefined,
+        borderDiagonalUpSpace?: string | number | undefined,
+        borderDiagonalDownSpace?: string | number | undefined,
+
+    ) {
         super();
         this.cellBackgroundColor = cellBackgroundColor;
         this.width = width;
+        this.preserveTotalWidthOfTable = preserveTotalWidthOfTable;
+        this.border = border;
+        this.borderTop = borderTop;
+        this.borderBottom = borderBottom;
+        this.borderLeft = borderLeft;
+        this.borderRight = borderRight;
+        this.borderDiagonalDown = borderDiagonalDown;
+        this.borderDiagonalUp = borderDiagonalUp;
+        this.borderColor = borderColor;
+        this.borderTopColor = borderTopColor;
+        this.borderBottomColor = borderBottomColor;
+        this.borderLeftColor = borderLeftColor;
+        this.borderRightColor = borderRightColor;
+        this.borderDiagonalUpColor = borderDiagonalUpColor;
+        this.borderDiagonalDownColor = borderDiagonalDownColor;
+        this.borderSize = borderSize;
+        this.borderTopSize = borderTopSize;
+        this.borderBottomSize = borderBottomSize;
+        this.borderLeftSize = borderLeftSize;
+        this.borderRightSize = borderRightSize;
+        this.borderDiagonalUpSize = borderDiagonalUpSize;
+        this.borderDiagonalDownSize = borderDiagonalDownSize;
+        this.borderSpace = borderSpace;
+        this.borderTopSpace = borderTopSpace;
+        this.borderBottomSpace = borderBottomSpace;
+        this.borderLeftSpace = borderLeftSpace;
+        this.borderRightSpace = borderRightSpace;
+        this.borderDiagonalUpSpace = borderDiagonalUpSpace;
+        this.borderDiagonalDownSpace = borderDiagonalDownSpace;
     }
 
     /**
@@ -60,7 +181,93 @@ export class CellStyleDocx extends CellStyle {
         if (this.width !== undefined) {
             result._width = this.width;
         }
-
+        if (this.preserveTotalWidthOfTable !== undefined) {
+            result._preserve_total_width_of_table = this.preserveTotalWidthOfTable;
+        }
+        if (this.border !== undefined) {
+            result._border = this.border;
+        }
+        if (this.borderTop !== undefined) {
+            result._border_top = this.borderTop;
+        }
+        if (this.borderBottom !== undefined) {
+            result._border_bottom = this.borderBottom;
+        }
+        if (this.borderLeft !== undefined) {
+            result._border_left = this.borderLeft;
+        }
+        if (this.borderRight !== undefined) {
+            result._border_right = this.borderRight;
+        }
+        if (this.borderDiagonalDown !== undefined) {
+            result._border_diagonal_down = this.borderDiagonalDown;
+        }
+        if (this.borderDiagonalUp !== undefined) {
+            result._border_diagonal_up = this.borderDiagonalUp;
+        }
+        if (this.borderColor !== undefined) {
+            result._border_color = this.borderColor;
+        }
+        if (this.borderTopColor !== undefined) {
+            result._border_top_color = this.borderTopColor;
+        }
+        if (this.borderBottomColor !== undefined) {
+            result._border_bottom_color = this.borderBottomColor;
+        }
+        if (this.borderLeftColor !== undefined) {
+            result._border_left_color = this.borderLeftColor;
+        }
+        if (this.borderRightColor !== undefined) {
+            result._border_right_color = this.borderRightColor;
+        }
+        if (this.borderDiagonalUpColor !== undefined) {
+            result._border_diagonal_up_color = this.borderDiagonalUpColor;
+        }
+        if (this.borderDiagonalDownColor !== undefined) {
+            result._border_diagonal_down_color = this.borderDiagonalDownColor;
+        }
+        if (this.borderSize !== undefined) {
+            result._border_size = this.borderSize;
+        }
+        if (this.borderTopSize !== undefined) {
+            result._border_top_size = this.borderTopSize;
+        }
+        if (this.borderBottomSize !== undefined) {
+            result._border_bottom_size = this.borderBottomSize;
+        }
+        if (this.borderLeftSize !== undefined) {
+            result._border_left_size = this.borderLeftSize;
+        }
+        if (this.borderRightSize !== undefined) {
+            result._border_right_size = this.borderRightSize;
+        }
+        if (this.borderDiagonalUpSize !== undefined) {
+            result._border_diagonal_up_size = this.borderDiagonalUpSize;
+        }
+        if (this.borderDiagonalDownSize !== undefined) {
+            result._border_diagonal_down_size = this.borderDiagonalDownSize;
+        }
+        if (this.borderSpace !== undefined) {
+            result._border_space = this.borderSpace;
+        }
+        if (this.borderTopSpace !== undefined) {
+            result._border_top_space = this.borderTopSpace;
+        }
+        if (this.borderBottomSpace !== undefined) {
+            result._border_bottom_space = this.borderBottomSpace;
+        }
+        if (this.borderLeftSpace !== undefined) {
+            result._border_left_space = this.borderLeftSpace;
+        }
+        if (this.borderRightSpace !== undefined) {
+            result._border_right_space = this.borderRightSpace;
+        }
+        if (this.borderDiagonalUpSpace !== undefined) {
+            result._border_diagonal_up_space = this.borderDiagonalUpSpace;
+        }
+        if (this.borderDiagonalDownSpace !== undefined) {
+            result._border_diagonal_down_space = this.borderDiagonalDownSpace;
+        }
         return result;
     }
 }
@@ -95,6 +302,11 @@ export class CellStyleXlsx extends CellStyle {
     textHAlignment: string | undefined;
     textVAlignment: string | undefined;
     textRotation: string | number | undefined;
+    wrapText: boolean | undefined;
+    width: string | number | undefined;
+    height: string | number | undefined;
+    maxCharacters: string | number | undefined;
+    heightScaling: string | number | undefined;
 
     /**
      * @param cellLocked Whether or not the cell is locked. Optional.
@@ -127,7 +339,12 @@ export class CellStyleXlsx extends CellStyle {
      * @param borderDiagonalColor hex color e.g: #000000. Optional.
      * @param textHAlignment [top|bottom|center|justify]. Optional.
      * @param textVAlignment [top|bottom|center|justify]. Optional.
-     * @param textRotation rotation of text value from 0-90 degrees. Optional.
+     * @param textRotation Rotation of text value from 0-90 degrees. Optional.
+     * @param wrapText Set to true for wrap text. Optional.
+     * @param width  Provide a custom width to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
+     * @param height Provide custom height to the cell. Supported units: inch, cm, px, pt, em, Excel Units(eu). Optional.
+     * @param maxCharacters Provide width for the cell. Optional.
+     * @param heightScaling Adjusts cell height for consistent rendering. Optional.
      */
     constructor(
         cellLocked?: boolean,
@@ -156,6 +373,11 @@ export class CellStyleXlsx extends CellStyle {
         textHAlignment?: string,
         textVAlignment?: string,
         textRotation?: string | number,
+        wrapText?: boolean,
+        width?: string | number,
+        height?: string | number,
+        maxCharacters?: string | number,
+        heightScaling?: string | number,
     ) {
         super();
         this.cellLocked = cellLocked;
@@ -184,6 +406,11 @@ export class CellStyleXlsx extends CellStyle {
         this.textHAlignment = textHAlignment;
         this.textVAlignment = textVAlignment;
         this.textRotation = textRotation;
+        this.wrapText = wrapText;
+        this.width = width;
+        this.height = height;
+        this.maxCharacters = maxCharacters;
+        this.heightScaling = heightScaling;
     }
 
     /**
@@ -193,7 +420,8 @@ export class CellStyleXlsx extends CellStyle {
      *  this property in this CellStyle object's dict representation
      */
     asDictSuffixes(): { [key: string]: string | number | boolean } {
-        const result: { [key: string]: string | number | boolean } = super.asDictSuffixes();
+        const result: { [key: string]: string | number | boolean } =
+            super.asDictSuffixes();
 
         if (this.cellLocked !== undefined) {
             result._cell_locked = this.cellLocked;
@@ -273,12 +501,28 @@ export class CellStyleXlsx extends CellStyle {
         if (this.textRotation !== undefined) {
             result._text_rotation = this.textRotation;
         }
+        if (this.wrapText !== undefined) {
+            result._wrap_text = this.wrapText;
+        }
+        if (this.width !== undefined) {
+            result._width = this.width;
+        }
+        if (this.height !== undefined) {
+            result._height = this.height;
+        }
+        if (this.maxCharacters !== undefined) {
+            result._max_characters = this.maxCharacters;
+        }
+        if (this.heightScaling !== undefined) {
+            result._height_scaling = this.heightScaling;
+        }
 
         return result;
     }
 }
 
 export abstract class Element {
+    /**Name of the tag being used */
     name: string;
 
     /**
@@ -382,12 +626,33 @@ export class CellStyleProperty extends Property {
 }
 
 export class Html extends Property {
+    customTableStyle?: string;
+    unorderedListStyle?: string | number;
+    orderedListStyle?: string | number;
+    useTagStyle?: boolean;
+    ignoreCellMargin?: boolean;
+    ignoreEmptyP?: boolean;
+    
     /**
-     * @param name the name for this property
-     * @param value the value for this property
+     * 
+     * @param name The name for this property.
+     * @param value  The value for this property.
+     * @param customTableStyle  Specify custom table style
+     * @param unorderedListStyle Create and customize ordered list
+     * @param orderedListStyle  Create and customize unordered list
+     * @param useTagStyle Use the styling from the template instead of default Word styling
+     * @param ignoreCellMargin Ignore empty paragraphs within HTML content
+     * @param ignoreEmptyP Ignore the cell margins in an HTML table cell when the text content is large
      */
-    constructor(name: string, value: string) {
+    constructor(name: string, value: string, customTableStyle?: string, unorderedListStyle?: string | number, orderedListStyle?: string | number, useTagStyle?: boolean, ignoreCellMargin?: boolean, ignoreEmptyP?: boolean) {
         super(name, value);
+        this.customTableStyle = customTableStyle;
+        this.unorderedListStyle = unorderedListStyle;
+        this.orderedListStyle = orderedListStyle;
+        this.useTagStyle = useTagStyle;
+        this.ignoreCellMargin = ignoreCellMargin;
+        this.ignoreEmptyP = ignoreEmptyP;
+        
     }
 
     /**
@@ -397,6 +662,38 @@ export class Html extends Property {
     availableTags(): Set<string> {
         return new Set([`{_${this.name}}`]);
     }
+
+      /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+      asDict(): { [key: string]: string | boolean | number } {
+        const result: { [key: string]: string | boolean | number } = {
+            [this.name]: this.value as string,
+        };
+
+        if (this.customTableStyle !== undefined) {
+            result[`${this.name}_custom_table_style`] = this.customTableStyle;
+        }
+        if (this.unorderedListStyle !== undefined) {
+            result[`${this.name}_unordered_list_style`] = this.unorderedListStyle;
+        }
+        if (this.orderedListStyle !== undefined) {
+            result[`${this.name}_ordered_list_style`] = this.orderedListStyle;
+        }
+        if (this.useTagStyle !== undefined) {
+            result[`${this.name}_use_tag_style`] = this.useTagStyle;
+        }
+        if (this.ignoreCellMargin !== undefined) {
+            result[`${this.name}_ignore_cell_margin`] = this.ignoreCellMargin;
+        }
+        if (this.ignoreEmptyP !== undefined) {
+            result[`${this.name}_ignore_empty_p`] = this.ignoreEmptyP;
+        }
+
+        return result;
+    }
+
 }
 
 export class RightToLeft extends Property {
@@ -439,16 +736,56 @@ export class FootNote extends Property {
  * The value may or may not have any links.
  * 
  */
-export class AutoLink extends Property {
-
+export class AutoLink extends Property  {
+    fontColor?: string;
+    underlineColor?: string;
+    preserveTagStyle?: string | boolean;
+    
     /**
-     * @param name the name for this element
-     * @param value the value for the AutoLink.
+    * PPTX-specific styling options are available for font and underline colors.
+    *
+     * @param name The name for this element
+     * @param value The value for the AutoLink.
+     * @param fontColor -(pptx only ) Font color for Autolink as hex code ( #RRGGBB)
+     * @param underlineColor - ( pptx only ) Underline color  for Autolink 
+     * @param preserveTagStyle - (pptx and word ) Maintain template's original text styling (default: false)
      */
-    constructor(name: string, value: string) {
-        super(name,value);
+    constructor(
+        name: string,
+        value: string,
+        fontColor?: string,
+        underlineColor?: string,
+        preserveTagStyle?: string | boolean
+         
+        ) {
+        super(name, value);
+        this.fontColor= fontColor;
+        this.underlineColor = underlineColor;
+        this.preserveTagStyle = preserveTagStyle;
+    
     }
 
+    /**
+     * Returns dictionary representation including PPTX-specific properties when set.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {
+            [this.name]: this.value as string
+        };
+
+        if (this.fontColor !== undefined) {
+            result[`${this.name}_font_color`] = this.fontColor;
+        }
+        if (this.underlineColor !== undefined) {
+            result[`${this.name}_underline_color`] = this.underlineColor;
+        }
+        if (this.preserveTagStyle !== undefined) {
+            result[`${this.name}_preserve_tag_style`] = this.preserveTagStyle;
+        }
+
+        return result;
+    }
     /**
      * A set containing all available template tags this Element reacts to.
      * @returns set of tags associated with this Element
@@ -461,29 +798,47 @@ export class AutoLink extends Property {
 export class Hyperlink extends Element {
     url: string;
     text: string | undefined;
-
+    fontColor?: string;
+    underlineColor?: string;
+    preserveTagStyle?: string | boolean;
+    
     /**
-     * @param name the name for this element
-     * @param url the URL for the hyperlink
-     * @param text the text for the hyperlink; optional
+     * @param name The name for this element
+     * @param url The URL for the hyperlink
+     * @param text  (PPTX only) - The text for the hyperlink; optional
+     * @param fontColor (PPTX only) - The font color for the text of hyperlink; optional
+     * @param underlineColor (PPTX only) - The underline color for the text of hyperlink; optional
+     * @param preserveTagStyle (PPTX and Word )-  Maintain template's original text styling 
      */
-    constructor(name: string, url: string, text?: string) {
+    constructor(name: string, url: string, text?: string, fontColor?: string, underlineColor?: string, preserveTagStyle?: string | boolean) {
         super(name);
         this.url = url;
         this.text = text;
+        this.fontColor =fontColor;
+        this.underlineColor = underlineColor;
+        this.preserveTagStyle = preserveTagStyle;
     }
 
     /**
      * Dictionary representation of this Element.
      * @returns dictionary representation of this Element
      */
-    asDict(): { [key: string]: string } {
-        const result: { [key: string]: string } = {
+      asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {
             [this.name]: this.url,
         };
 
         if (this.text !== undefined) {
             result[`${this.name}_text`] = this.text;
+        }
+        if (this.text !== undefined && this.fontColor !== undefined) {
+            result[`${this.text}_font_color`] = this.fontColor;
+        }
+        if (this.text !== undefined  && this.underlineColor !== undefined) {
+            result[`${this.text}_underline_color`] = this.underlineColor;
+        }
+        if (this.preserveTagStyle !== undefined) {
+            result[`${this.name}_preserve_tag_style`] = this.preserveTagStyle;
         }
 
         return result;
@@ -510,7 +865,12 @@ export class TableOfContents extends Element {
      * @param tabLeader How the space between title and page number should be filled.
      *  Can be "hyphen", "underscore", or "dot" (default). Optional.
      */
-    constructor(name: string, title?: string, depth?: number, tabLeader?: string) {
+    constructor(
+        name: string,
+        title?: string,
+        depth?: number,
+        tabLeader?: string,
+    ) {
         super(name);
         this.title = title;
         this.depth = depth;
@@ -873,7 +1233,9 @@ export class COPChartDateOptions {
  */
 export class COPChart extends Element {
     xData: string[];
-    yDatas: { [key: string]: (string | number | { [key: string]: string | number })[] };
+    yDatas: {
+        [key: string]: (string | number | { [key: string]: string | number })[];
+    };
     date: COPChartDateOptions | undefined;
     title: string | undefined;
     xTitle: string | undefined;
@@ -897,8 +1259,15 @@ export class COPChart extends Element {
     constructor(
         name: string,
         xData: string[],
-        yDatas: (string | number | { [key: string]: string | number })[][] |
-        { [key: string]: (string | number | { [key: string]: string | number })[] },
+        yDatas:
+            | (string | number | { [key: string]: string | number })[][]
+            | {
+                [key: string]: (
+                    | string
+                    | number
+                    | { [key: string]: string | number }
+                )[];
+            },
         date?: COPChartDateOptions,
         title?: string,
         xTitle?: string,
@@ -917,14 +1286,14 @@ export class COPChart extends Element {
         this.yDatas = {};
 
         if (yDatas instanceof Array) {
-            yDatas.forEach(
-                (el, index) => {
-                    this.yDatas[`series ${index + 1}`] = el;
-                },
-            );
+            yDatas.forEach((el, index) => {
+                this.yDatas[`series ${index + 1}`] = el;
+            });
         } else if (yDatas.constructor !== Object) {
             // If yDatas is not an array and not a dictionary: throw error
-            throw new Error(`Expected a dictionary or array, but received ${typeof yDatas}`);
+            throw new Error(
+                `Expected a dictionary or array, but received ${typeof yDatas}`,
+            );
         } else {
             this.yDatas = yDatas;
         }
@@ -935,8 +1304,7 @@ export class COPChart extends Element {
      * @returns dictionary representation of this Element
      */
     asDict(): {
-        [key: string]:
-        {
+        [key: string]: {
             [key: string]:
             {
                 [key: string]:
@@ -965,41 +1333,40 @@ export class COPChart extends Element {
         }
     } {
         const ySeries: {
-            name: string, data: (string | number |
-            { [key: string]: string | number })[]
+            name: string;
+            data: (string | number | { [key: string]: string | number })[];
         }[] = [];
-        Object.entries(this.yDatas).forEach(
-            (e) => {
-                ySeries.push({ name: e[0], data: e[1] });
-            },
-        );
+        Object.entries(this.yDatas).forEach((e) => {
+            ySeries.push({ name: e[0], data: e[1] });
+        });
 
         const result: {
             [key: string]:
-            {
+            | {
                 [key: string]:
-                string[] |
-                string |
-                {
-                    [key: string]:
-                    string |
-                    number
-                }
-            } |
-            {
-                [key: string]:
-                {
-                    [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            } |
-            string |
-            {
-                [key: string]:
-                string
+                | string[]
+                | string
+                | {
+                    [key: string]: string | number;
+                };
             }
+            | {
+                [key: string]:
+                | {
+                    [key: string]:
+                    | string
+                    | (
+                        | string
+                        | number
+                        | { [key: string]: string | number }
+                    )[];
+                }[]
+                | string;
+            }
+            | string
+            | {
+                [key: string]: string;
+            };
         } = {
             xAxis: {
                 data: this.xData,
@@ -1013,39 +1380,45 @@ export class COPChart extends Element {
             result.title = this.title;
         }
         if (this.date !== undefined) {
-            (result.xAxis as {
-                [key: string]:
-                string[] |
-                string |
-                {
+            (
+                result.xAxis as {
                     [key: string]:
-                    string |
-                    number
+                    | string[]
+                    | string
+                    | {
+                        [key: string]: string | number;
+                    };
                 }
-            }).date = this.date.asDict();
+            ).date = this.date.asDict();
         }
         if (this.xTitle !== undefined) {
-            (result.xAxis as {
-                [key: string]:
-                string[] |
-                string |
-                {
+            (
+                result.xAxis as {
                     [key: string]:
-                    string |
-                    number
+                    | string[]
+                    | string
+                    | {
+                        [key: string]: string | number;
+                    };
                 }
-            }).title = this.xTitle;
+            ).title = this.xTitle;
         }
         if (this.yTitle !== undefined) {
-            (result.yAxis as {
-                [key: string]:
-                {
+            (
+                result.yAxis as {
                     [key: string]:
-                    string |
-                    (string | number | { [key: string]: string | number })[]
-                }[] |
-                string
-            }).title = this.yTitle;
+                    | {
+                        [key: string]:
+                        | string
+                        | (
+                            | string
+                            | number
+                            | { [key: string]: string | number }
+                        )[];
+                    }[]
+                    | string;
+                }
+            ).title = this.yTitle;
         }
         if (this.x2Title !== undefined) {
             result.x2Axis = {
@@ -1197,6 +1570,87 @@ export class TextBox extends Element {
 }
 
 /**
+ * Only supported in Excel. Represents an object that indicates to put a freeze
+ * pane in the excel template.
+ */
+export class Freeze extends Property {
+    /**
+     *
+     * @param name The name for this property
+     * @param value Three options are available.
+     *  First option, place the pane where the tag is located, using a value of **true**.
+     *  Second option, provide the location to place the pane, e.g. **"C5"**, in the format of
+     *   excel cell and row.
+     *  Third option, don't place a pane, using a value of **false**.
+     */
+    constructor(name: string, value: string | boolean) {
+        super(name, value);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{freeze ${this.name}}`]);
+    }
+}
+
+/**
+ * The class for the link/target tags.
+ * This tags allows you to place a link to a target in the same document.
+ * If the uid is not provided, a new uid will be generated uniquely for every link and target pair.
+ */
+export class Link extends Property {
+    uidName?: string;
+    uidValue?: string;
+
+    /**
+     * Create a new link/target tag pair.
+     * If the uid is not provided, a new uid will be generated uniquely for each link/target pair.
+     * @param name the name of the link/target tags.
+     * @param value the value of the link/target tags.
+     * @param uidName the name of the uid of the link/target pair.
+     * @param uidValue the value of the uid of the link/target pair.
+     */
+    constructor(
+        name: string,
+        value: string,
+        uidName?: string,
+        uidValue?: string,
+    ) {
+        super(name, value);
+        this.uidName = uidName;
+        this.uidValue = uidValue;
+    }
+
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: unknown } {
+        if (this.uidName && this.uidValue) {
+            return { [this.name]: this.value, [this.uidName]: this.uidValue };
+        }
+        return { [this.name]: this.value };
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        if (this.uidName && this.uidValue) {
+            return new Set([
+                `{link ${this.name}:${this.uidName}}`,
+                `{target ${this.name}:${this.uidName}}`,
+            ]);
+        }
+        return new Set([`{link ${this.name}}`, `{target ${this.name}}`]);
+    }
+}
+
+/**
  * A collection used to group multiple elements together.
  * It can contain nested `ElementCollection`s and should be used to pass multiple `Element`s
  * as PrintJob data, as well as to allow for nested elements.
@@ -1231,11 +1685,9 @@ export class ElementCollection extends Element {
      *  this element collection object
      */
     addAll(col: ElementCollection) {
-        col.elements.forEach(
-            (el) => {
-                this.add(el);
-            },
-        );
+        col.elements.forEach((el) => {
+            this.add(el);
+        });
     }
 
     /**
@@ -1253,15 +1705,13 @@ export class ElementCollection extends Element {
     asDict() {
         let result: { [key: string]: unknown } = {};
 
-        this.elements.forEach(
-            (el) => {
-                if (el instanceof ElementCollection) {
-                    result[el.name] = el.asDict();
-                } else {
-                    result = { ...result, ...el.asDict() };
-                }
-            },
-        );
+        this.elements.forEach((el) => {
+            if (el instanceof ElementCollection) {
+                result[el.name] = el.asDict();
+            } else {
+                result = { ...result, ...el.asDict() };
+            }
+        });
 
         return result;
     }
@@ -1273,15 +1723,11 @@ export class ElementCollection extends Element {
     availableTags(): Set<string> {
         const result = new Set<string>();
 
-        this.elements.forEach(
-            (el) => {
-                el.availableTags().forEach(
-                    (tag) => {
-                        result.add(tag);
-                    },
-                );
-            },
-        );
+        this.elements.forEach((el) => {
+            el.availableTags().forEach((tag) => {
+                result.add(tag);
+            });
+        });
 
         return result;
     }
@@ -1292,7 +1738,10 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection
      * @returns the generated element collection from an element and a name
      */
-    static elementToElementCollection(element: Element, name: string = ''): ElementCollection {
+    static elementToElementCollection(
+        element: Element,
+        name: string = '',
+    ): ElementCollection {
         return ElementCollection.fromMapping(element.asDict(), name);
     }
 
@@ -1302,14 +1751,15 @@ export class ElementCollection extends Element {
      * @param name the name of the element collection; defaults to ''
      * @returns an element collection generated from the given mapping and name
      */
-    static fromMapping(mapping: { [key: string]: unknown }, name: string = ''): ElementCollection {
+    static fromMapping(
+        mapping: { [key: string]: unknown },
+        name: string = '',
+    ): ElementCollection {
         const resultSet = new Set<Element>();
 
-        Object.entries(mapping).forEach(
-            (e) => {
-                resultSet.add(new Property(e[0], e[1]));
-            },
-        );
+        Object.entries(mapping).forEach((e) => {
+            resultSet.add(new Property(e[0], e[1]));
+        });
 
         return new ElementCollection(name, Array.from(resultSet));
     }
@@ -1325,38 +1775,16 @@ export class ElementCollection extends Element {
     }
 }
 
-/**
- * This tag will allow you to utilize freeze pane property of the excel.Three options are available. 
- * First option, we can directly place the pane where the tag located. For this option we should provide true parameter.
- * Second option, we can provide the location where we want to place the pane such as "C5".
- * Finally, the third option is false which doesn't place a pane.
- */
-export class Freeze extends Property {
-    /**
-     * @param name name of the freeze tag
-     * @param freezeValue value for the freeze tag
-     */
-    constructor(name: string, freezeValue: string | boolean) {
-        super(name, freezeValue);
-    }
-
-    /**
-     * A set containing all available template tags this Element reacts to.
-     * @returns set of tags associated with this Element
-     */
-    availableTags(): Set<string> {
-        return new Set([`{freeze ${this.name}}`]);
-    }
-}
 
 /**
- * Inside Word and PowerPoint documents, the tag {?insert fileToInsert} can be used 
+ * Inside Word and PowerPoint and Excel documents, the tag {?insert fileToInsert} can be used 
  * to insert files like Word, Excel, Powerpoint and PDF documents.
+    Please use ExcelInsert element to insert documents in excel, because it has more options available.
  */
 export class Insert extends Property {
     /**
      * @param name Name of the insert tag. 
-     * @param documentToInsert Base64 encoded document. 
+     * @param documentToInsert document to insert which could be url,ftp,sftp or base64 endcoded.
      */
     constructor(name: string, documentToInsert: string) {
         super(name, documentToInsert);
@@ -1367,5 +1795,583 @@ export class Insert extends Property {
      */
     availableTags(): Set<string> {
         return new Set([`?insert ${this.name}`]);
+    }
+}
+
+/**
+ * Inside PowerPoint, the tag {name?} can be used 
+ * To remove an entire shape if the associated tag evaluates to false.
+    For example, if a template slide includes a text box with the tag {toShow?}
+    and the value of toShow is false or undefined, the entire shape will be removed from the slide.
+ */
+export class PptxShapeRemove extends Property {
+    /**
+     * @param name Name of the remove tag. 
+     * @param value (boolean or string): False (to remove the shape / text-box) or string/True.
+     */
+    constructor(name: string, value: string | boolean) {
+        super(name, value);
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`${this.name}?`]);
+    }
+}
+/**
+ * To hide a slide in powerpoint
+ * Append "_hide" to the key of the corresponding data field and set its value to "true"
+ */
+export class HideSlide extends Property {
+    /**
+     * @param name Name/identifier for this hide condition
+     * @param condition The condition to determine when to hide the slide
+     * The document should be pptx.
+     */
+    constructor(name: string, condition: string) {
+        super(name, condition);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{hide ${this.name}}`]);
+    }
+    
+}
+export class HideSheets extends Property {
+    /**
+     * Used to hide sheets in Excel based on a condition.
+     * @param name Name/identifier for this hide condition 
+     * @param condition The condition to determine when to hide the sheet.
+     */
+    constructor(name: string, condition: string) {
+        super(name, condition);
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{hide ${this.name}}`]);
+    }
+}
+
+
+/**
+ * Inside Excel it is possible to insert word, powerpoint, excel and pdf file using AOP tag {?insert fileToInsert}.
+        Options available are:  you can provide dynamic icon and icon position.
+ */
+        export class PdfInclude extends Element {
+            value?: string;
+            filename?: string;
+            mimeType?: string;
+            fileContent?: string;
+            fileSource?: string;
+            /**
+             * Inside Word, PowerPoint, and Excel documents, the tag {?include pdf } can be used to include files like Word, Excel, PowerPoint, and PDF documents.
+             * You should use the `ExcelInsert` element for more flexibility when inserting into Excel.
+             *
+             * @param name Name of the insert tag.
+             * @param value optional.
+             * @param filename Name of the file to be inserted. Optional.
+             * @param mimeType MIME type of the file to be inserted. Optional.
+             * @param fileContent Content of the file to be inserted. Optional.
+             * @param fileSource Source of the file to be inserted. Optional.
+             */
+            constructor(
+               name: string,
+               value?: string,
+               filename?: string,
+               mimeType?: string,
+               fileContent?: string,
+               fileSource?: string
+            ) {
+                super(name);
+                this.value = value;
+                this.filename = filename;
+                this.mimeType = mimeType;
+                this.fileContent = fileContent;
+                this.fileSource = fileSource;
+            }
+            /**
+             * A method for the available template tags this element reacts to.
+             * This returns a Set containing the tag `{?pdfinclude {name}}` associated with this element.
+             * 
+             * @returns A set of tags associated with this element.
+             */
+            availableTags(): Set<string> {
+                return new Set([`{?pdfinclude ${this.name}}`]);
+            }
+            /**
+             * Dictionary representation of this Element.
+             * @returns dictionary representation of this Element
+             */
+            asDict(): { [key: string]: any } {
+                const result: { [key: string]: any } = {};
+                result[this.name] = {};
+                
+                if (this.filename !== undefined) {
+                    result[this.name]["name"] = this.filename;
+
+                }
+                if (this.mimeType !== undefined) {
+                    result[this.name]["mime_type"] = this.mimeType;
+                }
+                if (this.fileContent !== undefined) {
+                    result[this.name]["file_content"] = this.fileContent;
+                }
+                if (this.fileSource !== undefined) {
+                    result[this.name]["file_source"] = this.fileSource;
+                }
+                return result;
+
+            }
+
+}
+export class ExcelInsert extends Element {
+    value: string;
+    // isPreview: boolean | undefined;
+    icon: string | undefined;
+    fromRow: number | undefined
+    fromCol: string | number | undefined;
+    fromRowOff: string | undefined;
+    fromColOff: string | undefined;
+    toRow: number | undefined;
+    toCol: string | number | undefined;
+    toRowOff: string | undefined;
+    toColOff: string | undefined;
+
+    /**
+     * 
+     * @param name  Name of insert tag. Ex(fileToInsert)
+     * @param value File to insert of path to file. (Source can be FTP, SFTP, URL or base64encoded file.)
+     * @param icon Icon to be showed as the document, when clicked on it, redirects it to file. Default icon is taken if not provided. Optional.
+     * @param fromRow position for top of icon. Defaults to row of the tag. Optional.
+     * @param fromCol position for left of icon. Defaults to column of the tag. Optional.
+     * @param fromRowOff space after the value of from Row. Defaults to 0. Optional.
+     * @param fromColOff space after the value of fromCol. Defaults to 0. Optional.
+     * @param toRow position for bottom of icon. Defaults to row of the tag + 3. Optional.
+     * @param toCol position for right side of icon. Defaults to column of the tag. Optional.
+     * @param toRowOff space after toRow value. Defaults to 20px. Optional.
+     * @param toColOff space after toCol value. Defaults to 50px. Optional.
+     */
+    constructor(
+        name: string,
+        value: string,
+        // isPreview?: boolean,
+        icon?: string,
+        fromRow?: number,
+        fromCol?: string | number,
+        fromRowOff?: string,
+        fromColOff?: string,
+        toRow?: number,
+        toCol?: string | number,
+        toRowOff?: string,
+        toColOff?: string
+    ) {
+        super(name);
+        this.value = value;
+        // this.isPreview = isPreview;
+        this.icon = icon;
+        this.fromRow = fromRow;
+        this.fromCol = fromCol;
+        this.fromRowOff = fromRowOff;
+        this.fromColOff = fromColOff;
+        this.toRow = toRow;
+        this.toCol = toCol;
+        this.toRowOff = toRowOff;
+        this.toColOff = toColOff;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | number | boolean } {
+        const result: { [key: string]: string | number | boolean } = {
+            [this.name]: this.value,
+        }
+        // if (this.isPreview !== undefined) {
+        //     result[this.name + '_isPreview'] = this.isPreview
+        // }
+        if (this.icon !== undefined) {
+            result[this.name + '_icon'] = this.icon
+        }
+        if (this.fromRow !== undefined) {
+            result[this.name + '_fromRow'] = this.fromRow
+        }
+        if (this.fromCol !== undefined) {
+            result[this.name + '_fromCol'] = this.fromCol
+        }
+        if (this.fromRowOff !== undefined) {
+            result[this.name + '_fromRowOff'] = this.fromRowOff
+        }
+        if (this.fromColOff !== undefined) {
+            result[this.name + '_fromColOff'] = this.fromColOff
+        }
+        if (this.toRow !== undefined) {
+            result[this.name + '_toRow'] = this.toRow
+        }
+        if (this.toCol !== undefined) {
+            result[this.name + '_toCol'] = this.toCol
+        }
+        if (this.toRowOff !== undefined) {
+            result[this.name + '_toRowOff'] = this.toRowOff
+        }
+        if (this.toColOff !== undefined) {
+            result[this.name + '_toColOff'] = this.toColOff
+        }
+        return result;
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{?insert ${this.name}}`])
+    }
+
+}
+
+/**
+ * This tag is used to make password protected sheets in Excel. 
+ * This tag has the feature of password along with different other features.
+ *     
+ * Note: value is considered password, so try to use only one (either value or passowrd).
+ */
+export class ProtectSheet extends Element {
+    value: string | undefined;
+    autoFilter: string | boolean | undefined;
+    deleteColumns: string | boolean | undefined;
+    deleteRows: string | boolean | undefined;
+    formatCells: string | boolean | undefined;
+    formatColumns: string | boolean | undefined;
+    formatRows: string | boolean | undefined;
+    insertColumns: string | boolean | undefined;
+    insertHyperlinks: string | boolean | undefined;
+    insertRows: string | boolean | undefined;
+    password: string | undefined;
+    pivotTables: string | boolean | undefined;
+    selectLockedCells: string | boolean | undefined;
+    selectUnlockedCells: string | boolean | undefined;
+    sort: string | boolean | undefined;
+    /**
+     * 
+     * @param name Name of the tag
+     * @param value Value for the tag; this is used as password
+     * @param autoFilter lock auto filter in sheet.
+     * @param deleteColumns lock delete columns in sheet.
+     * @param deleteRows lock delete rows in sheet.
+     * @param formatCells lock format cells.
+     * @param formatColumns lock format columns.
+     * @param formatRows lock format rows.
+     * @param insertColumns lock insert columns.
+     * @param insertHyperlinks lock insert hyperlinks.
+     * @param insertRows lock insert rows.
+     * @param password password to lock with.
+     * @param pivotTables lock pivot tables.
+     * @param selectLockedCells lock select locked cells.
+     * @param selectUnlockedCells lock select unlocked cells.
+     * @param sort lock sort.
+     */
+    constructor(
+        name: string,
+        value?: string,
+        autoFilter?: string | boolean,
+        deleteColumns?: string | boolean,
+        deleteRows?: string | boolean,
+        formatCells?: string | boolean,
+        formatColumns?: string | boolean,
+        formatRows?: string | boolean,
+        insertColumns?: string | boolean,
+        insertHyperlinks?: string | boolean,
+        insertRows?: string | boolean,
+        password?: string,
+        pivotTables?: string | boolean,
+        selectLockedCells?: string | boolean,
+        selectUnlockedCells?: string | boolean,
+        sort?: string | boolean
+    ) {
+        super(name);
+        this.value = value;
+        this.autoFilter = autoFilter;
+        this.deleteColumns = deleteColumns;
+        this.deleteRows = deleteRows;
+        this.formatCells = formatCells;
+        this.formatColumns = formatColumns;
+        this.formatRows = formatRows;
+        this.insertColumns = insertColumns;
+        this.insertHyperlinks = insertHyperlinks;
+        this.insertRows = insertRows;
+        this.password = password;
+        this.pivotTables = pivotTables;
+        this.selectLockedCells = selectLockedCells;
+        this.selectUnlockedCells = selectUnlockedCells;
+        this.sort = sort;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {};
+        if (this.value != undefined) {
+            result[this.name] = this.value;
+        }
+        if (this.autoFilter != undefined) {
+            result[this.name + `_allow_auto_filter`] = this.autoFilter;
+        }
+        if (this.deleteColumns != undefined) {
+            result[this.name + `_allow_delete_columns`] = this.deleteColumns;
+        }
+        if (this.deleteRows != undefined) {
+            result[this.name + `_allow_delete_rows`] = this.deleteRows;
+        }
+        if (this.formatCells != undefined) {
+            result[this.name + `_allow_format_cells`] = this.formatCells;
+        }
+        if (this.formatColumns != undefined) {
+            result[this.name + `_allow_format_columns`] = this.formatColumns;
+        }
+        if (this.formatRows != undefined) {
+            result[this.name + `_allow_format_rows`] = this.formatRows;
+        }
+        if (this.insertColumns != undefined) {
+            result[this.name + `_allow_insert_columns`] = this.insertColumns;
+        }
+        if (this.insertHyperlinks != undefined) {
+            result[this.name + `_allow_insert_hyperlinks`] = this.insertHyperlinks;
+        }
+        if (this.insertRows != undefined) {
+            result[this.name + `_allow_insert_rows`] = this.insertRows;
+        }
+        if (this.password != undefined) {
+            result[this.name + `_password`] = this.password;
+        }
+        if (this.pivotTables != undefined) {
+            result[this.name + `_allow_pivot_tables`] = this.pivotTables;
+        }
+        if (this.selectLockedCells != undefined) {
+            result[this.name + `_allow_select_locked_cells`] = this.selectLockedCells;
+        }
+        if (this.selectUnlockedCells != undefined) {
+            result[this.name + `_allow_select_unlocked_cells`] = this.selectUnlockedCells;
+        }
+        if (this.sort != undefined) {
+            result[this.name + `_allow_sort`] = this.sort;
+        }
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`{protect ${this.name}}`]);
+    }
+}
+/**
+ * This tag is used to append the content of docx file to the template by using {?embed fileToEmbed}.
+    This is only supported in docx and we can only embed docx file.
+    The content of document are not rendered.
+ */
+export class Embed extends Property {
+    /**
+     * In docx it is possible to copy the content of one docx file to another.
+     * @param name The name of the tag.
+     * @param fileToEmbed The docx file to embed. File source could be base64 encoded, ftp, sftp or url. 
+     */
+    constructor(name: string, fileToEmbed: string) {
+        super(name, fileToEmbed);
+    }
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`?embed ${this.name}`]);
+    }
+}
+
+/**
+ * It is possible to insert cell validation in excel using validate tag as {validate validateTag} (validate keyword followed by tagName)
+ */
+export class ValidateCell extends Element {
+    /**Set it to false for not allowing empty values in cell. The value is true by default. */
+    ignoreBlank: boolean | undefined;
+    /**Type of data used for validation. Available options are (anyValue, whole, decimal, list, date, time, textLength, custom). Please use camelCase to insert value for allow attribute. */
+    allow: string | undefined;
+    /**Value to compare with.  Note:
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br> */
+    value1: string | undefined;
+    /**Value to compare with.  Note:
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br> */
+    value2: string | undefined;
+    /**Set it to false for not showing dropdown button while validation allow type is list. It is true by default for list allow type. */
+    inCellDropdown: boolean | undefined;
+    /**Type of comparison to be done for the cell value. Available values are (lessThanOrEqual, notBetween, equal, notEqual, greaterThan, greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual). Default value is "between". Please use camelCase for the value as shown in examples. */
+    data: string | undefined;
+    /**Set it to false to hide message shown when the cell to validate is being selected. The value for it is true by default. */
+    showInputMessage: boolean | undefined;
+    /**Title of message to be shown when cell to validate is selected. */
+    inputTitle: string | undefined;
+    /**Message to be shown when cell to validate is selected. */
+    inputMessage: string | undefined;
+    /**Set it to false, if you want to hide error alert once cell validation fails. The value is true by default. */
+    showErrorAlert: boolean | undefined;
+    /**Type of error style when cell validation fails. The value is stop by default. Available options are(stop,waring, Information). */
+    errorStyle: string | undefined;
+    /**Title of error to be shown when cell validation fails. */
+    errorTitle: string | undefined;
+    /**Message of error to be shown when cell validation fails. */
+    errorMessage: string | undefined;
+    /**
+     * 
+     * @param name Name of the validate tag. For {validate tagName}, tagName is name for this element. 
+     * @param ignoreBlank Set it to false for not allowing empty values in cell. The value is true by default.
+     * @param allow Type of data used for validation. Available options are (anyValue, whole, decimal, list, date, time, textLength, custom). Please use camelCase to insert value for allow attribute.
+     * @param value1 Value to compare with.
+     * @param value2 Value to compare with.<br><br>
+     * Note:
+            These two options <strong>(_value1, _value2)</strong> can be used for any allow/type of validation that require values for comparison, in such case use <strong>"_value1"</strong> attribute as the first value to be passed and <strong>"_value2"</strong> attribute as the 2nd value.<br><br>
+            Some allow type of validation require only one value to compare; in such case use <strong>"_value1"</strong> attribute.<br><br>
+            For ex :<br>
+            If allow type of validation is date and you have to check in between two dates.<br>
+            Then you could use <strong>"_value1"</strong> attribute as start date and <strong>"_value2"</strong> attribute as end date.<br><br>
+            If allow type of validation is whole and you have to check for value less than 100.<br>
+            Then you could use <strong>"_value1"</strong> for that value and do not use "<strong>_value2".</strong><br><br>
+            While using time and date as allow type validation, please provide date/time with correct formatting.<br>
+            for time: <strong>hours:minutes:seconds</strong> i.e hours , minutes, seconds separated by colon (:)<br>
+                ex : 14:30:00 for 2:30 pm<br><br>
+            for date: <strong>month/day/year</strong> i.e day, month , year separated by forward slash(/)<br>
+                ex : 02/07/2023 for Feb 7 2023.<br><br>
+            for list: you could use normal string with elements separated by comma(,).<br>
+                ex : "first, second, third" for list of three elements.<br>
+     * @param inCellDropdown Set it to false for not showing dropdown button while validation allow type is list. It is true by default for list allow type.
+     * @param data Type of comparison to be done for the cell value. Available values are (lessThanOrEqual, notBetween, equal, notEqual, greaterThan, greaterThan, lessThan, greaterThanOrEqual, lessThanOrEqual). Default value is "between". Please use camelCase for the value as shown in examples.
+     * @param showInputMessage Set it to false to hide message shown when the cell to validate is being selected. The value for it is true by default.
+     * @param inputTitle Title of message to be shown when cell to validate is selected.
+     * @param inputMessage Message to be shown when cell to validate is selected.
+     * @param showErrorAlert Set it to false, if you want to hide error alert once cell validation fails. The value is true by default.
+     * @param errorStyle Type of error style when cell validation fails. The value is stop by default. Available options are(stop,waring, Information).
+     * @param errorTitle Title of error to be shown when cell validation fails.
+     * @param errorMessage Message of error to be shown when cell validation fails.
+     */
+    constructor(
+        name: string,
+        ignoreBlank?: boolean,
+        allow?: string,
+        value1?: string,
+        value2?: string,
+        inCellDropdown?: boolean,
+        data?: string,
+        showInputMessage?: boolean,
+        inputTitle?: string,
+        inputMessage?: string,
+        showErrorAlert?: boolean,
+        errorStyle?: string,
+        errorTitle?: string,
+        errorMessage?: string) {
+        super(name);
+        this.ignoreBlank = ignoreBlank;
+        this.allow = allow;
+        this.value1 = value1;
+        this.value2 = value2;
+        this.inCellDropdown = inCellDropdown;
+        this.data = data;
+        this.showInputMessage = showInputMessage;
+        this.inputTitle = inputTitle;
+        this.inputMessage = inputMessage;
+        this.showErrorAlert = showErrorAlert;
+        this.errorStyle = errorStyle;
+        this.errorTitle = errorTitle;
+        this.errorMessage = errorMessage;
+    }
+    /**
+     * Dictionary representation of this Element.
+     * @returns dictionary representation of this Element
+     */
+    asDict(): { [key: string]: string | boolean } {
+        const result: { [key: string]: string | boolean } = {};
+        if (this.ignoreBlank !== undefined) {
+            result[this.name + '_ignore_blank'] = this.ignoreBlank;
+        }
+        if (this.allow !== undefined) {
+            result[this.name + '_allow'] = this.allow;
+        }
+        if (this.value1 !== undefined) {
+            result[this.name + '_value1'] = this.value1;
+        }
+        if (this.value2 !== undefined) {
+            result[this.name + '_value2'] = this.value2;
+        }
+        if (this.inCellDropdown !== undefined) {
+            result[this.name + '_in_cell_dropdown'] = this.inCellDropdown;
+        }
+        if (this.data !== undefined) {
+            result[this.name + '_data'] = this.data;
+        }
+        if (this.showInputMessage !== undefined) {
+            result[this.name + '_show_input_message'] = this.showInputMessage;
+        }
+        if (this.inputTitle !== undefined) {
+            result[this.name + '_input_title'] = this.inputTitle;
+        }
+        if (this.inputMessage !== undefined) {
+            result[this.name + '_input_message'] = this.inputMessage;
+        }
+        if (this.showErrorAlert !== undefined) {
+            result[this.name + '_show_error_alert'] = this.showErrorAlert;
+        }
+        if (this.errorStyle !== undefined) {
+            result[this.name + '_error_style'] = this.errorStyle;
+        }
+        if (this.errorTitle !== undefined) {
+            result[this.name + '_error_title'] = this.errorTitle;
+        }
+        if (this.errorMessage !== undefined) {
+            result[this.name + '_error_message'] = this.errorMessage;
+        }
+        return result;
+    }
+
+    /**
+     * A set containing all available template tags this Element reacts to.
+     * @returns set of tags associated with this Element
+     */
+    availableTags(): Set<string> {
+        return new Set([`validate ${this.name}`]);
     }
 }

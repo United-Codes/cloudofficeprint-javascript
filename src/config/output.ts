@@ -1,7 +1,7 @@
 import { CloudAccessToken } from './cloud';
 import { PDFOptions } from './pdf';
 import { CsvOptions } from './csv';
-
+import { RequestOption } from './request_option';
 /**
  * Class to specify output configuration for a request.
  * This configuration is general and for the entire list of output files.
@@ -15,6 +15,14 @@ export class OutputConfig {
     pdfOptions: PDFOptions | undefined;
     csvOptions: CsvOptions | undefined;
     outputAppendPerPage: boolean | undefined;
+    outputPrependPerPage: boolean | undefined;
+    outputPolling: boolean | undefined;
+    secretKey: string | undefined;
+    updateToc: boolean | undefined;
+    outputLocale: string | undefined;
+    outputReadPassword: string | undefined;
+    requestOption: RequestOption | undefined;
+    return_output: boolean | undefined;
 
     /**
      * @param filetype The file type (as extension) to use for the output.
@@ -30,7 +38,15 @@ export class OutputConfig {
      *  Can only be used if the server allows to save on disk.
      *  The specific output path for each file is appended to the base path. Optional.
      * @param pdfOptions Optional PDF options. Optional.
-     * @param appendPerPage ability to prepend/append file after each page of output. Optional.
+     * @param appendPerPage ability to append file after each page of output. Optional.
+     * @param prependPerPage ability to prepend file after each page of output. Optional.
+     * @param outputPolling A unique link for each request is sent back, which can be used later to download the output file.
+     * @param secretKey A secret key can be specified to encrypt the file stored on the server (ussed with output polling).
+     * @param requestOption  AOP makes a call to the given option with response/output of the current request.
+     * @param updateToc Update table of contents of Word document.
+     * @param outputLocale Locale of the output file. Optional.
+     * @param outputReadPassword Password to open the output file. Optional.
+     * @param return_output When true, both saves files to server directory and returns the output. 
      */
     constructor(
         filetype?: string,
@@ -41,6 +57,14 @@ export class OutputConfig {
         pdfOptions?: PDFOptions,
         csvOptions?: CsvOptions,
         appendPerPage?: boolean,
+        prependPerPage?: boolean,
+        outputPolling?: boolean,
+        secretKey?: string,
+        requestOption?: RequestOption,
+        updateToc?: boolean,
+        outputLocale?: string,
+        outputReadPassword?: string,
+        return_output?: boolean,
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -50,6 +74,14 @@ export class OutputConfig {
         this.pdfOptions = pdfOptions;
         this.csvOptions = csvOptions;
         this.outputAppendPerPage = appendPerPage;
+        this.outputPrependPerPage = prependPerPage;
+        this.outputPolling = outputPolling;
+        this.requestOption = requestOption;
+        this.secretKey = secretKey;
+        this.updateToc = updateToc;
+        this.outputLocale = outputLocale;
+        this.outputReadPassword = outputReadPassword;
+        this.return_output = return_output;
     }
 
     /**
@@ -57,12 +89,20 @@ export class OutputConfig {
      * @returns the dict representation of this output config
      */
     asDict(): {
-        [key: string]: string | number | boolean | { [key: string]: number } |
-        { [key: string]: string | number }
-        } {
+        [key: string]: string | number | boolean |
+        {
+            [key: string]: string | number | boolean | {
+                [key: string]: string | number | boolean;
+            }
+        }
+    } {
         let result: {
-            [key: string]: string | number | boolean | { [key: string]: number } |
-            { [key: string]: string | number }
+            [key: string]: string | number | boolean |
+            {
+                [key: string]: string | number | boolean | {
+                    [key: string]: string | number | boolean;
+                }
+            }
         } = {
             output_encoding: this.encoding,
             output_converter: this.converter,
@@ -83,8 +123,32 @@ export class OutputConfig {
         if (this.csvOptions !== undefined) {
             result = { ...result, ...this.csvOptions.asDict() };
         }
-        if (this.outputAppendPerPage !== undefined){
+        if (this.outputAppendPerPage !== undefined) {
             result.output_append_per_page = this.outputAppendPerPage;
+        }
+        if(this.outputPrependPerPage !== undefined){
+            result.output_prepend_per_page = this.outputPrependPerPage;
+        }
+        if (this.outputPolling !== undefined) {
+            result.output_polling = this.outputPolling;
+        }
+        if (this.secretKey !== undefined) {
+            result.secret_key = this.secretKey;
+        }
+        if (this.updateToc !== undefined) {
+            result.update_toc = this.updateToc;
+        }
+        if (this.outputLocale !== undefined) {
+            result.output_locale = this.outputLocale;
+        }
+        if (this.outputReadPassword !== undefined) {
+            result.output_read_password = this.outputReadPassword;
+        }
+        if (this.requestOption !== undefined) {
+            result.request_option = this.requestOption.asDict();
+        }
+        if ( this.return_output !== undefined){
+            result.return_output = this.return_output;
         }
         return result;
     }

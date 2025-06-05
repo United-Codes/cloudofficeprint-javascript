@@ -1,12 +1,15 @@
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { Response as HTTPReponse } from 'node-fetch';
+// import fetch from 'node-fetch';
+const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
+
 import { OutputConfig, Server } from './config';
 import { Element, RESTSource } from './elements';
 import { COPError } from './exceptions';
 import { Resource } from './resource';
+import { Template } from './template';
 import { Response } from './response';
-
-const fetch = require('node-fetch').default; // .default is needed for node-fetch to work in a webbrowser
+import { TransformationFunction } from './transformation';
 
 export const STATIC_OPTS = {
     tool: 'javascript',
@@ -23,13 +26,16 @@ export const STATIC_OPTS = {
 export class PrintJob {
     data: Element | RESTSource | { [key: string]: Element };
     server: Server;
+    template?: Template | Resource;
     outputConfig: OutputConfig;
-    template: Resource | undefined;
     subtemplates: { [key: string]: Resource };
     prependFiles: Resource[];
     appendFiles: Resource[];
     copVerbose: boolean;
-
+    attachments: Resource[];
+    compareFiles: Resource[];
+    transformationFunction?: TransformationFunction;
+    
     /**
      * @param data This is either: An `Element` (e.g. an `ElementCollection`);
      *  A mapping, containing file names as keys and an `Element` as data.
@@ -45,16 +51,23 @@ export class PrintJob {
      * @param prependFiles Files to prepend to the output file. Defaults to [].
      * @param appendFiles Files to append to the output file. Defaults to [].
      * @param copVerbose Whether or not verbose mode should be activated. Defaults to False.
+     * @param attachments Files to attach to the PDF file. Defaults to [].
+     * @param _compareFiles to compare to the output file. Defaults to [].
+     *@param transformationFunction A JavaScript function that transforms the input data before processing.
+
      */
     constructor(
         data: Element | RESTSource | { [key: string]: Element },
         server: Server,
-        template?: Resource,
+        template?: Template | Resource,
         outputConfig: OutputConfig = new OutputConfig(),
         subtemplates: { [key: string]: Resource } = {},
         prependFiles: Resource[] = [],
         appendFiles: Resource[] = [],
         copVerbose: boolean = false,
+        attachments: Resource[] = [],
+        compareFiles: Resource[] = [],
+        transformationFunction?:TransformationFunction,
     ) {
         this.data = data;
         this.server = server;
@@ -64,6 +77,9 @@ export class PrintJob {
         this.prependFiles = prependFiles;
         this.appendFiles = appendFiles;
         this.copVerbose = copVerbose;
+        this.attachments = attachments;
+        this.compareFiles = compareFiles;
+        this.transformationFunction= transformationFunction;
     }
 
     /**
@@ -72,21 +88,21 @@ export class PrintJob {
      */
     async execute(): Promise<Response> {
         await this.server.raiseIfUnreachable();
-        let proxy;
-        if (this.server.config && this.server.config.proxies) {
-            proxy = new HttpsProxyAgent(this.server.config.proxies);
+        const proxy =
+            this.server.config && this.server.config.proxies
+                ? new HttpsProxyAgent(this.server.config.proxies)
+                : undefined;
+        const response = await fetch(this.server.url, {
+            method: 'post',
+            body: JSON.stringify(this.asDict()),
+            agent: proxy,
+            headers: { 'Content-type': 'application/json' },
+        });
+        if (this.template instanceof Template && this.template.shouldHash) {
+            const templateHash = response.headers.get('Template-Hash');
+            if (templateHash) this.template.updateHash(templateHash);
         }
-        return PrintJob.handleResponse(
-            await fetch(
-                this.server.url,
-                {
-                    method: 'post',
-                    body: JSON.stringify(this.asDict()),
-                    agent: proxy,
-                    headers: { 'Content-type': 'application/json' },
-                },
-            ),
-        );
+        return PrintJob.handleResponse(response);
     }
 
     /**
@@ -97,23 +113,22 @@ export class PrintJob {
      * @param server `Server`-object
      * @returns `Response`-object
      */
-    static async executeFullJson(jsonData: object, server: Server): Promise<Response> {
+    static async executeFullJson(
+        jsonData: object,
+        server: Server,
+    ): Promise<Response> {
         await server.raiseIfUnreachable();
-        let proxy;
-        if (server.config && server.config.proxies) {
-            proxy = new HttpsProxyAgent(server.config.proxies);
-        }
-        return PrintJob.handleResponse(
-            await fetch(
-                server.url,
-                {
-                    method: 'post',
-                    body: JSON.stringify(jsonData),
-                    agent: proxy,
-                    headers: { 'Content-type': 'application/json' },
-                },
-            ),
-        );
+        const proxy =
+            server.config && server.config.proxies
+                ? new HttpsProxyAgent(server.config.proxies)
+                : undefined;
+        const response = await fetch(server.url, {
+            method: 'post',
+            body: JSON.stringify(jsonData),
+            agent: proxy,
+            headers: { 'Content-type': 'application/json' },
+        });
+        return PrintJob.handleResponse(response);
     }
 
     /**
@@ -123,7 +138,7 @@ export class PrintJob {
      * @throws COPError when response status is not OK
      */
     static async handleResponse(res: HTTPReponse): Promise<Response> {
-        if (!(res.ok)) {
+        if (!res.ok) {
             throw new COPError(await res.text());
         } else {
             return new Response(res);
@@ -135,7 +150,7 @@ export class PrintJob {
      * @returns dict representation of this object
      */
     asDict() {
-        let result: { [key: string]: unknown } = { ...STATIC_OPTS };
+        let result: any = { ...STATIC_OPTS };
 
         // server config goes in the upper level
         if (this.server.config) {
@@ -152,32 +167,23 @@ export class PrintJob {
 
         // If output_type is not specified, set this to the template filetype
         // If no template found: default docx
-        if (!(Object.prototype.hasOwnProperty.call(result.output, 'output_type'))) {
+        if (
+            !Object.prototype.hasOwnProperty.call(result.output, 'output_type')
+        ) {
             if (this.template) {
-                (result.output as {
-                    [key: string]: string | number | boolean | {
-                        [key: string]: number;
-                    } | {
-                        [key: string]: string | number;
-                    };
-                })
-                    .output_type = (result.template as { [key: string]: string }).template_type;
+                result.output.output_type = result.template.template_type;
             } else {
-                (result.output as {
-                    [key: string]: string | number | boolean | {
-                        [key: string]: number;
-                    } | {
-                        [key: string]: string | number;
-                    };
-                }).output_type = 'docx';
+                result.output.output_type = 'docx';
             }
         }
 
         if (this.data.constructor === Object) {
-            result.files = Array.from(Object.entries(this.data).map(([name, data]) => ({
-                filename: name,
-                data: data.asDict(),
-            })));
+            result.files = Array.from(
+                Object.entries(this.data).map(([name, data]) => ({
+                    filename: name,
+                    data: data.asDict(),
+                })),
+            );
         } else if (this.data instanceof RESTSource) {
             result.files = [this.data.asDict()];
         } else {
@@ -185,34 +191,41 @@ export class PrintJob {
         }
 
         if (this.prependFiles.length > 0) {
-            result.prepend_files = Array.from(this.prependFiles.map(
-                (value) => value.secondaryFileDict(),
-            ));
+            result.prepend_files = this.prependFiles.map((file) =>
+                file.secondaryFileDict(),
+            );
         }
 
         if (this.appendFiles.length > 0) {
-            result.append_files = Array.from(this.appendFiles.map(
-                (value) => value.secondaryFileDict(),
-            ));
+            result.append_files = this.appendFiles.map((file) =>
+                file.secondaryFileDict(),
+            );
+        }
+
+        if (this.attachments.length > 0) {
+            result.attachments = this.attachments.map((file) =>
+                file.secondaryFileDict(),
+            );
+        }
+        if (this.compareFiles.length > 0) {
+            result.compare_files = this.compareFiles.map((file) =>
+                file.secondaryFileDict()
+            );
         }
 
         if (Object.keys(this.subtemplates).length > 0) {
-            const templatesArray: { [key: string]: string }[] = [];
-
-            Object.entries(this.subtemplates).forEach(
-                ([name, res]) => {
-                    const toAdd = res.secondaryFileDict();
-                    toAdd.name = name;
-                    templatesArray.push(toAdd);
-                },
+            result.templates = Object.entries(this.subtemplates).map(
+                ([name, file]) => ({ ...file.secondaryFileDict(), name }),
             );
-
-            result.templates = templatesArray;
         }
-
+        if (this.transformationFunction) {
+                        result.transformation_function = this.transformationFunction.toDict();
+                  }
         // If verbose mode is activated, print the result to the terminal
         if (this.copVerbose) {
-            console.log('The JSON data that is sent to the Cloud Office Print server:\n');
+            console.log(
+                'The JSON data that is sent to the Cloud Office Print server:\n',
+            );
             console.log(JSON.stringify(result, null, 2));
         }
 
