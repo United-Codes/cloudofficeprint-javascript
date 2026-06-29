@@ -313,7 +313,19 @@ test('Test for output_read_password', () => {
     conf.outputReadPassword = 'aop_pass';
     const dict = conf.asDict();
         expect(dict).toHaveProperty('output_read_password', 'aop_pass');
-        
+
+});
+
+test('Test for output_export_sheets', () => {
+    const conf = new cop.config.OutputConfig('xlsx');
+    conf.outputExportSheets = ['Sheet1', 'Sheet3'];
+    const confExpected = {
+        output_type: 'xlsx',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_export_sheets: ['Sheet1', 'Sheet3'],
+    };
+    expect(conf.asDict()).toEqual(confExpected);
 });
 
 });
