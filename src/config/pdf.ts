@@ -40,6 +40,11 @@ export class PDFOptions {
     batch_selector : string  | undefined;
     batch_size : number | undefined;
     batch_condition : string | undefined;
+    imageWatermark: string | undefined;
+    imageWatermarkOpacity: number | undefined;
+    imageWatermarkRotation: number | undefined;
+    imageWatermarkWidth: number | undefined;
+    imageWatermarkHeight: number | undefined;
 
     /**
     * @param readPassword The password needed to open the PDF. Optional.
@@ -211,6 +216,21 @@ export class PDFOptions {
         if (this.watermarkRotation !== undefined) {
             result.output_watermark_rotation = this.watermarkRotation;
         }
+        if (this.imageWatermark !== undefined) {
+            result.output_watermark_image = this.imageWatermark;
+        }
+        if (this.imageWatermarkOpacity !== undefined) {
+            result.output_watermark_image_opacity = this.imageWatermarkOpacity;
+        }
+        if (this.imageWatermarkRotation !== undefined) {
+            result.output_watermark_image_rotation = this.imageWatermarkRotation;
+        }
+        if (this.imageWatermarkWidth !== undefined) {
+            result.output_watermark_image_width = this.imageWatermarkWidth;
+        }
+        if (this.imageWatermarkHeight !== undefined) {
+            result.output_watermark_image_height = this.imageWatermarkHeight;
+        }
         if (this.lockForm !== undefined) {
             result.lock_form = this.lockForm;
         }
@@ -315,6 +335,28 @@ export class PDFOptions {
         this.watermarkOpacity = opacity;
         this.watermarkSize = size;
         this.watermarkRotation = rotation;
+    }
+
+    /**
+     * Set an image watermark on every page of the PDF file
+     * @param image The image as a watermark. Optional.
+     * @param opacity Specifies the opacity of the image watermark. Optional.
+     * @param rotation Specifies the angle to rotate the image watermark. Optional.
+     * @param width Specifies the width of the image watermark .  Optional.
+     * @param height Specifies the height of the image watermark. Optional.
+     */
+    setImageWatermark(
+        image?: string,
+        opacity?: number,
+        rotation?: number,
+        width?: number,
+        height?: number,
+    ) {
+        this.imageWatermark = image;
+        this.imageWatermarkOpacity = opacity;
+        this.imageWatermarkRotation = rotation;
+        this.imageWatermarkWidth = width;
+        this.imageWatermarkHeight = height;
     }
 
     /**

@@ -328,6 +328,24 @@ test('Test for output_export_sheets', () => {
     expect(conf.asDict()).toEqual(confExpected);
 });
 
+test('Test for image watermark', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.setImageWatermark('logo_base64', 50, 45, 100, 80);
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_watermark_image: 'logo_base64',
+        output_watermark_image_opacity: 50,
+        output_watermark_image_rotation: 45,
+        output_watermark_image_width: 100,
+        output_watermark_image_height: 80,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
 });
 describe('cop_pdf_batching', () => {
     test('test pdf batching', () => {
