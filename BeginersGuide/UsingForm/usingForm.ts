@@ -2,7 +2,7 @@
 // It creates a PDF form with textboxes, radio buttons, and checkboxes.
 // The form is then filled with data and sent to the CloudOfficePrint server for processing.
 import * as cop from '../../src'; 
-import { Textbox, RadioButton, Checkbox } from '../../src/elements/form';
+import { Textbox, RadioButton, Checkbox, Dropdown, ComboBox, ListBox, PushButton, Password } from '../../src/elements/form';
 
 // Create main element collection
 const collection = new cop.elements.ElementCollection();
@@ -50,6 +50,44 @@ const checkbox = new Checkbox(
 );
 
 collection.add(checkbox);
+
+// 4. Dropdown  and ComboBox
+collection.add(new Dropdown(
+  'country',
+  [
+    { value: 'US', label: 'United States' },
+    { value: 'BE', label: 'Belgium' },
+    { value: 'NP', label: 'Nepal' },
+  ],
+  'BE', // preselected value
+  20,   // height
+  200,  // width
+));
+collection.add(new ComboBox(
+  'city',
+  [{ value: 'Baglung' }, { value: 'Kathmandu' }],
+  'Pokhara', // dfvalue
+  20,        // height
+  200,       // width
+));
+
+// 5. ListBox
+collection.add(new ListBox(
+  'roles',
+  [
+    { value: 'admin', label: 'Admin' },
+    { value: 'user', label: 'User' },
+    { value: 'guest', label: 'Guest' },
+  ],
+  ['admin', 'user'], // preselected values
+  true,              // multiSelect
+  80,                // height
+  200,               // width
+));
+
+// 6. Push button and password field
+collection.add(new PushButton('submit', 'Submit form', 24, 120));
+collection.add(new Password('pw', 's3cret', 20, 200));
 
 // Server configuration
 const server = new cop.config.Server(
