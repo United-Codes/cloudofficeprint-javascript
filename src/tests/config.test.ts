@@ -360,6 +360,24 @@ test('Test for compress pdf', () => {
     expect(conf.asDict()).toEqual(confExpected);
 });
 
+test('Test for pdf split options', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.splitByString = 'Invoice No';
+    pdfOpts.splitAfterString = true;
+    pdfOpts.splitByPage = 2;
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_split_by_page: 2,
+        output_split_by_string: 'Invoice No',
+        output_split_after_string: true,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
 });
 describe('cop_pdf_batching', () => {
     test('test pdf batching', () => {

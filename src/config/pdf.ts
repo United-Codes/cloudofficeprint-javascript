@@ -46,6 +46,9 @@ export class PDFOptions {
     imageWatermarkWidth: number | undefined;
     imageWatermarkHeight: number | undefined;
     compressPdf: boolean | undefined;
+    splitByPage: number | undefined;
+    splitByString: string | undefined;
+    splitAfterString: boolean | undefined;
 
     /**
     * @param readPassword The password needed to open the PDF. Optional.
@@ -288,6 +291,15 @@ export class PDFOptions {
         }
         if (this.compressPdf !== undefined) {
             result.output_compress_pdf = this.compressPdf;
+        }
+        if (this.splitByPage !== undefined) {
+            result.output_split_by_page = this.splitByPage;
+        }
+        if (this.splitByString !== undefined) {
+            result.output_split_by_string = this.splitByString;
+        }
+        if (this.splitAfterString !== undefined) {
+            result.output_split_after_string = this.splitAfterString;
         }
         if (this.attachmentName !== undefined) {
             result.output_attachment_name = this.attachmentName;
