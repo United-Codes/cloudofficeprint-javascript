@@ -118,7 +118,7 @@ export class RadioButton extends Element {
     };
     if (this.value !== undefined) result.value = this.value;
     if (this.text !== undefined) result.text = this.text;
-    if (this.selected !== undefined) result.selected = this.selected ? 1 : 0;
+    if (this.selected !== undefined) result.selected = this.selected;
     if (this.height !== undefined) result.height = this.height;
     if (this.width !== undefined) result.width = this.width;
     

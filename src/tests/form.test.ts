@@ -87,14 +87,14 @@ describe('PDF Form Elements', () => {
           "name": "Radiolist",
           "value": "List A",
           "text": "Option A",
-          "selected": 1
+          "selected": true
         },
         {
           "type": "radio",
           "name": "Radiolist",
           "value": "List B",
           "text": "Option B",
-          "selected": 0
+          "selected": false
         }
       ]
     });
