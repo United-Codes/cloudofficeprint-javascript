@@ -45,6 +45,7 @@ export class PDFOptions {
     imageWatermarkRotation: number | undefined;
     imageWatermarkWidth: number | undefined;
     imageWatermarkHeight: number | undefined;
+    compressPdf: boolean | undefined;
 
     /**
     * @param readPassword The password needed to open the PDF. Optional.
@@ -284,6 +285,9 @@ export class PDFOptions {
         }
         if (this.convertToPdfa !== undefined) {
             result.output_convert_to_pdfa = this.convertToPdfa;
+        }
+        if (this.compressPdf !== undefined) {
+            result.output_compress_pdf = this.compressPdf;
         }
         if (this.attachmentName !== undefined) {
             result.output_attachment_name = this.attachmentName;

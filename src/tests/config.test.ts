@@ -346,6 +346,20 @@ test('Test for image watermark', () => {
     expect(conf.asDict()).toEqual(confExpected);
 });
 
+test('Test for compress pdf', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.compressPdf = true;
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_compress_pdf: true,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
 });
 describe('cop_pdf_batching', () => {
     test('test pdf batching', () => {
