@@ -33,6 +33,9 @@ export class PDFOptions {
     signCertificateTxt: string | undefined;
     watermarkRotation: number | undefined;
     convertToPdfa: string | undefined;
+    complyPdfaLevel: string | undefined;
+    validatePdfaLevel: string | undefined;
+    uaCompliantPdf: string | undefined;
     attachmentName: string | undefined;
     convertAttachmentToJson: boolean | undefined;
     insertBarcode: boolean | undefined;
@@ -98,6 +101,9 @@ export class PDFOptions {
     * @param watermarkRotation Requires PDF output, specifies the angle to rotate the watermark text specified,
     *  should be a number in px, i.e. 45. Optional.
     * @param convertToPdfa Convert to PDF/A format.
+    * @param complyPdfaLevel Comply with PDF/A level. Optional.
+    * @param validatePdfaLevel Validate PDF/A level. Optional.
+    * @param uaCompliantPdf Generate a PDF/UA compliant PDF. Optional.
     * @param attachmentName Retrieve attached file from PDF. output_type must be 'get_attachments'
     * @param convertAttachmentToJson Retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
     * @param insertBarcode Insert barcode in pdf.
@@ -133,6 +139,9 @@ export class PDFOptions {
         signCertificateTxt?: string,
         watermarkRotation?: number,
         convertToPdfa?: string,
+        complyPdfaLevel?: string,
+        validatePdfaLevel?: string,
+        uaCompliantPdf?: string,
         attachmentName?: string,
         convertAttachmentToJson?: boolean,
         insertBarcode?: boolean,
@@ -167,6 +176,9 @@ export class PDFOptions {
         this.removeLastPage = removeLastPage;
         this.watermarkRotation = watermarkRotation;
         this.convertToPdfa = convertToPdfa;
+        this.complyPdfaLevel = complyPdfaLevel;
+        this.validatePdfaLevel = validatePdfaLevel;
+        this.uaCompliantPdf = uaCompliantPdf;
         this.attachmentName = attachmentName;
         this.convertAttachmentToJson = convertAttachmentToJson;
         this.insertBarcode = insertBarcode;
@@ -288,6 +300,15 @@ export class PDFOptions {
         }
         if (this.convertToPdfa !== undefined) {
             result.output_convert_to_pdfa = this.convertToPdfa;
+        }
+        if (this.complyPdfaLevel !== undefined) {
+            result.output_comply_pdfa_level = this.complyPdfaLevel;
+        }
+        if (this.validatePdfaLevel !== undefined) {
+            result.output_validate_pdfa_level = this.validatePdfaLevel;
+        }
+        if (this.uaCompliantPdf !== undefined) {
+            result.output_ua_compliant_pdf = this.uaCompliantPdf;
         }
         if (this.compressPdf !== undefined) {
             result.output_compress_pdf = this.compressPdf;
