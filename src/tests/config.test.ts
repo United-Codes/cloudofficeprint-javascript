@@ -32,6 +32,9 @@ describe('Tests for config', () => {
             'text in english', // signCertificateTxt
              45, // watermarkRotation
             '1b', // convertToPdfa,
+            "pdfa3b", // complyPdfaLevel
+            "pdfa1b", // validatePdfaLevel
+            "true", // uaCompliantPdf
             'sample_attachment_file.pdf', // attachmentName
             true, // convertAttachmentToJson
             true // insertBarcode
@@ -84,6 +87,10 @@ describe('Tests for config', () => {
             output_attachment_name: 'sample_attachment_file.pdf',
             output_convert_attachment_to_json: true,
             output_insert_barcode: true,
+            output_comply_pdfa_level: 'pdfa3b',
+            output_validate_pdfa_level: 'pdfa1b',
+            output_ua_compliant_pdf: 'true',
+            
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
@@ -374,6 +381,21 @@ test('Test for pdf split options', () => {
         output_split_by_page: 2,
         output_split_by_string: 'Invoice No',
         output_split_after_string: true,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+
+test('Test for pdf producer metadata', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.pdfProducer = 'Cloud Office Print';
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_pdf_producer: 'Cloud Office Print',
     };
     expect(conf.asDict()).toEqual(confExpected);
 });

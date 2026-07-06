@@ -52,6 +52,7 @@ export class PDFOptions {
     splitByPage: number | undefined;
     splitByString: string | undefined;
     splitAfterString: boolean | undefined;
+    pdfProducer: string | undefined;
 
     /**
     * @param readPassword The password needed to open the PDF. Optional.
@@ -321,6 +322,9 @@ export class PDFOptions {
         }
         if (this.splitAfterString !== undefined) {
             result.output_split_after_string = this.splitAfterString;
+        }
+        if (this.pdfProducer !== undefined) {
+            result.output_pdf_producer = this.pdfProducer;
         }
         if (this.attachmentName !== undefined) {
             result.output_attachment_name = this.attachmentName;
