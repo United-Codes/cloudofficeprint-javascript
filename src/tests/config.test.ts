@@ -89,8 +89,8 @@ describe('Tests for config', () => {
             output_insert_barcode: true,
             output_comply_pdfa_level: 'pdfa3b',
             output_validate_pdfa_level: 'pdfa1b',
-            output_ua_compliant_pdf: 'true',
-            
+            output_ua_compliant: 'true',
+
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
@@ -396,6 +396,24 @@ test('Test for pdf producer metadata', () => {
         output_encoding: 'raw',
         output_converter: 'libreoffice',
         output_pdf_producer: 'Cloud Office Print',
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+test('Test for pdf metadata dates', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.createdDate = '2022-02-07T12:55:12';
+    pdfOpts.modifiedDate = '2022-02-08T09:33:00';
+    pdfOpts.ignoreConversionErrors = true;
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_created_date: '2022-02-07T12:55:12',
+        output_modified_date: '2022-02-08T09:33:00',
+        output_ignore_conversion_errors: true,
     };
     expect(conf.asDict()).toEqual(confExpected);
 });

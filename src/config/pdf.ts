@@ -53,6 +53,9 @@ export class PDFOptions {
     splitByString: string | undefined;
     splitAfterString: boolean | undefined;
     pdfProducer: string | undefined;
+    createdDate: string | undefined;
+    modifiedDate: string | undefined;
+    ignoreConversionErrors: boolean | undefined;
 
     /**
     * @param readPassword The password needed to open the PDF. Optional.
@@ -309,7 +312,7 @@ export class PDFOptions {
             result.output_validate_pdfa_level = this.validatePdfaLevel;
         }
         if (this.uaCompliantPdf !== undefined) {
-            result.output_ua_compliant_pdf = this.uaCompliantPdf;
+            result.output_ua_compliant = this.uaCompliantPdf;
         }
         if (this.compressPdf !== undefined) {
             result.output_compress_pdf = this.compressPdf;
@@ -325,6 +328,15 @@ export class PDFOptions {
         }
         if (this.pdfProducer !== undefined) {
             result.output_pdf_producer = this.pdfProducer;
+        }
+        if (this.createdDate !== undefined) {
+            result.output_created_date = this.createdDate;
+        }
+        if (this.modifiedDate !== undefined) {
+            result.output_modified_date = this.modifiedDate;
+        }
+        if (this.ignoreConversionErrors !== undefined) {
+            result.output_ignore_conversion_errors = this.ignoreConversionErrors;
         }
         if (this.attachmentName !== undefined) {
             result.output_attachment_name = this.attachmentName;
