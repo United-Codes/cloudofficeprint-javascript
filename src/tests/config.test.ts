@@ -80,7 +80,7 @@ describe('Tests for config', () => {
             output_merge: false,
             output_sign_certificate: 'test_sign_certificate',
             output_sign_certificate_password: 'test_certificate_password',
-            output_sign_certificate_txt: 'text in english',
+            output_sign_certificate_custom_text: 'text in english',
             identify_form_fields: true,
             output_split: true,
             output_convert_to_pdfa: '1b',
@@ -414,6 +414,30 @@ test('Test for pdf metadata dates', () => {
         output_created_date: '2022-02-07T12:55:12',
         output_modified_date: '2022-02-08T09:33:00',
         output_ignore_conversion_errors: true,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+test('Test for sign certificate options', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.signCertificate = 'base64_certificate';
+    pdfOpts.signCertificatePassword = 'cert_password';
+    pdfOpts.signCertificateTxt = 'Signed by COP';
+    pdfOpts.signCertificateField = 'Signature1';
+    pdfOpts.signCertificateBackgroundImage = 'base64_image';
+    pdfOpts.signCertificatePrivateKeyPassword = 'privatekey_password';
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_sign_certificate: 'base64_certificate',
+        output_sign_certificate_password: 'cert_password',
+        output_sign_certificate_custom_text: 'Signed by COP',
+        output_sign_certificate_field: 'Signature1',
+        output_sign_certificate_background_image: 'base64_image',
+        output_sign_certificate_privatekey_password: 'privatekey_password',
     };
     expect(conf.asDict()).toEqual(confExpected);
 });

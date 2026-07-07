@@ -31,6 +31,9 @@ export class PDFOptions {
     split: boolean | undefined;
     removeLastPage: boolean | undefined;
     signCertificateTxt: string | undefined;
+    signCertificateField: string | undefined;
+    signCertificateBackgroundImage: string | undefined;
+    signCertificatePrivateKeyPassword: string | undefined;
     watermarkRotation: number | undefined;
     convertToPdfa: string | undefined;
     complyPdfaLevel: string | undefined;
@@ -296,8 +299,19 @@ export class PDFOptions {
                 this.signCertificatePassword;
         }
         if (this.signCertificateTxt !== undefined) {
-            result.output_sign_certificate_txt =
+            result.output_sign_certificate_custom_text =
                 this.signCertificateTxt;
+        }
+        if (this.signCertificateField !== undefined) {
+            result.output_sign_certificate_field = this.signCertificateField;
+        }
+        if (this.signCertificateBackgroundImage !== undefined) {
+            result.output_sign_certificate_background_image =
+                this.signCertificateBackgroundImage;
+        }
+        if (this.signCertificatePrivateKeyPassword !== undefined) {
+            result.output_sign_certificate_privatekey_password =
+                this.signCertificatePrivateKeyPassword;
         }
         if (this.removeLastPage !== undefined) {
             result.output_remove_last_page = this.removeLastPage;
