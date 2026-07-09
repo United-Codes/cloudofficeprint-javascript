@@ -41,7 +41,7 @@ describe('PDF Form Elements', () => {
         "name": "Radiolist",
         "value": "List A",
         "text": "List Option A",
-        "selected": 1,
+        "selected": true,
         "height": 15,
         "width": 100
       }]
