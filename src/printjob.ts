@@ -14,7 +14,7 @@ import { TransformationFunction } from './transformation';
 export const STATIC_OPTS = {
     tool: 'javascript',
     // 'version': "18.2", # optional: version of Cloud Office Print JSON format
-    javascript_sdk_version: '21.2.0',
+    javascript_sdk_version: '26.1.1',
 };
 
 /**
