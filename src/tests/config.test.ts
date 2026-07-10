@@ -32,6 +32,9 @@ describe('Tests for config', () => {
             'text in english', // signCertificateTxt
              45, // watermarkRotation
             '1b', // convertToPdfa,
+            "pdfa3b", // complyPdfaLevel
+            "pdfa1b", // validatePdfaLevel
+            "true", // uaCompliantPdf
             'sample_attachment_file.pdf', // attachmentName
             true, // convertAttachmentToJson
             true // insertBarcode
@@ -77,13 +80,17 @@ describe('Tests for config', () => {
             output_merge: false,
             output_sign_certificate: 'test_sign_certificate',
             output_sign_certificate_password: 'test_certificate_password',
-            output_sign_certificate_txt: 'text in english',
+            output_sign_certificate_custom_text: 'text in english',
             identify_form_fields: true,
             output_split: true,
             output_convert_to_pdfa: '1b',
             output_attachment_name: 'sample_attachment_file.pdf',
             output_convert_attachment_to_json: true,
             output_insert_barcode: true,
+            output_comply_pdfa_level: 'pdfa3b',
+            output_validate_pdfa_level: 'pdfa1b',
+            output_ua_compliant: 'true',
+
         };
         expect(conf.asDict()).toEqual(confExpected);
     });
@@ -313,7 +320,126 @@ test('Test for output_read_password', () => {
     conf.outputReadPassword = 'aop_pass';
     const dict = conf.asDict();
         expect(dict).toHaveProperty('output_read_password', 'aop_pass');
-        
+
+});
+
+test('Test for output_export_sheets', () => {
+    const conf = new cop.config.OutputConfig('xlsx');
+    conf.outputExportSheets = ['Sheet1', 'Sheet3'];
+    const confExpected = {
+        output_type: 'xlsx',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_export_sheets: ['Sheet1', 'Sheet3'],
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+test('Test for image watermark', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.setImageWatermark('logo_base64', 50, 45, 100, 80);
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_watermark_image: 'logo_base64',
+        output_watermark_image_opacity: 50,
+        output_watermark_image_rotation: 45,
+        output_watermark_image_width: 100,
+        output_watermark_image_height: 80,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+test('Test for compress pdf', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.compressPdf = true;
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_compress_pdf: true,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+test('Test for pdf split options', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.splitByString = 'Invoice No';
+    pdfOpts.splitAfterString = true;
+    pdfOpts.splitByPage = 2;
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_split_by_page: 2,
+        output_split_by_string: 'Invoice No',
+        output_split_after_string: true,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+
+test('Test for pdf producer metadata', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.pdfProducer = 'Cloud Office Print';
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_pdf_producer: 'Cloud Office Print',
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+test('Test for pdf metadata dates', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.createdDate = '2022-02-07T12:55:12';
+    pdfOpts.modifiedDate = '2022-02-08T09:33:00';
+    pdfOpts.ignoreConversionErrors = true;
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_created_date: '2022-02-07T12:55:12',
+        output_modified_date: '2022-02-08T09:33:00',
+        output_ignore_conversion_errors: true,
+    };
+    expect(conf.asDict()).toEqual(confExpected);
+});
+
+test('Test for sign certificate options', () => {
+    const pdfOpts = new cop.config.PDFOptions();
+    pdfOpts.signCertificate = 'base64_certificate';
+    pdfOpts.signCertificatePassword = 'cert_password';
+    pdfOpts.signCertificateTxt = 'Signed by COP';
+    pdfOpts.signCertificateField = 'Signature1';
+    pdfOpts.signCertificateBackgroundImage = 'base64_image';
+    pdfOpts.signCertificatePrivateKeyPassword = 'privatekey_password';
+    const conf = new cop.config.OutputConfig('pdf');
+    conf.pdfOptions = pdfOpts;
+    const confExpected = {
+        output_type: 'pdf',
+        output_encoding: 'raw',
+        output_converter: 'libreoffice',
+        output_sign_certificate: 'base64_certificate',
+        output_sign_certificate_password: 'cert_password',
+        output_sign_certificate_custom_text: 'Signed by COP',
+        output_sign_certificate_field: 'Signature1',
+        output_sign_certificate_background_image: 'base64_image',
+        output_sign_certificate_privatekey_password: 'privatekey_password',
+    };
+    expect(conf.asDict()).toEqual(confExpected);
 });
 
 });

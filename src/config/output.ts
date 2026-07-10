@@ -23,6 +23,7 @@ export class OutputConfig {
     outputReadPassword: string | undefined;
     requestOption: RequestOption | undefined;
     return_output: boolean | undefined;
+    outputExportSheets: string[] | undefined;
 
     /**
      * @param filetype The file type (as extension) to use for the output.
@@ -46,7 +47,8 @@ export class OutputConfig {
      * @param updateToc Update table of contents of Word document.
      * @param outputLocale Locale of the output file. Optional.
      * @param outputReadPassword Password to open the output file. Optional.
-     * @param return_output When true, both saves files to server directory and returns the output. 
+     * @param return_output When true, both saves files to server directory and returns the output.
+     * @param outputExportSheets Export only the specified sheets in the output file. Optional.
      */
     constructor(
         filetype?: string,
@@ -65,6 +67,7 @@ export class OutputConfig {
         outputLocale?: string,
         outputReadPassword?: string,
         return_output?: boolean,
+        outputExportSheets?: string[],
     ) {
         this.filetype = filetype;
         this.encoding = encoding;
@@ -82,6 +85,7 @@ export class OutputConfig {
         this.outputLocale = outputLocale;
         this.outputReadPassword = outputReadPassword;
         this.return_output = return_output;
+        this.outputExportSheets = outputExportSheets;
     }
 
     /**
@@ -89,7 +93,7 @@ export class OutputConfig {
      * @returns the dict representation of this output config
      */
     asDict(): {
-        [key: string]: string | number | boolean |
+        [key: string]: string | number | boolean | string[] |
         {
             [key: string]: string | number | boolean | {
                 [key: string]: string | number | boolean;
@@ -97,7 +101,7 @@ export class OutputConfig {
         }
     } {
         let result: {
-            [key: string]: string | number | boolean |
+            [key: string]: string | number | boolean | string[] |
             {
                 [key: string]: string | number | boolean | {
                     [key: string]: string | number | boolean;
@@ -150,6 +154,10 @@ export class OutputConfig {
         if ( this.return_output !== undefined){
             result.return_output = this.return_output;
         }
+        if (this.outputExportSheets !== undefined) {
+            result.output_export_sheets = this.outputExportSheets;
+        }
+        
         return result;
     }
 }

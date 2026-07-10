@@ -1709,7 +1709,16 @@ export class ElementCollection extends Element {
             if (el instanceof ElementCollection) {
                 result[el.name] = el.asDict();
             } else {
-                result = { ...result, ...el.asDict() };
+                Object.entries(el.asDict()).forEach(([key, value]) => {
+                    if (Array.isArray(result[key]) && Array.isArray(value)) {
+                        result[key] = [
+                            ...(result[key] as unknown[]),
+                            ...value,
+                        ];
+                    } else {
+                        result[key] = value;
+                    }
+                });
             }
         });
 

@@ -1,6 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
 import * as cop from '../index';
-import { Textbox, RadioButton, Checkbox } from '../elements';
+import { Textbox, RadioButton, Checkbox, Dropdown, ComboBox, ListBox, PushButton, Password } from '../elements';
 
 
 describe('PDF Form Elements', () => {
@@ -41,7 +41,7 @@ describe('PDF Form Elements', () => {
         "name": "Radiolist",
         "value": "List A",
         "text": "List Option A",
-        "selected": 1,
+        "selected": true,
         "height": 15,
         "width": 100
       }]
@@ -87,16 +87,115 @@ describe('PDF Form Elements', () => {
           "name": "Radiolist",
           "value": "List A",
           "text": "Option A",
-          "selected": 1
+          "selected": true
         },
         {
           "type": "radio",
           "name": "Radiolist",
           "value": "List B",
           "text": "Option B",
-          "selected": 0
+          "selected": false
         }
       ]
+    });
+  });
+
+  test('Dropdown', () => {
+    const dropdown = new Dropdown(
+      'country',
+      [{ value: 'be', label: 'Belgium' }, { value: 'np', label: 'Nepal' }],
+      'be',
+      15,
+      100
+    );
+
+    expect(dropdown.asDict()).toEqual({
+      "country": [{
+        "type": "dropdown",
+        "name": "country",
+        "options": [{ value: 'be', label: 'Belgium' }, { value: 'np', label: 'Nepal' }],
+        "value": "be",
+        "height": 15,
+        "width": 100
+      }]
+    });
+  });
+
+  test('ComboBox', () => {
+    const combo = new ComboBox(
+      'city',
+      [{ value: 'bgl', label: 'baglung' }],
+      'bgl'
+    );
+
+    expect(combo.asDict()).toEqual({
+      "city": [{
+        "type": "combobox",
+        "name": "city",
+        "options": [{ value: 'bgl', label: 'baglung' }],
+        "value": "bgl"
+      }]
+    });
+  });
+
+  test('ListBox', () => {
+    const listbox = new ListBox(
+      'roles',
+      [{ value: 'admin', label: 'Admin' }, { value: 'user', label: 'User' }],
+      ['admin'],
+      true
+    );
+
+    expect(listbox.asDict()).toEqual({
+      "roles": [{
+        "type": "listbox",
+        "name": "roles",
+        "options": [{ value: 'admin', label: 'Admin' }, { value: 'user', label: 'User' }],
+        "values": ["admin"],
+        "multiSelect": true
+      }]
+    });
+  });
+
+  test('PushButton', () => {
+    const button = new PushButton('submit', 'Submit', 20, 80);
+
+    expect(button.asDict()).toEqual({
+      "submit": [{
+        "type": "pushbutton",
+        "name": "submit",
+        "caption": "Submit",
+        "height": 20,
+        "width": 80
+      }]
+    });
+  });
+
+  test('Password', () => {
+    const password = new Password('pw', 'secret', 20, 200, true);
+
+    expect(password.asDict()).toEqual({
+      "pw": [{
+        "type": "password",
+        "name": "pw",
+        "value": "secret",
+        "height": 20,
+        "width": 200,
+        "lock": true
+      }]
+    });
+  });
+
+  test('Radio group: same-name radios in a collection merge into one array', () => {
+    const collection = new cop.elements.ElementCollection();
+    collection.add(new RadioButton('radiolist', 'List A', 'List Option A', false));
+    collection.add(new RadioButton('radiolist', 'List B', 'List Option B', true));
+
+    expect(collection.asDict()).toEqual({
+      radiolist: [
+        { type: 'radio', name: 'radiolist', value: 'List A', text: 'List Option A', selected: 0 },
+        { type: 'radio', name: 'radiolist', value: 'List B', text: 'List Option B', selected: 1 },
+      ],
     });
   });
 });

@@ -31,8 +31,14 @@ export class PDFOptions {
     split: boolean | undefined;
     removeLastPage: boolean | undefined;
     signCertificateTxt: string | undefined;
+    signCertificateField: string | undefined;
+    signCertificateBackgroundImage: string | undefined;
+    signCertificatePrivateKeyPassword: string | undefined;
     watermarkRotation: number | undefined;
     convertToPdfa: string | undefined;
+    complyPdfaLevel: string | undefined;
+    validatePdfaLevel: string | undefined;
+    uaCompliantPdf: string | undefined;
     attachmentName: string | undefined;
     convertAttachmentToJson: boolean | undefined;
     insertBarcode: boolean | undefined;
@@ -40,6 +46,19 @@ export class PDFOptions {
     batch_selector : string  | undefined;
     batch_size : number | undefined;
     batch_condition : string | undefined;
+    imageWatermark: string | undefined;
+    imageWatermarkOpacity: number | undefined;
+    imageWatermarkRotation: number | undefined;
+    imageWatermarkWidth: number | undefined;
+    imageWatermarkHeight: number | undefined;
+    compressPdf: boolean | undefined;
+    splitByPage: number | undefined;
+    splitByString: string | undefined;
+    splitAfterString: boolean | undefined;
+    pdfProducer: string | undefined;
+    createdDate: string | undefined;
+    modifiedDate: string | undefined;
+    ignoreConversionErrors: boolean | undefined;
 
     /**
     * @param readPassword The password needed to open the PDF. Optional.
@@ -89,6 +108,9 @@ export class PDFOptions {
     * @param watermarkRotation Requires PDF output, specifies the angle to rotate the watermark text specified,
     *  should be a number in px, i.e. 45. Optional.
     * @param convertToPdfa Convert to PDF/A format.
+    * @param complyPdfaLevel Comply with PDF/A level. Optional.
+    * @param validatePdfaLevel Validate PDF/A level. Optional.
+    * @param uaCompliantPdf Generate a PDF/UA compliant PDF. Optional.
     * @param attachmentName Retrieve attached file from PDF. output_type must be 'get_attachments'
     * @param convertAttachmentToJson Retrieve data of the XML attachment as a JSON. output_type must be 'get_attachments'.
     * @param insertBarcode Insert barcode in pdf.
@@ -124,6 +146,9 @@ export class PDFOptions {
         signCertificateTxt?: string,
         watermarkRotation?: number,
         convertToPdfa?: string,
+        complyPdfaLevel?: string,
+        validatePdfaLevel?: string,
+        uaCompliantPdf?: string,
         attachmentName?: string,
         convertAttachmentToJson?: boolean,
         insertBarcode?: boolean,
@@ -158,6 +183,9 @@ export class PDFOptions {
         this.removeLastPage = removeLastPage;
         this.watermarkRotation = watermarkRotation;
         this.convertToPdfa = convertToPdfa;
+        this.complyPdfaLevel = complyPdfaLevel;
+        this.validatePdfaLevel = validatePdfaLevel;
+        this.uaCompliantPdf = uaCompliantPdf;
         this.attachmentName = attachmentName;
         this.convertAttachmentToJson = convertAttachmentToJson;
         this.insertBarcode = insertBarcode;
@@ -211,6 +239,21 @@ export class PDFOptions {
         if (this.watermarkRotation !== undefined) {
             result.output_watermark_rotation = this.watermarkRotation;
         }
+        if (this.imageWatermark !== undefined) {
+            result.output_watermark_image = this.imageWatermark;
+        }
+        if (this.imageWatermarkOpacity !== undefined) {
+            result.output_watermark_image_opacity = this.imageWatermarkOpacity;
+        }
+        if (this.imageWatermarkRotation !== undefined) {
+            result.output_watermark_image_rotation = this.imageWatermarkRotation;
+        }
+        if (this.imageWatermarkWidth !== undefined) {
+            result.output_watermark_image_width = this.imageWatermarkWidth;
+        }
+        if (this.imageWatermarkHeight !== undefined) {
+            result.output_watermark_image_height = this.imageWatermarkHeight;
+        }
         if (this.lockForm !== undefined) {
             result.lock_form = this.lockForm;
         }
@@ -256,14 +299,58 @@ export class PDFOptions {
                 this.signCertificatePassword;
         }
         if (this.signCertificateTxt !== undefined) {
-            result.output_sign_certificate_txt =
+            result.output_sign_certificate_custom_text =
                 this.signCertificateTxt;
+        }
+        if (this.signCertificateField !== undefined) {
+            result.output_sign_certificate_field = this.signCertificateField;
+        }
+        if (this.signCertificateBackgroundImage !== undefined) {
+            result.output_sign_certificate_background_image =
+                this.signCertificateBackgroundImage;
+        }
+        if (this.signCertificatePrivateKeyPassword !== undefined) {
+            result.output_sign_certificate_privatekey_password =
+                this.signCertificatePrivateKeyPassword;
         }
         if (this.removeLastPage !== undefined) {
             result.output_remove_last_page = this.removeLastPage;
         }
         if (this.convertToPdfa !== undefined) {
             result.output_convert_to_pdfa = this.convertToPdfa;
+        }
+        if (this.complyPdfaLevel !== undefined) {
+            result.output_comply_pdfa_level = this.complyPdfaLevel;
+        }
+        if (this.validatePdfaLevel !== undefined) {
+            result.output_validate_pdfa_level = this.validatePdfaLevel;
+        }
+        if (this.uaCompliantPdf !== undefined) {
+            result.output_ua_compliant = this.uaCompliantPdf;
+        }
+        if (this.compressPdf !== undefined) {
+            result.output_compress_pdf = this.compressPdf;
+        }
+        if (this.splitByPage !== undefined) {
+            result.output_split_by_page = this.splitByPage;
+        }
+        if (this.splitByString !== undefined) {
+            result.output_split_by_string = this.splitByString;
+        }
+        if (this.splitAfterString !== undefined) {
+            result.output_split_after_string = this.splitAfterString;
+        }
+        if (this.pdfProducer !== undefined) {
+            result.output_pdf_producer = this.pdfProducer;
+        }
+        if (this.createdDate !== undefined) {
+            result.output_created_date = this.createdDate;
+        }
+        if (this.modifiedDate !== undefined) {
+            result.output_modified_date = this.modifiedDate;
+        }
+        if (this.ignoreConversionErrors !== undefined) {
+            result.output_ignore_conversion_errors = this.ignoreConversionErrors;
         }
         if (this.attachmentName !== undefined) {
             result.output_attachment_name = this.attachmentName;
@@ -315,6 +402,28 @@ export class PDFOptions {
         this.watermarkOpacity = opacity;
         this.watermarkSize = size;
         this.watermarkRotation = rotation;
+    }
+
+    /**
+     * Set an image watermark on every page of the PDF file
+     * @param image The image as a watermark. Optional.
+     * @param opacity Specifies the opacity of the image watermark. Optional.
+     * @param rotation Specifies the angle to rotate the image watermark. Optional.
+     * @param width Specifies the width of the image watermark .  Optional.
+     * @param height Specifies the height of the image watermark. Optional.
+     */
+    setImageWatermark(
+        image?: string,
+        opacity?: number,
+        rotation?: number,
+        width?: number,
+        height?: number,
+    ) {
+        this.imageWatermark = image;
+        this.imageWatermarkOpacity = opacity;
+        this.imageWatermarkRotation = rotation;
+        this.imageWatermarkWidth = width;
+        this.imageWatermarkHeight = height;
     }
 
     /**
