@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>printjob | cloudofficeprint</title>
+	<title>FormChoiceOption | cloudofficeprint</title>
 	<meta name="description" content="Documentation for cloudofficeprint">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,57 +55,69 @@
 					<a href="../modules.html">cloudofficeprint</a>
 				</li>
 				<li>
-					<a href="printjob.html">printjob</a>
+					<a href="../modules/elements.html">elements</a>
+				</li>
+				<li>
+					<a href="elements.FormChoiceOption.html">FormChoiceOption</a>
 				</li>
 			</ul>
-			<h1>Namespace printjob</h1>
+			<h1>Interface FormChoiceOption</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A value/label pair for choice form elements (Dropdown, ComboBox, ListBox)</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">FormChoiceOption</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-namespace"><a href="../classes/printjob.PrintJob.html" class="tsd-kind-icon">Print<wbr>Job</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-namespace"><a href="printjob.html#STATIC_OPTS" class="tsd-kind-icon">STATIC_<wbr>OPTS</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="elements.FormChoiceOption.html#label" class="tsd-kind-icon">label</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="elements.FormChoiceOption.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-namespace">
-					<a name="STATIC_OPTS" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> STATIC_<wbr>OPTS</h3>
-					<div class="tsd-signature tsd-kind-icon">STATIC_<wbr>OPTS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>javascript_sdk_version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>tool<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = ...</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="label" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> label</h3>
+					<div class="tsd-signature tsd-kind-icon">label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/2732c25/src/printjob.ts#L14">src/printjob.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/2732c25/src/elements/form.ts#L193">src/elements/form.ts:193</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter">
-								<h5>javascript_<wbr>sdk_<wbr>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>tool<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="value" class="tsd-anchor"></a>
+					<h3>value</h3>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/United-Codes/cloudofficeprint-javascript/blob/2732c25/src/elements/form.ts#L192">src/elements/form.ts:192</a></li>
 						</ul>
-					</div>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -116,42 +128,51 @@
 						<a href="../modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="config.html">config</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="elements.html">elements</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="exceptions.html">exceptions</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="ownUtils.html">own<wbr>Utils</a>
+						<a href="../modules/config.html">config</a>
 					</li>
 					<li class="current tsd-kind-namespace">
-						<a href="printjob.html">printjob</a>
+						<a href="../modules/elements.html">elements</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="resource.html">resource</a>
+						<a href="../modules/exceptions.html">exceptions</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="response.html">response</a>
+						<a href="../modules/ownUtils.html">own<wbr>Utils</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="template.html">template</a>
+						<a href="../modules/printjob.html">printjob</a>
 					</li>
 					<li class=" tsd-kind-namespace">
-						<a href="transformation.html">transformation</a>
+						<a href="../modules/resource.html">resource</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/response.html">response</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/template.html">template</a>
+					</li>
+					<li class=" tsd-kind-namespace">
+						<a href="../modules/transformation.html">transformation</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-namespace">
-						<a href="../classes/printjob.PrintJob.html" class="tsd-kind-icon">Print<wbr>Job</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-namespace">
+						<a href="elements.FormChoiceOption.html" class="tsd-kind-icon">Form<wbr>Choice<wbr>Option</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="elements.FormChoiceOption.html#label" class="tsd-kind-icon">label</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="elements.FormChoiceOption.html#value" class="tsd-kind-icon">value</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-namespace">
-						<a href="printjob.html#STATIC_OPTS" class="tsd-kind-icon">STATIC_<wbr>OPTS</a>
-					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
@@ -161,6 +182,9 @@
 	<div class="container">
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
 		</div>
 	</div>
 </footer>

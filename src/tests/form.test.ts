@@ -193,8 +193,8 @@ describe('PDF Form Elements', () => {
 
     expect(collection.asDict()).toEqual({
       radiolist: [
-        { type: 'radio', name: 'radiolist', value: 'List A', text: 'List Option A', selected: 0 },
-        { type: 'radio', name: 'radiolist', value: 'List B', text: 'List Option B', selected: 1 },
+        { type: 'radio', name: 'radiolist', value: 'List A', text: 'List Option A', selected: false },
+        { type: 'radio', name: 'radiolist', value: 'List B', text: 'List Option B', selected: true },
       ],
     });
   });
